@@ -2,7 +2,7 @@
 # 后端：Spring4.x+SpringMVC+Mybatis+Maven+Mysql
 # 前端：bootstrap
  
- sample文件中的test.sql文件为测试文件；Man
+ sample文件中的test.sql文件为测试文件；Manufacturer.sql为厂商所用到的数据库
  
 # 系统用户分为三大类：
         系统管理员：管理整个系统的用户、权限、厂商、运营商的管理等；
