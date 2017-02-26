@@ -11,7 +11,7 @@ import com.lin.domain.User;
  * @since 2015年9月28日
  */
 public interface UserDao {
-	@Select("SELECT * FROM t_user WHERE USER_ID = #{userId}")
+	@Select("SELECT * FROM t_test WHERE USER_ID = #{userId}")
 	@Results({ @Result(id = true, column = "USER_ID", property = "userId"),
 			@Result(column = "USER_NAME", property = "userName"),
 			@Result(column = "USER_PASSWORD", property = "userPassword"),
