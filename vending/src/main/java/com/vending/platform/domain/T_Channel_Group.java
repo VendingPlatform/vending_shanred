@@ -16,8 +16,6 @@ public class T_Channel_Group implements Serializable {
 	private Integer channel_group_id;
 	/** 货道组名称 */
 	private String channel_group_name;
-	/** 货道列表 */
-	private String channel_num_list;
 	/** 商品编号 */
 	private String ware_code;
 	/** 商品名称 */
@@ -37,13 +35,11 @@ public class T_Channel_Group implements Serializable {
 		super();
 	}
 
-	public T_Channel_Group(Integer channel_group_id, String channel_group_name, String channel_num_list,
-			String ware_code, String ware_name, double ware_price, Integer is_discount, Integer group_id,
-			Integer operate_id, Date operate_date) {
+	public T_Channel_Group(Integer channel_group_id, String channel_group_name, String ware_code, String ware_name,
+			double ware_price, Integer is_discount, Integer group_id, Integer operate_id, Date operate_date) {
 		super();
 		this.channel_group_id = channel_group_id;
 		this.channel_group_name = channel_group_name;
-		this.channel_num_list = channel_num_list;
 		this.ware_code = ware_code;
 		this.ware_name = ware_name;
 		this.ware_price = ware_price;
@@ -67,14 +63,6 @@ public class T_Channel_Group implements Serializable {
 
 	public void setChannel_group_name(String channel_group_name) {
 		this.channel_group_name = channel_group_name;
-	}
-
-	public String getChannel_num_list() {
-		return channel_num_list;
-	}
-
-	public void setChannel_num_list(String channel_num_list) {
-		this.channel_num_list = channel_num_list;
 	}
 
 	public String getWare_code() {
@@ -136,8 +124,8 @@ public class T_Channel_Group implements Serializable {
 	@Override
 	public String toString() {
 		return "T_Channel_Group [channel_group_id=" + channel_group_id + ", channel_group_name=" + channel_group_name
-				+ ", channel_num_list=" + channel_num_list + ", ware_code=" + ware_code + ", ware_name=" + ware_name
-				+ ", ware_price=" + ware_price + ", is_discount=" + is_discount + ", group_id=" + group_id
-				+ ", operate_id=" + operate_id + ", operate_date=" + operate_date + "]";
+				+ ", ware_code=" + ware_code + ", ware_name=" + ware_name + ", ware_price=" + ware_price
+				+ ", is_discount=" + is_discount + ", group_id=" + group_id + ", operate_id=" + operate_id
+				+ ", operate_date=" + operate_date + "]";
 	}
 }

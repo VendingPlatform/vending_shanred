@@ -30,6 +30,8 @@ public class T_Ware_Info implements Serializable {
 	private double ware_min_price;
 	/** 商品描述 */
 	private String ware_desc;
+	/**所属运营商ID*/
+	private Integer firm_id;
 	/** 商品状态：0：可用；1：不可用 */
 	/** 操作者 */
 	private Integer operate_id;
@@ -41,8 +43,8 @@ public class T_Ware_Info implements Serializable {
 	}
 
 	public T_Ware_Info(Integer ware_id, String ware_code, String ware_name, String ware_norm, String ware_unit,
-			double ware_base_price, double ware_max_price, double ware_min_price, String ware_desc, Integer operate_id,
-			Date operate_date) {
+			double ware_base_price, double ware_max_price, double ware_min_price, String ware_desc, Integer firm_id,
+			Integer operate_id, Date operate_date) {
 		super();
 		this.ware_id = ware_id;
 		this.ware_code = ware_code;
@@ -53,6 +55,7 @@ public class T_Ware_Info implements Serializable {
 		this.ware_max_price = ware_max_price;
 		this.ware_min_price = ware_min_price;
 		this.ware_desc = ware_desc;
+		this.firm_id = firm_id;
 		this.operate_id = operate_id;
 		this.operate_date = operate_date;
 	}
@@ -129,6 +132,14 @@ public class T_Ware_Info implements Serializable {
 		this.ware_desc = ware_desc;
 	}
 
+	public Integer getFirm_id() {
+		return firm_id;
+	}
+
+	public void setFirm_id(Integer firm_id) {
+		this.firm_id = firm_id;
+	}
+
 	public Integer getOperate_id() {
 		return operate_id;
 	}
@@ -150,6 +161,8 @@ public class T_Ware_Info implements Serializable {
 		return "T_Ware_Info [ware_id=" + ware_id + ", ware_code=" + ware_code + ", ware_name=" + ware_name
 				+ ", ware_norm=" + ware_norm + ", ware_unit=" + ware_unit + ", ware_base_price=" + ware_base_price
 				+ ", ware_max_price=" + ware_max_price + ", ware_min_price=" + ware_min_price + ", ware_desc="
-				+ ware_desc + ", operate_id=" + operate_id + ", operate_date=" + operate_date + "]";
+				+ ware_desc + ", firm_id=" + firm_id + ", operate_id=" + operate_id + ", operate_date=" + operate_date
+				+ "]";
 	}
+
 }
