@@ -42,5 +42,51 @@ vending_shanred_platform
 ### PS:管理员权限
  * 修改密码
  * 退出登录
- 
- 
+
+# 数据库初始值设置
+
+ * 1、为t_firm_info插入三条数据：(系统管理员公司、厂商和普通运营商)
+```
+     insert  into `t_firm_info`(`FIRM_ID`,`FIRM_NAME`,`FIRM_DESC`,`FIRM_TYPE`,`FIRM_STATUS`,`OPERATE_ID`,`OPERATE_DATE`) values        
+     (1,'system','system',0,1,1,'2017-02-27 12:13:38'),
+     (2,'运营商1','运营商1的描述信息',1,1,1,'2017-02-27 13:02:06')，
+     (3, '厂商', '厂商1的描述信息', '2', '1', '1', '2017-02-27 17:00:49');
+```	
+* 2、 为t_authority_info插入三条数据：系统管理员权限编码、厂商和普通公司超级管理员编码；
+```
+     insert  into `t_authority_info`(`AUTH_ID`,`AUTH_NAME`,`AUTH_CODE`,`OPERATE_ID`,`OPERATE_DATE`) values 
+     (1,'system','000',1,'2017-02-27 12:55:37'),
+     (2,'firm_admin','001',1,'2017-02-27 16:09:36')，
+     (3, 'manu_admin', '002', '1', '2017-02-27 17:02:29'); 
+```    
+* 3、为t_role_info插入两条数据：系统管理员角色、厂商和普通运营商超级管理员角色；
+```	
+     insert  into `t_role_info`(`ROLE_ID`,`ROLE_NAME`,`AUTHORITY_CODE`,`AUTHORITY_NAME`,`STATUS`,`OPERATE_ID`,`OPERATE_DATE`) values 
+     (1,'system','000,','system,',1,1,'2017-02-27 12:54:59'),
+     (2,'firm_admin','001,','firm_admin,',1,1,'2017-02-27 16:10:10')，
+     (3, 'manu_admin', '002,', 'manu_admin,', '1', '1', '2017-02-27 17:03:15')；
+```
+* 4、为t_user_info添加两条数据：系统管理员、厂商普通运营商超级管理员
+```
+     insert  into `t_use_info`
+     (`USER_ID`,`USER_NO`,`USER_NAME`,`PASSWORD`,`MOBILE_PHONE`,`EMAIL`,`ROLE_ID`,
+     `GROUP_ID`,`STATUS`,`FIRM_ID`,`PARENT_USER_ID`,`OPERATE_DATE`,`OPERATE_ID`) values 
+     (1,'000','system','system',NULL,NULL,1,1,1,1,1,'2017-02-27 12:58:14',1),
+     (2,'00101','运营商user1','123456',NULL,NULL,2,NULL,1,2,1,'2017-02-27 16:12:00',1)，
+     (3, '00201', '厂商user1', '123456', NULL, NULL, '3', NULL, '1', '3', '1', '2017-02-27 17:04:19', '1'); 
+```    
+* 5、为t_machine_type添加一条数据
+```
+     INSERT INTO `vending`.`t_machine_type` (`T_MODEL_ID`, `T_MODEL_NAME`, `T_FIRM_ID`, `OPERATE_ID`, `OPERATE_DATE`) VALUES
+     ('1', '类型1', '3', '1', '2017-02-27 17:07:25'); 
+```
+* 6、为t_machine_info添加几条数据
+```
+     INSERT INTO `vending`.`t_machine_info` (`MACHINE_ID`, `MACHINE_NAME`, `MACHINE_PANNEL`, `MANU_FIRM_ID`, `MANCHINE_PRICE`,          
+     `T_MODEL_NAME`, `MANU_MANCHINE_STATUS`, `OPER_FIRM_ID`, `OPERATE_ID`, `OPERATE_DATE`) VALUES 
+     (1, '售货机名牌1', '售货机主板1', '3', '30', '类型1', '1', '2', '1', '2017-02-27 17:09:27')，
+     (2, '售货机名牌2', '售货机主板2', '3', '30', '类型1', '1', '2', '1', '2017-02-27 17:09:27')，
+     (3, '售货机名牌3', '售货机主板3', '3', '30', '类型1', '1', '2', '1', '2017-02-27 17:09:27')，
+     (4, '售货机名牌4', '售货机主板4', '3', '30', '类型1', '1', '2', '1', '2017-02-27 17:09:27');
+```
+
