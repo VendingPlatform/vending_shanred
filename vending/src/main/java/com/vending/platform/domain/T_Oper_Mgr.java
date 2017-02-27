@@ -9,7 +9,6 @@ import java.util.Date;
  * @author Miley_Ren
  */
 public class T_Oper_Mgr implements Serializable {
-
 	/** 序列号 */
 	private static final long serialVersionUID = -6417710404887297902L;
 	/** 主键 */
