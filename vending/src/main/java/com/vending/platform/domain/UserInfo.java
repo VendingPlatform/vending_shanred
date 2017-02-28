@@ -8,7 +8,7 @@ import java.util.Date;
  * 
  * @author Miley_Ren
  */
-public class T_User_Info implements Serializable {
+public class UserInfo implements Serializable {
 	/** 序列号 */
 	private static final long serialVersionUID = 912338831195864691L;
 	/** 用户ID */
@@ -38,27 +38,8 @@ public class T_User_Info implements Serializable {
 	/** 操作时间 */
 	private Date operate_date;
 
-	public T_User_Info() {
+	public UserInfo() {
 		super();
-	}
-
-	public T_User_Info(Integer user_id, String user_no, String user_name, String password, String mobile_phone,
-			String email, Integer role_id, Integer group_id, Integer status, Integer firm_id, Integer parent_user_id,
-			Integer operate_id, Date operate_date) {
-		super();
-		this.user_id = user_id;
-		this.user_no = user_no;
-		this.user_name = user_name;
-		this.password = password;
-		this.mobile_phone = mobile_phone;
-		this.email = email;
-		this.role_id = role_id;
-		this.group_id = group_id;
-		this.status = status;
-		this.firm_id = firm_id;
-		this.parent_user_id = parent_user_id;
-		this.operate_id = operate_id;
-		this.operate_date = operate_date;
 	}
 
 	public Integer getUser_id() {

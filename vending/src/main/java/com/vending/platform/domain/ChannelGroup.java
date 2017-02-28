@@ -8,7 +8,7 @@ import java.util.Date;
  *
  * @author Miley_Ren
  **/
-public class T_Channel_Group implements Serializable {
+public class ChannelGroup implements Serializable {
 
 	/** 序列号 */
 	private static final long serialVersionUID = -759033563075067030L;
@@ -31,22 +31,8 @@ public class T_Channel_Group implements Serializable {
 	/** 操作时间 */
 	private Date operate_date;
 
-	public T_Channel_Group() {
+	public ChannelGroup() {
 		super();
-	}
-
-	public T_Channel_Group(Integer channel_group_id, String channel_group_name, String ware_code, String ware_name,
-			double ware_price, Integer is_discount, Integer group_id, Integer operate_id, Date operate_date) {
-		super();
-		this.channel_group_id = channel_group_id;
-		this.channel_group_name = channel_group_name;
-		this.ware_code = ware_code;
-		this.ware_name = ware_name;
-		this.ware_price = ware_price;
-		this.is_discount = is_discount;
-		this.group_id = group_id;
-		this.operate_id = operate_id;
-		this.operate_date = operate_date;
 	}
 
 	public Integer getChannel_group_id() {

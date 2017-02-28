@@ -8,7 +8,7 @@ import java.util.Date;
  * 
  * @author Miley_Ren
  */
-public class T_Machine_Type implements Serializable {
+public class MachineType implements Serializable {
 
 	/** 序列号 */
 	private static final long serialVersionUID = 5344374703114752178L;
@@ -22,7 +22,7 @@ public class T_Machine_Type implements Serializable {
 	private Integer operate_id;
 	/** 操作时间 */
 	private Date operate_date;
-	public T_Machine_Type() {
+	public MachineType() {
 		super();
 	}
 	public Integer getT_model_id() {

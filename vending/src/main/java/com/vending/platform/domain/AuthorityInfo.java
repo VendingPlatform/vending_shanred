@@ -8,7 +8,7 @@ import java.util.Date;
  * 
  * @author Miley_Ren
  */
-public class T_Authority_Info implements Serializable {
+public class AuthorityInfo implements Serializable {
 	/** 序列号 */
 	private static final long serialVersionUID = -1610238727257309621L;
 	/** 权限ID */
@@ -22,18 +22,8 @@ public class T_Authority_Info implements Serializable {
 	/** 操作时间 */
 	private Date operate_date;
 
-	public T_Authority_Info() {
+	public AuthorityInfo() {
 		super();
-	}
-
-	public T_Authority_Info(Integer auth_id, String auth_name, String auth_code, Integer operate_id,
-			Date operate_date) {
-		super();
-		this.auth_id = auth_id;
-		this.auth_name = auth_name;
-		this.auth_code = auth_code;
-		this.operate_id = operate_id;
-		this.operate_date = operate_date;
 	}
 
 	public Integer getAuth_id() {

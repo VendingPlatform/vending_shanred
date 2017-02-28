@@ -8,7 +8,7 @@ import java.util.Date;
  * 
  * @author Miley_Ren
  */
-public class T_Firm_Info implements Serializable {
+public class FirmInfo implements Serializable {
 	/** 序列号 */
 	private static final long serialVersionUID = -3294054543209879646L;
 	/** 公司ID */
@@ -26,20 +26,8 @@ public class T_Firm_Info implements Serializable {
 	/** 操作时间 */
 	private Date operate_date;
 
-	public T_Firm_Info() {
+	public FirmInfo() {
 		super();
-	}
-
-	public T_Firm_Info(Integer firm_id, String firm_name, String firm_desc, int firm_type, int firm_status,
-			int operate_id, Date operate_date) {
-		super();
-		this.firm_id = firm_id;
-		this.firm_name = firm_name;
-		this.firm_desc = firm_desc;
-		this.firm_type = firm_type;
-		this.firm_status = firm_status;
-		this.operate_id = operate_id;
-		this.operate_date = operate_date;
 	}
 
 	public Integer getFirm_id() {

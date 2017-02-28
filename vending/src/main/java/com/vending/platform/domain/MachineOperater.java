@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * T_Machine_Operater:售货机详细信息表，记录在运营商处的分配
+ * 售货机详细信息表，记录在运营商处的分配
  * 
  * @author Miley_Ren
  */
-public class T_Machine_Operater implements Serializable {
+public class MachineOperater implements Serializable {
 	/** 序列号 */
 	private static final long serialVersionUID = -4564690143409202140L;
 	/** 售货机信息ID */
@@ -32,24 +32,8 @@ public class T_Machine_Operater implements Serializable {
 	/** 操作时间 */
 	private Date operate_date;
 
-	public T_Machine_Operater() {
+	public MachineOperater() {
 		super();
-	}
-
-	public T_Machine_Operater(Integer m_operater_id, Integer machine_id, Integer machine_assign, String t_model_name,
-			Integer user_id, String machine_address, Integer machine_status, Integer group_id, Integer operate_id,
-			Date operate_date) {
-		super();
-		this.m_operater_id = m_operater_id;
-		this.machine_id = machine_id;
-		this.machine_assign = machine_assign;
-		this.t_model_name = t_model_name;
-		this.user_id = user_id;
-		this.machine_address = machine_address;
-		this.machine_status = machine_status;
-		this.group_id = group_id;
-		this.operate_id = operate_id;
-		this.operate_date = operate_date;
 	}
 
 	public Integer getM_operater_id() {

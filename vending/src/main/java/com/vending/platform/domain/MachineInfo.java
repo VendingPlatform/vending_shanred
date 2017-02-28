@@ -8,7 +8,7 @@ import java.util.Date;
  * 
  * @author Miley_Ren
  */
-public class T_Machine_Info implements Serializable {
+public class MachineInfo implements Serializable {
 
 	/**
 	 * 序列号
@@ -36,24 +36,8 @@ public class T_Machine_Info implements Serializable {
 	/** 操作时间 */
 	private Date operate_date;
 
-	public T_Machine_Info() {
+	public MachineInfo() {
 		super();
-	}
-
-	public T_Machine_Info(Integer machine_id, String machine_name, String machine_pannel, Integer manu_firm_id,
-			double machine_price, String t_model_name, Integer manu_machine_status, Integer oper_firm_id,
-			Integer operate_id, Date operate_date) {
-		super();
-		this.machine_id = machine_id;
-		this.machine_name = machine_name;
-		this.machine_pannel = machine_pannel;
-		this.manu_firm_id = manu_firm_id;
-		this.machine_price = machine_price;
-		this.t_model_name = t_model_name;
-		this.manu_machine_status = manu_machine_status;
-		this.oper_firm_id = oper_firm_id;
-		this.operate_id = operate_id;
-		this.operate_date = operate_date;
 	}
 
 	public Integer getMachine_id() {

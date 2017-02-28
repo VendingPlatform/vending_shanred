@@ -8,7 +8,7 @@ import java.util.Date;
  *
  * @author Miley_Ren
  */
-public class T_Ware_Info implements Serializable {
+public class WareInfo implements Serializable {
 	/** 序列号 */
 	private static final long serialVersionUID = -3601449521375525963L;
 
@@ -30,7 +30,7 @@ public class T_Ware_Info implements Serializable {
 	private double ware_min_price;
 	/** 商品描述 */
 	private String ware_desc;
-	/**所属运营商ID*/
+	/** 所属运营商ID */
 	private Integer firm_id;
 	/** 商品状态：0：可用；1：不可用 */
 	/** 操作者 */
@@ -38,26 +38,8 @@ public class T_Ware_Info implements Serializable {
 	/** 操作时间 */
 	private Date operate_date;
 
-	public T_Ware_Info() {
+	public WareInfo() {
 		super();
-	}
-
-	public T_Ware_Info(Integer ware_id, String ware_code, String ware_name, String ware_norm, String ware_unit,
-			double ware_base_price, double ware_max_price, double ware_min_price, String ware_desc, Integer firm_id,
-			Integer operate_id, Date operate_date) {
-		super();
-		this.ware_id = ware_id;
-		this.ware_code = ware_code;
-		this.ware_name = ware_name;
-		this.ware_norm = ware_norm;
-		this.ware_unit = ware_unit;
-		this.ware_base_price = ware_base_price;
-		this.ware_max_price = ware_max_price;
-		this.ware_min_price = ware_min_price;
-		this.ware_desc = ware_desc;
-		this.firm_id = firm_id;
-		this.operate_id = operate_id;
-		this.operate_date = operate_date;
 	}
 
 	public Integer getWare_id() {

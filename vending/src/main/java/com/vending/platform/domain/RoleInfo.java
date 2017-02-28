@@ -9,7 +9,7 @@ import java.util.Date;
  * @author Miley_Ren
  * 
  */
-public class T_Role_Info implements Serializable {
+public class RoleInfo implements Serializable {
 
 	/** 序列号 */
 	private static final long serialVersionUID = 4555319742101777793L;
@@ -28,20 +28,8 @@ public class T_Role_Info implements Serializable {
 	/** 操作时间 */
 	private Date operate_date;
 
-	public T_Role_Info() {
+	public RoleInfo() {
 		super();
-	}
-
-	public T_Role_Info(Integer role_id, String role_name, String authority_code, String authority_name, Integer status,
-			Integer operate_id, Date operate_date) {
-		super();
-		this.role_id = role_id;
-		this.role_name = role_name;
-		this.authority_code = authority_code;
-		this.authority_name = authority_name;
-		this.status = status;
-		this.operate_id = operate_id;
-		this.operate_date = operate_date;
 	}
 
 	public Integer getRole_id() {

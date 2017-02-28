@@ -8,7 +8,7 @@ import java.util.Date;
  * 
  * @author Miley_Ren
  */
-public class T_Group_Info implements Serializable {
+public class GroupInfo implements Serializable {
 
 	/** 序列号 */
 	private static final long serialVersionUID = 4998771266910693602L;
@@ -25,19 +25,8 @@ public class T_Group_Info implements Serializable {
 	/** 操作时间 */
 	private Date operate_date;
 
-	public T_Group_Info() {
+	public GroupInfo() {
 		super();
-	}
-
-	public T_Group_Info(Integer group_id, String group_name, int group_type, String group_desc, Integer operate_id,
-			Date operate_date) {
-		super();
-		this.group_id = group_id;
-		this.group_name = group_name;
-		this.group_type = group_type;
-		this.group_desc = group_desc;
-		this.operate_id = operate_id;
-		this.operate_date = operate_date;
 	}
 
 	public Integer getGroup_id() {

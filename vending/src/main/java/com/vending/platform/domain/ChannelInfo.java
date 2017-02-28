@@ -8,7 +8,7 @@ import java.util.Date;
  * 
  * @author Miley_Ren
  */
-public class T_Channel_Info implements Serializable {
+public class ChannelInfo implements Serializable {
 
 	/** 序列号 */
 	private static final long serialVersionUID = 8761114712738792976L;
@@ -18,6 +18,10 @@ public class T_Channel_Info implements Serializable {
 	private String channel_no;
 	/** 商品名称 */
 	private String ware_name;
+	/** 商品价格 */
+	private double ware_price;
+	/** 是否特价 */
+	private int is_discount;
 	/** 额定存货量 */
 	private Integer stock_num;
 	/** 当前存货量 */
@@ -33,24 +37,8 @@ public class T_Channel_Info implements Serializable {
 	/** 操作时间 */
 	private Date operate_date;
 
-	public T_Channel_Info() {
+	public ChannelInfo() {
 		super();
-	}
-
-	public T_Channel_Info(Integer channel_id, String channel_no, String ware_name, Integer stock_num,
-			Integer stock_num_now, Integer stock_num_add, Integer machine_id, Integer is_history, Integer operate_id,
-			Date operate_date) {
-		super();
-		this.channel_id = channel_id;
-		this.channel_no = channel_no;
-		this.ware_name = ware_name;
-		this.stock_num = stock_num;
-		this.stock_num_now = stock_num_now;
-		this.stock_num_add = stock_num_add;
-		this.machine_id = machine_id;
-		this.is_history = is_history;
-		this.operate_id = operate_id;
-		this.operate_date = operate_date;
 	}
 
 	public Integer getChannel_id() {
@@ -75,6 +63,22 @@ public class T_Channel_Info implements Serializable {
 
 	public void setWare_name(String ware_name) {
 		this.ware_name = ware_name;
+	}
+
+	public double getWare_price() {
+		return ware_price;
+	}
+
+	public void setWare_price(double ware_price) {
+		this.ware_price = ware_price;
+	}
+
+	public int getIs_discount() {
+		return is_discount;
+	}
+
+	public void setIs_discount(int is_discount) {
+		this.is_discount = is_discount;
 	}
 
 	public Integer getStock_num() {
@@ -136,8 +140,8 @@ public class T_Channel_Info implements Serializable {
 	@Override
 	public String toString() {
 		return "T_Channel_Info [channel_id=" + channel_id + ", channel_no=" + channel_no + ", ware_name=" + ware_name
-				+ ", stock_num=" + stock_num + ", stock_num_now=" + stock_num_now + ", stock_num_add=" + stock_num_add
-				+ ", machine_id=" + machine_id + ", is_history=" + is_history + ", operate_id=" + operate_id
-				+ ", operate_date=" + operate_date + "]";
+				+ ", ware_price=" + ware_price + ", is_discount=" + is_discount + ", stock_num=" + stock_num
+				+ ", stock_num_now=" + stock_num_now + ", stock_num_add=" + stock_num_add + ", machine_id=" + machine_id
+				+ ", is_history=" + is_history + ", operate_id=" + operate_id + ", operate_date=" + operate_date + "]";
 	}
 }

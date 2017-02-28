@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	hello ssm
 	<a href="<c:url value="/user/reg"/>">Register</a>
 	<a href="<c:url value="/user/show?id=2"/>">show</a>

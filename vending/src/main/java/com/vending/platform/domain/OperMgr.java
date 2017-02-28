@@ -8,7 +8,7 @@ import java.util.Date;
  * 
  * @author Miley_Ren
  */
-public class T_Oper_Mgr implements Serializable {
+public class OperMgr implements Serializable {
 
 	/** 序列号 */
 	private static final long serialVersionUID = -6417710404887297902L;
@@ -22,15 +22,6 @@ public class T_Oper_Mgr implements Serializable {
 	private Integer operate_id;
 	/** 操作时间 */
 	private Date operate_date;
-
-	public T_Oper_Mgr(Integer oper_mge_id, Integer firm_id, String firm_name, Integer operate_id, Date operate_date) {
-		super();
-		this.oper_mge_id = oper_mge_id;
-		this.firm_id = firm_id;
-		this.firm_name = firm_name;
-		this.operate_id = operate_id;
-		this.operate_date = operate_date;
-	}
 
 	public Integer getOper_mge_id() {
 		return oper_mge_id;
