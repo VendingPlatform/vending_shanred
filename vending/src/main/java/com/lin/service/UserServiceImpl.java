@@ -6,20 +6,13 @@ import org.springframework.stereotype.Service;
 import com.lin.dao.UserDao;
 import com.lin.domain.User;
 
-/**
- * åŠŸèƒ½æ¦‚è¦�ï¼šUserServiceå®žçŽ°ç±»
- * 
- * @author linbingwen
- * @since 2015å¹´9æœˆ28æ—¥
- */
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
-    private UserDao userDao;
+	@Autowired
+	private UserDao userDao;
 
-    public User selectUserById(Integer userId) {
-        return userDao.selectUserById(userId);
+	public User selectUserById(Integer userId) {
+		return userDao.selectUserById(userId);
 
-    }
-
+	}
 }
