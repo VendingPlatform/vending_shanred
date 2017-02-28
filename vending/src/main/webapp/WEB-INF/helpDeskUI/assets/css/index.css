@@ -1,0 +1,27 @@
+.chart-weiget-canvas {
+  width: 100%;
+  height: 160px;
+}
+.chart-weiget-canvas + .table {
+  margin-top: 10px;
+  margin-bottom: 0;
+  padding-top: 10px;
+}
+.chart-line {
+  width: 100%;
+  height: 320px;
+}
+.char-line-selects {
+  padding-top: 50px;
+}
+.char-line-selects > label {
+  display: block;
+  line-height: 30px;
+}
+.char-line-selects > label > .iradio_flat-blue {
+  margin-right: 5px;
+  margin-top: -5px;
+}
+.input-width {
+  width: 220px;
+}

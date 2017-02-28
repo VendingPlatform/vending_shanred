@@ -13,9 +13,9 @@ MySQL - 5.1.62-community : Database - vending_machine
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`vending_machine` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`vending` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-USE `vending_machine`;
+USE `vending`;
 
 /*Table structure for table `authorityinfo` */
 
@@ -239,8 +239,8 @@ insert  into `RoleInfo`(`roleId`,`roleName`,`authorityCode`,`authorityName`,`sta
 DROP TABLE IF EXISTS `t_test`;
 
 CREATE TABLE `t_test` (
-  `userId` int(11) NOT NULL AUTO_INCREMENT,
-  `userName` char(30) NOT NULL,
+  `user_Id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_Name` char(30) NOT NULL,
   `user_password` char(10) NOT NULL,
   `user_email` char(30) NOT NULL,
   PRIMARY KEY (`userId`),
@@ -249,7 +249,7 @@ CREATE TABLE `t_test` (
 
 /*Data for the table `t_test` */
 
-insert  into `t_test`(`userId`,`userName`,`user_password`,`user_email`) values (1,'林炳文','1234567@','ling20081005@126.com'),(2,'evan','123','fff@126.com'),(3,'kaka','cadg','fwsfg@126.com'),(4,'simle','cscs','fsaf@126.com'),(5,'arthur','csas','fsaff@126.com'),(6,'小德','yuh78','fdfas@126.com'),(7,'小小','cvff','fsaf@126.com'),(8,'林林之家','gvv','lin@126.com'),(9,'林炳文evankaka','dfsc','ling2008@126.com'),(10,'apple','uih6','ff@qq.com');
+insert  into `t_test`(`user_Id`,`user_Name`,`user_password`,`user_email`) values (1,'林炳文','1234567@','ling20081005@126.com'),(2,'evan','123','fff@126.com'),(3,'kaka','cadg','fwsfg@126.com'),(4,'simle','cscs','fsaf@126.com'),(5,'arthur','csas','fsaff@126.com'),(6,'小德','yuh78','fdfas@126.com'),(7,'小小','cvff','fsaf@126.com'),(8,'林林之家','gvv','lin@126.com'),(9,'林炳文evankaka','dfsc','ling2008@126.com'),(10,'apple','uih6','ff@qq.com');
 
 /*Table structure for table `UserInfo` */
 
