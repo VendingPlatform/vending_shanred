@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <!-- IE兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 国产360浏览器高速模式 -->
+    <meta name="renderer" content="webkit">
+    <!-- 响应式设计 -->  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>运营平台-上报任务</title>
+    <!-- 基础组件样式 -->
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <!-- jQuery ui 组件样式 -->
+    <link rel="stylesheet" href="assets/css/jquery-ui-flat.css">
+    <!-- jQuery nprogress 进度条插件样式 -->
+    <link rel="stylesheet" href="assets/css/nprogress.css">
+    <!-- 图标字体样式 -->
+    <link rel="stylesheet" href="assets/css/simple-line-icons.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="assets/css/flat.css">
+    <link rel="stylesheet" href="assets/css/blue.css">
+    <!-- 
+        1. html5shiv 用于 IE8 支持 HTML5 标签 
+        2. respond.min.js 用于 IE8 的响应式设计兼容脚本。该脚本不支持本地直接打开方式，请在服务器下使用。
+    -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="pages theme-heading-static-top theme-sidebar-default">
+    <div class="navbar page-heading navbar-static-top">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!-- /navbar-header -->
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+               <li class="notification">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">    <i class="icon-bell"></i>
+                        <span class="badge badge-sm bg-badger">2</span>
+                    </a>
+                </li>
+                <li class="notification">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="icon-envelope fa-fw"></i>
+                        <span class="badge badge-sm bg-success">9</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#">
+                        <i class="icon-user"></i>
+                        李龙龙
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-lock-open"></i>
+                        修改密码
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-logout"></i>
+                        退出平台
+                    </a>
+                </li>
+            </ul>
+            <!-- /navbar-right -->
+        </div>
+    </div>
+    <!-- /navbar-top -->
+    <div class="page-sidebar">
+
+        <div class="sidebar-inner">
+            <div class="sidebar-brand bg-info">
+                <i class="fa fa-area-chart fa-2x"></i>
+                <span class="brand-title">运营平台</span>
+            </div>
+            <h4 class="sidebar-title">任务中心</h4>
+            <ul class="nav sidebar-nav">
+                <li>
+                    <a href="#" >
+                        <i class="icon-rocket"></i>
+                        上报任务
+                        <span class="badge badge-sm bg-badger pull-right">20</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-note"></i>
+                        任务处理
+                        <span class="badge badge-sm bg-info pull-right">4</span>
+                    </a>
+                </li>
+            </ul>
+            <h4 class="sidebar-title">权限管理</h4>
+            <ul class="nav sidebar-nav">
+                <li>
+                    <a href="#"> <i class="icon-users "></i>
+                        用户管理
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-settings "></i>
+                        角色管理
+                    </a>
+                </li>
+            </ul>
+            <h4 class="sidebar-title">值班管理</h4>
+            <ul class="nav sidebar-nav">
+                <li>
+                    <a href="#"> <i class="icon-user"></i>
+                        值班安排
+                        <span class="badge badge-sm bg-success pull-right">5</span>
+                    </a>
+                </li>
+            </ul>
+            <h4 class="sidebar-title">数据分析</h4>
+            <ul class="nav sidebar-nav">
+                <li>
+                    <a href="#"> <i class="icon-magnifier"></i>
+                        报表查询
+                    </a>
+                </li>
+                <li>
+                    <a href="#"> <i class="icon-pie-chart"></i>
+                        数据分析
+                    </a>
+                </li>
+            </ul>
+            <h4 class="sidebar-title sidebar-bordered">值班信息</h4>
+            <ul class="sidebar-user-nav">
+                <li>
+                    <i class="color-info icon-directions margin-right-sm"></i>
+                    李龙龙
+                </li>
+                <li>
+                    <i class="color-info icon-call-end margin-right-sm"></i>
+                    010-1234567
+                </li>
+                <li>
+                    <a href="mailto:lilonglong@gm-medicare.com">
+                        <i class="color-info icon-envelope-letter margin-right-sm"></i>
+                        邮件联系值班人员
+                    </a>
+                </li>
+                <li>
+                    <i class="color-info fa fa-calendar margin-right-sm"></i>
+                    2015-08-06 22:22:30
+                </li>
+                
+            </ul>
+            <!-- /sidebar-user-nav -->
+        </div>
+        <!-- /page-sidebar-inner -->
+    </div>
+    <!-- /page-sidebar -->
+    <div class="page-content">
+        <div class="page-breadcrumb">
+                <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-flag fa-stack-1x fa-inverse"></i>
+                </span>
+                <h1>上报任务</h1>
+                <ol class="breadcrumb pull-right">
+                    <li class="description color-lightslategray">
+                        您现在的位置：
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-home"></i>
+                            首页
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">任务中心</a>
+                    </li>
+                    <li class="active">上报任务</li>
+                </ol>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-flat">
+                        <div class="panel-heading clearfix">
+                            <h5 class="panel-title">
+                                <i class="icon-grid"></i>
+                                上报任务
+                            </h5>
+                            <div class="btn-group pull-right" role="group" aria-label="...">
+                            <button type="button" class="btn btn-default" id="js-add-btn">
+                                    <i class="icon-plus"></i>
+                                    新增
+                                </button>
+                                <button type="button" class="btn btn-default" data-toggle="collapse" href="#js-search-criteria" aria-expanded="false" aria-controls="js-search-criteria">
+                                    <i class="icon-magic-wand"></i>
+                                    折叠
+                                </button>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <form action="" class="form-table clearfix collapse in" id="js-search-criteria">
+                                <div class="row margin-bottom-lg">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-4 text-right">
+                                                <label class="margin-top-sm">
+                                                    客户系统：
+                                                </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select name="" id="" class="form-control ">
+                                                    <option value="新华人寿">新华人寿</option>
+                                                    <option value="天安人寿">天安人寿</option>
+                                                    <option value="幸福人寿">幸福人寿</option>
+                                                    <option value="永诚保险">永诚保险</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-4 text-right">
+                                                <label class="margin-top-sm">
+                                                    问题类型：
+                                                </label>
+                                            </div>
+                                            <div class="col-md-8 ">
+                                                <select name="" id="" class="form-control">
+                                                    <option value=""></option>
+                                                    <option value=""></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /row one -->
+                                <div class="row margin-bottom-lg">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-4 margin-top-sm text-right">
+                                                <label>
+                                                    优先级别：
+                                                </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                 <select name="" id="" class="form-control">
+                                                    <option value=""></option>
+                                                    <option value=""></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-md-6">
+                                         <div class="row">
+                                            <div class="col-md-4 margin-top-sm text-right">
+                                                <label>
+                                                    处理人：
+                                                </label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control">
+                                            </div>
+                                        </div>   
+                                    </div>
+                                </div>
+                                <!-- /row two -->
+                                <div class="row margin-bottom-lg">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-2 margin-top-sm text-right">
+                                                <label>
+                                                    问题描述：
+                                                </label>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <textarea name="" id="" cols="3" rows="4" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </div>
+                                <!-- /row three -->
+                                <div class="row margin-bottom-lg">
+                                    <div class="col-md-10 col-md-offset-2">
+                                        <button type="button" class="btn btn-info">
+                                            <i class="fa fa-send"></i>
+                                            保存
+                                        </button>
+                                        <button type="button" class="btn btn-primary">
+                                            <i class="icon-picture"></i>
+                                            预览
+                                        </button>
+                                        <button type="button" class="btn btn-default" data-toggle="collapse" href="#js-search-criteria" aria-expanded="false" aria-controls="js-search-criteria">
+                                            <i class="icon-refresh"></i>
+                                            取消
+                                        </button>
+                                    </div>
+                                    
+                                </div>
+                            </form>
+                            <div class="table-responsive">
+                                <table class="table js-icheck">
+                                    
+                                  <thead >
+                                    <tr class="bg-info-lighter">
+                                      <th>
+                                          <input type="checkbox" class="js-check-all">
+                                      </th>
+                                      <th>任务编号</th>
+                                      <th>客户系统</th>
+                                      <th>问题类型</th>
+                                      <th>提交人</th>
+                                      <th>提交时间</th>
+                                      <th>处理状态</th>
+                                      <th>处理人</th>
+                                      <th>处理时间</th>
+                                      <th>操作</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                        <tr>
+                                            <th scope="row">
+                                                <input type="checkbox"></th>
+                                            <td>
+                                                <span class="badge bg-badger">1000</span>
+                                            </td>
+                                            <td>
+                                                天安人寿
+                                            </td>
+                                            <td>@mdo</td>
+                                            <td>值班人员</td>
+                                            <td>2015-01-03</td>
+                                            <td>
+                                                <span class="label bg-lightslategray">未处理</span>
+                                            </td>
+                                            <td>运营主管</td>
+                                            <td>2015-05-22</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-default" type="button">
+                                                    <i class="fa fa-send"></i>
+                                                    提交
+                                                </button>
+                                                <button class="btn btn-sm btn-default" type="button">
+                                                    <i class="fa fa-trash"></i>
+                                                    删除
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    <tr class="bg-warning-lighter">
+                                        <th scope="row">
+                                            <input type="checkbox" checked></th>
+                                        <td>
+                                            <span class="badge bg-primary">50</span>
+                                        </td>
+                                        <td>新华人寿</td>
+                                        <td>@fat</td>
+                                        <td>行政人员</td>
+                                        <td>
+                                            2015-08-22
+                                        </td>
+                                        <td>
+                                            <span class="label bg-info">已处理</span>
+                                        </td>
+                                        <td>值班人员</td>
+                                        <td>2015-08-30</td>
+                                        <td>
+                                                <button class="btn btn-sm btn-default" type="button">
+                                                    <i class="fa fa-send"></i>
+                                                    提交
+                                                </button>
+                                                <button class="btn btn-sm btn-default" type="button">
+                                                    <i class="fa fa-trash"></i>
+                                                    删除
+                                                </button>
+                                            </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <input type="checkbox"></th>
+                                        <td>
+                                            <span class="badge bg-purple">30</span>
+                                        </td>
+                                        <td>幸福人寿</td>
+                                        <td>@mdo</td>
+                                        <td>行政人员</td>
+                                        <td>2015-03-22</td>
+                                        <td>
+                                            <span class="label bg-inverse">新建</span>
+                                        </td>
+                                        <td>行政人员</td>
+                                        <td>2015-04-11</td>
+                                        <td>
+                                                <button class="btn btn-sm btn-default" type="button">
+                                                    <i class="fa fa-send"></i>
+                                                    提交
+                                                </button>
+                                                <button class="btn btn-sm btn-default" type="button">
+                                                    <i class="fa fa-trash"></i>
+                                                    删除
+                                                </button>
+                                            </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <input type="checkbox"></th>
+                                        <td>
+                                            <span class="badge bg-lightslategray">8</span>   
+                                        </td>
+                                        <td>永诚保险</td>
+                                        <td>@mdo</td>
+                                        <td>客服人员</td>
+                                        <td>2015-01-02</td>
+                                        <td>
+                                            <span class="label bg-info">已处理</span>
+                                        </td>
+                                        <td>维护人员</td>
+                                        <td>2015-08-30</td>
+                                        <td>
+                                                <button class="btn btn-sm btn-default" type="button">
+                                                    <i class="fa fa-send"></i>
+                                                    提交
+                                                </button>
+                                                <button class="btn btn-sm btn-default" type="button">
+                                                    <i class="fa fa-trash"></i>
+                                                    删除
+                                                </button>
+                                            </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                            </div>
+                            <div class="table-footer">
+                                    <div class="table-result pull-left color-lightslategray">
+                                        当前第：
+                                        <span class="result-index color-inverse">1</span>
+                                        页
+                                    共查找到：
+                                        <span class="result-number color-badger">1000</span>
+                                        条数据
+                                    </div>
+                                    <!-- /table-result -->
+                                    <nav class="pagination-custom-wrap">
+                                        <ul class=" pagination-custom">
+                                            <li class="active">
+                                                <a href="#" aria-label="Previous">首页</a>
+                                            </li>
+                                            <li class="disabled">
+                                                <a href="#" aria-label="Previous">«上一页</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="#" aria-label="Next">
+                                                    <span aria-hidden="true">下一页»</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" aria-label="Previous">尾页</a>
+                                            </li>
+                                        </ul>
+                                        <div class="pagination-custom-result color-lightslategray">
+                                            <div class="pagination-total">
+                                                共
+                                                <span class="total">10</span>
+                                                页，
+                                            </div>
+                                            <div class="pagination-to">
+                                                到
+                                                <input type="text" class="form-control">页</div>
+
+                                            <button class="btn btn-default pagination-custom-btn" type="button">确定</button>
+                                        </div>
+                                    </nav>
+                                    <!-- /nav --> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="page-footer">
+        <p class="copyright pull-left color-lightslategray">
+            © 2015 Copyright <a href="http://www.gm-medicare.com/" target="_blank">GM-Medicare.com</a> All Rights Reserved 版权所有
+        </p>
+        <p class="theme-author pull-right">
+            <i class="icon-envelope-letter color-badger"></i>
+            by
+            <a href="mailto:lilonglong@gm-medicare.com">李龙龙</a>
+        </p>
+    </div>
+    <!-- /page-footer -->
+</div>
+<!-- /pages -->
+    
+<div id="js-add-dialog">
+    <form action="">
+        <div class="row margin-bottom-lg">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4 text-right">
+                        <label class="margin-top-sm">
+                            客户系统：
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <select name="" id="" class="form-control">
+                            <option value=""></option>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4 text-right">
+                        <label class="margin-top-sm">
+                            问题类型：
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <select name="" id="" class="form-control">
+                            <option value=""></option>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /row one -->
+        <div class="row margin-bottom-lg">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4 text-right">
+                        <label class="margin-top-sm">
+                            优先级别：
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <select name="" id="" class="form-control">
+                            <option value=""></option>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4 text-right">
+                        <label class="margin-top-sm">
+                            问题描述：
+                        </label>
+                    </div>
+                    <div class="col-md-8">
+                        <select name="" id="" class="form-control">
+                            <option value=""></option>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /row two -->
+        <div class="row ">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-2 text-right">
+                        <label class="margin-top-sm">
+                            请选择文件：
+                        </label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="file">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /row three -->
+    </form>
+</div>
+<!-- jQuery -->
+<script src="assets/js/lib/jquery.js"></script>
+<!-- jQuery UI -->
+<script src="assets/js/lib/jquery-ui.min.js"></script>
+<!-- jQuery twitter bootstrap -->
+<script src="assets/js/lib/bootstrap.min.js"></script>
+<!-- jQuery 进度条 nprogress -->
+<script src="assets/js/lib/nprogress.js"></script>
+<!-- jQuery icheck -->
+<script src="assets/js/lib/icheck.min.js"></script>
+<!-- jQuery slimscroll -->
+<script src="assets/js/lib/jquery.slimscroll.js"></script>
+
+<!-- 基础脚本库 -->
+<script src="assets/js/base/app.js"></script>
+<script src="assets/js/pages/reporting-tasks.js"></script>
+<script>
+    $(function (){
+        'use strict';
+        App.stopDefaultEvent();
+        App.sidebarScroll();
+        App.pageLoadBar();
+        App.icheckForm();
+        ReportingTasks.addDialog();
+    });
+</script>
+</body>
+</html>

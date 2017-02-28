@@ -1,0 +1,54 @@
+.panel-login {
+  width: 420px;
+  margin: 140px auto 10px;
+  border: none;
+}
+.login-title {
+  margin: 0 ;
+  line-height: 60px;
+  text-align: center;
+  font-size: 20px;
+  color: #fff;
+  border-radius: 4px 4px 0 0;
+}
+.login-form {
+  padding: 30px 20px 20px;
+}
+.login-form .form-group-header:before {
+  display: inline-block;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  right: 0;
+  border-bottom: 1px solid #e6ebed;
+}
+.login-form .form-group-header > span {
+  background-color: #fff;
+  padding: 0 10px;
+  position: relative;
+  font-weight: bold;
+}
+.login-form .form-group {
+  position: relative;
+}
+.login-form .form-control {
+  height: 38px;
+  padding-left: 40px;
+}
+.login-form .form-control:focus ~ .form-contorl-icon {
+  color: #3498db;
+}
+.login-form .form-contorl-icon {
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  border-right: 1px solid #e6ebed;
+}
+.login-form .btn.btn-block {
+  height: 38px;
+}
