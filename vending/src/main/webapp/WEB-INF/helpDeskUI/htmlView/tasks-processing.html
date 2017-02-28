@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <!-- IE兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 国产360浏览器高速模式 -->
+    <meta name="renderer" content="webkit">
+    <!-- 响应式设计 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>运营平台-处理任务</title>
+    <!-- 基础组件样式 -->
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+
+    <!-- jQuery ui 组件样式 -->
+    <link rel="stylesheet" href="assets/css/jquery-ui-flat.css">
+    <!-- jQuery nprogress 进度条插件样式 -->
+    <link rel="stylesheet" href="assets/css/nprogress.css">
+    <!-- 图标字体样式 -->
+    <link rel="stylesheet" href="assets/css/simple-line-icons.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.css">
+    <!-- 
+        1. html5shiv 用于 IE8 支持 HTML5 标签 
+        2. respond.min.js 用于 IE8 的响应式设计兼容脚本。该脚本不支持本地直接打开方式，请在服务器下使用。
+    -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="pages theme-heading-fixed-top theme-sidebar-fixed theme-footer-fixed">
+        <div class="navbar page-heading navbar-static-top">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- /navbar-header -->
+
+            <div id="navbar" class="navbar-collapse collapse">
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#">
+                            <i class="icon-user"></i>
+                            李龙龙
+                        </a>
+                    </li>
+                    <li>
+                        <a href="change-password.html">
+                            <i class="icon-lock-open"></i>
+                            修改密码
+                        </a>
+                    </li>
+                    <li>
+                        <a href="login.html">
+                            <i class="icon-logout"></i>
+                            退出平台
+                        </a>
+                    </li>
+                </ul>
+                <!-- /navbar-right --> </div>
+        </div>
+        <!-- /navbar-top -->
+        <div class="page-sidebar">
+
+            <div class="sidebar-inner">
+                <a class="sidebar-brand bg-info" href="index.html">
+                    <i class="fa fa-area-chart fa-2x"></i>
+                    <span class="brand-title">运营平台</span>
+                </a>
+                <h4 class="sidebar-title">任务中心</h4>
+                <ul class="nav sidebar-nav">
+                    <li>
+                        <a href="reporting-tasks.html" >
+                            <i class="icon-rocket"></i>
+                            上报任务
+                            <span class="badge badge-sm bg-badger pull-right">20</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tasks-processing.html">
+                            <i class="icon-note"></i>
+                            任务处理
+                            <span class="badge badge-sm bg-info pull-right">4</span>
+                        </a>
+                    </li>
+                </ul>
+                <h4 class="sidebar-title">权限管理</h4>
+                <ul class="nav sidebar-nav">
+                    <li>
+                        <a href="user-management.html"> <i class="icon-users "></i>
+                            用户管理
+                        </a>
+                    </li>
+                    <li>
+                        <a href="role-management.html">
+                            <i class="icon-settings "></i>
+                            角色管理
+                        </a>
+                    </li>
+                </ul>
+                <h4 class="sidebar-title">值班管理</h4>
+                <ul class="nav sidebar-nav">
+                    <li>
+                        <a href="watchkeeping-mangement.html"> <i class="icon-user"></i>
+                            值班安排
+                            <span class="badge badge-sm bg-success pull-right">5</span>
+                        </a>
+                    </li>
+                </ul>
+                <h4 class="sidebar-title">数据分析</h4>
+                <ul class="nav sidebar-nav">
+                    <li>
+                        <a href="#">
+                            <i class="icon-magnifier"></i>
+                            报表查询
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="icon-pie-chart"></i>
+                            数据分析
+                        </a>
+                    </li>
+                </ul>
+                <h4 class="sidebar-title sidebar-bordered">值班信息</h4>
+                <ul class="sidebar-user-nav">
+                    <li>
+                        <i class="color-info icon-directions margin-right-sm"></i>
+                        李龙龙
+                    </li>
+                    <li>
+                        <i class="color-info icon-call-end margin-right-sm"></i>
+                        010-1234567
+                    </li>
+                    <li>
+                        <a href="mailto:lilonglong@gm-medicare.com">
+                            <i class="color-info icon-envelope-letter margin-right-sm"></i>
+                            邮件联系值班人员
+                        </a>
+                    </li>
+                    <li>
+                        <i class="color-info fa fa-calendar margin-right-sm"></i>
+                        2015-08-06 22:22:30
+                    </li>
+
+                </ul>
+                <!-- /sidebar-user-nav --> </div>
+            <!-- /page-sidebar-inner --> </div>
+        <!-- /page-sidebar -->
+        <div class="page-content">
+            <div class="container-fluid">
+                <form action="" class="form-table clearfix collapse in" id="js-search-criteria">
+                    <div class="row margin-bottom-lg">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4 text-right">
+                                    <label class="margin-top-sm">理赔系统：</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select name="" id="" class="form-control ">
+                                        <option value="新华人寿">新华人寿</option>
+                                        <option value="天安人寿">天安人寿</option>
+                                        <option value="幸福人寿">幸福人寿</option>
+                                        <option value="永诚保险">永诚保险</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4 text-right">
+                                    <label class="margin-top-sm">状态：</label>
+                                </div>
+                                <div class="col-md-8 ">
+                                    <select name="" id="" class="form-control">
+                                        <option value="已处理">已处理</option>
+                                        <option value="未处理">未处理</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /row one -->
+                    <div class="row margin-bottom-lg">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4 margin-top-sm text-right">
+                                    <label>提交人：</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control"></div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4 margin-top-sm text-right">
+                                    <label>处理人：</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /row two -->
+                    <div class="row margin-bottom-lg">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4 margin-top-sm text-right">
+                                    <label>提交时间：</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="js-submit-date"></div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4 margin-top-sm text-right">
+                                    <label>处理时间：</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control"  id="js-processing-date"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /row three -->
+                    <div class="row margin-bottom-lg">
+                        <div class="col-md-10 col-md-offset-2">
+                            <button type="button" class="btn btn-info">
+                                <i class="icon-magnifier"></i>
+                                查询
+                            </button>
+                            <button type="button" class="btn btn-default" >
+                                <i class="icon-refresh"></i>
+                                取消
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                           <div class="panel-heading clearfix">
+                               <h5 class="panel-title">任务列表</h5>
+                           </div>
+                            <div class="panel-body">
+                                <table class="table table-hover no-margin">
+                                    <thead >
+                                        <tr>
+                                            <th>任务编号</th>
+                                            <th>优先级别</th>
+                                            <th>理赔系统</th>
+                                            <th>问题类型</th>
+                                            <th>提交时间</th>
+                                            <th>处理状态</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td >123456789</td>
+                                            <td>
+                                                <span class="color-badger ">
+                                                    <i class="fa fa-level-up"></i>
+                                                    高
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a href="#">新华人寿</a>
+                                            </td>
+
+                                            <td>案件回退</td>
+                                            <td>2015-06-06</td>
+                                            <td>
+                                                <span class="label bg-lightslategray">待处理</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td >123456789</td>
+                                            <td>
+                                               <span class="color-success ">
+                                                    <i class="fa fa-level-down"></i>
+                                                    低
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a href="#">
+                                                    天安人寿
+                                                </a>
+                                            </td>
+                                            <td>案件删除</td>
+                                            <td>2015-08-22</td>
+                                            <td>
+                                                <span class="label bg-lightslategray">待处理</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td >123456789</td>
+                                            <td>
+                                                <span class="color-badger ">
+                                                    <i class="fa fa-level-up"></i>
+                                                    高
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a href="#">新华人寿</a>
+                                            </td>
+
+                                            <td>案件回退</td>
+                                            <td>2015-06-06</td>
+                                            <td>
+                                                <span class="label bg-lightslategray">待处理</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td >123456789</td>
+                                            <td>
+                                               <span class="color-success ">
+                                                    <i class="fa fa-level-down"></i>
+                                                    低
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a href="#">
+                                                    天安人寿
+                                                </a>
+                                            </td>
+                                            <td>案件删除</td>
+                                            <td>2015-08-22</td>
+                                            <td>
+                                                <span class="label bg-lightslategray">待处理</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td >123456789</td>
+                                            <td>
+                                                <span class="color-badger ">
+                                                    <i class="fa fa-level-up"></i>
+                                                    高
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a href="#">新华人寿</a>
+                                            </td>
+
+                                            <td>案件回退</td>
+                                            <td>2015-06-06</td>
+                                            <td>
+                                                <span class="label bg-lightslategray">待处理</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td >123456789</td>
+                                            <td>
+                                               <span class="color-success ">
+                                                    <i class="fa fa-level-down"></i>
+                                                    低
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a href="#">
+                                                    天安人寿
+                                                </a>
+                                            </td>
+                                            <td>案件删除</td>
+                                            <td>2015-08-22</td>
+                                            <td>
+                                                <span class="label bg-lightslategray">待处理</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td >123456789</td>
+                                            <td>
+                                                <span class="color-badger ">
+                                                    <i class="fa fa-level-up"></i>
+                                                    高
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a href="#">新华人寿</a>
+                                            </td>
+
+                                            <td>案件回退</td>
+                                            <td>2015-06-06</td>
+                                            <td>
+                                                <span class="label bg-lightslategray">待处理</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td >123456789</td>
+                                            <td>
+                                               <span class="color-success ">
+                                                    <i class="fa fa-level-down"></i>
+                                                    低
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a href="#">
+                                                    天安人寿
+                                                </a>
+                                            </td>
+                                            <td>案件删除</td>
+                                            <td>2015-08-22</td>
+                                            <td>
+                                                <span class="label bg-lightslategray">待处理</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td >123456789</td>
+                                            <td>
+                                                <span class="color-badger ">
+                                                    <i class="fa fa-level-up"></i>
+                                                    高
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a href="#">新华人寿</a>
+                                            </td>
+
+                                            <td>案件回退</td>
+                                            <td>2015-06-06</td>
+                                            <td>
+                                                <span class="label bg-lightslategray">待处理</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td >123456789</td>
+                                            <td>
+                                               <span class="color-success ">
+                                                    <i class="fa fa-level-down"></i>
+                                                    低
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a href="#">
+                                                    天安人寿
+                                                </a>
+                                            </td>
+                                            <td>案件删除</td>
+                                            <td>2015-08-22</td>
+                                            <td>
+                                                <span class="label bg-lightslategray">待处理</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="panel-footer clearfix">
+                                <ul class="pager no-margin pull-left">
+                                    <li class="previous disabled">
+                                        <a href="#">
+                                            <i class="fa fa-angle-double-left"></i>
+                                            上一页
+                                        </a>
+                                    </li>
+                                    <li class="next">
+                                        <a href="#">
+                                            下一页
+                                            <i class="fa fa-angle-double-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="pagination-custom-result pull-right color-lightslategray">
+                                    <div class="pagination-total">
+                                        共
+                                        <span class="total">10</span>
+                                        页，
+                                    </div>
+                                    <div class="pagination-to">
+                                        到
+                                        <input type="text" class="form-control">页</div>
+
+                                    <button class="btn btn-default pagination-custom-btn" type="button">确定</button>
+                                </div>
+                                   
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading clearfix">
+                                    <h5 class=" panel-title">任务详情</h5>
+                                </div>
+                                <div class="panel-body no-padding-right">
+                                    <div class="task-info-scorll" style="padding-right: 15px;">
+                                        <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-5 text-right">
+                                                     <label class="margin-top-sm">任务编号：</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                     <p class="form-control-static">
+                                                         1000
+                                                     </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-5 text-right">
+                                                     <label class="margin-top-sm">理赔系统：</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                     <p class="form-control-static">
+                                                         新华人寿
+                                                     </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <!-- /row star -->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-5 text-right">
+                                                     <label class="margin-top-sm">优先级别：</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                     <p class="form-control-static">
+                                                         高
+                                                     </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-5 text-right">
+                                                     <label class="margin-top-sm">问题类型：</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                     <p class="form-control-static">
+                                                         案件回退
+                                                     </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /row two -->
+                                    <div class="row">
+                                         <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-5 text-right">
+                                                     <label class="margin-top-sm">提交人：</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                     <p class="form-control-static">
+                                                         admin
+                                                     </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-5 text-right">
+                                                     <label class="margin-top-sm">提交时间：</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                     <p class="form-control-static">
+                                                         2015-04-22
+                                                     </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /row three -->
+                                    <div class="row">
+                                         <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-5 text-right">
+                                                    <label class="margin-bottom">问题描述：</label>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col-md-12">
+                                                <textarea name="" id="" rows="5" class="margin-bottom form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <!-- /row four -->
+                                    <div class="row">
+                                         <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-5 text-right">
+                                                    <label class="margin-bottom">图片详情：</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="row margin-bottom">
+                                                <div class="col-md-3">
+                                                    <a href="#">
+                                                        <img src="http://szbk.wnrb.net/res/1/20111124/24001322110900218.jpg" alt="..." class="img-thumbnail">
+                                                    </a>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <a href="#">
+                                                        <img src="http://szbk.wnrb.net/res/1/20111124/24001322110900218.jpg" alt="..." class="img-thumbnail">
+                                                    </a>
+                                                    
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <a href="#">
+                                                        <img src="http://szbk.wnrb.net/res/1/20111124/24001322110900218.jpg" alt="..." class="img-thumbnail">
+                                                    </a>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <a href="#">
+                                                        <img src="http://szbk.wnrb.net/res/1/20111124/24001322110900218.jpg" alt="..." class="img-thumbnail">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- /row five -->
+                                    <div class="row">
+                                         <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-5 text-right">
+                                                    <label class="margin-bottom">处理意见：</label>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="margin-bottom" id="js-add-file">
+                                                <input type="file" class="margin-bottom-lg">
+                                                <button type="button" class="btn btn-default margin-right-sm" >
+                                                    <i class="fa fa-plus"></i>
+                                                    添加
+                                                </button>
+                                                <span class="color-info">
+                                                    <i class="fa fa-file-photo-o fa-fw"></i>
+                                                    点击增加，相应增加1个图片上传，最多可添加4个图片上传。
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                                <textarea name="" id="" rows="5" class="margin-bottom form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <!-- /row six -->
+
+                                    <div class="row">
+                                        <div class="col-md-12 margin-bottom-lg">
+                                            <button class="btn btn-info">
+                                                <i class="fa fa-send"></i>
+                                                提交
+                                            </button>
+                                            <button class="btn btn-default">
+                                                <i class="icon-refresh"></i>
+                                                取消
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- /row last -->
+                                   
+                                    <table class="table no-margin table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <i class="fa fa-user"></i>
+                                                    操作人
+                                                </th>
+                                                <th>
+                                                    <i class="fa fa-cog"></i>
+                                                    账户
+                                                </th>
+                                                <th>
+                                                    <i class="fa fa-sliders"></i>
+                                                    事件
+                                                </th>
+                                                <th>
+                                                    <i class="fa fa-calendar"></i>
+                                                    日期
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <a href="#">caohengyu</a>
+                                                </td>
+                                                <td>
+                                                    <span class="label bg-info margin-right-sm">
+                                                       新建问题
+                                                    </span>
+                                                    
+                                                </td>
+                                                <td>
+                                                    新建 => 已分派
+                                                </td>
+                                                <td >
+                                                    2015-06-26 14:38
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a href="#">caohengyu</a>
+                                                </td>
+                                                <td>
+                                                    <span class="label bg-primary margin-right-sm">
+                                                        状态
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    已分派
+                                                </td>
+                                                <td>
+                                                    2015-06-26 14:38
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                           
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <!-- /处理详情 -->
+                </div>
+
+            </div>
+            <!-- /container-fluid --> 
+    </div>
+    <!-- /page-content -->
+    <div class="page-footer">
+        <p class="copyright color-lightslategray">
+            © 2015 Copyright
+            <a href="http://www.gm-medicare.com/" target="_blank">GM-Medicare.com</a>
+            All Rights Reserved 版权所有
+        </p>
+    </div>
+    <!-- /page-footer -->
+</div>
+<!-- /pages -->
+
+<!-- jQuery -->
+<script src="assets/js/lib/jquery.js"></script>
+<!-- jQuery UI -->
+<script src="assets/js/lib/jquery-ui.min.js"></script>
+<script src="assets/js/lib/datepicker-zh-CN.js"></script>
+<!-- jQuery twitter bootstrap -->
+<script src="assets/js/lib/bootstrap.min.js"></script>
+<!-- jQuery 进度条 nprogress -->
+<script src="assets/js/lib/nprogress.js"></script>
+<!-- jQuery slimscroll -->
+<script src="assets/js/lib/jquery.slimscroll.js"></script>
+<!-- 基础脚本库 -->
+<script src="assets/js/base/app.js"></script>
+<script src="assets/js/pages/tasks-processing.js"></script>
+<script>
+    $(function (){
+        'use strict';
+        App.stopDefaultEvent();
+        App.sidebarScroll();
+        App.pageLoadBar();
+        App.icheckForm();
+        TaskProcessing.datepickerModule('#js-submit-date');
+        TaskProcessing.datepickerModule('#js-processing-date');
+
+        TaskProcessing.init();
+        
+    });
+</script>
+</body>
+</html>

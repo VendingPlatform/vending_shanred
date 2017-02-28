@@ -1,0 +1,34 @@
+.custom-tree-lists {
+  list-style: none;
+  padding-left: 0;
+}
+.custom-tree-lists li {
+  line-height: 34px;
+}
+.custom-tree-lists li input[type="checkbox"] {
+  display: inline-block;
+  margin-right: 5px;
+}
+.custom-tree-lists > li > a {
+  font-weight: bold;
+}
+.custom-tree-lists > li > .collapsed .fa-minus:before {
+  content: "\f067";
+}
+.custom-tree-lists a:hover,
+.custom-tree-lists a:focus {
+  text-decoration: none;
+}
+.custom-tree-lists ul > li {
+  padding-left: 25px;
+}
+.custom-tree-lists .tree-left-icon {
+  margin-right: 10px;
+  margin-top: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.custom-tree-lists ul {
+  list-style: none;
+  padding-left: 0;
+}

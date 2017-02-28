@@ -1,0 +1,14 @@
+.code-left{
+	padding-left: 0px !important;
+	padding-bottom: 15px;
+}
+.code-img{
+	height: 38px;
+	overflow: hidden;
+}
+.code-btn{
+	margin-top: 16px;
+}
+.code-right{
+	padding-right: 0px !important;
+}

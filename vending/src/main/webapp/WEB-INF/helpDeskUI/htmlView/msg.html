@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>运维平台信息提示</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+  </head>
+  
+  <body>
+    <div style="text-align: center;color: red;">
+    	您有需要处理的任务
+    </div>
+  </body>
+  <script type="text/javascript">
+  
+			var timer = setTimeout(function(){
+				window.opener = null;
+				window.open('', '_self', '');
+				window.close();
+			}, 30000); //毫秒 
+			
+		</script>
+</html>
