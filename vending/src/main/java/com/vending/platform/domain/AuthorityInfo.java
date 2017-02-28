@@ -12,63 +12,64 @@ public class AuthorityInfo implements Serializable {
 	/** 序列号 */
 	private static final long serialVersionUID = -1610238727257309621L;
 	/** 权限ID */
-	private Integer auth_id;
+	private Integer authId;
 	/** 权限名 */
-	private String auth_name;
+	private String authName;
 	/** 权限编码 */
-	private String auth_code;
+	private String authCode;
 	/** 操作者ID */
-	private Integer operate_id;
+	private Integer operateId;
 	/** 操作时间 */
-	private Date operate_date;
+	private Date operateDate;
 
 	public AuthorityInfo() {
 		super();
 	}
 
-	public Integer getAuth_id() {
-		return auth_id;
+	public Integer getAuthId() {
+		return authId;
 	}
 
-	public void setAuth_id(Integer auth_id) {
-		this.auth_id = auth_id;
+	public void setAuthId(Integer authId) {
+		this.authId = authId;
 	}
 
-	public String getAuth_name() {
-		return auth_name;
+	public String getAuthName() {
+		return authName;
 	}
 
-	public void setAuth_name(String auth_name) {
-		this.auth_name = auth_name;
+	public void setAuthName(String authName) {
+		this.authName = authName;
 	}
 
-	public String getAuth_code() {
-		return auth_code;
+	public String getAuthCode() {
+		return authCode;
 	}
 
-	public void setAuth_code(String auth_code) {
-		this.auth_code = auth_code;
+	public void setAuthCode(String authCode) {
+		this.authCode = authCode;
 	}
 
-	public Integer getOperate_id() {
-		return operate_id;
+	public Integer getOperateId() {
+		return operateId;
 	}
 
-	public void setOperate_id(Integer operate_id) {
-		this.operate_id = operate_id;
+	public void setOperateId(Integer operateId) {
+		this.operateId = operateId;
 	}
 
-	public Date getOperate_date() {
-		return operate_date;
+	public Date getOperateDate() {
+		return operateDate;
 	}
 
-	public void setOperate_date(Date operate_date) {
-		this.operate_date = operate_date;
+	public void setOperateDate(Date operateDate) {
+		this.operateDate = operateDate;
 	}
 
 	@Override
 	public String toString() {
-		return "T_Authority_Info [auth_id=" + auth_id + ", auth_name=" + auth_name + ", auth_code=" + auth_code
-				+ ", operate_id=" + operate_id + ", operate_date=" + operate_date + "]";
+		return "AuthorityInfo [authId=" + authId + ", authName=" + authName + ", authCode=" + authCode + ", operateId="
+				+ operateId + ", operateDate=" + operateDate + "]";
 	}
+
 }

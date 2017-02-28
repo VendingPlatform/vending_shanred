@@ -12,115 +12,116 @@ public class MachineOperater implements Serializable {
 	/** 序列号 */
 	private static final long serialVersionUID = -4564690143409202140L;
 	/** 售货机信息ID */
-	private Integer m_operater_id;
+	private Integer mOperaterId;
 	/** 售货机ID */
-	private Integer machine_id;
+	private Integer machineId;
 	/** 是否分配：0：未分配；1：已分配 */
-	private Integer machine_assign;
+	private Integer machineAssign;
 	/** 售货机类型 */
-	private String t_model_name;
+	private String tModelName;
 	/** 分配给某员工 */
-	private Integer user_id;
+	private Integer userId;
 	/** 售货机详细地址 */
-	private String machine_address;
+	private String machineAddress;
 	/** 售货机是否可用：0：不可用；1：可用 */
-	private Integer machine_status;
+	private Integer machineStatus;
 	/** 所属售货机组 */
-	private Integer group_id;
+	private Integer groupId;
 	/** 操作者 */
-	private Integer operate_id;
+	private Integer operateId;
 	/** 操作时间 */
-	private Date operate_date;
+	private Date operateDate;
 
 	public MachineOperater() {
 		super();
 	}
 
-	public Integer getM_operater_id() {
-		return m_operater_id;
+	public Integer getmOperaterId() {
+		return mOperaterId;
 	}
 
-	public void setM_operater_id(Integer m_operater_id) {
-		this.m_operater_id = m_operater_id;
+	public void setmOperaterId(Integer mOperaterId) {
+		this.mOperaterId = mOperaterId;
 	}
 
-	public Integer getMachine_id() {
-		return machine_id;
+	public Integer getMachineId() {
+		return machineId;
 	}
 
-	public void setMachine_id(Integer machine_id) {
-		this.machine_id = machine_id;
+	public void setMachineId(Integer machineId) {
+		this.machineId = machineId;
 	}
 
-	public Integer getMachine_assign() {
-		return machine_assign;
+	public Integer getMachineAssign() {
+		return machineAssign;
 	}
 
-	public void setMachine_assign(Integer machine_assign) {
-		this.machine_assign = machine_assign;
+	public void setMachineAssign(Integer machineAssign) {
+		this.machineAssign = machineAssign;
 	}
 
-	public String getT_model_name() {
-		return t_model_name;
+	public String gettModelName() {
+		return tModelName;
 	}
 
-	public void setT_model_name(String t_model_name) {
-		this.t_model_name = t_model_name;
+	public void settModelName(String tModelName) {
+		this.tModelName = tModelName;
 	}
 
-	public Integer getUser_id() {
-		return user_id;
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
-	public String getMachine_address() {
-		return machine_address;
+	public String getMachineAddress() {
+		return machineAddress;
 	}
 
-	public void setMachine_address(String machine_address) {
-		this.machine_address = machine_address;
+	public void setMachineAddress(String machineAddress) {
+		this.machineAddress = machineAddress;
 	}
 
-	public Integer getMachine_status() {
-		return machine_status;
+	public Integer getMachineStatus() {
+		return machineStatus;
 	}
 
-	public void setMachine_status(Integer machine_status) {
-		this.machine_status = machine_status;
+	public void setMachineStatus(Integer machineStatus) {
+		this.machineStatus = machineStatus;
 	}
 
-	public Integer getGroup_id() {
-		return group_id;
+	public Integer getGroupId() {
+		return groupId;
 	}
 
-	public void setGroup_id(Integer group_id) {
-		this.group_id = group_id;
+	public void setGroupId(Integer groupId) {
+		this.groupId = groupId;
 	}
 
-	public Integer getOperate_id() {
-		return operate_id;
+	public Integer getOperateId() {
+		return operateId;
 	}
 
-	public void setOperate_id(Integer operate_id) {
-		this.operate_id = operate_id;
+	public void setOperateId(Integer operateId) {
+		this.operateId = operateId;
 	}
 
-	public Date getOperate_date() {
-		return operate_date;
+	public Date getOperateDate() {
+		return operateDate;
 	}
 
-	public void setOperate_date(Date operate_date) {
-		this.operate_date = operate_date;
+	public void setOperateDate(Date operateDate) {
+		this.operateDate = operateDate;
 	}
 
 	@Override
 	public String toString() {
-		return "T_Machine_Operater [m_operater_id=" + m_operater_id + ", machine_id=" + machine_id + ", machine_assign="
-				+ machine_assign + ", t_model_name=" + t_model_name + ", user_id=" + user_id + ", machine_address="
-				+ machine_address + ", machine_status=" + machine_status + ", group_id=" + group_id + ", operate_id="
-				+ operate_id + ", operate_date=" + operate_date + "]";
+		return "MachineOperater [mOperaterId=" + mOperaterId + ", machineId=" + machineId + ", machineAssign="
+				+ machineAssign + ", tModelName=" + tModelName + ", userId=" + userId + ", machineAddress="
+				+ machineAddress + ", machineStatus=" + machineStatus + ", groupId=" + groupId + ", operateId="
+				+ operateId + ", operateDate=" + operateDate + "]";
 	}
+
 }

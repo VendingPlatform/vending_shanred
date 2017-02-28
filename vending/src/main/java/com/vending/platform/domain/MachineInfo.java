@@ -16,115 +16,116 @@ public class MachineInfo implements Serializable {
 	private static final long serialVersionUID = 8140170825790827210L;
 
 	/** 售货机ID */
-	private Integer machine_id;
+	private Integer machineId;
 	/** 售货机名牌号 */
-	private String machine_name;
+	private String machineName;
 	/** 售货机主板号 */
-	private String machine_pannel;
+	private String machinePannel;
 	/** 厂商ID */
-	private Integer manu_firm_id;
+	private Integer manuFirmId;
 	/** 售货机价格 */
-	private double machine_price;
+	private double machinePrice;
 	/** 售货机类型 */
-	private String t_model_name;
+	private String tModelName;
 	/** 售货机出售状态 ：0：未售出；1：售出；2：回收 */
-	private Integer manu_machine_status;
+	private Integer manuMachineStatus;
 	/** 卖给某运营商 */
-	private Integer oper_firm_id;
+	private Integer operFirmId;
 	/** 操作者 */
-	private Integer operate_id;
+	private Integer operateId;
 	/** 操作时间 */
-	private Date operate_date;
+	private Date operateDate;
 
 	public MachineInfo() {
 		super();
 	}
 
-	public Integer getMachine_id() {
-		return machine_id;
+	public Integer getMachineId() {
+		return machineId;
 	}
 
-	public void setMachine_id(Integer machine_id) {
-		this.machine_id = machine_id;
+	public void setMachineId(Integer machineId) {
+		this.machineId = machineId;
 	}
 
-	public String getMachine_name() {
-		return machine_name;
+	public String getMachineName() {
+		return machineName;
 	}
 
-	public void setMachine_name(String machine_name) {
-		this.machine_name = machine_name;
+	public void setMachineName(String machineName) {
+		this.machineName = machineName;
 	}
 
-	public String getMachine_pannel() {
-		return machine_pannel;
+	public String getMachinePannel() {
+		return machinePannel;
 	}
 
-	public void setMachine_pannel(String machine_pannel) {
-		this.machine_pannel = machine_pannel;
+	public void setMachinePannel(String machinePannel) {
+		this.machinePannel = machinePannel;
 	}
 
-	public Integer getManu_firm_id() {
-		return manu_firm_id;
+	public Integer getManuFirmId() {
+		return manuFirmId;
 	}
 
-	public void setManu_firm_id(Integer manu_firm_id) {
-		this.manu_firm_id = manu_firm_id;
+	public void setManuFirmId(Integer manuFirmId) {
+		this.manuFirmId = manuFirmId;
 	}
 
-	public double getMachine_price() {
-		return machine_price;
+	public double getMachinePrice() {
+		return machinePrice;
 	}
 
-	public void setMachine_price(double machine_price) {
-		this.machine_price = machine_price;
+	public void setMachinePrice(double machinePrice) {
+		this.machinePrice = machinePrice;
 	}
 
-	public String getT_model_name() {
-		return t_model_name;
+	public String gettModelName() {
+		return tModelName;
 	}
 
-	public void setT_model_name(String t_model_name) {
-		this.t_model_name = t_model_name;
+	public void settModelName(String tModelName) {
+		this.tModelName = tModelName;
 	}
 
-	public Integer getManu_machine_status() {
-		return manu_machine_status;
+	public Integer getManuMachineStatus() {
+		return manuMachineStatus;
 	}
 
-	public void setManu_machine_status(Integer manu_machine_status) {
-		this.manu_machine_status = manu_machine_status;
+	public void setManuMachineStatus(Integer manuMachineStatus) {
+		this.manuMachineStatus = manuMachineStatus;
 	}
 
-	public Integer getOper_firm_id() {
-		return oper_firm_id;
+	public Integer getOperFirmId() {
+		return operFirmId;
 	}
 
-	public void setOper_firm_id(Integer oper_firm_id) {
-		this.oper_firm_id = oper_firm_id;
+	public void setOperFirmId(Integer operFirmId) {
+		this.operFirmId = operFirmId;
 	}
 
-	public Integer getOperate_id() {
-		return operate_id;
+	public Integer getOperateId() {
+		return operateId;
 	}
 
-	public void setOperate_id(Integer operate_id) {
-		this.operate_id = operate_id;
+	public void setOperateId(Integer operateId) {
+		this.operateId = operateId;
 	}
 
-	public Date getOperate_date() {
-		return operate_date;
+	public Date getOperateDate() {
+		return operateDate;
 	}
 
-	public void setOperate_date(Date operate_date) {
-		this.operate_date = operate_date;
+	public void setOperateDate(Date operateDate) {
+		this.operateDate = operateDate;
 	}
 
 	@Override
 	public String toString() {
-		return "T_Machine_Info [machine_id=" + machine_id + ", machine_name=" + machine_name + ", machine_pannel="
-				+ machine_pannel + ", manu_firm_id=" + manu_firm_id + ", machine_price=" + machine_price
-				+ ", t_model_name=" + t_model_name + ", manu_machine_status=" + manu_machine_status + ", oper_firm_id="
-				+ oper_firm_id + ", operate_id=" + operate_id + ", operate_date=" + operate_date + "]";
+		return "MachineInfo [machineId=" + machineId + ", machineName=" + machineName + ", machinePannel="
+				+ machinePannel + ", manuFirmId=" + manuFirmId + ", machinePrice=" + machinePrice + ", tModelName="
+				+ tModelName + ", manuMachineStatus=" + manuMachineStatus + ", operFirmId=" + operFirmId
+				+ ", operateId=" + operateId + ", operateDate=" + operateDate + "]";
 	}
+
 }

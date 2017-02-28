@@ -12,74 +12,74 @@ public class UserInfo implements Serializable {
 	/** 序列号 */
 	private static final long serialVersionUID = 912338831195864691L;
 	/** 用户ID */
-	private Integer user_id;
+	private Integer userId;
 	/** 用户编号，用于登录 */
-	private String user_no;
+	private String userNo;
 	/** 用户名 */
-	private String user_name;
+	private String userName;
 	/** 用户密码 */
-	private String password;
+	private String userPassword;
 	/** 手机号码 */
-	private String mobile_phone;
+	private String mobilePhone;
 	/** E-mail */
 	private String email;
 	/** 用户角色 */
-	private Integer role_id;
+	private Integer roleId;
 	/** 所属用户组 */
-	private Integer group_id;
+	private Integer groupId;
 	/** 用户状态：0：不可用，1：可用 */
 	private Integer status;
 	/** 所属公司ID */
-	private Integer firm_id;
+	private Integer firmId;
 	/** 上级管理员 */
-	private Integer parent_user_id;
+	private Integer parentUserId;
 	/** 操作者 */
-	private Integer operate_id;
+	private Integer operateId;
 	/** 操作时间 */
-	private Date operate_date;
+	private Date operateDate;
 
 	public UserInfo() {
 		super();
 	}
 
-	public Integer getUser_id() {
-		return user_id;
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
-	public String getUser_no() {
-		return user_no;
+	public String getUserNo() {
+		return userNo;
 	}
 
-	public void setUser_no(String user_no) {
-		this.user_no = user_no;
+	public void setUserNo(String userNo) {
+		this.userNo = userNo;
 	}
 
-	public String getUser_name() {
-		return user_name;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getUserPassword() {
+		return userPassword;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
 
-	public String getMobile_phone() {
-		return mobile_phone;
+	public String getMobilePhone() {
+		return mobilePhone;
 	}
 
-	public void setMobile_phone(String mobile_phone) {
-		this.mobile_phone = mobile_phone;
+	public void setMobilePhone(String mobilePhone) {
+		this.mobilePhone = mobilePhone;
 	}
 
 	public String getEmail() {
@@ -90,20 +90,20 @@ public class UserInfo implements Serializable {
 		this.email = email;
 	}
 
-	public Integer getRole_id() {
-		return role_id;
+	public Integer getRoleId() {
+		return roleId;
 	}
 
-	public void setRole_id(Integer role_id) {
-		this.role_id = role_id;
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
 	}
 
-	public Integer getGroup_id() {
-		return group_id;
+	public Integer getGroupId() {
+		return groupId;
 	}
 
-	public void setGroup_id(Integer group_id) {
-		this.group_id = group_id;
+	public void setGroupId(Integer groupId) {
+		this.groupId = groupId;
 	}
 
 	public Integer getStatus() {
@@ -114,43 +114,44 @@ public class UserInfo implements Serializable {
 		this.status = status;
 	}
 
-	public Integer getFirm_id() {
-		return firm_id;
+	public Integer getFirmId() {
+		return firmId;
 	}
 
-	public void setFirm_id(Integer firm_id) {
-		this.firm_id = firm_id;
+	public void setFirmId(Integer firmId) {
+		this.firmId = firmId;
 	}
 
-	public Integer getParent_user_id() {
-		return parent_user_id;
+	public Integer getParentUserId() {
+		return parentUserId;
 	}
 
-	public void setParent_user_id(Integer parent_user_id) {
-		this.parent_user_id = parent_user_id;
+	public void setParentUserId(Integer parentUserId) {
+		this.parentUserId = parentUserId;
 	}
 
-	public Integer getOperate_id() {
-		return operate_id;
+	public Integer getOperateId() {
+		return operateId;
 	}
 
-	public void setOperate_id(Integer operate_id) {
-		this.operate_id = operate_id;
+	public void setOperateId(Integer operateId) {
+		this.operateId = operateId;
 	}
 
-	public Date getOperate_date() {
-		return operate_date;
+	public Date getOperateDate() {
+		return operateDate;
 	}
 
-	public void setOperate_date(Date operate_date) {
-		this.operate_date = operate_date;
+	public void setOperateDate(Date operateDate) {
+		this.operateDate = operateDate;
 	}
 
 	@Override
 	public String toString() {
-		return "T_User_Info [user_id=" + user_id + ", user_no=" + user_no + ", user_name=" + user_name + ", password="
-				+ password + ", mobile_phone=" + mobile_phone + ", email=" + email + ", role_id=" + role_id
-				+ ", group_id=" + group_id + ", status=" + status + ", firm_id=" + firm_id + ", parent_user_id="
-				+ parent_user_id + ", operate_id=" + operate_id + ", operate_date=" + operate_date + "]";
+		return "UserInfo [userId=" + userId + ", userNo=" + userNo + ", userName=" + userName + ", userPassword="
+				+ userPassword + ", mobilePhone=" + mobilePhone + ", email=" + email + ", roleId=" + roleId
+				+ ", groupId=" + groupId + ", status=" + status + ", firmId=" + firmId + ", parentUserId="
+				+ parentUserId + ", operateId=" + operateId + ", operateDate=" + operateDate + "]";
 	}
+
 }

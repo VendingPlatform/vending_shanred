@@ -12,85 +12,94 @@ public class FirmInfo implements Serializable {
 	/** 序列号 */
 	private static final long serialVersionUID = -3294054543209879646L;
 	/** 公司ID */
-	private Integer firm_id;
+	private Integer firmId;
+	/**公司编号*/
+	private String firmNo;
 	/** 公司名称 */
-	private String firm_name;
+	private String firmName;
 	/** 公司描述 */
-	private String firm_desc;
+	private String firmDesc;
 	/** 公司类型：0：系统管理员；1：运营商；2：厂商 */
-	private int firm_type;
+	private int firmType;
 	/** 公司状态：0：不可用；1：可用 */
-	private int firm_status;
+	private int firmStatus;
 	/** 操作人ID */
-	private int operate_id;
+	private int operateId;
 	/** 操作时间 */
-	private Date operate_date;
+	private Date operateDate;
 
 	public FirmInfo() {
 		super();
 	}
 
-	public Integer getFirm_id() {
-		return firm_id;
+	public Integer getFirmId() {
+		return firmId;
 	}
 
-	public void setFirm_id(Integer firm_id) {
-		this.firm_id = firm_id;
+	public void setFirmId(Integer firmId) {
+		this.firmId = firmId;
 	}
 
-	public String getFirm_name() {
-		return firm_name;
+	public String getFirmNo() {
+		return firmNo;
 	}
 
-	public void setFirm_name(String firm_name) {
-		this.firm_name = firm_name;
+	public void setFirmNo(String firmNo) {
+		this.firmNo = firmNo;
 	}
 
-	public String getFirm_desc() {
-		return firm_desc;
+	public String getFirmName() {
+		return firmName;
 	}
 
-	public void setFirm_desc(String firm_desc) {
-		this.firm_desc = firm_desc;
+	public void setFirmName(String firmName) {
+		this.firmName = firmName;
 	}
 
-	public int getFirm_type() {
-		return firm_type;
+	public String getFirmDesc() {
+		return firmDesc;
 	}
 
-	public void setFirm_type(int firm_type) {
-		this.firm_type = firm_type;
+	public void setFirmDesc(String firmDesc) {
+		this.firmDesc = firmDesc;
 	}
 
-	public int getFirm_status() {
-		return firm_status;
+	public int getFirmType() {
+		return firmType;
 	}
 
-	public void setFirm_status(int firm_status) {
-		this.firm_status = firm_status;
+	public void setFirmType(int firmType) {
+		this.firmType = firmType;
 	}
 
-	public int getOperate_id() {
-		return operate_id;
+	public int getFirmStatus() {
+		return firmStatus;
 	}
 
-	public void setOperate_id(int operate_id) {
-		this.operate_id = operate_id;
+	public void setFirmStatus(int firmStatus) {
+		this.firmStatus = firmStatus;
 	}
 
-	public Date getOperate_date() {
-		return operate_date;
+	public int getOperateId() {
+		return operateId;
 	}
 
-	public void setOperate_date(Date operate_date) {
-		this.operate_date = operate_date;
+	public void setOperateId(int operateId) {
+		this.operateId = operateId;
+	}
+
+	public Date getOperateDate() {
+		return operateDate;
+	}
+
+	public void setOperateDate(Date operateDate) {
+		this.operateDate = operateDate;
 	}
 
 	@Override
 	public String toString() {
-		return "T_Firm_Info [firm_id=" + firm_id + ", firm_name=" + firm_name + ", firm_desc=" + firm_desc
-				+ ", firm_type=" + firm_type + ", firm_status=" + firm_status + ", operate_id=" + operate_id
-				+ ", operate_date=" + operate_date + "]";
+		return "FirmInfo [firmId=" + firmId + ", firmName=" + firmName + ", firmDesc=" + firmDesc + ", firmType="
+				+ firmType + ", firmStatus=" + firmStatus + ", operateId=" + operateId + ", operateDate=" + operateDate
+				+ "]";
 	}
-
 }

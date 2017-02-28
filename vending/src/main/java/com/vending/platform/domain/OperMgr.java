@@ -13,60 +13,94 @@ public class OperMgr implements Serializable {
 	/** 序列号 */
 	private static final long serialVersionUID = -6417710404887297902L;
 	/** 主键 */
-	private Integer oper_mge_id;
+	private Integer operMgrId;
+	/** 公司编号 */
+	private String firmNo;
 	/** 运营商ID */
-	private Integer firm_id;
+	private Integer firmId;
 	/** 运营商名称 */
-	private String firm_name;
+	private String firmName;
+	/** 厂商ID */
+	private Integer manuId;
+	/** 厂商名 */
+	private String manuName;
 	/** 操作者 */
-	private Integer operate_id;
+	private Integer operateId;
 	/** 操作时间 */
-	private Date operate_date;
+	private Date operateDate;
 
-	public Integer getOper_mge_id() {
-		return oper_mge_id;
+	public OperMgr() {
+		super();
 	}
 
-	public void setOper_mge_id(Integer oper_mge_id) {
-		this.oper_mge_id = oper_mge_id;
+	public Integer getOperMgrId() {
+		return operMgrId;
 	}
 
-	public Integer getFirm_id() {
-		return firm_id;
+	public void setOperMgrId(Integer operMgrId) {
+		this.operMgrId = operMgrId;
 	}
 
-	public void setFirm_id(Integer firm_id) {
-		this.firm_id = firm_id;
+	public String getFirmNo() {
+		return firmNo;
 	}
 
-	public String getFirm_name() {
-		return firm_name;
+	public void setFirmNo(String firmNo) {
+		this.firmNo = firmNo;
 	}
 
-	public void setFirm_name(String firm_name) {
-		this.firm_name = firm_name;
+	public Integer getFirmId() {
+		return firmId;
 	}
 
-	public Integer getOperate_id() {
-		return operate_id;
+	public void setFirmId(Integer firmId) {
+		this.firmId = firmId;
 	}
 
-	public void setOperate_id(Integer operate_id) {
-		this.operate_id = operate_id;
+	public String getFirmName() {
+		return firmName;
 	}
 
-	public Date getOperate_date() {
-		return operate_date;
+	public void setFirmName(String firmName) {
+		this.firmName = firmName;
 	}
 
-	public void setOperate_date(Date operate_date) {
-		this.operate_date = operate_date;
+	public Integer getManuId() {
+		return manuId;
+	}
+
+	public void setManuId(Integer manuId) {
+		this.manuId = manuId;
+	}
+
+	public String getManuName() {
+		return manuName;
+	}
+
+	public void setManuName(String manuName) {
+		this.manuName = manuName;
+	}
+
+	public Integer getOperateId() {
+		return operateId;
+	}
+
+	public void setOperateId(Integer operateId) {
+		this.operateId = operateId;
+	}
+
+	public Date getOperateDate() {
+		return operateDate;
+	}
+
+	public void setOperateDate(Date operateDate) {
+		this.operateDate = operateDate;
 	}
 
 	@Override
 	public String toString() {
-		return "T_Oper_Mgr [oper_mge_id=" + oper_mge_id + ", firm_id=" + firm_id + ", firm_name=" + firm_name
-				+ ", operate_id=" + operate_id + ", operate_date=" + operate_date + "]";
+		return "OperMgr [operMgrId=" + operMgrId + ", firmId=" + firmId + ", firmName=" + firmName + ", manuId="
+				+ manuId + ", manuName=" + manuName + ", operateId=" + operateId + ", operateDate=" + operateDate + "]";
 	}
 
 }

@@ -13,138 +13,146 @@ public class WareInfo implements Serializable {
 	private static final long serialVersionUID = -3601449521375525963L;
 
 	/** 商品ID */
-	private Integer ware_id;
+	private Integer wareId;
 	/** 商品编号 */
-	private String ware_code;
+	private String wareCode;
 	/** 商品名称 */
-	private String ware_name;
+	private String wareName;
 	/** 商品规格，如：每箱多少瓶 */
-	private String ware_norm;
+	private String wareNorm;
 	/** 商品单位 */
-	private String ware_unit;
+	private String wareUnit;
 	/** 商品进价 */
-	private double ware_base_price;
+	private double wareBasePrice;
 	/** 最高售价 */
-	private double ware_max_price;
+	private double wareMaxPrice;
 	/** 最低售价 */
-	private double ware_min_price;
+	private double wareMinPrice;
 	/** 商品描述 */
-	private String ware_desc;
+	private String wareDesc;
+	/** 是否可用 */
+	private Integer wareStatus;
 	/** 所属运营商ID */
-	private Integer firm_id;
+	private Integer firmId;
 	/** 商品状态：0：可用；1：不可用 */
 	/** 操作者 */
-	private Integer operate_id;
+	private Integer operateId;
 	/** 操作时间 */
-	private Date operate_date;
+	private Date operateDate;
 
 	public WareInfo() {
 		super();
 	}
 
-	public Integer getWare_id() {
-		return ware_id;
+	public Integer getWareId() {
+		return wareId;
 	}
 
-	public void setWare_id(Integer ware_id) {
-		this.ware_id = ware_id;
+	public void setWareId(Integer wareId) {
+		this.wareId = wareId;
 	}
 
-	public String getWare_code() {
-		return ware_code;
+	public String getWareCode() {
+		return wareCode;
 	}
 
-	public void setWare_code(String ware_code) {
-		this.ware_code = ware_code;
+	public void setWareCode(String wareCode) {
+		this.wareCode = wareCode;
 	}
 
-	public String getWare_name() {
-		return ware_name;
+	public String getWareName() {
+		return wareName;
 	}
 
-	public void setWare_name(String ware_name) {
-		this.ware_name = ware_name;
+	public void setWareName(String wareName) {
+		this.wareName = wareName;
 	}
 
-	public String getWare_norm() {
-		return ware_norm;
+	public String getWareNorm() {
+		return wareNorm;
 	}
 
-	public void setWare_norm(String ware_norm) {
-		this.ware_norm = ware_norm;
+	public void setWareNorm(String wareNorm) {
+		this.wareNorm = wareNorm;
 	}
 
-	public String getWare_unit() {
-		return ware_unit;
+	public String getWareUnit() {
+		return wareUnit;
 	}
 
-	public void setWare_unit(String ware_unit) {
-		this.ware_unit = ware_unit;
+	public void setWareUnit(String wareUnit) {
+		this.wareUnit = wareUnit;
 	}
 
-	public double getWare_base_price() {
-		return ware_base_price;
+	public double getWareBasePrice() {
+		return wareBasePrice;
 	}
 
-	public void setWare_base_price(double ware_base_price) {
-		this.ware_base_price = ware_base_price;
+	public void setWareBasePrice(double wareBasePrice) {
+		this.wareBasePrice = wareBasePrice;
 	}
 
-	public double getWare_max_price() {
-		return ware_max_price;
+	public double getWareMaxPrice() {
+		return wareMaxPrice;
 	}
 
-	public void setWare_max_price(double ware_max_price) {
-		this.ware_max_price = ware_max_price;
+	public void setWareMaxPrice(double wareMaxPrice) {
+		this.wareMaxPrice = wareMaxPrice;
 	}
 
-	public double getWare_min_price() {
-		return ware_min_price;
+	public double getWareMinPrice() {
+		return wareMinPrice;
 	}
 
-	public void setWare_min_price(double ware_min_price) {
-		this.ware_min_price = ware_min_price;
+	public void setWareMinPrice(double wareMinPrice) {
+		this.wareMinPrice = wareMinPrice;
 	}
 
-	public String getWare_desc() {
-		return ware_desc;
+	public String getWareDesc() {
+		return wareDesc;
 	}
 
-	public void setWare_desc(String ware_desc) {
-		this.ware_desc = ware_desc;
+	public void setWareDesc(String wareDesc) {
+		this.wareDesc = wareDesc;
 	}
 
-	public Integer getFirm_id() {
-		return firm_id;
+	public Integer getWareStatus() {
+		return wareStatus;
 	}
 
-	public void setFirm_id(Integer firm_id) {
-		this.firm_id = firm_id;
+	public void setWareStatus(Integer wareStatus) {
+		this.wareStatus = wareStatus;
 	}
 
-	public Integer getOperate_id() {
-		return operate_id;
+	public Integer getFirmId() {
+		return firmId;
 	}
 
-	public void setOperate_id(Integer operate_id) {
-		this.operate_id = operate_id;
+	public void setFirmId(Integer firmId) {
+		this.firmId = firmId;
 	}
 
-	public Date getOperate_date() {
-		return operate_date;
+	public Integer getOperateId() {
+		return operateId;
 	}
 
-	public void setOperate_date(Date operate_date) {
-		this.operate_date = operate_date;
+	public void setOperateId(Integer operateId) {
+		this.operateId = operateId;
+	}
+
+	public Date getOperateDate() {
+		return operateDate;
+	}
+
+	public void setOperateDate(Date operateDate) {
+		this.operateDate = operateDate;
 	}
 
 	@Override
 	public String toString() {
-		return "T_Ware_Info [ware_id=" + ware_id + ", ware_code=" + ware_code + ", ware_name=" + ware_name
-				+ ", ware_norm=" + ware_norm + ", ware_unit=" + ware_unit + ", ware_base_price=" + ware_base_price
-				+ ", ware_max_price=" + ware_max_price + ", ware_min_price=" + ware_min_price + ", ware_desc="
-				+ ware_desc + ", firm_id=" + firm_id + ", operate_id=" + operate_id + ", operate_date=" + operate_date
-				+ "]";
+		return "WareInfo [wareId=" + wareId + ", wareCode=" + wareCode + ", wareName=" + wareName + ", wareNorm="
+				+ wareNorm + ", wareUnit=" + wareUnit + ", wareBasePrice=" + wareBasePrice + ", wareMaxPrice="
+				+ wareMaxPrice + ", wareMinPrice=" + wareMinPrice + ", wareDesc=" + wareDesc + ", firmId=" + firmId
+				+ ", operateId=" + operateId + ", operateDate=" + operateDate + "]";
 	}
-
 }

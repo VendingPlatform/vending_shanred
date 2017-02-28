@@ -14,54 +14,54 @@ public class RoleInfo implements Serializable {
 	/** 序列号 */
 	private static final long serialVersionUID = 4555319742101777793L;
 	/** 角色ID */
-	private Integer role_id;
+	private Integer roleId;
 	/** 角色名称 */
-	private String role_name;
+	private String roleName;
 	/** 权限编号集合，用逗号隔开 */
-	private String authority_code;
+	private String authorityCode;
 	/** 权限名称集合，与编号一一对应 */
-	private String authority_name;
+	private String authorityName;
 	/** 权限状态:0:不可用；1：可用 */
 	private Integer status;
 	/** 操作者 */
-	private Integer operate_id;
+	private Integer operateId;
 	/** 操作时间 */
-	private Date operate_date;
+	private Date operateDate;
 
 	public RoleInfo() {
 		super();
 	}
 
-	public Integer getRole_id() {
-		return role_id;
+	public Integer getRoleId() {
+		return roleId;
 	}
 
-	public void setRole_id(Integer role_id) {
-		this.role_id = role_id;
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
 	}
 
-	public String getRole_name() {
-		return role_name;
+	public String getRoleName() {
+		return roleName;
 	}
 
-	public void setRole_name(String role_name) {
-		this.role_name = role_name;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
-	public String getAuthority_code() {
-		return authority_code;
+	public String getAuthorityCode() {
+		return authorityCode;
 	}
 
-	public void setAuthority_code(String authority_code) {
-		this.authority_code = authority_code;
+	public void setAuthorityCode(String authorityCode) {
+		this.authorityCode = authorityCode;
 	}
 
-	public String getAuthority_name() {
-		return authority_name;
+	public String getAuthorityName() {
+		return authorityName;
 	}
 
-	public void setAuthority_name(String authority_name) {
-		this.authority_name = authority_name;
+	public void setAuthorityName(String authorityName) {
+		this.authorityName = authorityName;
 	}
 
 	public Integer getStatus() {
@@ -72,26 +72,27 @@ public class RoleInfo implements Serializable {
 		this.status = status;
 	}
 
-	public Integer getOperate_id() {
-		return operate_id;
+	public Integer getOperateId() {
+		return operateId;
 	}
 
-	public void setOperate_id(Integer operate_id) {
-		this.operate_id = operate_id;
+	public void setOperateId(Integer operateId) {
+		this.operateId = operateId;
 	}
 
-	public Date getOperate_date() {
-		return operate_date;
+	public Date getOperateDate() {
+		return operateDate;
 	}
 
-	public void setOperate_date(Date operate_date) {
-		this.operate_date = operate_date;
+	public void setOperateDate(Date operateDate) {
+		this.operateDate = operateDate;
 	}
 
 	@Override
 	public String toString() {
-		return "T_Role_Info [role_id=" + role_id + ", role_name=" + role_name + ", authority_code=" + authority_code
-				+ ", authority_name=" + authority_name + ", status=" + status + ", operate_id=" + operate_id
-				+ ", operate_date=" + operate_date + "]";
+		return "RoleInfo [roleId=" + roleId + ", roleName=" + roleName + ", authorityCode=" + authorityCode
+				+ ", authorityName=" + authorityName + ", status=" + status + ", operateId=" + operateId
+				+ ", operateDate=" + operateDate + "]";
 	}
+
 }

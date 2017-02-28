@@ -13,73 +13,74 @@ public class GroupInfo implements Serializable {
 	/** 序列号 */
 	private static final long serialVersionUID = 4998771266910693602L;
 	/** 分組ID */
-	private Integer group_id;
+	private Integer groupId;
 	/** 分组名称 */
-	private String group_name;
+	private String groupName;
 	/** 分组类型：0：用户组；1：售货机组 */
-	private int group_type;
+	private int groupType;
 	/** 分组描述 */
-	private String group_desc;
+	private String groupDesc;
 	/** 操作者 */
-	private Integer operate_id;
+	private Integer operateId;
 	/** 操作时间 */
-	private Date operate_date;
+	private Date operateDate;
 
 	public GroupInfo() {
 		super();
 	}
 
-	public Integer getGroup_id() {
-		return group_id;
+	public Integer getGroupId() {
+		return groupId;
 	}
 
-	public void setGroup_id(Integer group_id) {
-		this.group_id = group_id;
+	public void setGroupId(Integer groupId) {
+		this.groupId = groupId;
 	}
 
-	public String getGroup_name() {
-		return group_name;
+	public String getGroupName() {
+		return groupName;
 	}
 
-	public void setGroup_name(String group_name) {
-		this.group_name = group_name;
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
 	}
 
-	public int getGroup_type() {
-		return group_type;
+	public int getGroupType() {
+		return groupType;
 	}
 
-	public void setGroup_type(int group_type) {
-		this.group_type = group_type;
+	public void setGroupType(int groupType) {
+		this.groupType = groupType;
 	}
 
-	public String getGroup_desc() {
-		return group_desc;
+	public String getGroupDesc() {
+		return groupDesc;
 	}
 
-	public void setGroup_desc(String group_desc) {
-		this.group_desc = group_desc;
+	public void setGroupDesc(String groupDesc) {
+		this.groupDesc = groupDesc;
 	}
 
-	public Integer getOperate_id() {
-		return operate_id;
+	public Integer getOperateId() {
+		return operateId;
 	}
 
-	public void setOperate_id(Integer operate_id) {
-		this.operate_id = operate_id;
+	public void setOperateId(Integer operateId) {
+		this.operateId = operateId;
 	}
 
-	public Date getOperate_date() {
-		return operate_date;
+	public Date getOperateDate() {
+		return operateDate;
 	}
 
-	public void setOperate_date(Date operate_date) {
-		this.operate_date = operate_date;
+	public void setOperateDate(Date operateDate) {
+		this.operateDate = operateDate;
 	}
 
 	@Override
 	public String toString() {
-		return "T_Group_Info [group_id=" + group_id + ", group_name=" + group_name + ", group_type=" + group_type
-				+ ", group_desc=" + group_desc + ", operate_id=" + operate_id + ", operate_date=" + operate_date + "]";
+		return "GroupInfo [groupId=" + groupId + ", groupName=" + groupName + ", groupType=" + groupType
+				+ ", groupDesc=" + groupDesc + ", operateId=" + operateId + ", operateDate=" + operateDate + "]";
 	}
+
 }

@@ -13,105 +13,106 @@ public class ChannelGroup implements Serializable {
 	/** 序列号 */
 	private static final long serialVersionUID = -759033563075067030L;
 	/** 货道组ID */
-	private Integer channel_group_id;
+	private Integer channelGroupId;
 	/** 货道组名称 */
-	private String channel_group_name;
+	private String channelGroupName;
 	/** 商品编号 */
-	private String ware_code;
+	private String wareCode;
 	/** 商品名称 */
-	private String ware_name;
+	private String wareName;
 	/** 商品价格 */
-	private double ware_price;
+	private double warePrice;
 	/** 是否特价：0：否；1：是 */
-	private Integer is_discount;
+	private Integer isDiscount;
 	/** 所属售货机组 */
-	private Integer group_id;
+	private Integer groupId;
 	/** 操作者 */
-	private Integer operate_id;
+	private Integer operateId;
 	/** 操作时间 */
-	private Date operate_date;
+	private Date operateDate;
 
 	public ChannelGroup() {
 		super();
 	}
 
-	public Integer getChannel_group_id() {
-		return channel_group_id;
+	public Integer getChannelGroupId() {
+		return channelGroupId;
 	}
 
-	public void setChannel_group_id(Integer channel_group_id) {
-		this.channel_group_id = channel_group_id;
+	public void setChannelGroupId(Integer channelGroupId) {
+		this.channelGroupId = channelGroupId;
 	}
 
-	public String getChannel_group_name() {
-		return channel_group_name;
+	public String getChannelGroupName() {
+		return channelGroupName;
 	}
 
-	public void setChannel_group_name(String channel_group_name) {
-		this.channel_group_name = channel_group_name;
+	public void setChannelGroupName(String channelGroupName) {
+		this.channelGroupName = channelGroupName;
 	}
 
-	public String getWare_code() {
-		return ware_code;
+	public String getWareCode() {
+		return wareCode;
 	}
 
-	public void setWare_code(String ware_code) {
-		this.ware_code = ware_code;
+	public void setWareCode(String wareCode) {
+		this.wareCode = wareCode;
 	}
 
-	public String getWare_name() {
-		return ware_name;
+	public String getWareName() {
+		return wareName;
 	}
 
-	public void setWare_name(String ware_name) {
-		this.ware_name = ware_name;
+	public void setWareName(String wareName) {
+		this.wareName = wareName;
 	}
 
-	public double getWare_price() {
-		return ware_price;
+	public double getWarePrice() {
+		return warePrice;
 	}
 
-	public void setWare_price(double ware_price) {
-		this.ware_price = ware_price;
+	public void setWarePrice(double warePrice) {
+		this.warePrice = warePrice;
 	}
 
-	public Integer getIs_discount() {
-		return is_discount;
+	public Integer getIsDiscount() {
+		return isDiscount;
 	}
 
-	public void setIs_discount(Integer is_discount) {
-		this.is_discount = is_discount;
+	public void setIsDiscount(Integer isDiscount) {
+		this.isDiscount = isDiscount;
 	}
 
-	public Integer getGroup_id() {
-		return group_id;
+	public Integer getGroupId() {
+		return groupId;
 	}
 
-	public void setGroup_id(Integer group_id) {
-		this.group_id = group_id;
+	public void setGroupId(Integer groupId) {
+		this.groupId = groupId;
 	}
 
-	public Integer getOperate_id() {
-		return operate_id;
+	public Integer getOperateId() {
+		return operateId;
 	}
 
-	public void setOperate_id(Integer operate_id) {
-		this.operate_id = operate_id;
+	public void setOperateId(Integer operateId) {
+		this.operateId = operateId;
 	}
 
-	public Date getOperate_date() {
-		return operate_date;
+	public Date getOperateDate() {
+		return operateDate;
 	}
 
-	public void setOperate_date(Date operate_date) {
-		this.operate_date = operate_date;
+	public void setOperateDate(Date operateDate) {
+		this.operateDate = operateDate;
 	}
 
 	@Override
 	public String toString() {
-		return "T_Channel_Group [channel_group_id=" + channel_group_id + ", channel_group_name=" + channel_group_name
-				+ ", ware_code=" + ware_code + ", ware_name=" + ware_name + ", ware_price=" + ware_price
-				+ ", is_discount=" + is_discount + ", group_id=" + group_id + ", operate_id=" + operate_id
-				+ ", operate_date=" + operate_date + "]";
+		return "ChannelGroup [channelGroupId=" + channelGroupId + ", channelGroupName=" + channelGroupName
+				+ ", wareCode=" + wareCode + ", wareName=" + wareName + ", warePrice=" + warePrice + ", isDiscount="
+				+ isDiscount + ", groupId=" + groupId + ", operateId=" + operateId + ", operateDate=" + operateDate
+				+ "]";
 	}
+
 }

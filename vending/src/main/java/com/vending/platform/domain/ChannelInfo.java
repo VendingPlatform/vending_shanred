@@ -13,135 +13,157 @@ public class ChannelInfo implements Serializable {
 	/** 序列号 */
 	private static final long serialVersionUID = 8761114712738792976L;
 	/** 货道ID */
-	private Integer channel_id;
+	private Integer channelId;
 	/** 货道编号 */
-	private String channel_no;
+	private String channelNo;
+	/**商品编号*/
+	private String wareCode;
 	/** 商品名称 */
-	private String ware_name;
+	private String wareName;
 	/** 商品价格 */
-	private double ware_price;
+	private double warePrice;
 	/** 是否特价 */
-	private int is_discount;
+	private int isDiscount;
 	/** 额定存货量 */
-	private Integer stock_num;
+	private Integer stockNum;
 	/** 当前存货量 */
-	private Integer stock_num_now;
+	private Integer stockNumNow;
 	/** 新增存货量 */
-	private Integer stock_num_add;
+	private Integer stockNumAdd;
+	/**所属货道组ID*/
+	private Integer channelGroupId;
 	/** 所属售货机 */
-	private Integer machine_id;
+	private Integer machineId;
 	/** 是否为历史信息：0：否；1：是 */
-	private Integer is_history;
+	private Integer isHistory;
 	/** 操作者 */
-	private Integer operate_id;
+	private Integer operateId;
 	/** 操作时间 */
-	private Date operate_date;
+	private Date operateDate;
 
 	public ChannelInfo() {
 		super();
 	}
 
-	public Integer getChannel_id() {
-		return channel_id;
+	public Integer getChannelId() {
+		return channelId;
 	}
 
-	public void setChannel_id(Integer channel_id) {
-		this.channel_id = channel_id;
+	public void setChannelId(Integer channelId) {
+		this.channelId = channelId;
 	}
 
-	public String getChannel_no() {
-		return channel_no;
+	public String getChannelNo() {
+		return channelNo;
 	}
 
-	public void setChannel_no(String channel_no) {
-		this.channel_no = channel_no;
+	public void setChannelNo(String channelNo) {
+		this.channelNo = channelNo;
 	}
 
-	public String getWare_name() {
-		return ware_name;
+	public String getWareCode() {
+		return wareCode;
 	}
 
-	public void setWare_name(String ware_name) {
-		this.ware_name = ware_name;
+	public void setWareCode(String wareCode) {
+		this.wareCode = wareCode;
 	}
 
-	public double getWare_price() {
-		return ware_price;
+	public String getWareName() {
+		return wareName;
 	}
 
-	public void setWare_price(double ware_price) {
-		this.ware_price = ware_price;
+	public void setWareName(String wareName) {
+		this.wareName = wareName;
 	}
 
-	public int getIs_discount() {
-		return is_discount;
+	public double getWarePrice() {
+		return warePrice;
 	}
 
-	public void setIs_discount(int is_discount) {
-		this.is_discount = is_discount;
+	public void setWarePrice(double warePrice) {
+		this.warePrice = warePrice;
 	}
 
-	public Integer getStock_num() {
-		return stock_num;
+	public int getIsDiscount() {
+		return isDiscount;
 	}
 
-	public void setStock_num(Integer stock_num) {
-		this.stock_num = stock_num;
+	public void setIsDiscount(int isDiscount) {
+		this.isDiscount = isDiscount;
 	}
 
-	public Integer getStock_num_now() {
-		return stock_num_now;
+	public Integer getStockNum() {
+		return stockNum;
 	}
 
-	public void setStock_num_now(Integer stock_num_now) {
-		this.stock_num_now = stock_num_now;
+	public void setStockNum(Integer stockNum) {
+		this.stockNum = stockNum;
 	}
 
-	public Integer getStock_num_add() {
-		return stock_num_add;
+	public Integer getStockNumNow() {
+		return stockNumNow;
 	}
 
-	public void setStock_num_add(Integer stock_num_add) {
-		this.stock_num_add = stock_num_add;
+	public void setStockNumNow(Integer stockNumNow) {
+		this.stockNumNow = stockNumNow;
 	}
 
-	public Integer getMachine_id() {
-		return machine_id;
+	public Integer getStockNumAdd() {
+		return stockNumAdd;
 	}
 
-	public void setMachine_id(Integer machine_id) {
-		this.machine_id = machine_id;
+	public void setStockNumAdd(Integer stockNumAdd) {
+		this.stockNumAdd = stockNumAdd;
 	}
 
-	public Integer getIs_history() {
-		return is_history;
+	public Integer getChannelGroupId() {
+		return channelGroupId;
 	}
 
-	public void setIs_history(Integer is_history) {
-		this.is_history = is_history;
+	public void setChannelGroupId(Integer channelGroupId) {
+		this.channelGroupId = channelGroupId;
 	}
 
-	public Integer getOperate_id() {
-		return operate_id;
+	public Integer getMachineId() {
+		return machineId;
 	}
 
-	public void setOperate_id(Integer operate_id) {
-		this.operate_id = operate_id;
+	public void setMachineId(Integer machineId) {
+		this.machineId = machineId;
 	}
 
-	public Date getOperate_date() {
-		return operate_date;
+	public Integer getIsHistory() {
+		return isHistory;
 	}
 
-	public void setOperate_date(Date operate_date) {
-		this.operate_date = operate_date;
+	public void setIsHistory(Integer isHistory) {
+		this.isHistory = isHistory;
+	}
+
+	public Integer getOperateId() {
+		return operateId;
+	}
+
+	public void setOperateId(Integer operateId) {
+		this.operateId = operateId;
+	}
+
+	public Date getOperateDate() {
+		return operateDate;
+	}
+
+	public void setOperateDate(Date operateDate) {
+		this.operateDate = operateDate;
 	}
 
 	@Override
 	public String toString() {
-		return "T_Channel_Info [channel_id=" + channel_id + ", channel_no=" + channel_no + ", ware_name=" + ware_name
-				+ ", ware_price=" + ware_price + ", is_discount=" + is_discount + ", stock_num=" + stock_num
-				+ ", stock_num_now=" + stock_num_now + ", stock_num_add=" + stock_num_add + ", machine_id=" + machine_id
-				+ ", is_history=" + is_history + ", operate_id=" + operate_id + ", operate_date=" + operate_date + "]";
+		return "ChannelInfo [channelId=" + channelId + ", channelNo=" + channelNo + ", wareCode=" + wareCode
+				+ ", wareName=" + wareName + ", warePrice=" + warePrice + ", isDiscount=" + isDiscount + ", stockNum="
+				+ stockNum + ", stockNumNow=" + stockNumNow + ", stockNumAdd=" + stockNumAdd + ", machineId="
+				+ machineId + ", isHistory=" + isHistory + ", operateId=" + operateId + ", operateDate=" + operateDate
+				+ "]";
 	}
+
 }
