@@ -22,15 +22,15 @@ import com.lin.domain.User;
 // 使用标准的JUnit @RunWith注释来告诉JUnit使用Spring TestRunner
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserServiceTest extends AbstractJUnit4SpringContextTests {
-    @Autowired
-    private UserService userService;
-    Logger logger = Logger.getLogger(UserServiceTest.class);
+	@Autowired
+	private UserService userService;
+	Logger logger = Logger.getLogger(UserServiceTest.class);
 
-    @Test
-    public void selectUserByIdTest() {
-        User user = userService.selectUserById(10);
-        logger.debug("查找结果" + user);
-        logger.debug(JSON.toJSONString(user));
-    }
+	@Test
+	public void selectUserByIdTest() {
+		User user = userService.selectUserById(10);
+		logger.debug("查找结果" + user);
+		logger.debug(JSON.toJSONString(user));
+	}
 
 }

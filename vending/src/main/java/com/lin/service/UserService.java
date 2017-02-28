@@ -9,6 +9,6 @@ import com.lin.domain.User;
  * @since 2015年9月28日
  */
 public interface UserService {
-    User selectUserById(Integer userId);
+	User selectUserById(Integer userId);
 
 }
