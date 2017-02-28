@@ -1,5 +1,7 @@
 package com.lin.service;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +12,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alibaba.fastjson.JSON;
 import com.lin.domain.User;
+import com.vending.platform.domain.MachineOperater;
+import com.vending.platform.service.MachineService;
 
 /**
  * 功能概要：UserService单元测试
@@ -24,6 +28,8 @@ import com.lin.domain.User;
 public class UserServiceTest extends AbstractJUnit4SpringContextTests {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private MachineService machineService;
 	Logger logger = Logger.getLogger(UserServiceTest.class);
 
 	@Test
@@ -33,4 +39,14 @@ public class UserServiceTest extends AbstractJUnit4SpringContextTests {
 		logger.debug(JSON.toJSONString(user));
 	}
 
+	@Test
+	public void getMachine() {
+		MachineOperater mOperater = new MachineOperater();
+		mOperater.setmOperaterId(1);
+		List<MachineOperater> machineOperaters = machineService.getmachineOperater(mOperater);
+		for (MachineOperater machineOperater : machineOperaters) {
+			System.out.println(machineOperater.getMachineId() + "; " + machineOperater.gettModelName() + "; "
+					+ machineOperater.getMachineAddress());
+		}
+	}
 }
