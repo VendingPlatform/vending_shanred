@@ -96,3 +96,39 @@ vending_shanred_platform
      (3,3,0,'类型1',NULL,'华师大',1,NULL,3,'2017-02-27 21:03:12'),
      (4,4,0,'类型1',NULL,'闵行',1,NULL,3,'2017-02-27 21:03:53');
 ```
+###测试使用注解的SQL的构建方式
+* 1、一般注解
+```
+    @Select("SELECT * FROM MachineOperater where  mOperaterId=#{operater.mOperaterId}")
+    public List<MachineOperater> getmachineOperater(MachineOperater operater);
+
+```
+* 2、动态SQL的注解方式http://www.mybatis.org/mybatis-3/zh/dynamic-sql.html
+```
+    @Select("<script>SELECT * FROM MachineOperater "
+    + "<where>"
+    + "<if test=\"#{operater}!=null\"> "
+    + "<if test=\"#{operater.mOperaterId}!=null\"> "
+    + "mOperaterId=#{operater.mOperaterId} "
+    + "</if></if>"
+    + "</where> "
+    + "</script>")
+    public List<MachineOperater> getmachineOperater(@Param("operater") MachineOperater operater) ;
+```
+*3、SQL语句构建器http://www.mybatis.org/mybatis-3/zh/statement-builders.html
+     * 使用mybatis3.4.2，mybatis-spring1.3.1
+```
+    构建器类IMachineSqlProvider
+    public class IMachineSqlProvider {
+       /**
+       * 测试Sql构建器
+        */
+      public String getmachineOperater(MachineOperater operater) {
+          return new SQL().SELECT("*").FROM("MachineOperater").toString();
+      }
+      DAO接口IMachineDAO
+    public interface IMachineDAO {
+    @SelectProvider(type = IMachineSqlProvider.class, method = "getmachineOperater")
+    public List<MachineOperater> getmachineOperater(MachineOperater operater);
+    }
+```

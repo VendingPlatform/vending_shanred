@@ -27,6 +27,8 @@ public class MachineOperater implements Serializable {
 	private Integer machineStatus;
 	/** 所属售货机组 */
 	private Integer groupId;
+	/** 所属运营商ID */
+	private Integer operFirmId;
 	/** 操作者 */
 	private Integer operateId;
 	/** 操作时间 */
@@ -100,6 +102,14 @@ public class MachineOperater implements Serializable {
 		this.groupId = groupId;
 	}
 
+	public Integer getOperFirmId() {
+		return operFirmId;
+	}
+
+	public void setOperFirmId(Integer operFirmId) {
+		this.operFirmId = operFirmId;
+	}
+
 	public Integer getOperateId() {
 		return operateId;
 	}
@@ -120,8 +130,8 @@ public class MachineOperater implements Serializable {
 	public String toString() {
 		return "MachineOperater [mOperaterId=" + mOperaterId + ", machineId=" + machineId + ", machineAssign="
 				+ machineAssign + ", tModelName=" + tModelName + ", userId=" + userId + ", machineAddress="
-				+ machineAddress + ", machineStatus=" + machineStatus + ", groupId=" + groupId + ", operateId="
-				+ operateId + ", operateDate=" + operateDate + "]";
+				+ machineAddress + ", machineStatus=" + machineStatus + ", groupId=" + groupId + ", operFirmId="
+				+ operFirmId + ", operateId=" + operateId + ", operateDate=" + operateDate + "]";
 	}
 
 }

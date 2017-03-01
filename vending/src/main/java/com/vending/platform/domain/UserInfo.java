@@ -18,7 +18,7 @@ public class UserInfo implements Serializable {
 	/** 用户名 */
 	private String userName;
 	/** 用户密码 */
-	private String userPassword;
+	private String password;
 	/** 手机号码 */
 	private String mobilePhone;
 	/** E-mail */
@@ -66,12 +66,12 @@ public class UserInfo implements Serializable {
 		this.userName = userName;
 	}
 
-	public String getUserPassword() {
-		return userPassword;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
+	public void setUserPassword(String password) {
+		this.password = password;
 	}
 
 	public String getMobilePhone() {
@@ -148,10 +148,10 @@ public class UserInfo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "UserInfo [userId=" + userId + ", userNo=" + userNo + ", userName=" + userName + ", userPassword="
-				+ userPassword + ", mobilePhone=" + mobilePhone + ", email=" + email + ", roleId=" + roleId
-				+ ", groupId=" + groupId + ", status=" + status + ", firmId=" + firmId + ", parentUserId="
-				+ parentUserId + ", operateId=" + operateId + ", operateDate=" + operateDate + "]";
+		return "UserInfo [userId=" + userId + ", userNo=" + userNo + ", userName=" + userName + ", password=" + password
+				+ ", mobilePhone=" + mobilePhone + ", email=" + email + ", roleId=" + roleId + ", groupId=" + groupId
+				+ ", status=" + status + ", firmId=" + firmId + ", parentUserId=" + parentUserId + ", operateId="
+				+ operateId + ", operateDate=" + operateDate + "]";
 	}
 
 }

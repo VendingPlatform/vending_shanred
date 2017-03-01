@@ -4,5 +4,6 @@
 <configuration>
 	<mappers>
 		<mapper class="com.lin.dao.UserDao" />
+		<mapper class="com.vending.platform.dao.IMachineDAO" />
 	</mappers>
 </configuration>  
