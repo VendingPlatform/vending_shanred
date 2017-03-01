@@ -1,10 +1,9 @@
 package com.vending.platform.dao;
 
 import java.util.List;
+import org.apache.ibatis.annotations.SelectProvider;
 
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-
+import com.vending.platform.dao.sqlprovider.IMachineSqlProvider;
 import com.vending.platform.domain.MachineOperater;
 
 /**
@@ -22,7 +21,19 @@ public interface IMachineDAO {
 	 *            查询条件，售货机查询条件
 	 * @return List<T_Machine_Operater> 返回T_Machine_Operater的列表
 	 */
-	@Select("SELECT * FROM MachineOperater where mOperaterId=#{operater.mOperaterId}")
-	public List<MachineOperater> getmachineOperater(@Param("operater") MachineOperater operater);
+	// @Select("SELECT * FROM MachineOperater where
+	// mOperaterId=#{operater.mOperaterId}")
+	// @Select("<script>SELECT * FROM MachineOperater "
+	// + "<where>"
+	// + "<if test=\"#{operater}!=null\"> "
+	// + "<if test=\"#{operater.mOperaterId}!=null\"> "
+	// + "mOperaterId=#{operater.mOperaterId} "
+	// + "</if></if>"
+	// + "</where> "
+	// + "</script>")
+	// public List<MachineOperater> getmachineOperater(@Param("operater")
+	// MachineOperater operater) ;
+	@SelectProvider(type = IMachineSqlProvider.class, method = "getmachineOperater")
+	public List<MachineOperater> getmachineOperater(MachineOperater operater);
 
 }
