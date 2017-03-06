@@ -90,11 +90,11 @@ vending_shanred_platform
 ```
 * 7、根据machineinfo,初始化machineOperater
 ```
-     insert  into `MachineOperater`(`mOperaterId`,`machineId`,`machineAssign`,`tModelName`,`userId`,`machineAddress`,`machineStatus`,`groupId`,`operateId`,`operateDate`) 
-     values (1,1,0,'类型1',NULL,'松江',1,NULL,3,'2017-02-27 20:57:25'),
-     (2,2,0,'类型1',NULL,'普陀',1,NULL,3,'2017-02-27 21:02:07'),
-     (3,3,0,'类型1',NULL,'华师大',1,NULL,3,'2017-02-27 21:03:12'),
-     (4,4,0,'类型1',NULL,'闵行',1,NULL,3,'2017-02-27 21:03:53');
+     insert  into `MachineOperater`(`mOperaterId`,`machineId`,'machineName','machinePannel','machineAssign`,`tModelName`,`userId`,`machineAddress`,`machineStatus`,`groupId`,`operateId`,`operateDate`) 
+     values (1,1,'售货机名牌1','售货机主板1',0,'类型1',NULL,'松江',1,NULL,3,'2017-02-27 20:57:25'),
+     (2,2,'售货机名牌2','售货机主板2'0,'类型1',NULL,'普陀',1,NULL,3,'2017-02-27 21:02:07'),
+     (3,3,'售货机名牌3','售货机主板3'0,'类型1',NULL,'华师大',1,NULL,3,'2017-02-27 21:03:12'),
+     (4,4,'售货机名牌4','售货机主板4',0,'类型1',NULL,'闵行',1,NULL,3,'2017-02-27 21:03:53');
 ```
 # 测试使用注解的SQL的构建方式
 * 1、一般注解
@@ -132,4 +132,12 @@ vending_shanred_platform
     @SelectProvider(type = IMachineSqlProvider.class, method = "getmachineOperater")
     public List<MachineOperater> getmachineOperater(MachineOperater operater);
     }
+```
+
+### 获取数据库时间
+```
+    SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
+    java.util.Date ntime=new java.util.Date();   
+    long nowtime=ntime.getTime();   
+    java.sql.Date operateDate=new java.sql.Date(nowtime);//获取数据库时间
 ```
