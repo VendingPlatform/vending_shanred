@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.vending.platform.dao.IMachineDAO;
 import com.vending.platform.domain.MachineOperater;
+import com.vending.platform.domain.UserInfo;
 import com.vending.platform.service.MachineService;
 
 @Service
@@ -16,8 +17,18 @@ public class MachineServiceImpl implements MachineService {
 	private IMachineDAO machinedao;
 
 	@Override
-	public List<MachineOperater> getmachineOperater(MachineOperater operater) {
-		return (List<MachineOperater>) machinedao.getmachineOperater(operater);
+	public List<MachineOperater> getAllMachine(UserInfo userInfo, MachineOperater machineOperater) {
+		return machinedao.getAllMachine(userInfo, machineOperater);
+	}
+
+	@Override
+	public MachineOperater getMachineOperaterById(Integer mOperaterId) {
+		return machinedao.getMachineOperaterById(mOperaterId);
+	}
+
+	@Override
+	public void changeMachineStatus(int status, Integer mOperateId) {
+		machinedao.changeMachineStatus(status, mOperateId);
 	}
 
 }

@@ -10,7 +10,7 @@
 <body>
 	<%
 		UserInfo user = new UserInfo();
-		user.setUserId(1);
+		user.setUserId(2);
 		user.setUserNo("00101");
 		user.setUserName("厂商user1");
 		user.setRoleId(2);
@@ -18,6 +18,7 @@
 		user.setParentUserId(1);
 		user.setFirmId(2);
 		session.setAttribute("usertest", user);
+		session.setAttribute("test", "testModelMap");
 	%>
 	hello ssm
 	<a href="<c:url value="/user/reg"/>">Register</a>

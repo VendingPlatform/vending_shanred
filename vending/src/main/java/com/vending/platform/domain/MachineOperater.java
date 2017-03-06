@@ -15,6 +15,10 @@ public class MachineOperater implements Serializable {
 	private Integer mOperaterId;
 	/** 售货机ID */
 	private Integer machineId;
+	/** 售货机名牌号 */
+	private String machineName;
+	/** 售货机主板号 */
+	private String machinePannel;
 	/** 是否分配：0：未分配；1：已分配 */
 	private Integer machineAssign;
 	/** 售货机类型 */
@@ -33,6 +37,8 @@ public class MachineOperater implements Serializable {
 	private Integer operateId;
 	/** 操作时间 */
 	private Date operateDate;
+	/** 售货机基本信息 */
+	private MachineInfo machineInfo;
 
 	public MachineOperater() {
 		super();
@@ -126,12 +132,37 @@ public class MachineOperater implements Serializable {
 		this.operateDate = operateDate;
 	}
 
+	public void setMachineInfo(MachineInfo machineInfo) {
+		this.machineInfo = machineInfo;
+	}
+
+	public MachineInfo getMachineInfo() {
+		return machineInfo;
+	}
+
+	public String getMachineName() {
+		return machineName;
+	}
+
+	public void setMachineName(String machineName) {
+		this.machineName = machineName;
+	}
+
+	public String getMachinePannel() {
+		return machinePannel;
+	}
+
+	public void setMachinePannel(String machinePannel) {
+		this.machinePannel = machinePannel;
+	}
+
 	@Override
 	public String toString() {
-		return "MachineOperater [mOperaterId=" + mOperaterId + ", machineId=" + machineId + ", machineAssign="
-				+ machineAssign + ", tModelName=" + tModelName + ", userId=" + userId + ", machineAddress="
-				+ machineAddress + ", machineStatus=" + machineStatus + ", groupId=" + groupId + ", operFirmId="
-				+ operFirmId + ", operateId=" + operateId + ", operateDate=" + operateDate + "]";
+		return "MachineOperater [mOperaterId=" + mOperaterId + ", machineId=" + machineId + ", machineName="
+				+ machineName + ", machinePannel=" + machinePannel + ", machineAssign=" + machineAssign
+				+ ", tModelName=" + tModelName + ", userId=" + userId + ", machineAddress=" + machineAddress
+				+ ", machineStatus=" + machineStatus + ", groupId=" + groupId + ", operFirmId=" + operFirmId
+				+ ", operateId=" + operateId + ", operateDate=" + operateDate + "]";
 	}
 
 }

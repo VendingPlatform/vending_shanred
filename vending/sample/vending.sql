@@ -108,7 +108,7 @@ insert  into `firminfo`(`firmId`,`firmNo`,`firmName`,`firmDesc`,`firmType`,`firm
 DROP TABLE IF EXISTS `groupinfo`;
 
 CREATE TABLE `groupinfo` (
-  `groupId` int(11) NOT NULL AUTO_INCREMENT COMMENT '分组信息表',
+  `groupId` int(11) NOT NULL AUTO_INCREMENT COMMENT '分组信息ID',
   `groupName` varchar(50) NOT NULL COMMENT '组名（唯一）',
   `groupType` int(1) NOT NULL COMMENT '分组类型，0:系統管理員；1：用户组；2：售货机组',
   `groupDesc` text COMMENT '分组描述',
@@ -156,157 +156,26 @@ DROP TABLE IF EXISTS `machineoperater`;
 CREATE TABLE `machineoperater` (
   `mOperaterId` int(11) NOT NULL AUTO_INCREMENT COMMENT '售货机信息id',
   `machineId` int(11) NOT NULL COMMENT '售货机id',
-  `machineAssign` int(1) NOT NULL COMMENT '是否分配',
+  `machineName` varchar(100) NOT NULL COMMENT '售货机铭牌号',
+  `machinePannel` varchar(11) NOT NULL COMMENT '售货机主板号',
+  `machineAssign` int(1) NOT NULL COMMENT '是否分配给某员工',
   `tModelName` varchar(50) NOT NULL COMMENT '售货机类型',
   `userId` int(11) DEFAULT NULL COMMENT '分配给某员工',
   `machineAddress` varchar(150) DEFAULT NULL COMMENT '售货机地址',
   `machineStatus` int(1) NOT NULL COMMENT '售货机是否可用',
   `groupId` int(11) DEFAULT NULL COMMENT '售货机组id',
+  `operFirmId` int(11) NOT NULL COMMENT '运营商ID',
   `operateId` int(11) DEFAULT NULL COMMENT '操作者',
   `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`mOperaterId`),
   KEY `machineId` (`machineId`),
   KEY `userId` (`userId`),
   KEY `groupId` (`groupId`),
-  CONSTRAINT `MachineOperater_ibfk_1` FOREIGN KEY (`machineId`) REFERENCES `machineinfo` (`machineId`),
+  CONSTRAINT `MachineOperater_ibfk_1` FOREIGN KEY (`machineId`) REFERENCES `machineinfo` (`machineId`) ON UPDATE CASCADE,
   CONSTRAINT `MachineOperater_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `userinfo` (`userId`),
   CONSTRAINT `MachineOperater_ibfk_3` FOREIGN KEY (`groupId`) REFERENCES `groupinfo` (`groupId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `machineoperater` */
 
-insert  into `machineoperater`(`mOperaterId`,`machineId`,`machineAssign`,`tModelName`,`userId`,`machineAddress`,`machineStatus`,`groupId`,`operateId`,`operateDate`) values (1,1,0,'类型1',NULL,'松江',1,NULL,3,'2017-02-27 20:57:25'),(2,2,0,'类型1',NULL,'普陀',1,NULL,3,'2017-02-27 21:02:07'),(3,3,0,'类型1',NULL,'华师大',1,NULL,3,'2017-02-27 21:03:12'),(4,4,0,'类型1',NULL,'闵行',1,NULL,3,'2017-02-27 21:03:53');
-
-/*Table structure for table `machinetype` */
-
-DROP TABLE IF EXISTS `machinetype`;
-
-CREATE TABLE `machinetype` (
-  `tModelId` int(11) NOT NULL COMMENT '主键',
-  `tModelName` varchar(50) NOT NULL COMMENT '售货机型号/类型名称',
-  `firmId` int(11) NOT NULL COMMENT '所属厂商ID',
-  `operateId` int(11) DEFAULT NULL COMMENT '操作者',
-  `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
-  PRIMARY KEY (`tModelId`),
-  KEY `firmId` (`firmId`),
-  CONSTRAINT `MachineType_ibfk_1` FOREIGN KEY (`firmId`) REFERENCES `firminfo` (`firmId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `machinetype` */
-
-insert  into `machinetype`(`tModelId`,`tModelName`,`firmId`,`operateId`,`operateDate`) values (1,'类型1',3,1,'2017-02-27 17:07:25');
-
-/*Table structure for table `opermgr` */
-
-DROP TABLE IF EXISTS `opermgr`;
-
-CREATE TABLE `opermgr` (
-  `operMgrId` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `firmNo` varchar(50) NOT NULL COMMENT '公司编号',
-  `firmId` int(11) NOT NULL COMMENT '合作的运营商id',
-  `firmName` varchar(80) NOT NULL COMMENT '运营商姓名',
-  `manuId` int(11) NOT NULL COMMENT '厂商ID',
-  `manuName` varchar(50) DEFAULT NULL COMMENT '厂商姓名',
-  `operateId` int(11) DEFAULT NULL COMMENT '操作者',
-  `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
-  PRIMARY KEY (`operMgrId`),
-  KEY `firmId` (`firmId`),
-  CONSTRAINT `OperMgr_ibfk_1` FOREIGN KEY (`firmId`) REFERENCES `firminfo` (`firmId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `opermgr` */
-
-/*Table structure for table `roleinfo` */
-
-DROP TABLE IF EXISTS `roleinfo`;
-
-CREATE TABLE `roleinfo` (
-  `roleId` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户角色id',
-  `roleName` varchar(50) NOT NULL COMMENT '角色名称（唯一）',
-  `authorityCode` varchar(100) NOT NULL COMMENT '权限编码（集合）',
-  `authorityName` varchar(100) NOT NULL COMMENT '权限名称（集合）',
-  `status` int(1) NOT NULL COMMENT '0：不可用；1：可用',
-  `operateId` int(11) DEFAULT NULL COMMENT '操作者(用户id)',
-  `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
-  PRIMARY KEY (`roleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
-/*Data for the table `roleinfo` */
-
-insert  into `roleinfo`(`roleId`,`roleName`,`authorityCode`,`authorityName`,`status`,`operateId`,`operateDate`) values (1,'system','000,','system,',1,1,'2017-02-27 12:54:59'),(2,'oper_admin','001,','firm_admin,',1,1,'2017-02-27 16:10:10'),(3,'manu_admin','002,','manu_admin,',1,1,'2017-02-27 17:03:15');
-
-/*Table structure for table `t_test` */
-
-DROP TABLE IF EXISTS `t_test`;
-
-CREATE TABLE `t_test` (
-  `user_Id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_Name` char(30) NOT NULL,
-  `user_password` char(10) NOT NULL,
-  `user_email` char(30) NOT NULL,
-  PRIMARY KEY (`userId`),
-  KEY `idx_name` (`userName`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-
-/*Data for the table `t_test` */
-
-insert  into `t_test`(`user_Id`,`user_Name`,`user_password`,`user_email`) values (1,'林炳文','1234567@','ling20081005@126.com'),(2,'evan','123','fff@126.com'),(3,'kaka','cadg','fwsfg@126.com'),(4,'simle','cscs','fsaf@126.com'),(5,'arthur','csas','fsaff@126.com'),(6,'小德','yuh78','fdfas@126.com'),(7,'小小','cvff','fsaf@126.com'),(8,'林林之家','gvv','lin@126.com'),(9,'林炳文evankaka','dfsc','ling2008@126.com'),(10,'apple','uih6','ff@qq.com');
-
-/*Table structure for table `userinfo` */
-
-DROP TABLE IF EXISTS `userinfo`;
-
-CREATE TABLE `userinfo` (
-  `userId` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户主键',
-  `userNo` varchar(15) NOT NULL COMMENT '用户编号（用员工号进行登陆）',
-  `userName` varchar(50) NOT NULL COMMENT '用户名',
-  `password` varchar(50) NOT NULL COMMENT '密码',
-  `mobilePhone` char(11) DEFAULT NULL COMMENT '手机号码',
-  `email` varchar(50) DEFAULT NULL COMMENT 'email',
-  `roleId` int(11) NOT NULL COMMENT '角色id(角色不为空)',
-  `groupId` int(11) DEFAULT NULL COMMENT '用户组id',
-  `status` int(11) NOT NULL COMMENT '状态，0：不可用，1：可用',
-  `firmId` int(11) NOT NULL COMMENT '所属公司（系统管理员属于单独的公司）',
-  `parentUserId` int(11) NOT NULL COMMENT '父管理员id（默认为自己）',
-  `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
-  `operateId` int(11) DEFAULT NULL COMMENT '操作者',
-  PRIMARY KEY (`userId`),
-  KEY `roleId` (`roleId`),
-  KEY `groupId` (`groupId`),
-  KEY `firmId` (`firmId`),
-  CONSTRAINT `userinfo_ibfk_1` FOREIGN KEY (`roleId`) REFERENCES `roleinfo` (`roleId`),
-  CONSTRAINT `userinfo_ibfk_2` FOREIGN KEY (`groupId`) REFERENCES `groupinfo` (`groupId`),
-  CONSTRAINT `userinfo_ibfk_3` FOREIGN KEY (`firmId`) REFERENCES `firminfo` (`firmId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
-/*Data for the table `userinfo` */
-
-insert  into `userinfo`(`userId`,`userNo`,`userName`,`password`,`mobilePhone`,`email`,`roleId`,`groupId`,`status`,`firmId`,`parentUserId`,`operateDate`,`operateId`) values (1,'000','system','system',NULL,NULL,1,1,1,1,1,'2017-02-27 12:58:14',1),(2,'00101','运营商user1','123456',NULL,NULL,2,NULL,1,2,1,'2017-02-27 16:12:00',1),(3,'00201','厂商user1','123456',NULL,NULL,3,NULL,1,3,1,'2017-02-27 17:04:19',1);
-
-/*Table structure for table `wareinfo` */
-
-DROP TABLE IF EXISTS `wareinfo`;
-
-CREATE TABLE `wareinfo` (
-  `wareId` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品id',
-  `wareCode` varchar(50) NOT NULL COMMENT '商品编号',
-  `wareName` varchar(50) NOT NULL COMMENT '商品名称',
-  `wareNorm` varchar(20) NOT NULL COMMENT '商品规格（如每箱多少瓶）',
-  `wareUnit` varchar(20) NOT NULL COMMENT '商品单位（如瓶）',
-  `wareBasePrice` double DEFAULT NULL COMMENT '商品进价',
-  `wareMaxPrice` double DEFAULT NULL COMMENT '最高售价',
-  `wareMinPrice` double DEFAULT NULL COMMENT '最低售价',
-  `wareDesc` varchar(225) DEFAULT NULL COMMENT '商品描述',
-  `wareStatus` int(1) NOT NULL COMMENT '是否可用',
-  `firmId` int(11) NOT NULL COMMENT '运营商id',
-  `operateId` int(11) DEFAULT NULL COMMENT '操作者',
-  `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
-  PRIMARY KEY (`wareId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `wareinfo` */
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+insert  into `machineoperater`(`mOperaterId`,`machineId`,`machineName`,`machinePannel`,`machineAssign`,`tModelName`,`userId`,`machineAddress`,`machineStatus`,`groupId`,`operFirmId`,`operateId`,`operateDate`) values (1,1,'售货机名牌1','售货机主板1',0,'类型1',NULL,'松江',1,2,2,3,'2017-02-27 20:57:25')
