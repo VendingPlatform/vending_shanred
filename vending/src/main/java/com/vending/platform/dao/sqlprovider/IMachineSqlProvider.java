@@ -49,19 +49,19 @@ public class IMachineSqlProvider {
 				FROM("machineoperater");
 				if (machineOperater != null) {
 					if (StringUtils.isNotBlank(machineOperater.getMachineName())) {
-						WHERE("machineName='" + machineOperater.getMachineName() + "'");
+						WHERE("machineoperater.machineName='" + machineOperater.getMachineName() + "'");
 					}
 					if (StringUtils.isNotBlank(machineOperater.getMachinePannel())) {
-						WHERE("machinePannel='" + machineOperater.getMachinePannel() + "'");
+						WHERE("machineoperater.machinePannel='" + machineOperater.getMachinePannel() + "'");
 					}
 					if (machineOperater.getMachineAssign() != null) {
-						WHERE("machineAssign=" + machineOperater.getMachineAssign());
+						WHERE("machineoperater.machineAssign=" + machineOperater.getMachineAssign());
 					}
 					if (StringUtils.isNotBlank(machineOperater.gettModelName())) {
-						WHERE("tModelName='" + machineOperater.gettModelName() + "'");
+						WHERE("machineoperater.tModelName='" + machineOperater.gettModelName() + "'");
 					}
 				}
-				WHERE("operFirmId=" + userInfo.getFirmId());
+				WHERE("machineoperater.operFirmId=" + userInfo.getFirmId());
 			}
 		}.toString();
 		return SQL;
