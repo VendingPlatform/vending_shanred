@@ -52,7 +52,7 @@ vending_shanred_platform
      (2,NULL,'运营商1','运营商1的描述信息',1,1,1,'2017-02-27 13:02:06'),
      (3,NULL,'厂商','厂商1的描述信息',2,1,1,'2017-02-27 17:00:49');
 
-```	
+``` 
 * 2、 为authorityinfo插入三条数据：系统管理员权限编码、厂商和普通公司超级管理员编码；
 ```
      insert  into `authorityinfo`(`authId`,`authName`,`authCode`,`operateId`,`operateDate`) 
@@ -61,7 +61,7 @@ vending_shanred_platform
      (3,'manu_admin','002',1,'2017-02-27 17:02:29');
 ```    
 * 3、为roleinfo插入两条数据：系统管理员角色、厂商和普通运营商超级管理员角色；
-```	
+``` 
      insert  into `RoleInfo`(`roleId`,`roleName`,`authorityCode`,`authorityName`,`status`,`operateId`,`operateDate`)
      values (1,'system','000,','system,',1,1,'2017-02-27 12:54:59'),
      (2,'oper_admin','001,','firm_admin,',1,1,'2017-02-27 16:10:10'),
@@ -90,9 +90,54 @@ vending_shanred_platform
 ```
 * 7、根据machineinfo,初始化machineOperater
 ```
-     insert  into `MachineOperater`(`mOperaterId`,`machineId`,`machineAssign`,`tModelName`,`userId`,`machineAddress`,`machineStatus`,`groupId`,`operateId`,`operateDate`) 
-     values (1,1,0,'类型1',NULL,'松江',1,NULL,3,'2017-02-27 20:57:25'),
-     (2,2,0,'类型1',NULL,'普陀',1,NULL,3,'2017-02-27 21:02:07'),
-     (3,3,0,'类型1',NULL,'华师大',1,NULL,3,'2017-02-27 21:03:12'),
-     (4,4,0,'类型1',NULL,'闵行',1,NULL,3,'2017-02-27 21:03:53');
+     insert  into `MachineOperater`(`mOperaterId`,`machineId`,'machineName','machinePannel','machineAssign`,`tModelName`,`userId`,`machineAddress`,`machineStatus`,`groupId`,`operateId`,`operateDate`) 
+     values (1,1,'售货机名牌1','售货机主板1',0,'类型1',NULL,'松江',1,NULL,3,'2017-02-27 20:57:25'),
+     (2,2,'售货机名牌2','售货机主板2'0,'类型1',NULL,'普陀',1,NULL,3,'2017-02-27 21:02:07'),
+     (3,3,'售货机名牌3','售货机主板3'0,'类型1',NULL,'华师大',1,NULL,3,'2017-02-27 21:03:12'),
+     (4,4,'售货机名牌4','售货机主板4',0,'类型1',NULL,'闵行',1,NULL,3,'2017-02-27 21:03:53');
+```
+# 测试使用注解的SQL的构建方式
+* 1、一般注解
+```
+    @Select("SELECT * FROM MachineOperater where  mOperaterId=#{operater.mOperaterId}")
+    public List<MachineOperater> getmachineOperater(MachineOperater operater);
+
+```
+* 2、动态SQL的注解方式http://www.mybatis.org/mybatis-3/zh/dynamic-sql.html
+```
+    @Select("<script>SELECT * FROM MachineOperater "
+    + "<where>"
+    + "<if test=\"#{operater}!=null\"> "
+    + "<if test=\"#{operater.mOperaterId}!=null\"> "
+    + "mOperaterId=#{operater.mOperaterId} "
+    + "</if></if>"
+    + "</where> "
+    + "</script>")
+    public List<MachineOperater> getmachineOperater(@Param("operater") MachineOperater operater) ;
+```
+* 3、SQL语句构建器http://www.mybatis.org/mybatis-3/zh/statement-builders.html
+     
+     使用mybatis3.4.2，mybatis-spring1.3.1
+```
+    构建器类IMachineSqlProvider
+    public class IMachineSqlProvider {
+       /**
+       * 测试Sql构建器
+        */
+      public String getmachineOperater(MachineOperater operater) {
+          return new SQL().SELECT("*").FROM("MachineOperater").toString();
+      }
+      DAO接口IMachineDAO
+    public interface IMachineDAO {
+    @SelectProvider(type = IMachineSqlProvider.class, method = "getmachineOperater")
+    public List<MachineOperater> getmachineOperater(MachineOperater operater);
+    }
+```
+
+### 获取数据库时间
+```
+    SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
+    java.util.Date ntime=new java.util.Date();   
+    long nowtime=ntime.getTime();   
+    java.sql.Date operateDate=new java.sql.Date(nowtime);//获取数据库时间
 ```
