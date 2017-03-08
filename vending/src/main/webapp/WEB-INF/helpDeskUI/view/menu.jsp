@@ -1,10 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
 %>
 <!doctype html>
 <div class="page-sidebar">
@@ -44,14 +46,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<c:if
 				test="${fn:contains(sessionScope.userInfo.authorityCode ,'020')}">
 				<li><a
-					href="${pageContext.request.contextPath}/userCenter!userCenter.action"
+					href="#"
 					target="_self"> <i class="icon-users "></i> 用户管理
 				</a></li>
 			</c:if>
 			<c:if
 				test="${fn:contains(sessionScope.userInfo.authorityCode ,'030')}">
 				<li><a
-					href="${pageContext.request.contextPath}/roleCenter!roleCenter.action"
+					href="#"
 					target="_self"> <i class="icon-settings "></i> 角色管理
 				</a></li>
 			</c:if>
@@ -61,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<h4 class="sidebar-title">值班管理</h4>
 			<ul class="nav sidebar-nav">
 				<li><a
-					href="${pageContext.request.contextPath}/getDate!getDate.action"
+					href="#"
 					target="_self"> <i class="icon-user"></i> 值班安排
 				</a></li>
 			</ul>
@@ -99,7 +101,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	<!-- /page-sidebar-inner -->
 </div>
- <input type="hidden" id="basePath" value="<%=basePath%>" /> 
+<input type="hidden" id="basePath" value="<%=basePath%>" />
 <input type="hidden" id="js-authorityCode"
 	value="${sessionScope.userInfo.authorityCode}" />
 <!-- jQuery -->

@@ -178,7 +178,7 @@ CREATE TABLE `machineoperater` (
 
 /*Data for the table `machineoperater` */
 
-insert  into `machineoperater`(`mOperaterId`,`machineId`,`machineName`,`machinePannel`,`machineAssign`,`tModelName`,`userId`,`machineAddress`,`machineStatus`,`groupId`,`operFirmId`,`operateId`,`operateDate`) values (1,1,'售货机名牌1','售货机主板1',0,'类型1',NULL,'松江',1,2,2,3,'2017-02-27 20:57:25')
+insert  into `machineoperater`(`mOperaterId`,`machineId`,`machineName`,`machinePannel`,`machineAssign`,`tModelName`,`userId`,`machineAddress`,`machineStatus`,`groupId`,`operFirmId`,`operateId`,`operateDate`) values (1,1,'售货机名牌1','售货机主板1',0,'类型1',NULL,'松江',1,2,2,3,(select now())),(2,2,'售货机名牌2','售货机主板2',0,'类型1',NULL,'松江',1,2,2,3,(select now()))
 
 DROP TABLE IF EXISTS `machinetype`;
  
