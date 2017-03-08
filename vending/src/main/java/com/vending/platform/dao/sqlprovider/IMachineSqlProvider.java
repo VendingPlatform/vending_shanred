@@ -47,10 +47,8 @@ public class IMachineSqlProvider {
 					if (machineOperater.getOperateId() != null) {
 						SET("operateId=" + machineOperater.getOperateId());
 					}
-					if (machineOperater.getOperateDate()!=null) {
-						SET("operateDate='" + machineOperater.getOperateDate() + "'");
+					SET("operateDate=(select now())");
 
-					}
 					WHERE("mOperaterId=" + machineOperater.getmOperaterId());
 				}
 			}
