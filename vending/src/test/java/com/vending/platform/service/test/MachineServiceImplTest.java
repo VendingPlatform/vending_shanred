@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Delayed;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,10 +49,29 @@ public class MachineServiceImplTest extends AbstractJUnit4SpringContextTests {
 		// machineOperater.setMachinePannel("售货机主板1");
 	}
 
-	/***************** 有bug *****************************/
+	@Test
+	public void del() {
+		Integer id = 9;
+		machineDAO.deleteMachineOperateById(id);
+	}
+
+	@Test
+	public void testcreate() {
+		MachineOperater machineOperater = new MachineOperater();
+		machineOperater.setMachineId(3);
+		machineOperater.setMachineName("测试售货机");
+		machineOperater.setOperFirmId(1);
+		try {
+			machineDAO.insertMachineOperate(machineOperater);
+		} catch (Exception e) {
+			System.out.println("error");
+		}
+	}
+
 	@Test
 	public void tesGetMachine() {
-		List<MachineOperater> maOperaters = (List<MachineOperater>) machineDAO.getAllMachine(userInfo, machineOperater);
+		List<MachineOperater> maOperaters = (List<MachineOperater>) machineDAO.getAllMachineOperaters(userInfo,
+				machineOperater);
 		System.out.println("-----------------------------------------------");
 		System.out.println(maOperaters.size());
 		for (int i = 0; i < maOperaters.size(); i++) {
@@ -79,27 +99,23 @@ public class MachineServiceImplTest extends AbstractJUnit4SpringContextTests {
 	@Test
 	public void getById() {
 		machineOperater.setOperateId(1);
-		MachineOperater mOperater = machineService.getMachineOperaterById(machineOperater.getOperateId());
+		MachineOperater mOperater = machineDAO.getMachineOperaterById(machineOperater.getOperateId());
 		System.out.println("按Id查询：" + mOperater.toString());
 
 	}
 
 	@Test
-	public void changeStatus() {
-		machineOperater.setmOperaterId(1);
-		machineService.changeMachineStatus(0, machineOperater.getmOperaterId());
-	}
-
-	@Test
 	public void uodateGroup() {
-		/*Integer groupId = 2;
-		machineOperater.setmOperaterId(1);
-		machineDAO.updateMachineGroup(groupId, machineOperater.getmOperaterId());*/
-		MachineOperater machineOperater=new MachineOperater();
+		/*
+		 * Integer groupId = 2; machineOperater.setmOperaterId(1);
+		 * machineDAO.updateMachineGroup(groupId,
+		 * machineOperater.getmOperaterId());
+		 */
+		MachineOperater machineOperater = new MachineOperater();
 		machineOperater.setmOperaterId(1);
 		machineOperater.setGroupId(2);
 		machineDAO.updateMachineOperate(machineOperater);
-		
+
 	}
 
 	@Test

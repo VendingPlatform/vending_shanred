@@ -9,11 +9,44 @@ import com.vending.platform.domain.UserInfo;
 /** 使用SQL构建器进行复杂语句的构建 */
 public class IMachineSqlProvider {
 
-	/****** 各种更新操作的SQL语句需判断是否提供了操作者ID ********/
-	/**************************************************/
-	/******** 思考是否可以把所有的更新操作整合到一个接口 *********************/
+	public String insertMachineOperate(MachineOperater machineOperater) {
+		return new SQL() {
+			{
+				INSERT_INTO("machineoperater");
+				if (machineOperater != null && machineOperater.getMachineId() != null) {
+					VALUES("machineId", "'" + machineOperater.getMachineId() + "'");
+					VALUES("machineName", "'" + machineOperater.getMachineName() + "'");
+					VALUES("machinePannel", "'" + machineOperater.getMachinePannel() + "'");
+					VALUES("tModelName", "'" + machineOperater.gettModelName() + "'");
+					if (machineOperater.getMachineAssign() != null) {
+						VALUES("machineAssign", "'" + machineOperater.getMachineAssign() + "'");
+					}
+					if (machineOperater.getMachineStatus() != null) {
+						VALUES("machineStatus", "'" + machineOperater.getMachineStatus() + "'");
+					}
+					if (machineOperater.getOperFirmId() != null) {
+						VALUES("operFirmId", "'" + machineOperater.getOperFirmId() + "'");
+					}
+					if (machineOperater.getOperateId() != null) {
+						VALUES("operateId", "'" + machineOperater.getOperateId() + "'");
+					}
+					VALUES("operateDate", "(select now())");
+				}
+			}
+		}.toString();
+	}
+
+	public String deleteMachineOperateById(Integer machinId) {
+		return new SQL() {
+			{
+				DELETE_FROM("machineoperater");
+				WHERE("mOperaterId=" + machinId);
+			}
+		}.toString();
+	}
+
 	public String updateMachineOperate(MachineOperater machineOperater) {
-		String SQL = new SQL() {
+		return new SQL() {
 			{
 				if (machineOperater != null && machineOperater.getmOperaterId() != null) {
 					UPDATE("machineoperater");
@@ -53,41 +86,14 @@ public class IMachineSqlProvider {
 				}
 			}
 		}.toString();
-		return SQL;
-	}
-
-	public String updateMachineGroup(Integer groupId, Integer mOperateId) {
-		return new SQL() {
-			{
-				UPDATE("machineoperater");
-				SET("groupId=" + groupId);
-				WHERE("mOperaterId=" + mOperateId);
-			}
-		}.toString();
-	}
-
-	public String changeMachineStatus(int status, Integer mOperateId) {
-		return new SQL() {
-			{
-				UPDATE("machineoperater");
-				if (status == 1) {
-					// 由可用变为不可用
-					SET("machineStatus=0");
-				} else if (status == 0) {
-					SET("machineStatus=1");
-				}
-				WHERE("mOperaterId=" + mOperateId);
-			}
-		}.toString();
 	}
 
 	public String getMachineOperaterById(Integer id) {
 		return "SELECT * FROM machineoperater WHERE mOperaterId=" + id;
 	}
 
-	public String getAllMachine(UserInfo userInfo, MachineOperater machineOperater) {
-		String SQL = null;
-		SQL = new SQL() {
+	public String getAllMachineOperaters(UserInfo userInfo, MachineOperater machineOperater) {
+		return new SQL() {
 			{
 				SELECT("*");
 				FROM("machineoperater");
@@ -108,7 +114,6 @@ public class IMachineSqlProvider {
 				WHERE("machineoperater.operFirmId=" + userInfo.getFirmId());
 			}
 		}.toString();
-		return SQL;
 	}
 
 	public String getMachineInfoById(Integer id) {
