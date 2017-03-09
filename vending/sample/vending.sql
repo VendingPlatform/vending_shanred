@@ -25,16 +25,17 @@ CREATE TABLE `authorityinfo` (
   `authId` int(11) NOT NULL AUTO_INCREMENT COMMENT '权限id',
   `authName` varchar(50) NOT NULL COMMENT '权限名称（唯一性）',
   `authCode` varchar(10) NOT NULL COMMENT '权限编码（唯一性）',
+  `firmId` int(11) NOT NULL COMMENT '所属公司',
   `operateId` int(11) DEFAULT NULL COMMENT '操作者',
   `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`authId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 /*Data for the table `authorityinfo` */
 
 LOCK TABLES `authorityinfo` WRITE;
 
-insert  into `authorityinfo`(`authId`,`authName`,`authCode`,`operateId`,`operateDate`) values (1,'system','000',1,'2017-02-27 12:55:37'),(2,'oper_admin','001',1,'2017-02-27 16:09:36'),(3,'manu_admin','002',1,'2017-02-27 17:02:29');
+insert  into `authorityinfo`(`authId`,`authName`,`authCode`,`firmId`,`operateId`,`operateDate`) values (1,'system','000',0,1,'2017-02-27 12:55:37'),(2,'oper_admin','001',0,1,'2017-02-27 16:09:36'),(3,'manu_admin','002',0,1,'2017-02-27 17:02:29'),(4,'测试权限1','001',1,1,'2017-03-09 21:19:48'),(5,'测试权限1','001',1,1,'2017-03-09 21:24:37'),(6,'测试权限2','001',1,1,'2017-03-09 21:27:54'),(7,'测试权限2','001',1,1,'2017-03-09 21:33:45'),(8,'修改权限2','001',1,1,'2017-03-09 21:56:13'),(9,'','001',-1,1,'2017-03-09 21:37:53'),(10,'测试权限2','001',1,1,'2017-03-09 21:43:04');
 
 UNLOCK TABLES;
 
@@ -44,7 +45,7 @@ DROP TABLE IF EXISTS `channelgroup`;
 
 CREATE TABLE `channelgroup` (
   `channelGroupId` int(11) NOT NULL AUTO_INCREMENT COMMENT '货道组id',
-  `channelGroupName` varchar(50) NOT NULL COMMENT '货道组名称',
+  `channelGroupName` varchar(50) NOT NULL DEFAULT 'null' COMMENT '货道组名称',
   `wareCode` varchar(50) DEFAULT NULL COMMENT '商品编号',
   `wareName` varchar(50) DEFAULT NULL COMMENT '商品名称',
   `warePrice` double DEFAULT NULL COMMENT '商品价格',
@@ -69,17 +70,17 @@ DROP TABLE IF EXISTS `channelinfo`;
 
 CREATE TABLE `channelinfo` (
   `channelId` int(11) NOT NULL AUTO_INCREMENT COMMENT '货道id',
-  `channelNo` varchar(50) NOT NULL COMMENT '货道编号',
-  `wareCode` varchar(50) NOT NULL COMMENT '商品编号',
+  `channelNo` varchar(50) NOT NULL DEFAULT 'null' COMMENT '货道编号',
+  `wareCode` varchar(50) NOT NULL DEFAULT 'null' COMMENT '商品编号',
   `wareName` varchar(50) DEFAULT NULL COMMENT '商品名称',
   `warePrice` double DEFAULT NULL COMMENT '商品价格',
   `isDiscount` int(11) DEFAULT NULL COMMENT '是否特价',
-  `stockNum` int(11) NOT NULL COMMENT '额定存货量',
+  `stockNum` int(11) NOT NULL DEFAULT '0' COMMENT '额定存货量',
   `stockNumnNow` int(11) DEFAULT NULL COMMENT '当前存货量',
   `stockNumnAdd` int(11) DEFAULT NULL COMMENT '新增存货量',
   `channelGroupId` int(11) DEFAULT NULL COMMENT '所属货道组id',
-  `machineId` int(11) NOT NULL COMMENT '所属售货机id',
-  `isHistory` int(1) NOT NULL COMMENT '是否为历史信息',
+  `machineId` int(11) DEFAULT NULL COMMENT '所属售货机id',
+  `isHistory` int(1) NOT NULL DEFAULT '0' COMMENT '是否为历史信息',
   `operateId` int(11) DEFAULT NULL COMMENT '操作者',
   `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`channelId`),
@@ -101,11 +102,11 @@ DROP TABLE IF EXISTS `firminfo`;
 
 CREATE TABLE `firminfo` (
   `firmId` int(11) NOT NULL AUTO_INCREMENT COMMENT '公司主键',
-  `firmNo` varchar(50) NOT NULL COMMENT '公司编号',
-  `firmName` varchar(80) NOT NULL COMMENT '公司名称',
+  `firmNo` varchar(50) NOT NULL DEFAULT 'null' COMMENT '公司编号',
+  `firmName` varchar(80) NOT NULL DEFAULT 'null' COMMENT '公司名称',
   `firmDesc` text COMMENT '公司描述',
   `firmType` int(1) NOT NULL COMMENT '公司类型，0：系统管理员，不属于任何公司；1:运营商；2：厂商',
-  `firmStatus` int(1) NOT NULL COMMENT '公司状态，0：不可用；1：可用',
+  `firmStatus` int(1) NOT NULL DEFAULT '0' COMMENT '公司状态，0：不可用；1：可用',
   `operateId` int(11) DEFAULT NULL COMMENT '操作人',
   `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`firmId`)
@@ -125,7 +126,7 @@ DROP TABLE IF EXISTS `groupinfo`;
 
 CREATE TABLE `groupinfo` (
   `groupId` int(11) NOT NULL AUTO_INCREMENT COMMENT '分组信息ID',
-  `groupName` varchar(50) NOT NULL COMMENT '组名（唯一）',
+  `groupName` varchar(50) NOT NULL DEFAULT 'null' COMMENT '组名（唯一）',
   `groupType` int(1) NOT NULL COMMENT '分组类型，0:系統管理員；1：用户组；2：售货机组',
   `groupDesc` text COMMENT '分组描述',
   `firmId` int(11) NOT NULL COMMENT '公司id（运营商）',
@@ -198,13 +199,13 @@ CREATE TABLE `machineoperater` (
   CONSTRAINT `machineoperater_ibfk_1` FOREIGN KEY (`machineId`) REFERENCES `machineinfo` (`machineId`),
   CONSTRAINT `MachineOperater_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `userinfo` (`userId`),
   CONSTRAINT `MachineOperater_ibfk_3` FOREIGN KEY (`groupId`) REFERENCES `groupinfo` (`groupId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `machineoperater` */
 
 LOCK TABLES `machineoperater` WRITE;
 
-insert  into `machineoperater`(`mOperaterId`,`machineId`,`machineName`,`machinePannel`,`machineAssign`,`tModelName`,`userId`,`machineAddress`,`machineStatus`,`groupId`,`operFirmId`,`operateId`,`operateDate`) values (1,1,'售货机名牌1','售货机主板1',0,'类型1',NULL,'普陀修改',1,2,2,2,'2017-03-08 21:23:06'),(2,2,'售货机名牌2','售货机主板2',0,'类型1',NULL,'普陀',1,NULL,2,3,'2017-02-27 21:02:07'),(3,3,'售货机名牌3','售货机主板3',0,'类型1',NULL,'华师大',1,NULL,2,3,'2017-02-27 21:03:12'),(4,4,'售货机名牌4','售货机主板4',0,'类型1',NULL,'闵行',1,NULL,2,3,'2017-02-27 21:03:53');
+insert  into `machineoperater`(`mOperaterId`,`machineId`,`machineName`,`machinePannel`,`machineAssign`,`tModelName`,`userId`,`machineAddress`,`machineStatus`,`groupId`,`operFirmId`,`operateId`,`operateDate`) values (1,1,'售货机名牌1','售货机主板1',0,'类型1',NULL,'普陀修改',1,2,2,2,'2017-03-08 21:23:06'),(2,2,'售货机名牌2','售货机主板2',0,'类型1',NULL,'普陀',1,NULL,2,3,'2017-02-27 21:02:07'),(3,3,'售货机名牌3','售货机主板3',0,'类型1',NULL,'华师大',1,NULL,2,3,'2017-02-27 21:03:12'),(4,4,'售货机名牌4','售货机主板4',0,'类型1',NULL,'闵行',1,NULL,2,3,'2017-02-27 21:03:53'),(5,3,'测试售货机','null',0,'null',NULL,NULL,0,NULL,1,NULL,'2017-03-09 21:32:44');
 
 UNLOCK TABLES;
 
@@ -265,6 +266,7 @@ CREATE TABLE `roleinfo` (
   `authorityCode` varchar(100) NOT NULL COMMENT '权限编码（集合）',
   `authorityName` varchar(100) NOT NULL COMMENT '权限名称（集合）',
   `status` int(1) NOT NULL DEFAULT '0' COMMENT '0：不可用；1：可用',
+  `firmId` int(11) DEFAULT NULL COMMENT '所属公司',
   `operateId` int(11) DEFAULT NULL COMMENT '操作者(用户id)',
   `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`roleId`)
@@ -274,7 +276,7 @@ CREATE TABLE `roleinfo` (
 
 LOCK TABLES `roleinfo` WRITE;
 
-insert  into `roleinfo`(`roleId`,`roleName`,`authorityCode`,`authorityName`,`status`,`operateId`,`operateDate`) values (1,'system','000,','system,',1,1,'2017-02-27 12:54:59'),(2,'oper_admin','001,','firm_admin,',1,1,'2017-02-27 16:10:10'),(3,'manu_admin','002,','manu_admin,',1,1,'2017-02-27 17:03:15');
+insert  into `roleinfo`(`roleId`,`roleName`,`authorityCode`,`authorityName`,`status`,`firmId`,`operateId`,`operateDate`) values (1,'system','000,','system,',1,NULL,1,'2017-02-27 12:54:59'),(2,'oper_admin','001,','firm_admin,',1,NULL,1,'2017-02-27 16:10:10'),(3,'manu_admin','002,','manu_admin,',1,NULL,1,'2017-02-27 17:03:15');
 
 UNLOCK TABLES;
 
@@ -290,6 +292,7 @@ CREATE TABLE `userinfo` (
   `mobilePhone` char(11) DEFAULT NULL COMMENT '手机号码',
   `email` varchar(50) DEFAULT NULL COMMENT 'email',
   `roleId` int(11) NOT NULL COMMENT '角色id(角色不为空)',
+  `roleName` varchar(50) DEFAULT NULL COMMENT '角色名',
   `groupId` int(11) DEFAULT NULL COMMENT '用户组id',
   `status` int(11) NOT NULL DEFAULT '0' COMMENT '状态，0：不可用，1：可用',
   `firmId` int(11) NOT NULL COMMENT '所属公司（系统管理员属于单独的公司）',
@@ -309,7 +312,7 @@ CREATE TABLE `userinfo` (
 
 LOCK TABLES `userinfo` WRITE;
 
-insert  into `userinfo`(`userId`,`userNo`,`userName`,`password`,`mobilePhone`,`email`,`roleId`,`groupId`,`status`,`firmId`,`parentUserId`,`operateDate`,`operateId`) values (1,'000','system','system',NULL,NULL,1,1,1,1,1,'2017-02-27 12:58:14',1),(2,'00101','运营商user1','123456',NULL,NULL,2,NULL,1,2,1,'2017-02-27 16:12:00',1),(3,'00201','厂商user1','123456',NULL,NULL,3,NULL,1,3,1,'2017-02-27 17:04:19',1),(4,'00102','运营商user2','123455',NULL,NULL,2,1,1,2,1,NULL,1);
+insert  into `userinfo`(`userId`,`userNo`,`userName`,`password`,`mobilePhone`,`email`,`roleId`,`roleName`,`groupId`,`status`,`firmId`,`parentUserId`,`operateDate`,`operateId`) values (1,'000','system','system',NULL,NULL,1,NULL,1,1,1,1,'2017-02-27 12:58:14',1),(2,'00101','运营商user1','123456',NULL,NULL,2,NULL,NULL,1,2,1,'2017-02-27 16:12:00',1),(3,'00201','厂商user1','123456',NULL,NULL,3,NULL,NULL,1,3,1,'2017-02-27 17:04:19',1),(4,'00102','运营商user2','123455',NULL,NULL,2,NULL,1,1,2,1,NULL,1);
 
 UNLOCK TABLES;
 

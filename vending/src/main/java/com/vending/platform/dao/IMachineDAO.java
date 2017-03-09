@@ -18,6 +18,8 @@ import com.vending.platform.domain.UserInfo;
  * 1、售货机分组管理 ;<br>
  * 2、售货机分配 ;<br>
  * 3、售货机货道管理<br>
+ * 
+ * @author Miley_Ren
  */
 public interface IMachineDAO {
 	/**

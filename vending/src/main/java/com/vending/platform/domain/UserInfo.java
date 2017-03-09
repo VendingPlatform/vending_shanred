@@ -25,6 +25,8 @@ public class UserInfo implements Serializable {
 	private String email;
 	/** 用户角色 */
 	private Integer roleId;
+	/** 用户角色名称 */
+	private String roleName;
 	/** 所属用户组 */
 	private Integer groupId;
 	/** 用户状态：0：不可用，1：可用 */
@@ -134,6 +136,18 @@ public class UserInfo implements Serializable {
 		return operateId;
 	}
 
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public void setOperateId(Integer operateId) {
 		this.operateId = operateId;
 	}
@@ -149,9 +163,9 @@ public class UserInfo implements Serializable {
 	@Override
 	public String toString() {
 		return "UserInfo [userId=" + userId + ", userNo=" + userNo + ", userName=" + userName + ", password=" + password
-				+ ", mobilePhone=" + mobilePhone + ", email=" + email + ", roleId=" + roleId + ", groupId=" + groupId
-				+ ", status=" + status + ", firmId=" + firmId + ", parentUserId=" + parentUserId + ", operateId="
-				+ operateId + ", operateDate=" + operateDate + "]";
+				+ ", mobilePhone=" + mobilePhone + ", email=" + email + ", roleId=" + roleId + ", roleName=" + roleName
+				+ ", groupId=" + groupId + ", status=" + status + ", firmId=" + firmId + ", parentUserId="
+				+ parentUserId + ", operateId=" + operateId + ", operateDate=" + operateDate + "]";
 	}
 
 }

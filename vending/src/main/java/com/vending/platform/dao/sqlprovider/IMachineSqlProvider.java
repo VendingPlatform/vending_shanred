@@ -6,7 +6,7 @@ import org.apache.ibatis.jdbc.SQL;
 import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.UserInfo;
 
-/** 使用SQL构建器进行复杂语句的构建 */
+/** @author Miley_Ren */
 public class IMachineSqlProvider {
 
 	public String insertMachineOperate(MachineOperater machineOperater) {
