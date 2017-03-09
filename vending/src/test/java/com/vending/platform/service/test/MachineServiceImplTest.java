@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.Delayed;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,15 +16,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.vending.platform.dao.IMachineDAO;
 import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.UserInfo;
-import com.vending.platform.service.MachineService;
 
-//指定bean注入的配置文件
+/**
+ * @author Miley_Ren
+ */
+// 指定bean注入的配置文件
 @ContextConfiguration("classpath:spring-mybatis.xml")
 // 使用标准的JUnit @RunWith注释来告诉JUnit使用Spring TestRunner
 @RunWith(SpringJUnit4ClassRunner.class)
 public class MachineServiceImplTest extends AbstractJUnit4SpringContextTests {
-	@Autowired
-	private MachineService machineService;
 	@Autowired
 	private IMachineDAO machineDAO;
 	private UserInfo userInfo;
