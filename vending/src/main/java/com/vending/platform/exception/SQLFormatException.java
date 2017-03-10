@@ -7,9 +7,16 @@ package com.vending.platform.exception;
  */
 public class SQLFormatException extends Exception {
 
-	private static final long serialVersionUID = -6217306577418889634L;
+    private static final long serialVersionUID = -6217306577418889634L;
 
-	public SQLFormatException(String message) {
-		super(message);
-	}
+    public SQLFormatException() {
+    }
+
+    public SQLFormatException(String msg) {
+        super(msg);
+    }
+
+    public SQLFormatException(String msg, Throwable t) {
+        super(msg, t);
+    }
 }
