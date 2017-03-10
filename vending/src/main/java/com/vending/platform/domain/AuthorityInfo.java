@@ -17,6 +17,8 @@ public class AuthorityInfo implements Serializable {
 	private String authName;
 	/** 权限编码 */
 	private String authCode;
+	/**所属公司*/
+	private Integer firmId;
 	/** 操作者ID */
 	private Integer operateId;
 	/** 操作时间 */
@@ -50,6 +52,14 @@ public class AuthorityInfo implements Serializable {
 		this.authCode = authCode;
 	}
 
+	public Integer getFirmId() {
+		return firmId;
+	}
+
+	public void setFirmId(Integer firmId) {
+		this.firmId = firmId;
+	}
+
 	public Integer getOperateId() {
 		return operateId;
 	}
@@ -68,8 +78,8 @@ public class AuthorityInfo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "AuthorityInfo [authId=" + authId + ", authName=" + authName + ", authCode=" + authCode + ", operateId="
-				+ operateId + ", operateDate=" + operateDate + "]";
+		return "AuthorityInfo [authId=" + authId + ", authName=" + authName + ", authCode=" + authCode + ", firmId="
+				+ firmId + ", operateId=" + operateId + ", operateDate=" + operateDate + "]";
 	}
 
 }

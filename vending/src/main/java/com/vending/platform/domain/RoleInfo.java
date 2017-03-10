@@ -23,6 +23,8 @@ public class RoleInfo implements Serializable {
 	private String authorityName;
 	/** 权限状态:0:不可用；1：可用 */
 	private Integer status;
+	/**所属公司*/
+	private Integer firmId;
 	/** 操作者 */
 	private Integer operateId;
 	/** 操作时间 */
@@ -72,6 +74,14 @@ public class RoleInfo implements Serializable {
 		this.status = status;
 	}
 
+	public Integer getFirmId() {
+		return firmId;
+	}
+
+	public void setFirmId(Integer firmId) {
+		this.firmId = firmId;
+	}
+
 	public Integer getOperateId() {
 		return operateId;
 	}
@@ -91,8 +101,8 @@ public class RoleInfo implements Serializable {
 	@Override
 	public String toString() {
 		return "RoleInfo [roleId=" + roleId + ", roleName=" + roleName + ", authorityCode=" + authorityCode
-				+ ", authorityName=" + authorityName + ", status=" + status + ", operateId=" + operateId
-				+ ", operateDate=" + operateDate + "]";
+				+ ", authorityName=" + authorityName + ", status=" + status + ", firmId=" + firmId + ", operateId="
+				+ operateId + ", operateDate=" + operateDate + "]";
 	}
 
 }
