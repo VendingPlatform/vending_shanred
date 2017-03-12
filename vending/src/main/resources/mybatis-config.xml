@@ -5,6 +5,6 @@
 	<mappers>
 		<mapper class="com.lin.dao.UserDao" />
 		<mapper class="com.vending.platform.dao.IMachineDAO" />
-		<mapper class="com.vending.platform.dao.IAuthorityInfoDao"/>
+		<mapper class="com.vending.platform.dao.IUserManagerDao" />
 	</mappers>
 </configuration>  
