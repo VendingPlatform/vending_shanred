@@ -2,14 +2,12 @@ package com.vending.platform.service.test;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Update;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.lin.domain.User;
 import com.vending.platform.dao.IUserManagerDao;
 import com.vending.platform.domain.AuthorityInfo;
 import com.vending.platform.domain.RoleInfo;

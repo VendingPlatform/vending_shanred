@@ -20,11 +20,11 @@ public class FirmInfo implements Serializable {
 	/** 公司描述 */
 	private String firmDesc;
 	/** 公司类型：0：系统管理员；1：运营商；2：厂商 */
-	private int firmType;
+	private Integer firmType;
 	/** 公司状态：0：不可用；1：可用 */
-	private int firmStatus;
+	private Integer firmStatus;
 	/** 操作人ID */
-	private int operateId;
+	private Integer operateId;
 	/** 操作时间 */
 	private Date operateDate;
 
@@ -64,27 +64,27 @@ public class FirmInfo implements Serializable {
 		this.firmDesc = firmDesc;
 	}
 
-	public int getFirmType() {
+	public Integer getFirmType() {
 		return firmType;
 	}
 
-	public void setFirmType(int firmType) {
+	public void setFirmType(Integer firmType) {
 		this.firmType = firmType;
 	}
 
-	public int getFirmStatus() {
+	public Integer getFirmStatus() {
 		return firmStatus;
 	}
 
-	public void setFirmStatus(int firmStatus) {
+	public void setFirmStatus(Integer firmStatus) {
 		this.firmStatus = firmStatus;
 	}
 
-	public int getOperateId() {
+	public Integer getOperateId() {
 		return operateId;
 	}
 
-	public void setOperateId(int operateId) {
+	public void setOperateId(Integer operateId) {
 		this.operateId = operateId;
 	}
 

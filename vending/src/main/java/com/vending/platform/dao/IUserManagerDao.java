@@ -1,10 +1,7 @@
 package com.vending.platform.dao;
 
 import java.util.List;
-
 import org.apache.ibatis.annotations.SelectProvider;
-
-import com.lin.domain.User;
 import com.vending.platform.dao.sqlprovider.UserManagerSqlProvider;
 import com.vending.platform.domain.AuthorityInfo;
 import com.vending.platform.domain.RoleInfo;

@@ -17,9 +17,11 @@ public class GroupInfo implements Serializable {
 	/** 分组名称 */
 	private String groupName;
 	/** 分组类型：0：用户组；1：售货机组 */
-	private int groupType;
+	private Integer groupType;
 	/** 分组描述 */
 	private String groupDesc;
+	/** 公司 */
+	private Integer firmId;
 	/** 操作者 */
 	private Integer operateId;
 	/** 操作时间 */
@@ -45,11 +47,11 @@ public class GroupInfo implements Serializable {
 		this.groupName = groupName;
 	}
 
-	public int getGroupType() {
+	public Integer getGroupType() {
 		return groupType;
 	}
 
-	public void setGroupType(int groupType) {
+	public void setGroupType(Integer groupType) {
 		this.groupType = groupType;
 	}
 
@@ -59,6 +61,14 @@ public class GroupInfo implements Serializable {
 
 	public void setGroupDesc(String groupDesc) {
 		this.groupDesc = groupDesc;
+	}
+
+	public Integer getFirmId() {
+		return firmId;
+	}
+
+	public void setFirmId(Integer firmId) {
+		this.firmId = firmId;
 	}
 
 	public Integer getOperateId() {
@@ -80,7 +90,8 @@ public class GroupInfo implements Serializable {
 	@Override
 	public String toString() {
 		return "GroupInfo [groupId=" + groupId + ", groupName=" + groupName + ", groupType=" + groupType
-				+ ", groupDesc=" + groupDesc + ", operateId=" + operateId + ", operateDate=" + operateDate + "]";
+				+ ", groupDesc=" + groupDesc + ", firmId=" + firmId + ", operateId=" + operateId + ", operateDate="
+				+ operateDate + "]";
 	}
 
 }
