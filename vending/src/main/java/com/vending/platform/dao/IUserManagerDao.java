@@ -2,7 +2,7 @@ package com.vending.platform.dao;
 
 import java.util.List;
 import org.apache.ibatis.annotations.SelectProvider;
-import com.vending.platform.dao.sqlprovider.UserManagerSqlProvider;
+import com.vending.platform.dao.sqlprovider.IUserManagerSqlProvider;
 import com.vending.platform.domain.AuthorityInfo;
 import com.vending.platform.domain.RoleInfo;
 import com.vending.platform.domain.UserInfo;
@@ -21,7 +21,7 @@ public interface IUserManagerDao {
 	 * @param authorityInfo
 	 *            新增的权限信息类;插入信息时，authName、authCode、firmId都不能为空，否则会抛出异常
 	 */
-	@SelectProvider(type = UserManagerSqlProvider.class, method = "insertAuthorityInfo")
+	@SelectProvider(type = IUserManagerSqlProvider.class, method = "insertAuthorityInfo")
 	public void insertAuthorityInfo(AuthorityInfo authorityInfo) throws SQLFormatException;
 
 	/**
@@ -30,7 +30,7 @@ public interface IUserManagerDao {
 	 * @param authorityInfo
 	 *            新增的权限信息类
 	 */
-	@SelectProvider(type = UserManagerSqlProvider.class, method = "updateAutorityInfo")
+	@SelectProvider(type = IUserManagerSqlProvider.class, method = "updateAutorityInfo")
 	public void updateAutorityInfo(AuthorityInfo authorityInfo);
 
 	/**
@@ -40,7 +40,7 @@ public interface IUserManagerDao {
 	 *            查询的权限信息类
 	 * @return List<AuthorityInfo> 返回一个实体类列表
 	 */
-	@SelectProvider(type = UserManagerSqlProvider.class, method = "getAllAuthorityInfos")
+	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getAllAuthorityInfos")
 	public List<AuthorityInfo> getAllAuthorityInfos(AuthorityInfo authorityInfo);
 
 	/**
@@ -50,7 +50,7 @@ public interface IUserManagerDao {
 	 *            查询信息
 	 * @return AuthorityInfo 返回一个实体类
 	 */
-	@SelectProvider(type = UserManagerSqlProvider.class, method = "getAuthorityInfoById")
+	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getAuthorityInfoById")
 	public AuthorityInfo getAuthorityInfoById(Integer authId);
 
 	/**
@@ -58,7 +58,7 @@ public interface IUserManagerDao {
 	 * 
 	 * @param authId
 	 */
-	@SelectProvider(type = UserManagerSqlProvider.class, method = "deleteAuthorityInfo")
+	@SelectProvider(type = IUserManagerSqlProvider.class, method = "deleteAuthorityInfo")
 	public void deleteAuthorityInfo(Integer authId);
 
 	/**
@@ -66,7 +66,7 @@ public interface IUserManagerDao {
 	 * 
 	 * @param roleInfo,roleInfo.authorityCode以分号隔开，表示多个权限
 	 */
-	@SelectProvider(type = UserManagerSqlProvider.class, method = "insertRoleInfo")
+	@SelectProvider(type = IUserManagerSqlProvider.class, method = "insertRoleInfo")
 	public void insertRoleInfo(RoleInfo roleInfo) throws SQLFormatException;
 
 	/**
@@ -74,7 +74,7 @@ public interface IUserManagerDao {
 	 * 
 	 * @param roleInfo
 	 */
-	@SelectProvider(type = UserManagerSqlProvider.class, method = "updateRoleInfo")
+	@SelectProvider(type = IUserManagerSqlProvider.class, method = "updateRoleInfo")
 	public void updateRoleInfo(RoleInfo roleInfo);
 
 	/**
@@ -83,7 +83,7 @@ public interface IUserManagerDao {
 	 * @param roleInfo
 	 *            角色信息
 	 */
-	@SelectProvider(type = UserManagerSqlProvider.class, method = "getAllRoles")
+	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getAllRoles")
 	public List<RoleInfo> getAllRoles(RoleInfo roleInfo);
 
 	/**
@@ -92,11 +92,11 @@ public interface IUserManagerDao {
 	 * @param roleId
 	 *            角色ID
 	 */
-	@SelectProvider(type = UserManagerSqlProvider.class, method = "getRoleById")
+	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getRoleById")
 	public RoleInfo getRoleById(Integer roleId);
 
 	/** 删除角色 */
-	@SelectProvider(type = UserManagerSqlProvider.class, method = "deleteRole")
+	@SelectProvider(type = IUserManagerSqlProvider.class, method = "deleteRole")
 	public void deleteRole(Integer roleId);
 
 	/**
@@ -105,13 +105,13 @@ public interface IUserManagerDao {
 	 * @param userInfo
 	 *            用户信息
 	 */
-	@SelectProvider(type = UserManagerSqlProvider.class, method = "insertUser")
+	@SelectProvider(type = IUserManagerSqlProvider.class, method = "insertUser")
 	public void insertUser(UserInfo userInfo) throws SQLFormatException;
 
 	/**
 	 * 更新用户
 	 */
-	@SelectProvider(type = UserManagerSqlProvider.class, method = "updateUser")
+	@SelectProvider(type = IUserManagerSqlProvider.class, method = "updateUser")
 	public void updateUser(UserInfo userInfo);
 
 	/**
@@ -119,15 +119,15 @@ public interface IUserManagerDao {
 	 * 
 	 * @param userInfo
 	 */
-	@SelectProvider(type = UserManagerSqlProvider.class, method = "getAllUsers")
+	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getAllUsers")
 	public List<UserInfo> getAllUsers(UserInfo userInfo);
 
 	/** 按Id查找用户 */
-	@SelectProvider(type = UserManagerSqlProvider.class, method = "getUserById")
+	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getUserById")
 	public UserInfo getUserById(Integer integer);
 
 	/** 删除用户 */
-	@SelectProvider(type = UserManagerSqlProvider.class, method = "deleteUser")
+	@SelectProvider(type = IUserManagerSqlProvider.class, method = "deleteUser")
 	public void deleteUser(Integer integer);
 
 }

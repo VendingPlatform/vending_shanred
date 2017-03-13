@@ -1,8 +1,6 @@
 package com.vending.platform.service.test;
 
-import java.security.acl.Group;
 import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.vending.platform.dao.IFrimAndGroupDAO;
 import com.vending.platform.domain.FirmInfo;
 import com.vending.platform.domain.GroupInfo;
+import com.vending.platform.domain.OperMgr;
 
 /** @author Miley_Ren */
 // 指定bean注入的配置文件
@@ -21,6 +20,25 @@ public class FirmAndGroupTest {
 
 	@Autowired
 	private IFrimAndGroupDAO firm;
+
+	@Test
+	public void testOpgemGR() {
+		OperMgr operMgr = new OperMgr();
+		operMgr.setFirmNo("公司编号");
+		operMgr.setFirmId(1);
+		operMgr.setFirmName("公司名称");
+		operMgr.setManuId(1);
+		firm.insertOperMgr(operMgr);
+		operMgr.setOperMgrId(1);
+		operMgr.setManuName("厂商名称");
+		firm.updateOperMgr(operMgr);
+		List<OperMgr> operMgrs = firm.getAllOperMgrs(operMgr);
+		for (OperMgr operMgr2 : operMgrs) {
+			System.out.println(operMgr2.toString());
+		}
+		System.out.println(firm.getOperMgrById(1).toString());
+		firm.deleteOperMgr(1);
+	}
 
 	@Test
 	public void testGroup() {
@@ -60,9 +78,7 @@ public class FirmAndGroupTest {
 		for (FirmInfo firmInfo2 : firmInfos) {
 			System.out.println(firmInfo2.toString());
 		}
-
 		System.out.println(firm.getFirmInfoById(4).toString());
-
 		firm.deleteFirmInfo(4);
 	}
 

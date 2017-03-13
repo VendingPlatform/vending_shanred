@@ -5,8 +5,9 @@ import org.apache.ibatis.jdbc.SQL;
 
 import com.vending.platform.domain.FirmInfo;
 import com.vending.platform.domain.GroupInfo;
+import com.vending.platform.domain.OperMgr;
 
-public class FirmAndGroupSqlProvider {
+public class IFirmAndGroupSqlProvider {
 	public String insertFirm(FirmInfo firmInfo) {
 		return new SQL() {
 			{
@@ -161,6 +162,78 @@ public class FirmAndGroupSqlProvider {
 
 	public String deleteGroupInfo(Integer integer) {
 		return "DELETE FROM groupinfo WHERE groupId=#{groupId}";
+	}
+
+	public String insertOperMgr(OperMgr operMgr) {
+		return new SQL() {
+			{
+				INSERT_INTO("opermgr");
+				if (StringUtils.isNotBlank(operMgr.getFirmNo()))
+					VALUES("firmNo", "#{firmNo}");
+				if (operMgr.getFirmId() != null)
+					VALUES("firmId", "#{firmId}");
+				if (StringUtils.isNotBlank(operMgr.getFirmName()))
+					VALUES("firmName", "#{firmName}");
+				if (operMgr.getManuId() != null)
+					VALUES("manuId", "#{manuId}");
+				if (StringUtils.isNotBlank(operMgr.getManuName()))
+					VALUES("manuName", "#{manuName}");
+				if (operMgr.getOperateId() != null)
+					VALUES("operateId", "#{operateId}");
+				VALUES("operateDate", "(SELECT NOW())");
+			}
+		}.toString();
+	}
+
+	public String updateOperMgr(OperMgr operMgr) {
+		return new SQL() {
+			{
+				UPDATE("opermgr");
+				if (StringUtils.isNotBlank(operMgr.getFirmNo()))
+					SET("firmNo=#{firmNo}");
+				if (operMgr.getFirmId() != null)
+					SET("firmId=#{firmId}");
+				if (StringUtils.isNotBlank(operMgr.getFirmName()))
+					SET("firmName=#{firmName}");
+				if (operMgr.getManuId() != null)
+					SET("manuId=#{manuId}");
+				if (StringUtils.isNotBlank(operMgr.getManuName()))
+					SET("manuName=#{manuName}");
+				if (operMgr.getOperateId() != null)
+					SET("operateId=#{operateId}");
+				SET("operateDate=(SELECT NOW())");
+				WHERE("operMgrId=#{operMgrId}");
+			}
+		}.toString();
+	}
+
+	public String getAllOperMgrs(OperMgr operMgr) {
+		return new SQL() {
+			{
+				SELECT("*").FROM("opermgr");
+				if (StringUtils.isNotBlank(operMgr.getFirmNo()))
+					WHERE("firmNo=#{firmNo}");
+				if (operMgr.getFirmId() != null)
+					WHERE("firmId=#{firmId}");
+				if (StringUtils.isNotBlank(operMgr.getFirmName()))
+					WHERE("firmName=#{firmName}");
+				if (operMgr.getManuId() != null)
+					WHERE("manuId=#{manuId}");
+				if (StringUtils.isNotBlank(operMgr.getManuName()))
+					WHERE("manuName=#{manuName}");
+				if (operMgr.getOperateId() != null)
+					WHERE("operateId=#{operateId}");
+				WHERE("operMgrId=#{operMgrId}");
+			}
+		}.toString();
+	}
+
+	public String getOperMgrById(Integer operMgrId) {
+		return "SELECT * FROM opermgr WHERE operMgrId=#{operMgrId}";
+	}
+
+	public String deleteOperMgr(Integer operMgrId) {
+		return "DELETE FROM opermgr WHERE operMgrId=#{operMgrId}";
 	}
 
 }

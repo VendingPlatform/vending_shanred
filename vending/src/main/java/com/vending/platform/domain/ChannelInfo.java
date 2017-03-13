@@ -23,7 +23,7 @@ public class ChannelInfo implements Serializable {
 	/** 商品价格 */
 	private double warePrice;
 	/** 是否特价 */
-	private int isDiscount;
+	private Integer isDiscount;
 	/** 额定存货量 */
 	private Integer stockNum;
 	/** 当前存货量 */
@@ -85,11 +85,11 @@ public class ChannelInfo implements Serializable {
 		this.warePrice = warePrice;
 	}
 
-	public int getIsDiscount() {
+	public Integer getIsDiscount() {
 		return isDiscount;
 	}
 
-	public void setIsDiscount(int isDiscount) {
+	public void setIsDiscount(Integer isDiscount) {
 		this.isDiscount = isDiscount;
 	}
 

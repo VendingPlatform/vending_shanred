@@ -8,7 +8,7 @@ import com.vending.platform.domain.RoleInfo;
 import com.vending.platform.domain.UserInfo;
 
 /** @author Miley_Ren */
-public class UserManagerSqlProvider {
+public class IUserManagerSqlProvider {
 
 	public String insertAuthorityInfo(AuthorityInfo authorityInfo) {
 		return new SQL() {
