@@ -24,7 +24,7 @@
 		<ul class="nav navbar-nav navbar-right">
 			<!-- <li><a href="helpDeskUI/view/index.jsp"> <i class="fa fa-area-chart"></i>首页 </a></li> -->
 			<li><a href="#"> <i class="icon-user"></i> ${sessionScope.userInfo.userName }-${sessionScope.userInfo.roleName } </a></li>
-			<li><a href="${pageContext.request.contextPath}/gotoUpdatePassWd!gotoUpdatePassWd.action" target="_self"> <i class="icon-lock-open"></i> 修改密码 </a></li>
+			<li><a href="#" target="_self"> <i class="icon-lock-open"></i> 修改密码 </a></li>
 			<li><a href="loginU!loginU.action"> <i class="icon-logout"></i> 退出平台 </a></li>
 		</ul>
 		<!-- /navbar-right -->

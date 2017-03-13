@@ -14,8 +14,11 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.vending.platform.dao.IMachineDAO;
+import com.vending.platform.domain.MachineInfo;
 import com.vending.platform.domain.MachineOperater;
+import com.vending.platform.domain.MachineType;
 import com.vending.platform.domain.UserInfo;
+import com.vending.platform.exception.SQLFormatException;
 
 /**
  * @author Miley_Ren
@@ -134,6 +137,62 @@ public class MachineServiceImplTest extends AbstractJUnit4SpringContextTests {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+	}
 
+	@Test
+	public void testMachineType() {
+		MachineType machineType = new MachineType();
+		machineType.settModelName("类型测试");
+		machineType.setFirmId(2);
+		machineType.setOperateId(2);
+
+		try {
+			machineDAO.inseretMachineType(machineType);
+		} catch (SQLFormatException e) {
+			System.out.println("类型不正确");
+		}
+	}
+
+	@Test
+	public void updateMachineType() {
+		MachineType machineType = new MachineType();
+		machineType.settModelName("类型修改");
+		machineType.setFirmId(2);
+		machineType.settModelId(2);
+		machineDAO.updateMachineType(machineType);
+
+	}
+
+	@Test
+	public void getMachineType() {
+		MachineType machineType = new MachineType();
+		machineType.setFirmId(2);
+		List<MachineType> machineTypes = machineDAO.getAllMachineType(machineType);
+		for (MachineType machineType2 : machineTypes) {
+			System.out.println(machineType2.toString());
+		}
+		System.out.println(machineDAO.getMachineTypeById(1).toString());
+	}
+
+	@Test
+	public void testMachineInfo() {
+		MachineInfo machineInfo = new MachineInfo();
+		machineInfo.setMachineName("测试MachineInfo");
+		machineInfo.setMachinePannel("测试MachinePannel");
+		machineInfo.setManuFirmId(3);
+		machineInfo.setMachinePrice(12.3);
+		machineInfo.setManuMachineStatus(1);
+		machineDAO.insertMachineInfo(machineInfo);
+		
+		machineInfo.setMachineId(5);
+		machineInfo.settModelName("修改之后的model");
+		machineDAO.updateMachineInfo(machineInfo);
+		
+		List<MachineInfo> machineInfos = machineDAO.getAllMachineInfos(machineInfo);
+		for (MachineInfo machineInfo2 : machineInfos) {
+			System.out.println(machineInfo2.toString());
+		}
+		
+		machineDAO.deleteMachineInfo(5);
 	}
 }

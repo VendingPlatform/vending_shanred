@@ -3,8 +3,10 @@
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<mappers>
-		<mapper class="com.lin.dao.UserDao" />
 		<mapper class="com.vending.platform.dao.IMachineDAO" />
-		<mapper class="com.vending.platform.dao.IAuthorityInfoDao"/>
+		<mapper class="com.vending.platform.dao.IUserManagerDao" />
+		<mapper class="com.vending.platform.dao.IFrimAndGroupDAO" />
+		<mapper class="com.vending.platform.dao.IChannelManagerDAO" />
+		<mapper class="com.vending.platform.dao.IWareManagerDAO" />
 	</mappers>
 </configuration>  

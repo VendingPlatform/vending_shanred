@@ -10,14 +10,16 @@ import org.apache.ibatis.annotations.SelectProvider;
 import com.vending.platform.dao.sqlprovider.IMachineSqlProvider;
 import com.vending.platform.domain.MachineInfo;
 import com.vending.platform.domain.MachineOperater;
+import com.vending.platform.domain.MachineType;
 import com.vending.platform.domain.UserInfo;
+import com.vending.platform.exception.SQLFormatException;
 
 /**
- * 售貨机DAO
+ * 售貨机DAO<br>
  * 
- * 1、售货机分组管理 ;<br>
- * 2、售货机分配 ;<br>
- * 3、售货机货道管理<br>
+ * 1、厂商售货机管理 ;<br>
+ * 2、运营商售货机分配 ;<br>
+ * 3、厂商售货机类型管理<br>
  * 
  * @author Miley_Ren
  */
@@ -69,12 +71,43 @@ public interface IMachineDAO {
 	@Results(@Result(property = "machineInfo", column = "machineId", one = @One(select = "com.vending.platform.dao.IMachineDAO.getMachineInfoById")))
 	public List<MachineOperater> getAllMachineOperaters(UserInfo userInfo, MachineOperater machineOperater);
 
-	/**
-	 * 按照Id查询MachineInfo中信息
-	 * 
-	 * @param machineId
-	 */
+	/** 添加售货机类型 */
+	@SelectProvider(type = IMachineSqlProvider.class, method = "inseretMachineType")
+	public void inseretMachineType(MachineType machineType) throws SQLFormatException;
+
+	/** 修改售货机类型 */
+	@SelectProvider(type = IMachineSqlProvider.class, method = "updateMachineType")
+	public void updateMachineType(MachineType machineType);
+
+	/** 按条件查询所有售货机类型 */
+	@SelectProvider(type = IMachineSqlProvider.class, method = "getAllMachineType")
+	public List<MachineType> getAllMachineType(MachineType machineType);
+
+	/** 按Id查询售货机 */
+	@SelectProvider(type = IMachineSqlProvider.class, method = "getMachineTypeById")
+	public MachineType getMachineTypeById(Integer tModeId);
+
+	/** 删除售货机类型 */
+	@SelectProvider(type = IMachineSqlProvider.class, method = "deleteMachineType")
+	public void deleteMachineType(Integer tModeId);
+
+	/** 厂商添加售货机 */
+	@SelectProvider(type = IMachineSqlProvider.class, method = "insertMachineInfo")
+	public void insertMachineInfo(MachineInfo machineInfo);
+
+	/** 更新厂商售货机 */
+	@SelectProvider(type = IMachineSqlProvider.class, method = "updateMachineInfo")
+	public void updateMachineInfo(MachineInfo machineInfo);
+
+	/** 按条件查询所有售货机 */
+	@SelectProvider(type = IMachineSqlProvider.class, method = "getAllMachineInfos")
+	public List<MachineInfo> getAllMachineInfos(MachineInfo machineInfo);
+
+	/** 按照Id查询MachineInfo中信息 */
 	@SelectProvider(type = IMachineSqlProvider.class, method = "getMachineInfoById")
 	public MachineInfo getMachineInfoById(Integer machineId);
 
+	/** 删除售货机 */
+	@SelectProvider(type = IMachineSqlProvider.class, method = "deleteMachineInfo")
+	public void deleteMachineInfo(Integer machineId);
 }
