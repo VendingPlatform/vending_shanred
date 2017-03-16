@@ -72,8 +72,7 @@ public class MachineServiceImplTest extends AbstractJUnit4SpringContextTests {
 
 	@Test
 	public void tesGetMachine() {
-		List<MachineOperater> maOperaters = (List<MachineOperater>) machineDAO.getAllMachineOperaters(userInfo,
-				machineOperater);
+		List<MachineOperater> maOperaters = (List<MachineOperater>) machineDAO.getAllMachineOperaters(machineOperater);
 		System.out.println("-----------------------------------------------");
 		System.out.println(maOperaters.size());
 		for (int i = 0; i < maOperaters.size(); i++) {

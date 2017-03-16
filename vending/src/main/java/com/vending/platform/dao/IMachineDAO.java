@@ -69,7 +69,7 @@ public interface IMachineDAO {
 
 	@SelectProvider(type = IMachineSqlProvider.class, method = "getAllMachineOperaters")
 	@Results(@Result(property = "machineInfo", column = "machineId", one = @One(select = "com.vending.platform.dao.IMachineDAO.getMachineInfoById")))
-	public List<MachineOperater> getAllMachineOperaters(UserInfo userInfo, MachineOperater machineOperater);
+	public List<MachineOperater> getAllMachineOperaters(MachineOperater machineOperater);
 
 	/** 添加售货机类型 */
 	@SelectProvider(type = IMachineSqlProvider.class, method = "inseretMachineType")
