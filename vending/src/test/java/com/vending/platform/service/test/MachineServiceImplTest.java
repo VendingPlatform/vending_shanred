@@ -166,7 +166,7 @@ public class MachineServiceImplTest extends AbstractJUnit4SpringContextTests {
 	public void getMachineType() {
 		MachineType machineType = new MachineType();
 		machineType.setFirmId(2);
-		List<MachineType> machineTypes = machineDAO.getAllMachineType(machineType);
+		List<MachineType> machineTypes = machineDAO.getAllMachineTypes(machineType);
 		for (MachineType machineType2 : machineTypes) {
 			System.out.println(machineType2.toString());
 		}

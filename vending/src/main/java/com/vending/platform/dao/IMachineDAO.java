@@ -80,8 +80,8 @@ public interface IMachineDAO {
 	public void updateMachineType(MachineType machineType);
 
 	/** 按条件查询所有售货机类型 */
-	@SelectProvider(type = IMachineSqlProvider.class, method = "getAllMachineType")
-	public List<MachineType> getAllMachineType(MachineType machineType);
+	@SelectProvider(type = IMachineSqlProvider.class, method = "getAllMachineTypes")
+	public List<MachineType> getAllMachineTypes(MachineType machineType);
 
 	/** 按Id查询售货机 */
 	@SelectProvider(type = IMachineSqlProvider.class, method = "getMachineTypeById")

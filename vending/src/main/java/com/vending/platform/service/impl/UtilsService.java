@@ -19,20 +19,20 @@ public class UtilsService {
             MachineOperater machineOperater, UserInfo userInfo) {
         String[] aCodes = (String[]) authorityCodes.split(";");
         for (int i = 0; i < aCodes.length; i++) {
-            if (aCodes.equals("000")) {
+            if (aCodes[i].equals("000")) {
                 // 000位系统管理员，可查看所有商家及用户符合条件的信息
                 break;
-            } else if (aCodes.equals("001") || aCodes.equals("002")) {
+            } else if (aCodes[i].equals("001") || aCodes[i].equals("002")) {
                 // 001代表运营商超管；002代表厂商超管，可查看公司内所有售货机000
                 if (machineOperater.getOperFirmId() == null) {
                     machineOperater.setOperFirmId(userInfo.getFirmId());
                     break;
                 }
-            } else if (aCodes.equals("00101")) {
+            } else if (aCodes[i].equals("00101")) {
                 // 00101代表运营商小组长，可查询组内所有售货机
                 machineOperater.setOperFirmId(userInfo.getFirmId());
 
-            } else if (aCodes.equals("00102")) {
+            } else if (aCodes[i].equals("00102")) {
                 // 00102代表普通管理员，仅可查看自身拥有的售货机
                 machineOperater.setUserId(userInfo.getUserId());
             }

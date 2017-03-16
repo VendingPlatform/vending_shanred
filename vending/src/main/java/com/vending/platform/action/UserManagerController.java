@@ -27,12 +27,13 @@ public class UserManagerController {
     @Description("用户登录")
     @RequestMapping(method = RequestMethod.POST, value = "/login")
     @ModelAttribute("user")
-    public ModelAndView login(UserInfo userInfo) {
+    public ModelAndView login(UserInfo userInfo,ModelMap modelMap) {
         UserInfo user = userManagerService.login(userInfo);
         ModelAndView modelAndView = new ModelAndView();
         if (user != null) {
             modelAndView.setViewName("genview/home");
             modelAndView.addObject("user", user);
+            modelMap.addAttribute("user", user);
             logger.debug(user.toString() + "：登录信息");
         } else {
             modelAndView.setViewName("/login");
@@ -43,7 +44,6 @@ public class UserManagerController {
     @Description("查看用户信息")
     @RequestMapping(value = "/userInfo")
     public String getUserInfo(ModelMap modelMap, SessionStatus sessionStatus) {
-        logger.debug("信息：" + modelMap.get("user").toString());
         return "genview/userInfo";
     }
 
