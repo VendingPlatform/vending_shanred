@@ -207,7 +207,7 @@ public class IMachineSqlProvider {
         }.toString();
     }
 
-    public String getAllMachineType(MachineType machineType) {
+    public String getAllMachineTypes(MachineType machineType) {
         return new SQL() {
             {
                 SELECT("*").FROM("machinetype");

@@ -9,33 +9,36 @@ import org.springframework.stereotype.Service;
 import com.vending.platform.dao.IMachineDAO;
 import com.vending.platform.dao.IUserManagerDao;
 import com.vending.platform.domain.MachineOperater;
+import com.vending.platform.domain.MachineType;
 import com.vending.platform.domain.RoleInfo;
 import com.vending.platform.domain.UserInfo;
 import com.vending.platform.service.IMachineManagerService;
 
 @Service
 public class MachineManagerServiceImpl implements IMachineManagerService {
-    private static Logger logger = Logger
-            .getLogger(MachineManagerServiceImpl.class);
+	private static Logger logger = Logger.getLogger(MachineManagerServiceImpl.class);
 
-    @Autowired
-    private IMachineDAO machineDao;
-    @Autowired
-    private IUserManagerDao userManagerDao;
+	@Autowired
+	private IMachineDAO machineDao;
+	@Autowired
+	private IUserManagerDao userManagerDao;
 
-    @Override
-    public List<MachineOperater> getOprMachines(UserInfo userInfo,
-            MachineOperater machineOperater) {
-        if (machineOperater == null || userInfo == null) {
-            return null;
-        }
-        int roleId = userInfo.getRoleId();
-        RoleInfo roleInfo = userManagerDao.getRoleById(roleId);
-        String authorityCode = roleInfo.getAuthorityCode();
-        machineOperater = UtilsService.getCode(authorityCode, machineOperater,
-                userInfo);
-       List<MachineOperater> machineOperaters= machineDao.getAllMachineOperaters(machineOperater);
-       return machineOperaters;
-    }
+	@Override
+	public List<MachineOperater> getOprMachines(UserInfo userInfo, MachineOperater machineOperater) {
+		if (machineOperater == null || userInfo == null) {
+			return null;
+		}
+		int roleId = userInfo.getRoleId();
+		RoleInfo roleInfo = userManagerDao.getRoleById(roleId);
+		String authorityCode = roleInfo.getAuthorityCode();
+		machineOperater = UtilsService.getCode(authorityCode, machineOperater, userInfo);
+		List<MachineOperater> machineOperaters = machineDao.getAllMachineOperaters(machineOperater);
+		return machineOperaters;
+	}
+
+	@Override
+	public List<MachineType> getAllMachineTypes(MachineType machineType) {
+		return machineDao.getAllMachineTypes(machineType);
+	}
 
 }
