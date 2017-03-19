@@ -1,4 +1,4 @@
-package com.vending.platform.action;
+package com.vending.platform.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

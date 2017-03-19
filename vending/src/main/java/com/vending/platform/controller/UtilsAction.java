@@ -1,4 +1,4 @@
-package com.vending.platform.action;
+package com.vending.platform.controller;
 
 import java.io.Serializable;
 

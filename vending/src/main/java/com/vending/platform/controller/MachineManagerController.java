@@ -1,9 +1,6 @@
-package com.vending.platform.action;
+package com.vending.platform.controller;
 
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
@@ -11,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,7 +34,7 @@ public class MachineManagerController {
 	private IMachineManagerService machineManagerService;
 
 	@Description("进入售货机页面")
-	@RequestMapping(value = "/machineHome")
+	@RequestMapping(value = "/machineHome" , method=RequestMethod.GET)
 	@ModelAttribute("allMachineTypes")
 	public ModelAndView getMachineHome(ModelMap modelMap,SessionStatus sessionStatus) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -49,8 +47,8 @@ public class MachineManagerController {
 
 	@Description("获取运营商的售货机")
 	@ModelAttribute("machineOperaterInfo")
-	@RequestMapping(value = "/machineInfo")
-	public ModelAndView getOprMachineInfo(MachineOperater machineOperater, @ModelAttribute("user") UserInfo userInfo,
+	@RequestMapping(value = "/machineInfo",method=RequestMethod.GET)
+	public ModelAndView getAllOprMachineInfos(MachineOperater machineOperater, @ModelAttribute("user") UserInfo userInfo,
 			ModelMap modelMap) {
 		ModelAndView modelAndView = new ModelAndView();
 		if (machineOperater != null) {
@@ -68,5 +66,11 @@ public class MachineManagerController {
 			modelAndView.setViewName("genview/smachine");
 		}
 		return modelAndView;
+	}
+	
+	@Description("查看某售货机详细信息")
+	@RequestMapping(value="/machine/machineInfoDetail/{mOperaterId}" , method=RequestMethod.GET)
+	public ModelAndView getMachineOperateById(Integer mOperaterId){
+        return null;
 	}
 }

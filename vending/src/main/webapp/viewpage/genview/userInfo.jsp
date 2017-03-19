@@ -13,6 +13,14 @@
 <body>
 	<%@include file="topmenu.jsp"%>
 	<div class="container">
+	<div class="row clearfix">
+			<div class="col-md-12 column">
+				<ul class="breadcrumb">
+					<li><a href="#">主页</a></li>
+					<li class="active">用户信息</li>
+				</ul>
+			</div>
+		</div>
 		<table class="table table-hover">
 			<tr>
 				<td>Id</td>
