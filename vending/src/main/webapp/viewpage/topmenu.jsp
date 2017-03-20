@@ -16,7 +16,8 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="<c:url value="/home"/>">主页</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 用户管理 <span class="caret"></span>
+					<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 用户管理 <span class="caret"></span>
 					</a>
 						<ul class="dropdown-menu">
 							<li><a href="#">用户管理</a></li>

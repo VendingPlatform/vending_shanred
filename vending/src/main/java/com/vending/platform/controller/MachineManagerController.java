@@ -1,14 +1,19 @@
 package com.vending.platform.controller;
 
 import java.util.List;
+
+import javax.jws.WebParam.Mode;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,7 +31,7 @@ import com.vending.platform.service.IMachineManagerService;
  * 中取到这样的对象，再添加到参数列表。只要我们不去调用 SessionStatus 的 setComplete() 方法，这个对象就会一直保留在
  * Session 中，从而实现 Session 信息的共享。
  */
-@SessionAttributes({ "user", "machineOperaterInfo"})
+@SessionAttributes({ "user", "machineOperaterInfo" })
 @RequestMapping("/machine")
 public class MachineManagerController {
 	private static Logger logger = Logger.getLogger(MachineManagerController.class);
@@ -34,9 +39,9 @@ public class MachineManagerController {
 	private IMachineManagerService machineManagerService;
 
 	@Description("进入售货机页面")
-	@RequestMapping(value = "/machineHome" , method=RequestMethod.GET)
+	@RequestMapping(value = "/machineHome")
 	@ModelAttribute("allMachineTypes")
-	public ModelAndView getMachineHome(ModelMap modelMap,SessionStatus sessionStatus) {
+	public ModelAndView getMachineHome(ModelMap modelMap) {
 		ModelAndView modelAndView = new ModelAndView();
 		List<MachineType> machineTypes = machineManagerService.getAllMachineTypes(new MachineType());
 		modelMap.addAttribute("allMachineTypes", machineTypes);
@@ -47,9 +52,9 @@ public class MachineManagerController {
 
 	@Description("获取运营商的售货机")
 	@ModelAttribute("machineOperaterInfo")
-	@RequestMapping(value = "/machineInfo",method=RequestMethod.GET)
-	public ModelAndView getAllOprMachineInfos(MachineOperater machineOperater, @ModelAttribute("user") UserInfo userInfo,
-			ModelMap modelMap) {
+	@RequestMapping(value = "/machineInfo")
+	public ModelAndView getAllOprMachineInfos(MachineOperater machineOperater,
+			@ModelAttribute("user") UserInfo userInfo, ModelMap modelMap) {
 		ModelAndView modelAndView = new ModelAndView();
 		if (machineOperater != null) {
 			logger.debug("信息：" + userInfo.toString());
@@ -67,10 +72,35 @@ public class MachineManagerController {
 		}
 		return modelAndView;
 	}
-	
-	@Description("查看某售货机详细信息")
-	@RequestMapping(value="/machine/machineInfoDetail/{mOperaterId}" , method=RequestMethod.GET)
-	public ModelAndView getMachineOperateById(Integer mOperaterId){
-        return null;
+
+	@Description("按Id查看某售货机详细信息")
+	@RequestMapping(value = "/machineInfoDetail", method = RequestMethod.GET)
+	public ModelAndView getMachineOperateById(@RequestParam("mOperaterId") Integer mOperaterId) {
+		ModelAndView modelAndView = new ModelAndView();
+		MachineOperater machineOperater = machineManagerService.getMachineOperaterById(mOperaterId);
+		modelAndView.addObject("machineOperater", machineOperater);
+		modelAndView.setViewName("genview/machineInfoDetail");
+		return modelAndView;
+	}
+
+	@Description("更新machineOperate")
+	@RequestMapping(value = "/machineInfoUpdateInfo", method = RequestMethod.GET)
+	public ModelAndView updateMachineOperate(@RequestParam("mOperaterId") Integer mOperaterId,
+			@ModelAttribute("user") UserInfo userInfo) {
+		ModelAndView modelAndView = new ModelAndView();
+		MachineOperater machineOperater = machineManagerService.getMachineOperaterById(mOperaterId);
+		modelAndView.addObject("machineOperater", machineOperater);
+		modelAndView.setViewName("genview/machineInfoUpdateInfo");
+
+		return modelAndView;
+	}
+
+	@Description("执行更新数据库操作")
+	@RequestMapping(value = "/machineInfoUpdate", method = RequestMethod.POST)
+	public String updateMachineOperateExecute(@ModelAttribute("machineOperater") MachineOperater machineOperater,
+			@ModelAttribute("user") UserInfo userInfo) {
+		logger.debug("更新操作 ");
+		machineManagerService.updateMachineOperater(machineOperater, userInfo);
+		return "redirect:/machine/machineInfoDetail?mOperaterId=" + machineOperater.getmOperaterId();
 	}
 }

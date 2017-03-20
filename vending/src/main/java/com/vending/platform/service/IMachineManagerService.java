@@ -21,4 +21,8 @@ public interface IMachineManagerService {
 
 	/** 查询所有售货机的类型 */
 	public List<MachineType> getAllMachineTypes(MachineType machineType);
+
+	MachineOperater getMachineOperaterById(Integer mOperaterId);
+
+	void updateMachineOperater(MachineOperater machineOperater, UserInfo userInfo);
 }

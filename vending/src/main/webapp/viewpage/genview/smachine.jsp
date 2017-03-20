@@ -13,12 +13,12 @@
 <title>Select Machine Page</title>
 </head>
 <body>
-	<%@include file="topmenu.jsp"%>
+	<%@include file="../topmenu.jsp"%>
 	<div class="container">
 		<div class="row clearfix">
 			<div class="col-md-12 column">
 				<ul class="breadcrumb">
-					<li><a href="#">主页</a></li>
+					<li><a href="<c:url value="/home"/>">主页</a></li>
 					<li class="active">售货机查询</li>
 				</ul>
 			</div>
@@ -70,10 +70,14 @@
 						<td>${machine.machineAssign }</td>
 						<td>${machine.tModelName }</td>
 						<td>${machine.machineAddress }</td>
-						<td><a href="<c:url value="/machine/machineInfoDetail/${machine.mOperaterId}"/> class="btn default"><span
-								class="glyphicon glyphicon-info-sign" title="详情"></span></a> <a
-							href="#" class="btn default"><span
-								class="glyphicon glyphicon-edit" title="编辑"></span></a></td>
+						<td>
+							<a href= "<c:url value="/machine/machineInfoDetail"/>?mOperaterId=${machine.mOperaterId}" class="btn default">
+								<span class="glyphicon glyphicon-info-sign" title="详情"></span>
+							</a> 
+							<a href= "<c:url value="/machine/machineInfoUpdateInfo"/>?mOperaterId=${machine.mOperaterId}" class="btn default">
+								<span class="glyphicon glyphicon-edit" title="编辑"></span>
+							</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>

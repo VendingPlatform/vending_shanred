@@ -2,6 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -11,13 +16,14 @@
 <title>首页</title>
 </head>
 <body>
-	<%@include file="topmenu.jsp"%>
+	<%@include file="../topmenu.jsp"%>
 	<div class="container">
 		<div class="page-header">
 			<h1>主页</h1>
 		</div>
-		<div><img src="../imgs/pic1.jpg" alt="First slide"></div>
-<!-- 		<div id="carousel-example-generic" class="carousel slide"
+		<div>
+		</div>
+		<!-- 		<div id="carousel-example-generic" class="carousel slide"
 			data-ride="carousel">
 			<ol class="carousel-indicators">
 				<li data-target="#carousel-example-generic" data-slide-to="0"

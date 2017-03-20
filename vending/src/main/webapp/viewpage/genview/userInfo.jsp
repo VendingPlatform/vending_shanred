@@ -11,12 +11,12 @@
 <title>用户信息</title>
 </head>
 <body>
-	<%@include file="topmenu.jsp"%>
+	<%@include file="../topmenu.jsp"%>
 	<div class="container">
 	<div class="row clearfix">
 			<div class="col-md-12 column">
 				<ul class="breadcrumb">
-					<li><a href="#">主页</a></li>
+					<li><a href="<c:url value="/home"/>">主页</a></li>
 					<li class="active">用户信息</li>
 				</ul>
 			</div>

@@ -41,4 +41,14 @@ public class MachineManagerServiceImpl implements IMachineManagerService {
 		return machineDao.getAllMachineTypes(machineType);
 	}
 
+	@Override
+	public MachineOperater getMachineOperaterById(Integer mOperaterId) {
+		return machineDao.getMachineOperaterById(mOperaterId);
+	}
+
+	@Override
+	public void updateMachineOperater(MachineOperater machineOperater, UserInfo userInfo) {
+		machineOperater.setOperateId(userInfo.getUserId());
+		machineDao.updateMachineOperate(machineOperater);
+	}
 }
