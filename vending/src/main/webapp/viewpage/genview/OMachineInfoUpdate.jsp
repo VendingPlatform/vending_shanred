@@ -24,8 +24,8 @@
 		</div>
 		<!-- 显示内容 -->
 		<div>
-			<form action="<c:url value="/machine/machineInfoUpdate"/>" method="post">
-				<input type="hidden" name="mOperaterId" value=${machineOperater.mOperaterId }>
+			<form class="form-inline" action="<c:url value="/machine/machineInfoUpdate"/>" method="post">
+				<input type="hidden" name="mOperaterId" value="${machineOperater.mOperaterId }">
 				<table class="table" align="center">
 					<tr>
 						<th>列名</th>
@@ -42,7 +42,10 @@
 					<tr>
 						<td>是否分配</td>
 						<td>
-							<input type="text" id="machineAssign" name="machineAssign" readonly="readonly" reuired value=${machineOperater.machineAssign }>
+						<div class="form-group">
+							<input type="text" id="machineAssign" class="form-control" 
+							name="machineAssign" readonly="readonly" reuired value="${machineOperater.machineAssign }">
+						</div>
 						</td>
 					</tr>
 					<tr>
@@ -52,13 +55,17 @@
 					<tr>
 						<td>分配管理员</td>
 						<td>
-							<input type="text" name="userId" id="userId" onchange="assign(this.value)" value=${machineOperater.userId }>
+						<div class="form-group">
+							<input type="text" name="userId" class="form-control"  placeholder="分配管理员" id="userId" onchange="assign(this.value)" value="${machineOperater.userId }">
+						</div>
 						</td>
 					</tr>
 					<tr>
 						<td>售货机地址</td>
 						<td>
-							<input type="text" name="machineAddress" value=${machineOperater.machineAddress }>
+						<div class="form-group">
+							<input type="text" name="machineAddress" class="form-control"  placeholder="售货机地址" value="${machineOperater.machineAddress }">
+						</div>
 						</td>
 					</tr>
 					<tr>
@@ -79,7 +86,18 @@
 					<tr>
 						<td>售货机组</td>
 						<td>
-							<input type="text" name="groupId" value=${machineOperater.groupId }>
+							<select name="groupId" required="required">
+							 	<c:forEach items="${groupInfos}" var="groupInfo">
+								<c:choose> 
+									 <c:when test="${(groupInfo.groupId)==(machineOperater.groupId)}"> 
+										<option value="${machineOperater.groupId }" selected>${groupInfo.groupName }</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${groupInfo.groupId }">${groupInfo.groupName }</option>
+									</c:otherwise>
+								</c:choose>
+								</c:forEach> 
+							</select>
 						</td>
 					</tr>
 					<tr>
@@ -87,7 +105,7 @@
 						<td>${machineOperater.operFirmId }</td>
 					</tr>
 				</table>
-				<button class="btn btn-primary" value="submit">修改</button>
+				<button class="btn btn-primary" value="submit">提交</button>
 			</form>
 		</div>
 	</div>

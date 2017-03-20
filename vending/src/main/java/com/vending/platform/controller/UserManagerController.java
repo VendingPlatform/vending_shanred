@@ -19,32 +19,51 @@ import com.vending.platform.service.IUserManagerService;
 @SessionAttributes("user")
 @RequestMapping("/user")
 public class UserManagerController {
-    private static Logger logger = Logger
-            .getLogger(UserManagerController.class);
-    @Autowired
-    private IUserManagerService userManagerService;
+	private static Logger logger = Logger.getLogger(UserManagerController.class);
+	@Autowired
+	private IUserManagerService userManagerService;
 
-    @Description("用户登录")
-    @RequestMapping(method = RequestMethod.POST, value = "/login")
-    @ModelAttribute("user")
-    public ModelAndView login(UserInfo userInfo,ModelMap modelMap) {
-        UserInfo user = userManagerService.login(userInfo);
-        ModelAndView modelAndView = new ModelAndView();
-        if (user != null) {
-            modelAndView.setViewName("genview/home");
-            modelAndView.addObject("user", user);
-            modelMap.addAttribute("user", user);
-            logger.debug(user.toString() + "：登录信息");
-        } else {
-            modelAndView.setViewName("/login");
-        }
-        return modelAndView;
-    }
+	@Description("用户登录")
+	@RequestMapping(method = RequestMethod.POST, value = "/login")
+	@ModelAttribute("user")
+	public ModelAndView login(UserInfo userInfo, ModelMap modelMap) {
+		UserInfo user = userManagerService.login(userInfo);
+		ModelAndView modelAndView = new ModelAndView();
+		if (user != null) {
+			modelAndView.setViewName("genview/home");
+			modelAndView.addObject("user", user);
+			modelMap.addAttribute("user", user);
+			logger.debug(user.toString() + "：登录信息");
+		} else {
+			modelAndView.setViewName("/login");
+		}
+		return modelAndView;
+	}
 
-    @Description("查看用户信息")
-    @RequestMapping(value = "/userInfo")
-    public String getUserInfo(ModelMap modelMap, SessionStatus sessionStatus) {
-        return "genview/userInfo";
-    }
+	@Description("查看用户信息")
+	@RequestMapping(value = "/userInfo")
+	public String getUserInfo(ModelMap modelMap) {
+		return "genview/userInfo";
+	}
 
+	@Description("修改密码")
+	@RequestMapping(value = "/changepwd")
+	public String updatePwd(@ModelAttribute("user") UserInfo userInfo) {
+		return "genview/userPwd";
+	}
+
+	@Description("执行修改密码")
+	@RequestMapping(value = "/changepwdexecute")
+	public String updatePwdExecute(UserInfo userInfo, SessionStatus sessionStatus) {
+		userManagerService.updatePwd(userInfo);
+		sessionStatus.setComplete();
+		return "login";
+	}
+
+	@Description("退出登录")
+	@RequestMapping(value = "/logout")
+	public String logout(SessionStatus sessionStatus) {
+		sessionStatus.setComplete();
+		return "login";
+	}
 }
