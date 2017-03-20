@@ -93,7 +93,7 @@ $(document).ready(function(){
             dataType:"text",  
             data:$('#addGroupForm').serialize(),
             success:function(responseText){  
-            	if(responseText==true)
+            	if(responseText==1)
             	{alert("创建成功");}
             	else{
             		alert("创建失败");

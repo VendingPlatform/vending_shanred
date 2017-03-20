@@ -88,14 +88,12 @@
 						<td>
 							<select name="groupId" required="required">
 							 	<c:forEach items="${groupInfos}" var="groupInfo">
-								<c:choose> 
-									 <c:when test="${(groupInfo.groupId)==(machineOperater.groupId)}"> 
+									  <c:if test="${(groupInfo.groupId)==(machineOperater.groupId)}"> 
 										<option value="${machineOperater.groupId }" selected>${groupInfo.groupName }</option>
-									</c:when>
-									<c:otherwise>
+									</c:if>
+									 <c:if test="${(groupInfo.groupId)!=(machineOperater.groupId)}">
 										<option value="${groupInfo.groupId }">${groupInfo.groupName }</option>
-									</c:otherwise>
-								</c:choose>
+									</c:if>
 								</c:forEach> 
 							</select>
 						</td>

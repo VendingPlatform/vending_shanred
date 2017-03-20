@@ -81,7 +81,7 @@ public class MachineManagerController extends UtilsAction {
 		groupInfo.setGroupType(2);// type=2,表示查询售货机分组
 		List<GroupInfo> groupInfos = machineManagerService.getAllMachineGroups(groupInfo);
 		modelAndView.addObject("groupInfos", groupInfos);
-		
+
 		MachineOperater machineOperater = machineManagerService.getMachineOperaterById(mOperaterId);
 		modelAndView.addObject("machineOperater", machineOperater);
 		modelAndView.setViewName("genview/OMachineInfoUpdate");
@@ -135,15 +135,14 @@ public class MachineManagerController extends UtilsAction {
 	@RequestMapping(value = "/machineGroupCreate")
 	public String createGroupInfo(GroupInfo groupInfo, @ModelAttribute("user") UserInfo userInfo, ModelMap modelMap) {
 		boolean ret = machineManagerService.addGroupInfo(groupInfo, userInfo);
-		modelMap.addAttribute("creatResult", ret);
+		int index = 0;
+		if (ret) {
+			index = 1;
+		}
 		try {
-			write(ret);
+			write(index);
 		} catch (IOException e) {
-			try {
-				write(!ret);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			e.printStackTrace();
 		}
 		return "/genview/OMachineGroup";
 	}
