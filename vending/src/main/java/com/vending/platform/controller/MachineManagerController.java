@@ -20,7 +20,6 @@ import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.MachineType;
 import com.vending.platform.domain.UserInfo;
 import com.vending.platform.service.IMachineManagerService;
-import com.vending.platform.service.impl.UtilsService;
 
 @Controller
 @SessionAttributes({ "user", "machineOperaterInfo", "allMachineTypes", "machineGroupInfos" })
@@ -48,7 +47,8 @@ public class MachineManagerController extends UtilsAction {
 		ModelAndView modelAndView = new ModelAndView();
 		if (machineOperater != null) {
 			logger.debug("信息：" + userInfo.toString());
-			List<MachineOperater> machineOperaters = machineManagerService.getOprMachines(userInfo, machineOperater);
+			List<MachineOperater> machineOperaters = machineManagerService.getMachineOperaters(userInfo,
+					machineOperater);
 			if (machineOperaters != null) {
 				modelAndView.addObject("machineOperaterInfo", machineOperaters);
 				modelMap.addAttribute("machineOperaterInfo", machineOperaters);
@@ -98,7 +98,7 @@ public class MachineManagerController extends UtilsAction {
 		return "redirect:/machine/machineInfoDetail?mOperaterId=" + machineOperater.getmOperaterId();
 	}
 
-	@Description("售货机分组信息")
+	@Description("查看所有售货机分组信息")
 	@RequestMapping(value = "/machineGroup")
 	public ModelAndView getAllMachineGroups(@ModelAttribute("user") UserInfo userInfo, ModelMap modelMap) {
 		GroupInfo groupInfo = new GroupInfo();
@@ -117,6 +117,22 @@ public class MachineManagerController extends UtilsAction {
 		return new ModelAndView("genview/OMachineGroupInfo", modelMap);
 	}
 
+	@Description("添加售货机分组")
+	@RequestMapping(value = "/machineGroupCreate")
+	public String createGroupInfo(GroupInfo groupInfo, @ModelAttribute("user") UserInfo userInfo, ModelMap modelMap) {
+		boolean ret = machineManagerService.addGroupInfo(groupInfo, userInfo);
+		int index = 0;
+		if (ret) {
+			index = 1;
+		}
+		try {
+			write(index);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "/genview/OMachineGroup";
+	}
+
 	@Description("更新售货机分组信息")
 	@RequestMapping(value = "/machineGroupUpdate")
 	public String updateGroupInfo(GroupInfo groupInfo) {
@@ -131,20 +147,25 @@ public class MachineManagerController extends UtilsAction {
 		return "redirect:/machine/machineGroup";
 	}
 
-	@Description("添加分组")
-	@RequestMapping(value = "/machineGroupCreate")
-	public String createGroupInfo(GroupInfo groupInfo, @ModelAttribute("user") UserInfo userInfo, ModelMap modelMap) {
-		boolean ret = machineManagerService.addGroupInfo(groupInfo, userInfo);
-		int index = 0;
-		if (ret) {
-			index = 1;
-		}
-		try {
-			write(index);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return "/genview/OMachineGroup";
+	@Description("查看组内信息")
+	@RequestMapping(value = "/machineGroupDetialInfos")
+	public String getMachineGroupInfos(@RequestParam("groupId") Integer groupId, ModelMap modelMap) {
+		MachineOperater machineOperater = new MachineOperater();
+		machineOperater.setGroupId(groupId);
+		List<MachineOperater> machineOperaters = machineManagerService.getAllMachineOperaters(machineOperater);
+		modelMap.addAttribute("machineGroupDetialInfos", machineOperaters);
+		return "genview/OMachineGroupDetailInfos";
+	}
+
+	@Description("将售货机从分组中移除")
+	@RequestMapping(value = "machineInfoRemoveGroup")
+	public String removeMachineFromGroup(Integer mOperaterId, Integer groupId,
+			@ModelAttribute("user") UserInfo userInfo, ModelMap modelMap) {
+		MachineOperater machineOperater = new MachineOperater();
+		machineOperater.setGroupId(-1);// 表示移除，在sql构建器中判断，若为-1,则置空
+		machineOperater.setmOperaterId(mOperaterId);
+		machineManagerService.updateMachineOperater(machineOperater, userInfo);
+		return "redirect:/machine/machineGroupDetialInfos?groupId=" + groupId;
 	}
 
 }

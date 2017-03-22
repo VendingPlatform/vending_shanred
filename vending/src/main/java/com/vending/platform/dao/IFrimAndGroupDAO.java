@@ -1,6 +1,10 @@
 package com.vending.platform.dao;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import com.vending.platform.dao.sqlprovider.IFirmAndGroupSqlProvider;
 import com.vending.platform.domain.FirmInfo;
@@ -49,6 +53,9 @@ public interface IFrimAndGroupDAO {
 
 	/** 按Id查看分组信息 */
 	@SelectProvider(type = IFirmAndGroupSqlProvider.class, method = "getGroupInfoById")
+	@Results({
+			@Result(property = "machineOperaters", column = "mOperaterId", many = @Many(select = "com.vending.platform.dao.IMachineDAO.getAllMachineOperaters")),
+			@Result(property = "machineOperater", column = "mOperaterId", many = @Many(select = "com.vending.platform.dao.IMachineDAO.getMachineOperaterById")) })
 	public GroupInfo getGroupInfoById(Integer groupId);
 
 	/** 删除分组信息 */

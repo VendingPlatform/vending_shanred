@@ -28,7 +28,7 @@ public class MachineManagerServiceImpl implements IMachineManagerService {
 	private IFrimAndGroupDAO firmandgroupDao;
 
 	@Override
-	public List<MachineOperater> getOprMachines(UserInfo userInfo, MachineOperater machineOperater) {
+	public List<MachineOperater> getMachineOperaters(UserInfo userInfo, MachineOperater machineOperater) {
 		if (machineOperater == null || userInfo == null) {
 			return null;
 		}
@@ -103,5 +103,11 @@ public class MachineManagerServiceImpl implements IMachineManagerService {
 			firmandgroupDao.insertGroupInfo(groupInfo);
 			return true;
 		}
+	}
+
+	@Override
+	public List<MachineOperater> getAllMachineOperaters(MachineOperater machineOperater) {
+		List<MachineOperater> machineOperaters = machineDao.getAllMachineOperaters(machineOperater);
+		return machineOperaters;
 	}
 }

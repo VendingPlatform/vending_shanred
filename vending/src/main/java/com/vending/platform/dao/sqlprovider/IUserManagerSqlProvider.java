@@ -245,7 +245,11 @@ public class IUserManagerSqlProvider {
 						SET("roleName=#{roleName}");
 					}
 					if (userInfo.getGroupId() != null) {
-						SET("groupId=#{groupId}");
+						if (userInfo.getGroupId() == -1) {
+							SET("groupId=null");
+						} else {
+							SET("groupId=#{groupId}");
+						}
 					}
 					if (userInfo.getStatus() != null) {
 						SET("status=#{status}");

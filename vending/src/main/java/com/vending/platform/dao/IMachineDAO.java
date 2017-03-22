@@ -11,7 +11,6 @@ import com.vending.platform.dao.sqlprovider.IMachineSqlProvider;
 import com.vending.platform.domain.MachineInfo;
 import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.MachineType;
-import com.vending.platform.domain.UserInfo;
 import com.vending.platform.exception.SQLFormatException;
 
 /**
@@ -54,7 +53,8 @@ public interface IMachineDAO {
 	 * @return MachineOperater 返回对应的售货机信息
 	 */
 	@SelectProvider(type = IMachineSqlProvider.class, method = "getMachineOperaterById")
-	@Results(@Result(property = "machineInfo", column = "machineId", one = @One(select = "com.vending.platform.dao.IMachineDAO.getMachineInfoById")))
+	@Results({@Result(property = "machineInfo", column = "machineId", one = @One(select = "com.vending.platform.dao.IMachineDAO.getMachineInfoById")),
+		@Result(property = "groupInfo" , column = "groupId",one= @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getGroupInfoById"))})
 	public MachineOperater getMachineOperaterById(Integer mOperaterId);
 
 	/**
@@ -68,7 +68,8 @@ public interface IMachineDAO {
 	 */
 
 	@SelectProvider(type = IMachineSqlProvider.class, method = "getAllMachineOperaters")
-	@Results(@Result(property = "machineInfo", column = "machineId", one = @One(select = "com.vending.platform.dao.IMachineDAO.getMachineInfoById")))
+	@Results({@Result(property = "machineInfo", column = "machineId", one = @One(select = "com.vending.platform.dao.IMachineDAO.getMachineInfoById")),
+		@Result(property = "groupInfo" , column = "groupId",one= @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getGroupInfoById"))})
 	public List<MachineOperater> getAllMachineOperaters(MachineOperater machineOperater);
 
 	/** 添加售货机类型 */

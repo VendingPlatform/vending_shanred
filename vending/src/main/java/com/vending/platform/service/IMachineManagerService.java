@@ -1,6 +1,5 @@
 package com.vending.platform.service;
 
-import java.security.acl.Group;
 import java.util.List;
 
 import com.vending.platform.domain.GroupInfo;
@@ -10,19 +9,14 @@ import com.vending.platform.domain.UserInfo;
 
 /** 售货机管理Service */
 public interface IMachineManagerService {
-	/**
-	 * 查询厂商售货机
-	 * 
-	 * @param userInfo
-	 *            用户信息
-	 * @param machineOperater
-	 *            售货机查询条件
-	 * @return MachineOperater
-	 */
-	List<MachineOperater> getOprMachines(UserInfo userInfo, MachineOperater machineOperater);
-
 	/** 查询所有售货机的类型 */
 	List<MachineType> getAllMachineTypes(MachineType machineType);
+
+	/** 查询厂商售货机 */
+	List<MachineOperater> getMachineOperaters(UserInfo userInfo, MachineOperater machineOperater);
+
+	/** 查询groupId售货机组内所有售货机信息 */
+	List<MachineOperater> getAllMachineOperaters(MachineOperater machineOperater);
 
 	MachineOperater getMachineOperaterById(Integer mOperaterId);
 
@@ -40,4 +34,5 @@ public interface IMachineManagerService {
 
 	/** 添加分组 ，同一公司、同一类型的分组不能重名 */
 	boolean addGroupInfo(GroupInfo groupInfo, UserInfo userInfo);
+
 }
