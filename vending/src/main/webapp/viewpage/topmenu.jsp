@@ -16,7 +16,8 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="<c:url value="/home"/>">主页</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 用户管理 <span class="caret"></span>
+					<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 用户管理 <span class="caret"></span>
 					</a>
 						<ul class="dropdown-menu">
 							<li><a href="#">用户管理</a></li>
@@ -29,7 +30,7 @@
 					</a>
 						<ul class="dropdown-menu">
 							<li><a href="<c:url value="/machine/machineHome"/>">售货机管理</a></li>
-							<li><a href="#">分组管理</a></li>
+							<li><a href="<c:url value="/machine/machineGroup"/>">分组管理</a></li>
 							<li><a href="#">货道管理</a>
 							<li role="separator" class="divider"></li>
 							<li><a href="#">货道组管理</a></li>
@@ -48,8 +49,10 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="<c:url value="/user/userInfo"/>"><span class="glyphicon glyphicon-user"></span> ${user.userName}</a></li>
-					<li><a href="#">修改密码</a></li>
-					<li><a href="#">退出平台</a></li>
+					<c:if test="${user!=null}">
+						<li><a href="<c:url value="/user/changepwd"/>">修改密码</a></li>
+						<li><a href="<c:url value="/user/logout"/>">退出平台</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>

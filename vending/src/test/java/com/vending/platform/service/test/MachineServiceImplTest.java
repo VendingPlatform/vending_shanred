@@ -83,17 +83,9 @@ public class MachineServiceImplTest extends AbstractJUnit4SpringContextTests {
 
 	@Test
 	public void testUpdate() {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
-		Date ntime = new Date();
-		/* System.out.println(ntime); */
-		System.out.println(df.format(ntime));
-		long nowtime = ntime.getTime();
-		java.sql.Date operateDate = new java.sql.Date(nowtime);// 获取数据库时间
-		System.out.println(operateDate.getTime());
 		machineOperater.setmOperaterId(1);
 		// machineOperater.setOperateId(userInfo.getUserId());
 		// machineOperater.setMachineAddress("普陀修改");
-		machineOperater.setOperateDate(operateDate);
 		machineDAO.updateMachineOperate(machineOperater);
 	}
 

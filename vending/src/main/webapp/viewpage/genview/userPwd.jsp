@@ -4,57 +4,34 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>用户信息</title>
+<title>change pwd</title>
 </head>
 <body>
 	<%@include file="../topmenu.jsp"%>
 	<div class="container">
-	<div class="row clearfix">
+		<div class="row clearfix">
 			<div class="col-md-12 column">
 				<ul class="breadcrumb">
 					<li><a href="<c:url value="/home"/>">主页</a></li>
-					<li class="active">用户信息</li>
+					<li class="active">修改密码</li>
 				</ul>
 			</div>
 		</div>
-		<table class="table table-hover">
-			<tr>
-				<td>Id</td>
-				<td>${user.userId}</td>
-			</tr>
-			<tr>
-				<td>userNo</td>
-				<td>${user.userNo}</td>
-			</tr>
-			<tr>
-				<td>userName</td>
-				<td>${user.userName}</td>
-			</tr>
-			<tr>
-				<td>email</td>
-				<td>${user.email}</td>
-			</tr>
-			<tr>
-				<td>roleId</td>
-				<td>${user.roleId}</td>
-			</tr>
-			<tr>
-				<td>roleName</td>
-				<td>${user.roleName}</td>
-			</tr>
-			<tr>
-				<td>GroupId</td>
-				<td>${user.groupId}</td>
-			</tr>
-			<tr>
-				<td>status</td>
-				<td>${user.status}</td>
-			</tr>
-		</table>
+		<form  action="<c:url value="/user/changepwdexecute"/>" method="post" style="width:180px">
+			<input type="hidden" name="userId" value="${user.userId }">
+			<div class="form-group">
+				<label for="name">UserName:</label>
+				<input type="text" class="form-control" id="name" name="userName" value="${user.userName }" readonly="readonly">
+			</div>
+			<div class="form-group">
+				<label for="pwd">Password:</label>
+				<input type="password" class="form-control" id="pwd" name="password" value="${user.password}" required placeholder="输入密码">
+			</div>
+			<button type="submit" class="btn btn-primary">提交</button>
+		</form>
 	</div>
 </body>
 </html>
