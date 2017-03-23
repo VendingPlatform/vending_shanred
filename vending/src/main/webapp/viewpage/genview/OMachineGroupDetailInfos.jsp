@@ -22,9 +22,9 @@
 			</div>
 		</div>
 		<div>
-		<a href="#" class="btn btn-primary"  > 
+		<a href="#" class="btn btn-primary"  data-toggle="modal" data-target="#addMachineToGroup" > 
 			<span class="glyphicon glyphicon-plus"></span>添加售货机
-			</a>
+		</a>
 			<table class="table">
 				<tr>
 					<th>铭牌号</th>
@@ -47,7 +47,6 @@
 						<td>${machine.machineStatus}</td>
 						<td>${machine.groupInfo.groupName}</td>
 						<td>${machine.operFirmId}</td>
-						
 						<td>
 							<a href= "<c:url value="/machine/machineInfoDetail"/>?mOperaterId=${machine.mOperaterId}" class="btn default">
 								<span class="glyphicon glyphicon-info-sign" title="详情"></span>
@@ -60,6 +59,49 @@
 				</c:forEach>
 			</table>
 		</div>
+		<div class="modal fade" id="addMachineToGroup" tabindex="-1" role="dialog" aria-labelledby="ModelAdd">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="ModelAdd">添加售货机</h4>
+		      </div>
+		      <div class="modal-body" style="width:500px">
+		        	<form  method="post" id="addMachineToGroupForm">
+		        	<input name="groupId" value="${groupId}" type="hidden">
+		        	<c:forEach items="${machineNotIntoGroup}" var="m">
+		        		<label class="checkbox-inline">
+		        		  <input type="checkbox" name="mOperaterId" id="checkValue${m.mOperaterId}" value="${m.mOperaterId}">${m.machineName}
+		        		</label>
+		        	</c:forEach>
+		        	</form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		        <button type="button" id="addMachineToGroup" class="btn btn-primary" data-dismiss="modal">提交</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	</div>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#addMachineToGroup").click(function(){  
+         $.ajax({  
+            url:"<c:url value='/machine/addMachineToGroup'/>",
+            type:"post",  
+            dataType:"text",  
+            data:$('#addMachineToGroupForm').serialize(),
+            success:function(responseText){  
+            	alert("创建成功");
+            	location.reload();
+            },  
+            error:function(){  
+                alert("创建失败");  
+            }  
+        });  
+     });  
+ });  
+</script>
 </body>
 </html>

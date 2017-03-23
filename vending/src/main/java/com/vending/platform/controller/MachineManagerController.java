@@ -1,6 +1,7 @@
 package com.vending.platform.controller;
 
 import java.io.IOException;
+import java.nio.channels.FileChannel.MapMode;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -9,9 +10,11 @@ import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -149,23 +152,54 @@ public class MachineManagerController extends UtilsAction {
 
 	@Description("查看组内信息")
 	@RequestMapping(value = "/machineGroupDetialInfos")
-	public String getMachineGroupInfos(@RequestParam("groupId") Integer groupId, ModelMap modelMap) {
+	public String getMachineGroupInfos(@RequestParam("groupId") Integer groupId, ModelMap modelMap,
+			@ModelAttribute("user") UserInfo userInfo) {
 		MachineOperater machineOperater = new MachineOperater();
 		machineOperater.setGroupId(groupId);
 		List<MachineOperater> machineOperaters = machineManagerService.getAllMachineOperaters(machineOperater);
 		modelMap.addAttribute("machineGroupDetialInfos", machineOperaters);
+		modelMap.addAttribute("groupId", groupId);
+
+		machineOperater = new MachineOperater();
+		machineOperater.setOperFirmId(userInfo.getFirmId());
+		machineOperater.setGroupId(-1);
+		List<MachineOperater> machineOperatersNotInGroup = machineManagerService
+				.getAllMachineOperaters(machineOperater);
+		modelMap.addAttribute("machineNotIntoGroup", machineOperatersNotInGroup);
+
 		return "genview/OMachineGroupDetailInfos";
 	}
 
 	@Description("将售货机从分组中移除")
 	@RequestMapping(value = "machineInfoRemoveGroup")
 	public String removeMachineFromGroup(Integer mOperaterId, Integer groupId,
-			@ModelAttribute("user") UserInfo userInfo, ModelMap modelMap) {
+			@ModelAttribute("user") UserInfo userInfo) {
 		MachineOperater machineOperater = new MachineOperater();
 		machineOperater.setGroupId(-1);// 表示移除，在sql构建器中判断，若为-1,则置空
 		machineOperater.setmOperaterId(mOperaterId);
 		machineManagerService.updateMachineOperater(machineOperater, userInfo);
+
 		return "redirect:/machine/machineGroupDetialInfos?groupId=" + groupId;
 	}
 
+	@Description("将所选售货机加入到分组中")
+	@RequestMapping(value = "addMachineToGroup")
+	public String addMachineToGroup(Integer[] mOperaterId, Integer groupId,
+			@ModelAttribute("user") UserInfo userInfo) {
+		if (mOperaterId == null || mOperaterId.length== 0)
+			return "genview/OMachineGroupDetailInfos";
+		MachineOperater machineOperater = null;
+		for(int i=0;i<mOperaterId.length;i++){
+			machineOperater=new MachineOperater();
+			machineOperater.setmOperaterId(mOperaterId[i]);
+			machineOperater.setGroupId(groupId);
+			machineManagerService.updateMachineOperater(machineOperater, userInfo);
+		}
+		try {
+			write("添加成功");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "redirect:/machine/machineGroupDetialInfos?groupId=" + groupId;
+	}
 }

@@ -6,7 +6,6 @@ import org.apache.ibatis.jdbc.SQL;
 import com.vending.platform.domain.MachineInfo;
 import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.MachineType;
-import com.vending.platform.domain.UserInfo;
 
 /** @author Miley_Ren */
 public class IMachineSqlProvider {
@@ -132,7 +131,11 @@ public class IMachineSqlProvider {
 						WHERE("machineStatus=#{machineStatus}");
 					}
 					if (machineOperater.getGroupId() != null) {
-						WHERE("groupId=#{groupId}");
+						if (machineOperater.getGroupId() == -1) {
+							WHERE("groupId is null");
+						} else {
+							WHERE("groupId=#{groupId}");
+						}
 					}
 					if (machineOperater.getOperFirmId() != null) {
 						WHERE("operFirmId=#{operFirmId}");

@@ -29,11 +29,15 @@ vending_shanred_platform
  - 管理售货机，添加售货机时要进行类型的选择；
  - 售货机的分配与回收
 
-### 运营商 （运营商管理员）：
+### 运营商 （运营商管理员）：
  * 用户管理
      * 角色管理
      * 权限管理
      * 分组管理
+        >- 售货机分组中，若查询未分组的售货机，在controller中将查询条件`groupId`置为`-1`,SQL构建器定义，若`groupId=-1`, 则将查询条件置为`groupId is null`.
+        >- 将售货机从分组中移除，在controller中将查询条件`groupId`置为`-1`，同上
+        >- 用户组操作同上
+        
  * 售货机管理
      * 分组管理
      * 售货机分配（可按售货机组分配，也可单台分配）
@@ -99,7 +103,7 @@ vending_shanred_platform
 ```
 * 7、根据machineinfo,初始化machineOperater
 ```
-     iinsert  into `machineoperater`(`mOperaterId`,`machineId`,`machineName`,`machinePannel`,`machineAssign`,`tModelName`,`userId`,`machineAddress`,`machineStatus`,`groupId`,`operFirmId`,`operateId`,`operateDate`) 
+     iinsert  into `machineoperater`(`mOperaterId`,`machineId`,`machineName`,`machinePannel`,`machineAssign`,`tModelName`,`userId`,`machineAddress`,`machineStatus`,`groupId`,`operFirmId`,`operateId`,`operateDate`) 
      values 
      (1,1,'售货机名牌1','售货机主板1',0,'类型1',NULL,'普陀修改',1,2,2,2,'2017-03-08 21:23:06'),
      (2,2,'售货机名牌2','售货机主板2',0,'类型1',NULL,'普陀',1,NULL,2,3,'2017-02-27 21:02:07'),
