@@ -29,6 +29,9 @@ public interface IFrimAndGroupDAO {
 
 	/** 按条件查找所有公司信息 */
 	@SelectProvider(type = IFirmAndGroupSqlProvider.class, method = "getAllFirmInfos")
+	@Results({
+			@Result(property = "userInfos", column = "userId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllUsers")),
+			@Result(property = "userInfo", column = "userId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getUserById")) })
 	public List<FirmInfo> getAllFirmInfos(FirmInfo firmInfo);
 
 	/** 按Id查找公司 */
@@ -55,7 +58,9 @@ public interface IFrimAndGroupDAO {
 	@SelectProvider(type = IFirmAndGroupSqlProvider.class, method = "getGroupInfoById")
 	@Results({
 			@Result(property = "machineOperaters", column = "mOperaterId", many = @Many(select = "com.vending.platform.dao.IMachineDAO.getAllMachineOperaters")),
-			@Result(property = "machineOperater", column = "mOperaterId", many = @Many(select = "com.vending.platform.dao.IMachineDAO.getMachineOperaterById")) })
+			@Result(property = "machineOperater", column = "mOperaterId", many = @Many(select = "com.vending.platform.dao.IMachineDAO.getMachineOperaterById")),
+			@Result(property = "userInfos", column = "userId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllUsers")),
+			@Result(property = "userInfo", column = "userId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getUserById")) })
 	public GroupInfo getGroupInfoById(Integer groupId);
 
 	/** 删除分组信息 */

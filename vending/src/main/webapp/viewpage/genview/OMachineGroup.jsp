@@ -94,9 +94,9 @@ $(document).ready(function(){
             data:$('#addGroupForm').serialize(),
             success:function(responseText){  
             	if(responseText==1)
-            	{alert("创建成功");}
+            	{alert("添加成功");}
             	else{
-            		alert("创建失败");
+            		alert("添加失败");
             	}  
             	location.reload();
             },  

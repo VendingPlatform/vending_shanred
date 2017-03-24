@@ -67,41 +67,39 @@
 		        <h4 class="modal-title" id="ModelAdd">添加售货机</h4>
 		      </div>
 		      <div class="modal-body" style="width:500px">
-		        	<form  method="post" id="addMachineToGroupForm">
-		        	<input name="groupId" value="${groupId}" type="hidden">
+		        	<form  method="post" id="addMachineToGroupForm" >
+		        	<input type="hidden" value="${groupId}" name="groupId">
 		        	<c:forEach items="${machineNotIntoGroup}" var="m">
 		        		<label class="checkbox-inline">
-		        		  <input type="checkbox" name="mOperaterId" id="checkValue${m.mOperaterId}" value="${m.mOperaterId}">${m.machineName}
+		        		  <input type="checkbox" name="mOperaterId" value="${m.mOperaterId}">${m.machineName}
 		        		</label>
 		        	</c:forEach>
 		        	</form>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-		        <button type="button" id="addMachineToGroup" class="btn btn-primary" data-dismiss="modal">提交</button>
+		        <button type="button" class="btn btn-primary" onclick="addMachineToGroup()" data-dismiss="modal">提交</button>
 		      </div>
 		    </div>
 		  </div>
 		</div>
 	</div>
 <script type="text/javascript">
-$(document).ready(function(){
-    $("#addMachineToGroup").click(function(){  
-         $.ajax({  
+	function addMachineToGroup(){
+		$.ajax({  
             url:"<c:url value='/machine/addMachineToGroup'/>",
             type:"post",  
             dataType:"text",  
             data:$('#addMachineToGroupForm').serialize(),
             success:function(responseText){  
-            	alert("创建成功");
+            	alert("添加成功");
             	location.reload();
             },  
             error:function(){  
-                alert("创建失败");  
+                alert("添加失败");  
             }  
         });  
-     });  
- });  
+	}
 </script>
 </body>
 </html>

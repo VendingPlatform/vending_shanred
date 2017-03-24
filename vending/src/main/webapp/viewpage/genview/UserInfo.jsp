@@ -13,7 +13,7 @@
 <body>
 	<%@include file="../topmenu.jsp"%>
 	<div class="container">
-	<div class="row clearfix">
+		<div class="row clearfix">
 			<div class="col-md-12 column">
 				<ul class="breadcrumb">
 					<li><a href="<c:url value="/home"/>">主页</a></li>
@@ -40,7 +40,7 @@
 			</tr>
 			<tr>
 				<td>roleId</td>
-				<td>${user.roleId}</td>
+				<td>${user.roleInfo.roleId}</td>
 			</tr>
 			<tr>
 				<td>roleName</td>
@@ -48,7 +48,11 @@
 			</tr>
 			<tr>
 				<td>GroupId</td>
-				<td>${user.groupId}</td>
+				<td>${user.groupInfo.groupName}</td>
+			</tr>
+			<tr>
+				<td>FirmName</td>
+				<td>${user.firmInfo.firmName}</td>
 			</tr>
 			<tr>
 				<td>status</td>

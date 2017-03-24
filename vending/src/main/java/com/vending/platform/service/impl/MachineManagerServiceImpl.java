@@ -32,7 +32,7 @@ public class MachineManagerServiceImpl implements IMachineManagerService {
 		if (machineOperater == null || userInfo == null) {
 			return null;
 		}
-		int roleId = userInfo.getRoleId();
+		int roleId = userInfo.getRoleInfo().getRoleId();
 		RoleInfo roleInfo = userManagerDao.getRoleById(roleId);
 		String authorityCode = roleInfo.getAuthorityCode();
 		machineOperater = UtilsService.getCode(authorityCode, machineOperater, userInfo);
@@ -91,14 +91,14 @@ public class MachineManagerServiceImpl implements IMachineManagerService {
 	@Override
 	public boolean addGroupInfo(GroupInfo groupInfo, UserInfo userInfo) {
 		GroupInfo group = new GroupInfo();
-		group.setFirmId(userInfo.getFirmId());
+		group.setFirmId(userInfo.getFirmInfo().getFirmId());
 		group.setGroupType(groupInfo.getGroupType());
 		group.setGroupName(groupInfo.getGroupName());
 		List<GroupInfo> groupInfos = firmandgroupDao.getAllGroupInfos(group);
 		if (groupInfos != null && groupInfos.size() > 0) {
 			return false;
 		} else {
-			groupInfo.setFirmId(userInfo.getFirmId());
+			groupInfo.setFirmId(userInfo.getFirmInfo().getFirmId());
 			groupInfo.setOperateId(userInfo.getUserId());
 			firmandgroupDao.insertGroupInfo(groupInfo);
 			return true;
