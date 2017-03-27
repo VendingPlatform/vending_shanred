@@ -36,6 +36,9 @@ public interface IFrimAndGroupDAO {
 
 	/** 按Id查找公司 */
 	@SelectProvider(type = IFirmAndGroupSqlProvider.class, method = "getFirmInfoById")
+	@Results({
+		@Result(property = "machineType", column = "tModelId", 
+				many = @Many(select = "com.vending.platform.dao.IMachineDAO.getMachineTypeById")) })
 	public FirmInfo getFirmInfoById(Integer firmId);
 
 	/** 删除公司信息 */

@@ -12,8 +12,8 @@ import com.vending.platform.dao.IUserManagerDao;
 import com.vending.platform.domain.GroupInfo;
 import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.MachineType;
-import com.vending.platform.domain.RoleInfo;
 import com.vending.platform.domain.UserInfo;
+import com.vending.platform.exception.SQLFormatException;
 import com.vending.platform.service.IMachineManagerService;
 
 @Service
@@ -32,11 +32,12 @@ public class MachineManagerServiceImpl implements IMachineManagerService {
 		if (machineOperater == null || userInfo == null) {
 			return null;
 		}
-		int roleId = userInfo.getRoleInfo().getRoleId();
-		RoleInfo roleInfo = userManagerDao.getRoleById(roleId);
-		String authorityCode = roleInfo.getAuthorityCode();
-		machineOperater = UtilsService.getCode(authorityCode, machineOperater, userInfo);
-		List<MachineOperater> machineOperaters = machineDao.getAllMachineOperaters(machineOperater);
+		/*
+		 * int roleId = userInfo.getRoleInfo().getRoleId(); RoleInfo roleInfo =
+		 * userManagerDao.getRoleById(roleId); String authorityCode =
+		 * roleInfo.getAuthorityCode(); machineOperater =
+		 * UtilsService.getCode(authorityCode, machineOperater, userInfo);
+		 */List<MachineOperater> machineOperaters = machineDao.getAllMachineOperaters(machineOperater);
 		return machineOperaters;
 	}
 
@@ -51,63 +52,45 @@ public class MachineManagerServiceImpl implements IMachineManagerService {
 	}
 
 	@Override
-	public void updateMachineOperater(MachineOperater machineOperater, UserInfo userInfo) {
-		machineOperater.setOperateId(userInfo.getUserId());
+	public void updateMachineOperater(MachineOperater machineOperater) {
 		machineDao.updateMachineOperate(machineOperater);
 	}
 
-	@Override
-	public List<GroupInfo> getAllMachineGroups(GroupInfo groupInfo) {
-		List<GroupInfo> groupInfos = firmandgroupDao.getAllGroupInfos(groupInfo);
-		return groupInfos;
-	}
-
-	@Override
-	public GroupInfo getGroupInfoById(Integer groupId) {
-		return firmandgroupDao.getGroupInfoById(groupId);
-	}
-
-	@Override
-	public void updateGroupInfo(GroupInfo groupInfo) {
-		firmandgroupDao.updateGroupInfo(groupInfo);
-	}
-
-	@Override
-	public boolean deleteGroupInfo(Integer groupId) {
-		MachineOperater machineOperater = new MachineOperater();
-		machineOperater.setGroupId(groupId);
-		List<MachineOperater> machineOperaters = machineDao.getAllMachineOperaters(machineOperater);
-		UserInfo userInfo = new UserInfo();
-		userInfo.setGroupId(groupId);
-		List<UserInfo> userInfos = userManagerDao.getAllUsers(userInfo);
-		if ((machineOperaters == null || machineOperaters.size() == 0)
-				&& (userInfos == null || userInfos.size() == 0)) {
-			firmandgroupDao.deleteGroupInfo(groupId);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean addGroupInfo(GroupInfo groupInfo, UserInfo userInfo) {
-		GroupInfo group = new GroupInfo();
-		group.setFirmId(userInfo.getFirmInfo().getFirmId());
-		group.setGroupType(groupInfo.getGroupType());
-		group.setGroupName(groupInfo.getGroupName());
-		List<GroupInfo> groupInfos = firmandgroupDao.getAllGroupInfos(group);
-		if (groupInfos != null && groupInfos.size() > 0) {
-			return false;
-		} else {
-			groupInfo.setFirmId(userInfo.getFirmInfo().getFirmId());
-			groupInfo.setOperateId(userInfo.getUserId());
-			firmandgroupDao.insertGroupInfo(groupInfo);
-			return true;
-		}
-	}
 
 	@Override
 	public List<MachineOperater> getAllMachineOperaters(MachineOperater machineOperater) {
 		List<MachineOperater> machineOperaters = machineDao.getAllMachineOperaters(machineOperater);
 		return machineOperaters;
+	}
+
+	@Override
+	public MachineType getMachineTypeById(Integer id) {
+		return machineDao.getMachineTypeById(id);
+	}
+
+	@Override
+	public void updateMachineType(MachineType machineType) {
+		try {
+			machineDao.updateMachineType(machineType);
+			logger.debug("没有Id,更新失败");
+			throw new SQLFormatException("没有Id,更新失败");
+		} catch (SQLFormatException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void insertMachineType(MachineType machineType) {
+		try {
+			machineDao.inseretMachineType(machineType);
+		} catch (SQLFormatException e) {
+			logger.debug("数据格式不允许");
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void deleteMachineType(Integer id) {
+		machineDao.deleteMachineType(id);
 	}
 }

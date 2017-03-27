@@ -12,7 +12,15 @@ public interface IMachineManagerService {
 	/** 查询所有售货机的类型 */
 	List<MachineType> getAllMachineTypes(MachineType machineType);
 
-	/** 查询厂商售货机 */
+	MachineType getMachineTypeById(Integer id);
+
+	void updateMachineType(MachineType machineType);
+
+	void insertMachineType(MachineType machineType);
+
+	void deleteMachineType(Integer id);
+
+	/** 查询运营商售货机 */
 	List<MachineOperater> getMachineOperaters(UserInfo userInfo, MachineOperater machineOperater);
 
 	/** 查询groupId售货机组内所有售货机信息 */
@@ -20,19 +28,8 @@ public interface IMachineManagerService {
 
 	MachineOperater getMachineOperaterById(Integer mOperaterId);
 
-	void updateMachineOperater(MachineOperater machineOperater, UserInfo userInfo);
+	void updateMachineOperater(MachineOperater machineOperater);
 
-	/** 查询售货机分组 */
-	List<GroupInfo> getAllMachineGroups(GroupInfo groupInfo);
-
-	GroupInfo getGroupInfoById(Integer groupId);
-
-	void updateGroupInfo(GroupInfo groupInfo);
-
-	/** 删除分组，只有当前分组不被任何人或机器引用才可以删除，否则不进行删除 */
-	boolean deleteGroupInfo(Integer groupId);
-
-	/** 添加分组 ，同一公司、同一类型的分组不能重名 */
-	boolean addGroupInfo(GroupInfo groupInfo, UserInfo userInfo);
+	
 
 }

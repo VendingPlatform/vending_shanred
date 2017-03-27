@@ -54,8 +54,8 @@ public interface IMachineDAO {
 	 */
 	@SelectProvider(type = IMachineSqlProvider.class, method = "getMachineOperaterById")
 	@Results({
-		@Result(property = "machineInfo", column = "machineId", one = @One(select = "com.vending.platform.dao.IMachineDAO.getMachineInfoById")),
-		@Result(property = "groupInfo" , column = "groupId",one= @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getGroupInfoById"))})
+			@Result(property = "machineInfo", column = "machineId", one = @One(select = "com.vending.platform.dao.IMachineDAO.getMachineInfoById")),
+			@Result(property = "groupInfo", column = "groupId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getGroupInfoById")) })
 	public MachineOperater getMachineOperaterById(Integer mOperaterId);
 
 	/**
@@ -70,8 +70,8 @@ public interface IMachineDAO {
 
 	@SelectProvider(type = IMachineSqlProvider.class, method = "getAllMachineOperaters")
 	@Results({
-		@Result(property = "machineInfo", column = "machineId", one = @One(select = "com.vending.platform.dao.IMachineDAO.getMachineInfoById")),
-		@Result(property = "groupInfo" , column = "groupId",one= @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getGroupInfoById"))})
+			@Result(property = "machineInfo", column = "machineId", one = @One(select = "com.vending.platform.dao.IMachineDAO.getMachineInfoById")),
+			@Result(property = "groupInfo", column = "groupId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getGroupInfoById")) })
 	public List<MachineOperater> getAllMachineOperaters(MachineOperater machineOperater);
 
 	/** 添加售货机类型 */
@@ -88,6 +88,9 @@ public interface IMachineDAO {
 
 	/** 按Id查询售货机 */
 	@SelectProvider(type = IMachineSqlProvider.class, method = "getMachineTypeById")
+	@Results({
+		@Result(property = "firmInfo" , column = "firmId",
+				one= @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById"))})
 	public MachineType getMachineTypeById(Integer tModeId);
 
 	/** 删除售货机类型 */

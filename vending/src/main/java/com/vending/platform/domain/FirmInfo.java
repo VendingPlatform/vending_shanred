@@ -29,6 +29,7 @@ public class FirmInfo implements Serializable {
 	/** 操作时间 */
 	private Date operateDate;
 	private List<UserInfo> userInfos;
+	private List<MachineType> machineTypes;
 
 	public FirmInfo() {
 		super();
@@ -104,6 +105,14 @@ public class FirmInfo implements Serializable {
 
 	public void setUserInfos(List<UserInfo> userInfos) {
 		this.userInfos = userInfos;
+	}
+
+	public List<MachineType> getMachineTypes() {
+		return machineTypes;
+	}
+
+	public void setMachineTypes(List<MachineType> machineTypes) {
+		this.machineTypes = machineTypes;
 	}
 
 	@Override

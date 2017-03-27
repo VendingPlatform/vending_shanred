@@ -19,7 +19,9 @@ import com.vending.platform.domain.GroupInfo;
 import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.MachineType;
 import com.vending.platform.domain.UserInfo;
+import com.vending.platform.service.IFirmAndGroupService;
 import com.vending.platform.service.IMachineManagerService;
+import com.vending.platform.service.IUserManagerService;
 
 @Controller
 @SessionAttributes({ "user", "machineOperaterInfo", "allMachineTypes", "machineGroupInfos" })
@@ -29,6 +31,10 @@ public class MachineManagerController extends UtilsAction {
 	private static Logger logger = Logger.getLogger(MachineManagerController.class);
 	@Autowired
 	private IMachineManagerService machineManagerService;
+	@Autowired
+	private IFirmAndGroupService firmAndGroupService;
+	@Autowired
+	private IUserManagerService userManagerService;
 
 	@Description("进入售货机页面")
 	@RequestMapping(value = "/machineHome")
@@ -71,7 +77,7 @@ public class MachineManagerController extends UtilsAction {
 		return new ModelAndView("genview/OMachineInfoDetail", modelMap);
 	}
 
-	@Description("更新machineOperate")
+	@Description("进入更新machineOperate页面")
 	@RequestMapping(value = "/machineInfoUpdateInfo", method = RequestMethod.GET)
 	public ModelAndView updateMachineOperate(@RequestParam("mOperaterId") Integer mOperaterId,
 			@ModelAttribute("user") UserInfo userInfo) {
@@ -79,7 +85,7 @@ public class MachineManagerController extends UtilsAction {
 		GroupInfo groupInfo = new GroupInfo();
 		groupInfo.setFirmId(userInfo.getFirmId());
 		groupInfo.setGroupType(2);// type=2,表示查询售货机分组
-		List<GroupInfo> groupInfos = machineManagerService.getAllMachineGroups(groupInfo);
+		List<GroupInfo> groupInfos = firmAndGroupService.getAllGroupInfos(groupInfo);
 		modelAndView.addObject("groupInfos", groupInfos);
 
 		MachineOperater machineOperater = machineManagerService.getMachineOperaterById(mOperaterId);
@@ -94,7 +100,8 @@ public class MachineManagerController extends UtilsAction {
 	public String updateMachineOperateExecute(@ModelAttribute("machineOperater") MachineOperater machineOperater,
 			@ModelAttribute("user") UserInfo userInfo) {
 		logger.debug("更新操作 ");
-		machineManagerService.updateMachineOperater(machineOperater, userInfo);
+		machineOperater.setOperateId(userInfo.getUserId());
+		machineManagerService.updateMachineOperater(machineOperater);
 		return "redirect:/machine/machineInfoDetail?mOperaterId=" + machineOperater.getmOperaterId();
 	}
 
@@ -104,7 +111,10 @@ public class MachineManagerController extends UtilsAction {
 		GroupInfo groupInfo = new GroupInfo();
 		groupInfo.setFirmId(userInfo.getFirmId());
 		groupInfo.setGroupType(2);// type=2,表示查询售货机分组
-		List<GroupInfo> groupInfos = machineManagerService.getAllMachineGroups(groupInfo);
+
+		// List<GroupInfo> groupInfos =
+		// machineManagerService.getAllMachineGroups(groupInfo);
+		List<GroupInfo> groupInfos = firmAndGroupService.getAllGroupInfos(groupInfo);
 		modelMap.addAttribute("machineGroupInfos", groupInfos);
 		return new ModelAndView("genview/OMachineGroup", modelMap);
 	}
@@ -112,7 +122,7 @@ public class MachineManagerController extends UtilsAction {
 	@Description("编辑售货机分组")
 	@RequestMapping(value = "/machinegroupInfo")
 	public ModelAndView getMachineGroupInfo(@RequestParam("groupId") Integer groupId, ModelMap modelMap) {
-		GroupInfo groupInfo = machineManagerService.getGroupInfoById(groupId);
+		GroupInfo groupInfo = firmAndGroupService.getGroupInfoById(groupId);
 		modelMap.addAttribute("groupInfo", groupInfo);
 		return new ModelAndView("genview/OMachineGroupInfo", modelMap);
 	}
@@ -120,7 +130,9 @@ public class MachineManagerController extends UtilsAction {
 	@Description("添加售货机分组")
 	@RequestMapping(value = "/machineGroupCreate")
 	public String createGroupInfo(GroupInfo groupInfo, @ModelAttribute("user") UserInfo userInfo, ModelMap modelMap) {
-		boolean ret = machineManagerService.addGroupInfo(groupInfo, userInfo);
+		// boolean ret = machineManagerService.addGroupInfo(groupInfo,
+		// userInfo);
+		boolean ret = firmAndGroupService.insertGroup(groupInfo, userInfo);
 		int index = 0;
 		if (ret) {
 			index = 1;
@@ -136,14 +148,27 @@ public class MachineManagerController extends UtilsAction {
 	@Description("更新售货机分组信息")
 	@RequestMapping(value = "/machineGroupUpdate")
 	public String updateGroupInfo(GroupInfo groupInfo) {
-		machineManagerService.updateGroupInfo(groupInfo);
+		firmAndGroupService.updateGroup(groupInfo);
+		// machineManagerService.updateGroupInfo(groupInfo);
 		return "redirect:/machine/machineGroup";
 	}
 
 	@Description("删除分组信息")
 	@RequestMapping(value = "/machinegroupDelete")
 	public String deleteGroupInfo(@RequestParam("groupId") Integer groupId) {
-		boolean ret = machineManagerService.deleteGroupInfo(groupId);
+		MachineOperater machineOperater = new MachineOperater();
+		machineOperater.setGroupId(groupId);
+		List<MachineOperater> machineOperaters = machineManagerService.getAllMachineOperaters(machineOperater);
+		UserInfo userInfo = new UserInfo();
+		userInfo.setGroupId(groupId);
+		List<UserInfo> userInfos = userManagerService.getAllUserInfos(userInfo);
+		if ((machineOperaters == null || machineOperaters.size() == 0)
+				&& (userInfos == null || userInfos.size() == 0)) {
+			firmAndGroupService.deleteGroupInfo(groupId);
+			logger.debug("删除成功");
+		} else {
+			logger.debug("分组内有成员，不能被删除");
+		}
 		return "redirect:/machine/machineGroup";
 	}
 
@@ -174,23 +199,24 @@ public class MachineManagerController extends UtilsAction {
 		MachineOperater machineOperater = new MachineOperater();
 		machineOperater.setGroupId(-1);// 表示移除，在sql构建器中判断，若为-1,则置空
 		machineOperater.setmOperaterId(mOperaterId);
-		machineManagerService.updateMachineOperater(machineOperater, userInfo);
+		machineOperater.setOperateId(userInfo.getUserId());
+		machineManagerService.updateMachineOperater(machineOperater);
 
 		return "redirect:/machine/machineGroupDetialInfos?groupId=" + groupId;
 	}
 
 	@Description("将所选售货机加入到分组中")
 	@RequestMapping(value = "addMachineToGroup")
-	public String addMachineToGroup(Integer[] mOperaterId, Integer groupId,
-			@ModelAttribute("user") UserInfo userInfo) {
-		if (mOperaterId == null || mOperaterId.length== 0)
+	public String addMachineToGroup(Integer[] mOperaterId, Integer groupId, @ModelAttribute("user") UserInfo userInfo) {
+		if (mOperaterId == null || mOperaterId.length == 0)
 			return "genview/OMachineGroupDetailInfos";
 		MachineOperater machineOperater = null;
-		for(int i=0;i<mOperaterId.length;i++){
-			machineOperater=new MachineOperater();
+		for (int i = 0; i < mOperaterId.length; i++) {
+			machineOperater = new MachineOperater();
 			machineOperater.setmOperaterId(mOperaterId[i]);
 			machineOperater.setGroupId(groupId);
-			machineManagerService.updateMachineOperater(machineOperater, userInfo);
+			machineOperater.setOperateId(userInfo.getUserId());
+			machineManagerService.updateMachineOperater(machineOperater);
 		}
 		return "redirect:/machine/machineGroupDetialInfos?groupId=" + groupId;
 	}

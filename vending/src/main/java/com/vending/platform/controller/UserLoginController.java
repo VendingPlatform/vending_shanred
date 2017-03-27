@@ -55,7 +55,7 @@ public class UserLoginController {
 	@Description("执行修改密码")
 	@RequestMapping(value = "/changepwdexecute")
 	public String updatePwdExecute(UserInfo userInfo, SessionStatus sessionStatus) {
-		userManagerService.updatePwd(userInfo);
+		userManagerService.updateUserInfo(userInfo);
 		sessionStatus.setComplete();
 		return "login";
 	}

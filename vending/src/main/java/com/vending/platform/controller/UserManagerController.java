@@ -16,9 +16,10 @@ public class UserManagerController extends UtilsAction {
 	@Autowired
 	private IUserManagerService userManagerService;
 
-	@Description("进入用户查找管理")
-	@RequestMapping(value = "userHome")
-	public String getUserHome() {
+	@Description("查看所有权限")
+	@RequestMapping(value="getAllAuthority")
+	public String getAllAuthority(){
+		
 		return "";
 	}
 

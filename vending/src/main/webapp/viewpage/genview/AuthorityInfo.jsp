@@ -4,11 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>用户信息</title>
+<title>Authority Info Page</title>
 </head>
+<body>
 <body>
 	<%@include file="../topmenu.jsp"%>
 	<div class="container">
@@ -16,25 +18,10 @@
 			<div class="col-md-12 column">
 				<ul class="breadcrumb">
 					<li><a href="<c:url value="/home"/>">主页</a></li>
-					<li class="active">用户信息</li>
+					<li class="active">权限管理</li>
 				</ul>
 			</div>
 		</div>
-		<div>
-			<form class="form-inline" method="post">
-				<div class="form-group">
-					<input type="text" class="form-control" name="statue"
-						placeholder="是否可用">
-				</div>
-				<div class="form-group">
-				<select name="statue" class="form-control">
-					<option value="1" selected>可用</option>
-					<option value="0">不可用</option>
-				</select>
-			</div>
-			</form>
-		</div>
-
 	</div>
 </body>
 </html>
