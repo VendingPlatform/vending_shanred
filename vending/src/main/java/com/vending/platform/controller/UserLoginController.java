@@ -30,10 +30,12 @@ public class UserLoginController {
 		UserInfo user = userManagerService.login(userInfo);
 		ModelAndView modelAndView = new ModelAndView();
 		if (user != null) {
-			modelAndView.setViewName("genview/home");
-			modelAndView.addObject("user", user);
-			modelMap.addAttribute("user", user);
-			logger.debug(user.toString() + "：登录信息");
+			if (user.getFirmInfo().getFirmStatus() == 1) {
+				modelAndView.setViewName("genview/home");
+				modelAndView.addObject("user", user);
+				modelMap.addAttribute("user", user);
+				logger.debug(user.toString() + "：登录信息");
+			}
 		} else {
 			modelAndView.setViewName("/login");
 		}

@@ -97,6 +97,7 @@ public class OperMgr implements Serializable {
 		this.operateDate = operateDate;
 	}
 
+
 	@Override
 	public String toString() {
 		return "OperMgr [operMgrId=" + operMgrId + ", firmId=" + firmId + ", firmName=" + firmName + ", manuId="

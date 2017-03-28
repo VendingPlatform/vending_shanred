@@ -3,6 +3,7 @@ package com.vending.platform.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
@@ -37,8 +38,7 @@ public interface IFrimAndGroupDAO {
 	/** 按Id查找公司 */
 	@SelectProvider(type = IFirmAndGroupSqlProvider.class, method = "getFirmInfoById")
 	@Results({
-		@Result(property = "machineType", column = "tModelId", 
-				many = @Many(select = "com.vending.platform.dao.IMachineDAO.getMachineTypeById")) })
+			@Result(property = "machineType", column = "tModelId", many = @Many(select = "com.vending.platform.dao.IMachineDAO.getMachineTypeById")) })
 	public FirmInfo getFirmInfoById(Integer firmId);
 
 	/** 删除公司信息 */

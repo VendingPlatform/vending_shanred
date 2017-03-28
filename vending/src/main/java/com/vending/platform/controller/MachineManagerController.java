@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.vending.platform.domain.GroupInfo;
 import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.MachineType;
+import com.vending.platform.domain.OperMgr;
 import com.vending.platform.domain.UserInfo;
 import com.vending.platform.service.IFirmAndGroupService;
 import com.vending.platform.service.IMachineManagerService;
@@ -220,4 +221,6 @@ public class MachineManagerController extends UtilsAction {
 		}
 		return "redirect:/machine/machineGroupDetialInfos?groupId=" + groupId;
 	}
+
+
 }

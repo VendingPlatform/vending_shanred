@@ -78,6 +78,9 @@ public class IFirmAndGroupSqlProvider {
 				if (StringUtils.isNotBlank(firmInfo.getFirmDesc())) {
 					WHERE("firmDesc=#{firmDesc}");
 				}
+				if (firmInfo.getFirmType() == null) {
+					WHERE("firmType != 0");
+				}
 				if (firmInfo.getFirmType() != null) {
 					WHERE("firmType=#{firmType}");
 				}
@@ -223,7 +226,6 @@ public class IFirmAndGroupSqlProvider {
 					WHERE("manuName=#{manuName}");
 				if (operMgr.getOperateId() != null)
 					WHERE("operateId=#{operateId}");
-				WHERE("operMgrId=#{operMgrId}");
 			}
 		}.toString();
 	}
