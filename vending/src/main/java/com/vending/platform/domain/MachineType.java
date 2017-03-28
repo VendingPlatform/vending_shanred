@@ -22,6 +22,7 @@ public class MachineType implements Serializable {
 	private Integer operateId;
 	/** 操作时间 */
 	private Date operateDate;
+	private FirmInfo firmInfo;
 
 	public MachineType() {
 		super();
@@ -65,6 +66,14 @@ public class MachineType implements Serializable {
 
 	public void setOperateDate(Date operateDate) {
 		this.operateDate = operateDate;
+	}
+
+	public FirmInfo getFirmInfo() {
+		return firmInfo;
+	}
+
+	public void setFirmInfo(FirmInfo firmInfo) {
+		this.firmInfo = firmInfo;
 	}
 
 	@Override

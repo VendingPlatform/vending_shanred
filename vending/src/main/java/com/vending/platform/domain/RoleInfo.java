@@ -2,6 +2,7 @@ package com.vending.platform.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * T_Role_Info映射表：角色表
@@ -23,13 +24,15 @@ public class RoleInfo implements Serializable {
 	private String authorityName;
 	/** 权限状态:0:不可用；1：可用 */
 	private Integer status;
-	/**所属公司*/
+	/** 所属公司 */
 	private Integer firmId;
 	/** 操作者 */
 	private Integer operateId;
 	/** 操作时间 */
 	private Date operateDate;
 
+	private List<UserInfo> userInfos;
+	
 	public RoleInfo() {
 		super();
 	}
@@ -96,6 +99,14 @@ public class RoleInfo implements Serializable {
 
 	public void setOperateDate(Date operateDate) {
 		this.operateDate = operateDate;
+	}
+
+	public List<UserInfo> getUserInfos() {
+		return userInfos;
+	}
+
+	public void setUserInfos(List<UserInfo> userInfos) {
+		this.userInfos = userInfos;
 	}
 
 	@Override

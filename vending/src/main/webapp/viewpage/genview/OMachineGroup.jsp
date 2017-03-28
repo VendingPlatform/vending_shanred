@@ -45,7 +45,7 @@
 						<td>${groupInfo.operateId}</td>
 						<td>${groupInfo.operateDate}</td>
 						<td>
-							<a href="<c:url value="/machine/machinegroupInfos"/>?groupId=${groupInfo.groupId}" class="btn default"> <span class="glyphicon glyphicon-paperclip" title="详情"></span>
+							<a href="<c:url value="/machine/machineGroupDetialInfos"/>?groupId=${groupInfo.groupId}" class="btn default"> <span class="glyphicon glyphicon-paperclip" title="详情"></span>
 							</a>
 							<a href="<c:url value="/machine/machinegroupInfo"/>?groupId=${groupInfo.groupId}" class="btn default"> <span class="glyphicon glyphicon-edit" title="编辑"></span>
 							</a>
@@ -94,9 +94,9 @@ $(document).ready(function(){
             data:$('#addGroupForm').serialize(),
             success:function(responseText){  
             	if(responseText==1)
-            	{alert("创建成功");}
+            	{alert("添加成功");}
             	else{
-            		alert("创建失败");
+            		alert("添加失败");
             	}  
             	location.reload();
             },  

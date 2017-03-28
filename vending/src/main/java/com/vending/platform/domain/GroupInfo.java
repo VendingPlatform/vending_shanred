@@ -2,6 +2,7 @@ package com.vending.platform.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * T_Group_Info映射表：分組信息映射表
@@ -26,6 +27,9 @@ public class GroupInfo implements Serializable {
 	private Integer operateId;
 	/** 操作时间 */
 	private Date operateDate;
+
+	private List<MachineOperater> machineOperaters;
+	private List<UserInfo> userInfos;
 
 	public GroupInfo() {
 		super();
@@ -85,6 +89,22 @@ public class GroupInfo implements Serializable {
 
 	public void setOperateDate(Date operateDate) {
 		this.operateDate = operateDate;
+	}
+
+	public List<MachineOperater> getMachineOperaters() {
+		return machineOperaters;
+	}
+
+	public void setMachineOperaters(List<MachineOperater> machineOperaters) {
+		this.machineOperaters = machineOperaters;
+	}
+
+	public List<UserInfo> getUserInfos() {
+		return userInfos;
+	}
+
+	public void setUserInfos(List<UserInfo> userInfos) {
+		this.userInfos = userInfos;
 	}
 
 	@Override

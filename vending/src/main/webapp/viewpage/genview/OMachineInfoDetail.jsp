@@ -58,7 +58,7 @@
 				</tr>
 				<tr>
 					<td>售货机组</td>
-					<td>${machineOperater.groupId}</td>
+					<td>${machineOperater.groupInfo.groupName}</td>
 				</tr>
 				<tr>
 					<td>运营商</td>

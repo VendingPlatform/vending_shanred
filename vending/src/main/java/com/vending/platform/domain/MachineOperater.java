@@ -39,6 +39,8 @@ public class MachineOperater implements Serializable {
 	private Date operateDate;
 	/** 售货机基本信息 */
 	private MachineInfo machineInfo;
+	/** 售货机组 */
+	private GroupInfo groupInfo;
 
 	public MachineOperater() {
 		super();
@@ -156,13 +158,22 @@ public class MachineOperater implements Serializable {
 		this.machinePannel = machinePannel;
 	}
 
+	public GroupInfo getGroupInfo() {
+		return groupInfo;
+	}
+
+	public void setGroupInfo(GroupInfo groupInfo) {
+		this.groupInfo = groupInfo;
+	}
+
 	@Override
 	public String toString() {
 		return "MachineOperater [mOperaterId=" + mOperaterId + ", machineId=" + machineId + ", machineName="
 				+ machineName + ", machinePannel=" + machinePannel + ", machineAssign=" + machineAssign
 				+ ", tModelName=" + tModelName + ", userId=" + userId + ", machineAddress=" + machineAddress
 				+ ", machineStatus=" + machineStatus + ", groupId=" + groupId + ", operFirmId=" + operFirmId
-				+ ", operateId=" + operateId + ", operateDate=" + operateDate + "]";
+				+ ", operateId=" + operateId + ", operateDate=" + operateDate + ", machineInfo=" + machineInfo
+				+ ", groupInfo=" + groupInfo + "]";
 	}
 
 }

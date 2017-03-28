@@ -1,6 +1,11 @@
 package com.vending.platform.dao;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.One;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import com.vending.platform.dao.sqlprovider.IFirmAndGroupSqlProvider;
 import com.vending.platform.domain.FirmInfo;
@@ -25,10 +30,15 @@ public interface IFrimAndGroupDAO {
 
 	/** 按条件查找所有公司信息 */
 	@SelectProvider(type = IFirmAndGroupSqlProvider.class, method = "getAllFirmInfos")
+	@Results({
+			@Result(property = "userInfos", column = "userId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllUsers")),
+			@Result(property = "userInfo", column = "userId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getUserById")) })
 	public List<FirmInfo> getAllFirmInfos(FirmInfo firmInfo);
 
 	/** 按Id查找公司 */
 	@SelectProvider(type = IFirmAndGroupSqlProvider.class, method = "getFirmInfoById")
+	@Results({
+			@Result(property = "machineType", column = "tModelId", many = @Many(select = "com.vending.platform.dao.IMachineDAO.getMachineTypeById")) })
 	public FirmInfo getFirmInfoById(Integer firmId);
 
 	/** 删除公司信息 */
@@ -49,6 +59,11 @@ public interface IFrimAndGroupDAO {
 
 	/** 按Id查看分组信息 */
 	@SelectProvider(type = IFirmAndGroupSqlProvider.class, method = "getGroupInfoById")
+	@Results({
+			@Result(property = "machineOperaters", column = "mOperaterId", many = @Many(select = "com.vending.platform.dao.IMachineDAO.getAllMachineOperaters")),
+			@Result(property = "machineOperater", column = "mOperaterId", many = @Many(select = "com.vending.platform.dao.IMachineDAO.getMachineOperaterById")),
+			@Result(property = "userInfos", column = "userId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllUsers")),
+			@Result(property = "userInfo", column = "userId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getUserById")) })
 	public GroupInfo getGroupInfoById(Integer groupId);
 
 	/** 删除分组信息 */

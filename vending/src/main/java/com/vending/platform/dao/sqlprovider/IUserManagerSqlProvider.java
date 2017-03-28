@@ -20,9 +20,6 @@ public class IUserManagerSqlProvider {
 				if (StringUtils.isNotBlank(authorityInfo.getAuthCode())) {
 					VALUES("authCode", "#{authCode}");
 				}
-				if (authorityInfo.getFirmId() != null) {
-					VALUES("firmId", "#{firmId}");
-				}
 				if (authorityInfo.getOperateId() != null) {
 					VALUES("operateId", "#{operateId}");
 				}
@@ -41,9 +38,6 @@ public class IUserManagerSqlProvider {
 					}
 					if (StringUtils.isNotBlank(authorityInfo.getAuthCode())) {
 						SET("authCode=#{authCode}");
-					}
-					if (authorityInfo.getFirmId() != null) {
-						SET("firmId=#{firmId}");
 					}
 					if (authorityInfo.getOperateId() != null) {
 						SET("operateId=#{operateId}");
@@ -65,9 +59,6 @@ public class IUserManagerSqlProvider {
 					}
 					if (StringUtils.isNotBlank(authorityInfo.getAuthCode())) {
 						WHERE("authCode=#{authCode}");
-					}
-					if (authorityInfo.getFirmId() != null) {
-						WHERE("firmId=#{firmId}");
 					}
 				}
 			}
@@ -245,7 +236,11 @@ public class IUserManagerSqlProvider {
 						SET("roleName=#{roleName}");
 					}
 					if (userInfo.getGroupId() != null) {
-						SET("groupId=#{groupId}");
+						if (userInfo.getGroupId() == -1) {
+							SET("groupId=null");
+						} else {
+							SET("groupId=#{groupId}");
+						}
 					}
 					if (userInfo.getStatus() != null) {
 						SET("status=#{status}");
@@ -291,7 +286,11 @@ public class IUserManagerSqlProvider {
 					WHERE("roleName=#{roleName}");
 				}
 				if (userInfo.getGroupId() != null) {
-					WHERE("groupId=#{groupId}");
+					if (userInfo.getGroupId() == -1) {
+						WHERE("groupId is null");
+					} else {
+						WHERE("groupId=#{groupId}");
+					}
 				}
 				if (userInfo.getStatus() != null) {
 					WHERE("status=#{status}");

@@ -1,6 +1,11 @@
 package com.vending.platform.dao;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.One;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import com.vending.platform.dao.sqlprovider.IUserManagerSqlProvider;
 import com.vending.platform.domain.AuthorityInfo;
@@ -93,6 +98,9 @@ public interface IUserManagerDao {
 	 *            角色ID
 	 */
 	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getRoleById")
+	@Results({
+			@Result(property = "userInfos", column = "userId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllUsers")),
+			@Result(property = "userInfo", column = "userId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getUserById")) })
 	public RoleInfo getRoleById(Integer roleId);
 
 	/** 删除角色 */
@@ -120,10 +128,18 @@ public interface IUserManagerDao {
 	 * @param userInfo
 	 */
 	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getAllUsers")
+	@Results({
+			@Result(property = "roleInfo", column = "roleId", one = @One(select = "com.vending.platform.dao.IUserManagerDao.getRoleById")),
+			@Result(property = "firmInfo", column = "firmId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById")),
+			@Result(property = "groupInfo", column = "groupId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getGroupInfoById")) })
 	public List<UserInfo> getAllUsers(UserInfo userInfo);
 
 	/** 按Id查找用户 */
 	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getUserById")
+	@Results({
+			@Result(property = "roleInfo", column = "roleId", one = @One(select = "com.vending.platform.dao.IUserManagerDao.getRoleById")),
+			@Result(property = "firmInfo", column = "firmId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById")),
+			@Result(property = "groupInfo", column = "groupId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getGroupInfoById")) })
 	public UserInfo getUserById(Integer integer);
 
 	/** 删除用户 */
