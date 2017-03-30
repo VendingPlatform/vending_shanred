@@ -20,7 +20,6 @@ import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.MachineType;
 import com.vending.platform.domain.UserInfo;
 import com.vending.platform.service.IMachineManagerService;
-import com.vending.platform.service.impl.UtilsService;
 
 @Controller
 @SessionAttributes({ "user", "machineOperaterInfo", "allMachineTypes", "machineGroupInfos" })
