@@ -221,5 +221,4 @@ public class MachineManagerController extends UtilsAction {
 		return "redirect:/machine/machineGroupDetialInfos?groupId=" + groupId;
 	}
 
-
 }

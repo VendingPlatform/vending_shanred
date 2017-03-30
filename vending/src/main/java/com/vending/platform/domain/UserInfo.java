@@ -48,6 +48,29 @@ public class UserInfo implements Serializable {
 		super();
 	}
 
+	public UserInfo(Integer userId, String userNo, String userName, String password, String mobilePhone, String email,
+			Integer roleId, String roleName, Integer groupId, Integer status, Integer firmId, Integer parentUserId,
+			Integer operateId, Date operateDate, RoleInfo roleInfo, FirmInfo firmInfo, GroupInfo groupInfo) {
+		super();
+		this.userId = userId;
+		this.userNo = userNo;
+		this.userName = userName;
+		this.password = password;
+		this.mobilePhone = mobilePhone;
+		this.email = email;
+		this.roleId = roleId;
+		this.roleName = roleName;
+		this.groupId = groupId;
+		this.status = status;
+		this.firmId = firmId;
+		this.parentUserId = parentUserId;
+		this.operateId = operateId;
+		this.operateDate = operateDate;
+		this.roleInfo = roleInfo;
+		this.firmInfo = firmInfo;
+		this.groupInfo = groupInfo;
+	}
+
 	public Integer getUserId() {
 		return userId;
 	}
