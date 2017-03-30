@@ -9,7 +9,7 @@ import com.vending.platform.domain.UserInfo;
 
 public interface IFirmAndGroupService {
 
-	void insertFirm(FirmInfo firmInfo);
+	boolean insertFirm(FirmInfo firmInfo);
 
 	void updateFirm(FirmInfo firmInfo);
 

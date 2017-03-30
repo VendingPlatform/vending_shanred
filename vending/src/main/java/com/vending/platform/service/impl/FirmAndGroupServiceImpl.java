@@ -17,8 +17,16 @@ public class FirmAndGroupServiceImpl implements IFirmAndGroupService {
 	private IFrimAndGroupDAO firmAndGroupDao;
 
 	@Override
-	public void insertFirm(FirmInfo firmInfo) {
-		firmAndGroupDao.insertFirm(firmInfo);
+	public boolean insertFirm(FirmInfo firmInfo) {
+		FirmInfo firmAlready = new FirmInfo();
+		firmAlready.setFirmNo(firmInfo.getFirmNo());
+		List<FirmInfo> firmInfos = firmAndGroupDao.getAllFirmInfos(firmAlready);
+		if (firmInfos.size() > 0) {
+			return false;
+		} else {
+			firmAndGroupDao.insertFirm(firmInfo);
+			return true;
+		}
 	}
 
 	@Override
@@ -42,7 +50,7 @@ public class FirmAndGroupServiceImpl implements IFirmAndGroupService {
 	}
 
 	@Override
-	public boolean insertGroup(GroupInfo groupInfo,UserInfo userInfo) {
+	public boolean insertGroup(GroupInfo groupInfo, UserInfo userInfo) {
 		GroupInfo group = new GroupInfo();
 		group.setFirmId(userInfo.getFirmInfo().getFirmId());
 		group.setGroupType(groupInfo.getGroupType());

@@ -30,7 +30,7 @@ public class UserLoginController {
 		UserInfo user = userManagerService.login(userInfo);
 		ModelAndView modelAndView = new ModelAndView();
 		if (user != null) {
-			if (user.getFirmInfo().getFirmStatus() == 1) {
+			if (user.getFirmInfo().getFirmStatus() == 1 && user.getStatus() == 1) {
 				modelAndView.setViewName("genview/home");
 				modelAndView.addObject("user", user);
 				modelMap.addAttribute("user", user);

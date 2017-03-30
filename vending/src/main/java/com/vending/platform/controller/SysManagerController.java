@@ -1,5 +1,6 @@
 package com.vending.platform.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,44 @@ public class SysManagerController extends UtilsAction {
 	private IFirmAndGroupService firmAndGroupService;
 
 	@Description("获取所有商家信息")
-	@RequestMapping(value = "/getAllFirms", method = RequestMethod.POST)
+	@RequestMapping(value = "/getAllFirms")
 	public String getAllFirms(FirmInfo firmInfo, ModelMap map) {
 		List<FirmInfo> allFirmInfos = firmAndGroupService.getAllFirmInfos(firmInfo);
 		map.addAttribute("allFirmInfos", allFirmInfos);
 		return "genview/ManagerFirm";
+	}
+
+	@Description("获取商家信息")
+	@RequestMapping(value = "/getFirmInfo", method = RequestMethod.GET)
+	public String getFirmById(Integer firmId, ModelMap modelMap) {
+		FirmInfo firmInfo = firmAndGroupService.getFirmInfo(firmId);
+		modelMap.addAttribute("firmInfo", firmInfo);
+		return "genview/MFirmUpdate";
+	}
+
+	@Description("更新商家信息")
+	@RequestMapping(value = "/updateFirmInfo", method = RequestMethod.POST)
+	public String updateFirmInfo(FirmInfo firmInfo, ModelMap modelMap) {
+		firmAndGroupService.updateFirm(firmInfo);
+		return "redirect:/manager/getAllFirms";
+	}
+
+	@Description("添加商家")
+	@RequestMapping(value = "/createFirmInfo", method = RequestMethod.POST)
+	public String createFirmInfo(FirmInfo firmInfo) {
+		boolean flag = firmAndGroupService.insertFirm(firmInfo);
+		try {
+			write(flag);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "genview/ManagerFirm";
+	}
+
+	@Description("删除商家信息")
+	@RequestMapping(value = "/deleteFirmInfo")
+	public String deleteFirm(Integer firmId, ModelMap modelMap) {
+		firmAndGroupService.deleteFirmInfo(firmId);
+		return "redirect:/manager/getAllFirms";
 	}
 }
