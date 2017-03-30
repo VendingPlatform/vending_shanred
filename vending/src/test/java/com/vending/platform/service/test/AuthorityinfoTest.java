@@ -24,6 +24,12 @@ public class AuthorityinfoTest {
 	private IUserManagerDao aDao;
 
 	@Test
+	public void getUserById() {
+		UserInfo userInfo = aDao.getUserById(1);
+		System.out.println(userInfo.toString());
+	}
+
+	@Test
 	public void insetUser() throws SQLFormatException {
 		UserInfo userInfo = new UserInfo();
 		userInfo.setUserNo("111");
@@ -54,15 +60,15 @@ public class AuthorityinfoTest {
 	@Test
 	public void testGetUser() {
 		UserInfo userInfo = new UserInfo();
-		userInfo.setUserName("update");
-		userInfo.setRoleId(2);
-		userInfo.setStatus(1);
+		// userInfo.setUserName("update");
+		// userInfo.setRoleId(2);
+		// userInfo.setStatus(1);
 		List<UserInfo> userInfos = aDao.getAllUsers(userInfo);
 		for (UserInfo userInfo2 : userInfos) {
 			System.out.println(userInfo2.toString());
 		}
 
-		System.out.println(aDao.getUserById(1).toString());
+		// System.out.println(aDao.getUserById(1).toString());
 	}
 
 	@Test
@@ -85,7 +91,6 @@ public class AuthorityinfoTest {
 	public void updateRole() {
 		RoleInfo roleInfo = new RoleInfo();
 		roleInfo.setRoleId(6);
-		roleInfo.setRoleName("testuPDATE5");
 		roleInfo.setAuthorityCode("ttt_UPDATE;");
 		roleInfo.setAuthorityName("ttt;");
 		roleInfo.setStatus(1);
@@ -95,7 +100,6 @@ public class AuthorityinfoTest {
 	@Test
 	public void getAllRoles() {
 		RoleInfo roleInfo = new RoleInfo();
-		roleInfo.setRoleName("testuPDATE5");
 		roleInfo.setAuthorityCode("ttt_UPDATE;");
 		roleInfo.setAuthorityName("ttt;");
 		roleInfo.setStatus(1);

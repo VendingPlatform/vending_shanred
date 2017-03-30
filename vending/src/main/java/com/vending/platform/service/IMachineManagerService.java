@@ -2,7 +2,6 @@ package com.vending.platform.service;
 
 import java.util.List;
 
-import com.vending.platform.domain.GroupInfo;
 import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.MachineType;
 import com.vending.platform.domain.UserInfo;

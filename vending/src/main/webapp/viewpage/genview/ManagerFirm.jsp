@@ -20,6 +20,9 @@
 				</ul>
 			</div>
 		</div>
+		<div class="form-group">
+			<button class="btn btn-primary" data-toggle="modal" data-target="#createFirmInfoModal">注册商家</button>
+		</div>
 		<div id="search">
 			<form class="form-inline" method="post" action="<c:url value="/manager/getAllFirms"/>">
 				<div class="form-group">
@@ -32,7 +35,7 @@
 					<select name="firmType" class="form-control">
 						<option value="">---商家类型---</option>
 						<option value="1">运营商</option>
-						<option value="0">厂商</option>
+						<option value="2">厂商</option>
 					</select>
 				</div>
 				<div class="form-group">
@@ -67,13 +70,20 @@
 						<td>${firm.firmNo}</td>
 						<td>${firm.firmName}</td>
 						<td>${firm.firmDesc}</td>
-						<td>${firm.firmType}</td>
-						<td>${firm.firmStatus}</td>
+						<td>
+							<c:if test="${firm.firmType==1}">运营商</c:if>
+							<c:if test="${firm.firmType==2}">厂商</c:if>
+						</td>
+						<td>
+							<c:if test="${firm.firmStatus==1}">可用</c:if>
+							<c:if test="${firm.firmStatus==0}">不可用</c:if>
+						</td>
 						<td>${firm.operateId}</td>
 						<td>${firm.operateDate}</td>
 						<td>
-							<a href="<c:url value="/manager/firmUpdate"/>?firmId=${firm.firmId}" class="btn default"> 
-							<span class="glyphicon glyphicon-edit" title="编辑"></span>
+							<a href="<c:url value="/manager/getFirmInfo"/>?firmId=${firm.firmId}" class="btn default"> <span class="glyphicon glyphicon-edit" title="编辑"></span>
+							</a>
+							<a href="<c:url value="/manager/deleteFirmInfo"/>?firmId=${firm.firmId}" class="btn default"> <span class="glyphicon glyphicon-trash" title="删除"></span>
 							</a>
 						</td>
 					</tr>
@@ -82,5 +92,76 @@
 			</table>
 		</div>
 	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="createFirmInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">添加商家</h4>
+				</div>
+				<div class="modal-body" style="width: 80%; padding-left: 30px">
+					<form class="form-horizontal" id="createFirmInfo" method="post">
+						<input type="hidden" name="operateId" value="${user.userId}" />
+						<div class="form-group">
+							<label for="firmNo">商家编号:</label>
+							<input type="text" class="form-control" name="firmNo" required placeholder="商家编号">
+						</div>
+
+						<div class="form-group">
+							<label for="firmName">商家名称:</label>
+							<input type="text" class="form-control" name="firmName" required placeholder="商家名称">
+						</div>
+
+						<div class="form-group">
+							<label for="firmDesc">商家描述:</label>
+							<input type="text" class="form-control" name="firmDesc" placeholder="商家描述">
+						</div>
+						<div class="form-group">
+							<label for="firmDesc">商家类型:</label>
+							<select name="firmType" required>
+								<option value="1" selected>运营商</option>
+								<option value="2">厂商</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="firmDesc">商家状态:</label>
+							<select name="firmStatus" required>
+								<option value="1" selected>可用</option>
+								<option value="0">不可用</option>
+							</select>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" id="createBtn" data-dismiss="modal" onclick="createFirmInfo()">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
+<script type="text/javascript">
+	function createFirmInfo() {
+		$.ajax({
+			url : "<c:url value='/manager/createFirmInfo'/>",
+			type : "post",
+			dataType : "text",
+			data : $('#createFirmInfo').serialize(),
+			success : function(response) {
+				if (response == "true") {
+					alert("添加成功");
+				} else if (response =="false") {
+					alert("编号重复，请重置");
+				}
+				location.reload();
+			},
+			error : function() {
+				alert("添加失败");
+			}
+		});
+	}
+</script>
 </html>

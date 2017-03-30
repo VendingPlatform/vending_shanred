@@ -78,7 +78,7 @@ public class IUserManagerSqlProvider {
 			{
 				INSERT_INTO("roleinfo");
 				if (StringUtils.isNotBlank(roleInfo.getRoleName())) {
-					VALUES("roleName", "#{roleName}");
+					VALUES("authorityCode", "#{roleName}");
 				}
 				if (StringUtils.isNotBlank(roleInfo.getAuthorityCode())) {
 					VALUES("authorityCode", "#{authorityCode}");
@@ -106,7 +106,7 @@ public class IUserManagerSqlProvider {
 				if (roleInfo.getRoleId() != null) {
 					UPDATE("roleinfo");
 					if (StringUtils.isNotBlank(roleInfo.getRoleName())) {
-						SET("roleName=#{roleName}");
+						SET("authorityCode=#{roleName}");
 					}
 					if (StringUtils.isNotBlank(roleInfo.getAuthorityCode())) {
 						SET("authorityCode=#{authorityCode}");
@@ -135,7 +135,7 @@ public class IUserManagerSqlProvider {
 			{
 				SELECT("*").FROM("roleinfo");
 				if (StringUtils.isNotBlank(roleInfo.getRoleName())) {
-					WHERE("roleName=#{roleName}");
+					WHERE("authorityCode=#{roleName}");
 				}
 				if (StringUtils.isNotBlank(roleInfo.getAuthorityCode())) {
 					WHERE("authorityCode=#{authorityCode}");
