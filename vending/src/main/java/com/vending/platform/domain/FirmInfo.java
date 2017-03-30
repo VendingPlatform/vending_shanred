@@ -2,6 +2,7 @@ package com.vending.platform.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * T_Firm_Info映射类： 公司信息表，包括系统管理员、厂商和运营商
@@ -13,7 +14,7 @@ public class FirmInfo implements Serializable {
 	private static final long serialVersionUID = -3294054543209879646L;
 	/** 公司ID */
 	private Integer firmId;
-	/**公司编号*/
+	/** 公司编号 */
 	private String firmNo;
 	/** 公司名称 */
 	private String firmName;
@@ -27,6 +28,8 @@ public class FirmInfo implements Serializable {
 	private Integer operateId;
 	/** 操作时间 */
 	private Date operateDate;
+	private List<UserInfo> userInfos;
+	private List<MachineType> machineTypes;
 
 	public FirmInfo() {
 		super();
@@ -94,6 +97,22 @@ public class FirmInfo implements Serializable {
 
 	public void setOperateDate(Date operateDate) {
 		this.operateDate = operateDate;
+	}
+
+	public List<UserInfo> getUserInfos() {
+		return userInfos;
+	}
+
+	public void setUserInfos(List<UserInfo> userInfos) {
+		this.userInfos = userInfos;
+	}
+
+	public List<MachineType> getMachineTypes() {
+		return machineTypes;
+	}
+
+	public void setMachineTypes(List<MachineType> machineTypes) {
+		this.machineTypes = machineTypes;
 	}
 
 	@Override

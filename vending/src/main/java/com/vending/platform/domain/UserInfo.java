@@ -40,6 +40,10 @@ public class UserInfo implements Serializable {
 	/** 操作时间 */
 	private Date operateDate;
 
+	private RoleInfo roleInfo;
+	private FirmInfo firmInfo;
+	private GroupInfo groupInfo;
+
 	public UserInfo() {
 		super();
 	}
@@ -158,6 +162,30 @@ public class UserInfo implements Serializable {
 
 	public void setOperateDate(Date operateDate) {
 		this.operateDate = operateDate;
+	}
+
+	public RoleInfo getRoleInfo() {
+		return roleInfo;
+	}
+
+	public void setRoleInfo(RoleInfo roleInfo) {
+		this.roleInfo = roleInfo;
+	}
+
+	public FirmInfo getFirmInfo() {
+		return firmInfo;
+	}
+
+	public void setFirmInfo(FirmInfo firmInfo) {
+		this.firmInfo = firmInfo;
+	}
+
+	public GroupInfo getGroupInfo() {
+		return groupInfo;
+	}
+
+	public void setGroupInfo(GroupInfo groupInfo) {
+		this.groupInfo = groupInfo;
 	}
 
 	@Override
