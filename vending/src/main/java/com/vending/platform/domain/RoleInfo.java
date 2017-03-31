@@ -16,7 +16,6 @@ public class RoleInfo implements Serializable {
 	private static final long serialVersionUID = 4555319742101777793L;
 	/** 角色ID */
 	private Integer roleId;
-	/** 角色名称 */
 	private String roleName;
 	/** 权限编号集合，用逗号隔开 */
 	private String authorityCode;
@@ -32,7 +31,7 @@ public class RoleInfo implements Serializable {
 	private Date operateDate;
 
 	private List<UserInfo> userInfos;
-	
+
 	public RoleInfo() {
 		super();
 	}
@@ -43,14 +42,6 @@ public class RoleInfo implements Serializable {
 
 	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
-	}
-
-	public String getRoleName() {
-		return roleName;
-	}
-
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
 	}
 
 	public String getAuthorityCode() {
@@ -109,11 +100,19 @@ public class RoleInfo implements Serializable {
 		this.userInfos = userInfos;
 	}
 
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
 	@Override
 	public String toString() {
 		return "RoleInfo [roleId=" + roleId + ", roleName=" + roleName + ", authorityCode=" + authorityCode
 				+ ", authorityName=" + authorityName + ", status=" + status + ", firmId=" + firmId + ", operateId="
-				+ operateId + ", operateDate=" + operateDate + "]";
+				+ operateId + ", operateDate=" + operateDate + ", userInfos=" + userInfos + "]";
 	}
 
 }

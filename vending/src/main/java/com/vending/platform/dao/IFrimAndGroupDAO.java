@@ -3,10 +3,10 @@ package com.vending.platform.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Many;
-import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
+
 import com.vending.platform.dao.sqlprovider.IFirmAndGroupSqlProvider;
 import com.vending.platform.domain.FirmInfo;
 import com.vending.platform.domain.GroupInfo;

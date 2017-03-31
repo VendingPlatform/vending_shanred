@@ -8,8 +8,8 @@ import com.vending.platform.domain.OperMgr;
 import com.vending.platform.domain.UserInfo;
 
 public interface IFirmAndGroupService {
-
-	void insertFirm(FirmInfo firmInfo);
+	/** 添加商家，创建商家的同时要为商家创建管理员 */
+	boolean insertFirm(FirmInfo firmInfo);
 
 	void updateFirm(FirmInfo firmInfo);
 
