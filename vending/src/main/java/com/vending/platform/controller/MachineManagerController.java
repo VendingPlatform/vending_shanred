@@ -18,14 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.vending.platform.domain.GroupInfo;
 import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.MachineType;
-import com.vending.platform.domain.OperMgr;
 import com.vending.platform.domain.UserInfo;
 import com.vending.platform.service.IFirmAndGroupService;
 import com.vending.platform.service.IMachineManagerService;
-<<<<<<< HEAD
-=======
 import com.vending.platform.service.IUserManagerService;
->>>>>>> 3b63549b98c084ce647a6fc5453cabe480ef989e
 
 @Controller
 @SessionAttributes({ "user", "machineOperaterInfo", "allMachineTypes", "machineGroupInfos" })
