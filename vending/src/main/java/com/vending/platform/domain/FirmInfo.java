@@ -30,7 +30,7 @@ public class FirmInfo implements Serializable {
 	private Date operateDate;
 	private List<UserInfo> userInfos;
 	private List<MachineType> machineTypes;
-
+	private List<MachineInfo> machineInfos;
 	public FirmInfo() {
 		super();
 	}
@@ -114,6 +114,12 @@ public class FirmInfo implements Serializable {
 	public void setMachineTypes(List<MachineType> machineTypes) {
 		this.machineTypes = machineTypes;
 	}
+	public List<MachineInfo> getMachineInfos() {
+        return machineInfos;
+    }
+	public void setMachineInfos(List<MachineInfo> machineInfos) {
+        this.machineInfos = machineInfos;
+    }
 
 	@Override
 	public String toString() {

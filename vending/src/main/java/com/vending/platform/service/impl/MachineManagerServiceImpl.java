@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.vending.platform.dao.IFrimAndGroupDAO;
 import com.vending.platform.dao.IMachineDAO;
 import com.vending.platform.dao.IUserManagerDao;
-import com.vending.platform.domain.GroupInfo;
+import com.vending.platform.domain.MachineInfo;
 import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.MachineType;
 import com.vending.platform.domain.UserInfo;
@@ -22,10 +22,6 @@ public class MachineManagerServiceImpl implements IMachineManagerService {
 
 	@Autowired
 	private IMachineDAO machineDao;
-	@Autowired
-	private IUserManagerDao userManagerDao;
-	@Autowired
-	private IFrimAndGroupDAO firmandgroupDao;
 
 	@Override
 	public List<MachineOperater> getMachineOperaters(UserInfo userInfo, MachineOperater machineOperater) {
@@ -93,4 +89,26 @@ public class MachineManagerServiceImpl implements IMachineManagerService {
 	public void deleteMachineType(Integer id) {
 		machineDao.deleteMachineType(id);
 	}
+
+    @Override
+    public List<MachineInfo> getAllMachineInfos(MachineInfo machineInfo) {
+        return machineDao.getAllMachineInfos(machineInfo);
+    }
+
+    @Override
+    public MachineInfo getMachineInfoById(Integer machineId) {
+        return machineDao.getMachineInfoById(machineId);
+    }
+
+    @Override
+    public void updateMachineInfo(MachineInfo machineInfo) {
+        machineDao.updateMachineInfo(machineInfo);
+        
+    }
+
+    @Override
+    public void deleteMachineInfo(Integer machineId) {
+        // TODO Auto-generated method stub
+        machineDao.deleteMachineInfo(machineId);
+    }
 }

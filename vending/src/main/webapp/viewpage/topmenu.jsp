@@ -26,7 +26,7 @@
 						<ul class="dropdown-menu">
 							<li><a href="<%=basePath%>viewpage/genview/UserManager.jsp">用户管理</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="<c:url value="/user/getAllAuthority"/>">权限管理</a></li>
+							<li><a href="<c:url value="/manager/getAllAuthoritys"/>">权限管理</a></li>
 							<li><a href="#">角色管理</a></li>
 							<li><a href="#">用户组管理</a></li>
 						</ul></li>
@@ -61,6 +61,7 @@
 					<c:if test="${user.firmInfo.firmType==2 }">
 						<!-- 厂商才有的权限 -->
 						<li><a href="<c:url value="/manu/getAllOperateFirms"/>">运营商管理</a></li>
+						<li><a href="<c:url value="/manu/getAllMachines"/>">售货机管理</a></li>
 					</c:if>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">

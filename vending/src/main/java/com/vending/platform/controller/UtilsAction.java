@@ -6,7 +6,6 @@ import java.io.Serializable;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,6 @@ import com.alibaba.fastjson.JSON;
 @Controller
 public class UtilsAction implements Serializable {
 	private static final long serialVersionUID = -8348417258576966571L;
-	private static Logger logger = Logger.getLogger(UtilsAction.class);
 	private HttpServletResponse response;
 
 	@Description("进入home页")

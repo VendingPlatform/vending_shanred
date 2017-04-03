@@ -71,7 +71,7 @@ public class FirmAndGroupServiceImpl implements IFirmAndGroupService {
 	}
 
 	@Override
-	public FirmInfo getFirmInfo(Integer firmId) {
+	public FirmInfo getFirmInfoById(Integer firmId) {
 		return firmAndGroupDao.getFirmInfoById(firmId);
 	}
 

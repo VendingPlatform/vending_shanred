@@ -32,7 +32,9 @@ public interface IFrimAndGroupDAO {
 	@SelectProvider(type = IFirmAndGroupSqlProvider.class, method = "getAllFirmInfos")
 	@Results({
 			@Result(property = "userInfos", column = "userId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllUsers")),
-			@Result(property = "userInfo", column = "userId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getUserById")) })
+			@Result(property = "userInfo", column = "userId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getUserById")),
+			@Result(property = "machineInfos", column= "machineId", many= @Many(select = "com.vending.platform.dao.IMachineDAO.getAllMachineInfos")),
+            @Result(property = "machineInfo", column= "machineId", many= @Many(select = "com.vending.platform.dao.IMachineDAO.getMachineInfoById"))})
 	public List<FirmInfo> getAllFirmInfos(FirmInfo firmInfo);
 
 	/** 按Id查找公司 */

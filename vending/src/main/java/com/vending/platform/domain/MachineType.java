@@ -28,7 +28,7 @@ public class MachineType implements Serializable {
 		super();
 	}
 
-	public Integer gettModelId() {
+    public Integer gettModelId() {
 		return tModelId;
 	}
 

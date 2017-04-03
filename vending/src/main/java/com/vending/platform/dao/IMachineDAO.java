@@ -107,10 +107,18 @@ public interface IMachineDAO {
 
 	/** 按条件查询所有售货机 */
 	@SelectProvider(type = IMachineSqlProvider.class, method = "getAllMachineInfos")
+	@Results({
+	    @Result(property = "operFirmInfo" , column = "operFirmId", one= @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById")),
+	    @Result(property = "manuFirmInfo" , column = "manuFirmId", one= @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById"))
+	    })
 	public List<MachineInfo> getAllMachineInfos(MachineInfo machineInfo);
 
 	/** 按照Id查询MachineInfo中信息 */
 	@SelectProvider(type = IMachineSqlProvider.class, method = "getMachineInfoById")
+	@Results({
+	    @Result(property = "operFirmInfo" , column = "operFirmId",one= @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById")),
+        @Result(property = "manuFirmInfo" , column = "manuFirmId",one= @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById"))
+	    })
 	public MachineInfo getMachineInfoById(Integer machineId);
 
 	/** 删除售货机 */

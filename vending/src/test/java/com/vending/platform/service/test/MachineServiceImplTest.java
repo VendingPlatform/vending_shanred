@@ -1,5 +1,6 @@
 package com.vending.platform.service.test;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -171,7 +172,7 @@ public class MachineServiceImplTest extends AbstractJUnit4SpringContextTests {
 		machineInfo.setMachineName("测试MachineInfo");
 		machineInfo.setMachinePannel("测试MachinePannel");
 		machineInfo.setManuFirmId(3);
-		machineInfo.setMachinePrice(12.3);
+		machineInfo.setMachinePrice(BigDecimal.valueOf(2.0));
 		machineInfo.setManuMachineStatus(1);
 		machineDAO.insertMachineInfo(machineInfo);
 		

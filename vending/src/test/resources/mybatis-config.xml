@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<mappers>
+		<mapper class="com.vending.platform.dao.IMachineDAO" />
+		<mapper class="com.vending.platform.dao.IUserManagerDao" />
+		<mapper class="com.vending.platform.dao.IFrimAndGroupDAO" />
+		<mapper class="com.vending.platform.dao.IChannelManagerDAO" />
+		<mapper class="com.vending.platform.dao.IWareManagerDAO" />
+	</mappers>
+</configuration>  
