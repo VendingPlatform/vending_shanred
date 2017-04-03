@@ -20,6 +20,7 @@
 				</ul>
 			</div>
 		</div>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#insertFirm">添加商家</button>
 		<div>
 			<table class="table">
 				<tr>
@@ -31,6 +32,7 @@
 					<th>厂商名称</th>
 					<th>操作者</th>
 					<th>操作时间</th>
+					<th>操作</th>
 				</tr>
 				<c:forEach items="${operMgrs}" var="operFirm">
 					<tr>
@@ -42,10 +44,59 @@
 						<td>${operFirm.manuName}</td>
 						<td>${operFirm.operateId}</td>
 						<td>${operFirm.operateDate}</td>
+						<td>
+						<a href= "<c:url value="/manu/removeFirmToManu"/>?operMgrId=${operFirm.operMgrId}" class="btn default">
+								<span class="glyphicon glyphicon-remove-sign" title="移除"></span>
+							</a> 
+						</td>
 					</tr>
 				</c:forEach>
 			</table>
 		</div>
 	</div>
+	<div class="modal fade" id="insertFirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  		<div class="modal-dialog" role="document">
+   			<div class="modal-content">
+      			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        			<h4 class="modal-title" id="myModalLabel">商家列表</h4>
+      			</div>
+      			<div class="modal-body" style="width: 80%; padding-left: 30px">
+      			<form  method="post" id="insertFirmForm" >
+		        	<c:forEach items="${firmInfosNotInManus}" var="firm">
+		        		<label class="checkbox">
+		        		  <input type="checkbox" name="firmIds" value="${firm.firmId}">
+		        			&nbsp;<span>${firm.firmNo}</span>
+   	      					&nbsp;<span>${firm.firmName}</span>
+   	     			 		&nbsp;<span>${firm.firmDesc}</span>
+   	      					&nbsp;<span><c:if test="${firm.firmStatus==1}">可用</c:if></span>
+		        		</label>
+		        	</c:forEach>
+		        	</form>
+      			</div>
+    	  		<div class="modal-footer">
+    	    		<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      	    		<button type="button" class="btn btn-primary"  onclick="insertFirm()" data-dismiss="modal"  >保存</button>
+     	 		</div>
+   	 		</div>
+ 		 </div>
+	</div>
 </body>
+<script type="text/javascript">
+function insertFirm(){
+	$.ajax({  
+        url:"<c:url value='/manu/insertFirmToManu'/>",
+        type:"post",  
+        dataType:"text",  
+        data:$('#insertFirmForm').serialize(),
+        success:function(responseText){  
+        	alert("添加成功"+responseText+"个");
+        	location.reload();
+        },  
+        error:function(){  
+            alert("添加失败");  
+        }  
+    });  
+}
+</script>
 </html>

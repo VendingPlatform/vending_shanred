@@ -16,8 +16,8 @@ import com.vending.platform.exception.SQLFormatException;
 
 /** @author Miley_Ren */
 // 指定bean注入的配置文件
-@ContextConfiguration("classpath:spring-mybatis.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations= "classpath:spring-mybatis.xml")
 public class AuthorityinfoTest {
 
 	@Autowired

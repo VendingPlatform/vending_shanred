@@ -2,9 +2,6 @@ package com.vending.platform.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.vending.platform.domain.MachineOperater;
-import com.vending.platform.domain.UserInfo;
-
 @Service
 public class UtilsService {
 
@@ -19,7 +16,7 @@ public class UtilsService {
 	 *            用户信息
 	 * @return MachineOperater 根据权限编码封装过后的查询信息
 	 */
-	public static MachineOperater getCode(String authorityCodes, MachineOperater machineOperater, UserInfo userInfo) {
+	/*public static MachineOperater getCode(String authorityCodes, MachineOperater machineOperater, UserInfo userInfo) {
 		String[] aCodes = (String[]) authorityCodes.split(";");
 		for (int i = 0; i < aCodes.length; i++) {
 			if (aCodes[i].equals("000")) {
@@ -41,5 +38,5 @@ public class UtilsService {
 			}
 		}
 		return machineOperater;
-	}
+	}*/
 }

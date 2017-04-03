@@ -15,7 +15,7 @@ public interface IFirmAndGroupService {
 
 	List<FirmInfo> getAllFirmInfos(FirmInfo firmInfo);
 
-	FirmInfo getFirmInfo(Integer firmId);
+	FirmInfo getFirmInfoById(Integer firmId);
 
 	void deleteFirmInfo(Integer firmId);
 

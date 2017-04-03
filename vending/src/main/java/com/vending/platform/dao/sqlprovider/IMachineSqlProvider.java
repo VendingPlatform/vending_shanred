@@ -296,7 +296,7 @@ public class IMachineSqlProvider {
 				if (machineInfo.getManuFirmId() != null) {
 					WHERE("manuFirmId=#{manuFirmId}");
 				}
-				if (StringUtils.isNotBlank(machineInfo.getMachinePrice() + "")) {
+				if (machineInfo.getMachinePrice()!=null) {
 					WHERE("machinePrice=#{machinePrice}");
 				}
 				if (StringUtils.isNotBlank(machineInfo.gettModelName())) {

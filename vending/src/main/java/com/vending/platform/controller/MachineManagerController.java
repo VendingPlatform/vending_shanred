@@ -130,8 +130,6 @@ public class MachineManagerController extends UtilsAction {
 	@Description("添加售货机分组")
 	@RequestMapping(value = "/machineGroupCreate")
 	public String createGroupInfo(GroupInfo groupInfo, @ModelAttribute("user") UserInfo userInfo, ModelMap modelMap) {
-		// boolean ret = machineManagerService.addGroupInfo(groupInfo,
-		// userInfo);
 		boolean ret = firmAndGroupService.insertGroup(groupInfo, userInfo);
 		int index = 0;
 		if (ret) {

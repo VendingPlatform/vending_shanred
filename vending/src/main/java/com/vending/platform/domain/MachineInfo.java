@@ -1,18 +1,13 @@
 package com.vending.platform.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
-
 /**
  * T_Machine_Info映射表：售货机信息表
- * 
  * @author Miley_Ren
  */
 public class MachineInfo implements Serializable {
-
-	/**
-	 * 序列号
-	 */
 	private static final long serialVersionUID = 8140170825790827210L;
 
 	/** 售货机ID */
@@ -24,7 +19,7 @@ public class MachineInfo implements Serializable {
 	/** 厂商ID */
 	private Integer manuFirmId;
 	/** 售货机价格 */
-	private double machinePrice;
+	private BigDecimal machinePrice;
 	/** 售货机类型 */
 	private String tModelName;
 	/** 售货机出售状态 ：0：未售出；1：售出；2：回收 */
@@ -35,6 +30,9 @@ public class MachineInfo implements Serializable {
 	private Integer operateId;
 	/** 操作时间 */
 	private Date operateDate;
+	
+	private FirmInfo operFirmInfo;
+	private FirmInfo manuFirmInfo;
 
 	public MachineInfo() {
 		super();
@@ -72,11 +70,11 @@ public class MachineInfo implements Serializable {
 		this.manuFirmId = manuFirmId;
 	}
 
-	public double getMachinePrice() {
+	public BigDecimal getMachinePrice() {
 		return machinePrice;
 	}
 
-	public void setMachinePrice(double machinePrice) {
+	public void setMachinePrice(BigDecimal machinePrice) {
 		this.machinePrice = machinePrice;
 	}
 
@@ -120,7 +118,23 @@ public class MachineInfo implements Serializable {
 		this.operateDate = operateDate;
 	}
 
-	@Override
+	public FirmInfo getOperFirmInfo() {
+        return operFirmInfo;
+    }
+
+    public void setOperFirmInfo(FirmInfo operFirmInfo) {
+        this.operFirmInfo = operFirmInfo;
+    }
+
+    public FirmInfo getManuFirmInfo() {
+        return manuFirmInfo;
+    }
+
+    public void setManuFirmInfo(FirmInfo manuFirmInfo) {
+        this.manuFirmInfo = manuFirmInfo;
+    }
+
+    @Override
 	public String toString() {
 		return "MachineInfo [machineId=" + machineId + ", machineName=" + machineName + ", machinePannel="
 				+ machinePannel + ", manuFirmId=" + manuFirmId + ", machinePrice=" + machinePrice + ", tModelName="
