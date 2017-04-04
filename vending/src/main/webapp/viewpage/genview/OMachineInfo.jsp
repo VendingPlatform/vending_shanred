@@ -22,10 +22,10 @@
 		</div>
 		<form class="form-inline" method="post" action="<c:url value="/machine/machineInfo"/>">
 			<div class="form-group">
-				<input type="text" class="form-control" name="machineName" placeholder="售货机铭牌号">
+				<input type="text" class="form-control" name="machineInfo.machineName" placeholder="售货机铭牌号">
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" name="machinePannel" placeholder="设备主板">
+				<input type="text" class="form-control" name="machineInfo.machinePannel" placeholder="设备主板">
 			</div>
 			<div class="form-group">
 				<select name="machineAssign" class="form-control">
@@ -35,7 +35,7 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<select name="tModelName" class="form-control">
+				<select name="machineInfo.tModelName" class="form-control">
 					<option value="">---售货机类型---</option>
 					<c:forEach items="${allMachineTypes}" var="machineType">
 						<option value="${machineType.tModelName}">${machineType.tModelName}</option>
@@ -60,10 +60,10 @@
 				</tr>
 				<c:forEach items="${machineOperaterInfo}" var="machine">
 					<tr>
-						<td>${machine.machineName }</td>
-						<td>${machine.machinePannel }</td>
+						<td>${machine.machineInfo.machineName }</td>
+						<td>${machine.machineInfo.machinePannel }</td>
 						<td>${machine.machineAssign }</td>
-						<td>${machine.tModelName }</td>
+						<td>${machine.machineInfo.tModelName }</td>
 						<td>${machine.machineAddress }</td>
 						<td>
 							<a href="<c:url value="/machine/machineInfoDetail"/>?mOperaterId=${machine.mOperaterId}" class="btn default"> <span class="glyphicon glyphicon-info-sign" title="详情"></span>

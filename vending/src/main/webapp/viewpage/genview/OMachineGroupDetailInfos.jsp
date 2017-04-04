@@ -39,12 +39,11 @@
 				</tr>
 				<c:forEach items="${machineGroupDetialInfos}" var="machine">
 					<tr>
-						<td>${machine.machineName }</td>
-						<td>${machine.machinePannel }</td>
+						<td>${machine.machineInfo.machineName }</td>
+						<td>${machine.machineInfo.machinePannel }</td>
 						<td>${machine.machineAssign }</td>
-						<td>${machine.tModelName }</td>
+						<td>${machine.machineInfo.tModelName }</td>
 						<td>${machine.machineAddress }</td>
-						<td>${machine.machineStatus}</td>
 						<td>${machine.groupInfo.groupName}</td>
 						<td>${machine.operFirmId}</td>
 						<td>
@@ -71,7 +70,7 @@
 		        	<input type="hidden" value="${groupId}" name="groupId">
 		        	<c:forEach items="${machineNotIntoGroup}" var="m">
 		        		<label class="checkbox-inline">
-		        		  <input type="checkbox" name="mOperaterId" value="${m.mOperaterId}">${m.machineName}
+		        		  <input type="checkbox" name="mOperaterId" value="${m.mOperaterId}">${m.machineInfo.machineName}
 		        		</label>
 		        	</c:forEach>
 		        	</form>

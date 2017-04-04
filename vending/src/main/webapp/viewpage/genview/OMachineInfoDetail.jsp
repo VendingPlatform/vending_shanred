@@ -30,11 +30,11 @@
 				</tr>
 				<tr>
 					<td>铭牌号</td>
-					<td>${machineOperater.machineName }</td>
+					<td>${machineOperater.machineInfo.machineName }</td>
 				</tr>
 				<tr>
 					<td>主板号</td>
-					<td>${machineOperater.machinePannel }</td>
+					<td>${machineOperater.machineInfo.machinePannel }</td>
 				</tr>
 				<tr>
 					<td>是否分配</td>
@@ -42,7 +42,7 @@
 				</tr>
 				<tr>
 					<td>售货机类型</td>
-					<td>${machineOperater.tModelName }</td>
+					<td>${machineOperater.machineInfo.tModelName }</td>
 				</tr>
 				<tr>
 					<td>管理员</td>
@@ -51,10 +51,6 @@
 				<tr>
 					<td>售货机地址</td>
 					<td>${machineOperater.machineAddress }</td>
-				</tr>
-				<tr>
-					<td>售货机状态</td>
-					<td>${machineOperater.machineStatus}</td>
 				</tr>
 				<tr>
 					<td>售货机组</td>

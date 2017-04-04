@@ -6,9 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.vending.platform.dao.IFrimAndGroupDAO;
 import com.vending.platform.dao.IMachineDAO;
-import com.vending.platform.dao.IUserManagerDao;
 import com.vending.platform.domain.MachineInfo;
 import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.MachineType;
@@ -107,8 +105,30 @@ public class MachineManagerServiceImpl implements IMachineManagerService {
     }
 
     @Override
-    public void deleteMachineInfo(Integer machineId) {
-        // TODO Auto-generated method stub
+    public boolean deleteMachineInfo(Integer machineId) {
+        MachineOperater machineOperater = new MachineOperater();
+        machineOperater.setMachineId(machineId);
+        List<MachineOperater> machineOperaters = machineDao.getAllMachineOperaters(machineOperater);
+        if(machineOperaters.size()>0){
+            return false;
+        }
+        else{
         machineDao.deleteMachineInfo(machineId);
+        return true;
+    }}
+
+    @Override
+    public void insertMachine(MachineInfo machineInfo) {
+         machineDao.insertMachineInfo(machineInfo);
+    }
+
+    @Override
+    public void inserMachineOperater(MachineOperater machineOperater) {
+        try {
+            machineDao.insertMachineOperate(machineOperater);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }
