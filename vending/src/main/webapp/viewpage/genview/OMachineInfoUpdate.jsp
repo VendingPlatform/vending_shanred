@@ -69,22 +69,6 @@
 						</td>
 					</tr>
 					<tr>
-						<td>售货机状态</td>
-						<td>
-						${machineOperater.machineInfo.manuMachineStatus}
-							<%-- <select name="machineInfo.manuMachineStatus" required>
-								<c:if test="${machineOperater.machineInfo.manuMachineStatus==0}">
-									<option value="${machineOperater.machineInfo.manuMachineStatus}" selected>不可用</option>
-									<option value="1">可用</option>
-								</c:if>
-								<c:if test="${machineOperater.machineInfo.manuMachineStatus==1}">
-									<option value="${machineOperater.machineInfo.manuMachineStatus }" selected>可用</option>
-									<option value="0">不可用</option>
-								</c:if>
-							</select> --%>
-						</td>
-					</tr>
-					<tr>
 						<td>售货机组</td>
 						<td>
 							<select name="groupId" required="required">

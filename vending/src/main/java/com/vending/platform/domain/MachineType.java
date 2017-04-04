@@ -77,8 +77,10 @@ public class MachineType implements Serializable {
 	}
 
 	@Override
-	public String toString() {
-		return "MachineType [tModelId=" + tModelId + ", tModelName=" + tModelName + ", firmId=" + firmId
-				+ ", operateId=" + operateId + ", operateDate=" + operateDate + "]";
-	}
+    public String toString() {
+        return "MachineType [tModelId=" + tModelId + ", tModelName="
+                + tModelName + ", firmId=" + firmId + ", operateId=" + operateId
+                + ", operateDate=" + operateDate + ", firmInfo=" + firmInfo
+                + "]";
+    }
 }

@@ -177,30 +177,30 @@ public class IMachineSqlProvider {
                         }
                     }
                     if (machineOperater.getMachineId() != null) {
-                        WHERE("machineId=#{machineId}");
+                        WHERE("o.machineId=#{machineId}");
                     }
                     if (machineOperater.getMachineAssign() != null) {
-                        WHERE("machineAssign=#{machineAssign}");
+                        WHERE("o.machineAssign=#{machineAssign}");
                     }
                     if (machineOperater.getUserId() != null) {
-                        WHERE("userId=#{userId}");
+                        WHERE("o.userId=#{userId}");
                     }
                     if (StringUtils.isNotBlank(machineOperater.getMachineAddress())) {
-                        WHERE("machineAddress=#{machineAddress}");
+                        WHERE("o.machineAddress=#{machineAddress}");
                     }
                   
                     if (machineOperater.getGroupId() != null) {
                         if (machineOperater.getGroupId() == -1) {
-                            WHERE("groupId is null");
+                            WHERE("o.groupId is null");
                         } else {
-                            WHERE("groupId=#{groupId}");
+                            WHERE("o.groupId=#{groupId}");
                         }
                     }
                     if (machineOperater.getOperFirmId() != null) {
-                        WHERE("operFirmId=#{operFirmId}");
+                        WHERE("o.operFirmId=#{operFirmId}");
                     }
                     if (machineOperater.getOperateId() != null) {
-                        WHERE("operateId=#{operateId}");
+                        WHERE("o.operateId=#{operateId}");
                     }
                 }
             }

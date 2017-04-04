@@ -11,12 +11,13 @@ import com.vending.platform.domain.UserInfo;
 public interface IMachineManagerService {
     
     MachineInfo getMachineInfoById(Integer machineId);
+    void insertMachine(MachineInfo machineInfo);
     /**查询厂商所有售货机*/
     List<MachineInfo> getAllMachineInfos(MachineInfo machineInfo);
     
     void updateMachineInfo(MachineInfo machineInfo);
     
-    void deleteMachineInfo(Integer machineId);
+    boolean deleteMachineInfo(Integer machineId);
     
 	/** 查询所有售货机的类型 */
 	List<MachineType> getAllMachineTypes(MachineType machineType);
@@ -36,6 +37,6 @@ public interface IMachineManagerService {
 	MachineOperater getMachineOperaterById(Integer mOperaterId);
 
 	void updateMachineOperater(MachineOperater machineOperater);
-
+	void inserMachineOperater(MachineOperater machineOperater);
 
 }

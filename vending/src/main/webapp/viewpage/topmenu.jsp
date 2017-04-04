@@ -62,6 +62,7 @@
 						<!-- 厂商才有的权限 -->
 						<li><a href="<c:url value="/manu/getAllOperateFirms"/>">运营商管理</a></li>
 						<li><a href="<c:url value="/manu/getAllMachines"/>">售货机管理</a></li>
+						<li><a href="<c:url value="/manu/getAllTypes"/>">类型管理</a></li>
 					</c:if>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">

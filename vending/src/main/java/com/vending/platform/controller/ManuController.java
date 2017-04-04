@@ -1,5 +1,7 @@
 package com.vending.platform.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.vending.platform.domain.FirmInfo;
 import com.vending.platform.domain.MachineInfo;
+import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.MachineType;
 import com.vending.platform.domain.OperMgr;
 import com.vending.platform.domain.UserInfo;
@@ -22,13 +25,13 @@ import com.vending.platform.service.IFirmAndGroupService;
 import com.vending.platform.service.IMachineManagerService;
 
 @Controller
-@SessionAttributes({ "user", "machineTypes" })
+@SessionAttributes({ "user", "machineTypes", "operMgrs" })
 @RequestMapping("/manu")
 public class ManuController extends UtilsAction {
     private static final long serialVersionUID = -5888803867214434197L;
     @Autowired
     private IFirmAndGroupService firmAndGroupService;
-    @Autowired 
+    @Autowired
     private IMachineManagerService machineManagerService;
 
     @Description("厂商查看关联运营商")
@@ -73,7 +76,8 @@ public class ManuController extends UtilsAction {
 
     @Description("将运营商添加至厂商和做运营商管理表中")
     @RequestMapping(value = "/insertFirmToManu", method = RequestMethod.POST)
-    public String insertFirmToManu(Integer[] firmIds, @ModelAttribute("user") UserInfo userInfo,ModelMap modelMap) {
+    public String insertFirmToManu(Integer[] firmIds,
+            @ModelAttribute("user") UserInfo userInfo, ModelMap modelMap) {
         if (firmIds == null || firmIds.length == 0)
             return "redirect:/manu/getAllOperateFirms";
         int result = 0;
@@ -107,10 +111,12 @@ public class ManuController extends UtilsAction {
         firmAndGroupService.deleteOperMgr(operMgrId);
         return "redirect:/manu/getAllOperateFirms";
     }
+
     @Description("获取售货机信息")
     @RequestMapping(value = "/getMachineInfoById")
-    public String getMachineInfoById(Integer machineId,ModelMap modelMap) {
-        MachineInfo machineInfo =  machineManagerService.getMachineInfoById(machineId);
+    public String getMachineInfoById(Integer machineId, ModelMap modelMap) {
+        MachineInfo machineInfo = machineManagerService
+                .getMachineInfoById(machineId);
         modelMap.addAttribute("machineInfo", machineInfo);
         try {
             writeJson(machineInfo);
@@ -119,28 +125,134 @@ public class ManuController extends UtilsAction {
         }
         return "genview/MMachineInfo";
     }
-    
+
     @Description("获取所有售货机")
-    @RequestMapping(value="/getAllMachines")
-    public String getAllMachines(@ModelAttribute("user") UserInfo userInfo,ModelMap modelMap){
+    @RequestMapping(value = "/getAllMachines")
+    public String getAllMachines(@ModelAttribute("user") UserInfo userInfo,
+            ModelMap modelMap) {
         Integer manuFirmId = userInfo.getFirmInfo().getFirmId();
         MachineInfo machineInfo = new MachineInfo();
         machineInfo.setManuFirmId(manuFirmId);
-        List<MachineInfo> machineInfos = machineManagerService.getAllMachineInfos(machineInfo);
-        
+        List<MachineInfo> machineInfos = machineManagerService
+                .getAllMachineInfos(machineInfo);
+
         MachineType machineType = new MachineType();
         machineType.setFirmId(manuFirmId);
-        List<MachineType> machineTypes = machineManagerService.getAllMachineTypes(machineType);
-        
+        List<MachineType> machineTypes = machineManagerService
+                .getAllMachineTypes(machineType);
+
+        // 获取所有厂商的运营商表
+        OperMgr operMgr = new OperMgr();
+        operMgr.setManuId(userInfo.getFirmId());
+        List<OperMgr> operMgrs = firmAndGroupService.getAllOperMgrs(operMgr);
+
         modelMap.addAttribute("machineInfos", machineInfos);
         modelMap.addAttribute("machineTypes", machineTypes);
-        
-        return "genview/MMachineInfo";
-        }
-    @Description("更新售货机信息")
-    @RequestMapping(value = "/updateMachine")
-    public String updateMachine(MachineInfo machineInfo,ModelMap modelMap) {
-        //更新的同时要更新操作表，也可以设置操作表的对应关系
+        modelMap.addAttribute("operMgrs", operMgrs);
         return "genview/MMachineInfo";
     }
+
+    @Description("添加售货机")
+    @RequestMapping(value = "/addMachine")
+    public String addMachine(MachineInfo machineInfo) {
+        machineManagerService.insertMachine(machineInfo);
+        return "genview/MMachineInfo";
+    }
+
+    @Description("更新售货机信息")
+    @RequestMapping(value = "/updateMachine")
+    public String updateMachine(MachineInfo machineInfo, ModelMap modelMap) {
+        if (machineInfo.getManuMachineStatus() == 1) {
+            // 售货机已出售，不允许修改
+            try {
+                write("售货机已出售，不允许进行修改");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return "genview/MMachineInfo";
+        } else {
+            machineManagerService.updateMachineInfo(machineInfo);
+            try {
+                write("更新成功");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return "genview/MMachineInfo";
+        }
+
+    }
+
+    @Description("删除售货机")
+    @RequestMapping(value = "/deleteMachineInfo")
+    public String delMachine(Integer machineId) {
+        boolean result = machineManagerService.deleteMachineInfo(machineId);
+        try {
+            write(result);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "genview/MMachineInfo";
+    }
+
+    @Description("分配售货机信息")
+    @RequestMapping(value = "/assignMachine")
+    public String assignMachine(MachineInfo machineInfo, ModelMap modelMap) {
+        MachineInfo mInfo = machineManagerService.getMachineInfoById(machineInfo.getMachineId());
+        if (mInfo.getManuMachineStatus() == 1) {
+            // 已分配，不再分配
+            try {
+                write("已分配，不再进行分配");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            //分配售货机
+            mInfo.setOperFirmId(machineInfo.getOperFirmInfo().getFirmId());
+            mInfo.setManuMachineStatus(1);
+            machineManagerService.updateMachineInfo(mInfo);
+            //更新运营商表
+            MachineOperater operater = new MachineOperater();
+            operater.setMachineId(mInfo.getMachineId());
+            operater.setMachineAssign(0);
+            operater.setOperFirmId(machineInfo.getOperFirmInfo().getFirmId());
+            machineManagerService.inserMachineOperater(operater);
+            try {
+                write("分配成功");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return "genview/MMachineInfo";
+    }
+    
+    @Description("查找所有类型")
+    @RequestMapping(value = "/getAllTypes")
+    public String getAllTypes(@ModelAttribute("user") UserInfo userInfo,ModelMap modelMap){
+        Integer firmId = userInfo.getFirmId();
+        MachineType machineType = new MachineType();
+        machineType.setFirmId(firmId);
+        List<MachineType> machineTypes = machineManagerService.getAllMachineTypes(machineType);
+        modelMap.addAttribute("machineTypes", machineTypes);
+        return "genview/MMachineType";
+        }
+    
+    @Description("查找类型")
+    @RequestMapping(value = "/getTypeById")
+    public String getTypeById(Integer tModelId, ModelMap modelMap){
+        MachineType machineType =machineManagerService.getMachineTypeById(tModelId);
+        modelMap.addAttribute("machineType", machineType);
+        try {
+            writeJson(machineType.gettModelName());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "genview/MMachineType";
+        }
+    
+    @Description("更新类型")
+    @RequestMapping(value = "/updateType")
+    public String updateType(MachineType machineType, ModelMap modelMap){
+        machineManagerService.updateMachineType(machineType);
+        return "genview/MMachineType";
+        }
 }

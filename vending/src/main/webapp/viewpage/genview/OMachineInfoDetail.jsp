@@ -53,10 +53,6 @@
 					<td>${machineOperater.machineAddress }</td>
 				</tr>
 				<tr>
-					<td>售货机状态</td>
-					<td>${machineOperater.machineInfo.manuMachineStatus}</td>
-				</tr>
-				<tr>
 					<td>售货机组</td>
 					<td>${machineOperater.groupInfo.groupName}</td>
 				</tr>
