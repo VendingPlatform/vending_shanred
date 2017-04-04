@@ -33,11 +33,11 @@
 					</tr>
 					<tr>
 						<td>铭牌号</td>
-						<td>${machineOperater.machineName }</td>
+						<td>${machineOperater.machineInfo.machineName }</td>
 					</tr>
 					<tr>
 						<td>主板号</td>
-						<td>${machineOperater.machinePannel }</td>
+						<td>${machineOperater.machineInfo.machinePannel }</td>
 					</tr>
 					<tr>
 						<td>是否分配</td>
@@ -50,7 +50,7 @@
 					</tr>
 					<tr>
 						<td>售货机类型</td>
-						<td>${machineOperater.tModelName }</td>
+						<td>${machineOperater.machineInfo.tModelName }</td>
 					</tr>
 					<tr>
 						<td>分配管理员</td>
@@ -71,16 +71,17 @@
 					<tr>
 						<td>售货机状态</td>
 						<td>
-							<select name="machineStatus" required>
-								<c:if test="${machineOperater.machineStatus==0}">
-									<option value="${machineOperater.machineStatus }" selected>不可用</option>
+						${machineOperater.machineInfo.manuMachineStatus}
+							<%-- <select name="machineInfo.manuMachineStatus" required>
+								<c:if test="${machineOperater.machineInfo.manuMachineStatus==0}">
+									<option value="${machineOperater.machineInfo.manuMachineStatus}" selected>不可用</option>
 									<option value="1">可用</option>
 								</c:if>
-								<c:if test="${machineOperater.machineStatus==1}">
-									<option value="${machineOperater.machineStatus }" selected>可用</option>
+								<c:if test="${machineOperater.machineInfo.manuMachineStatus==1}">
+									<option value="${machineOperater.machineInfo.manuMachineStatus }" selected>可用</option>
 									<option value="0">不可用</option>
 								</c:if>
-							</select>
+							</select> --%>
 						</td>
 					</tr>
 					<tr>

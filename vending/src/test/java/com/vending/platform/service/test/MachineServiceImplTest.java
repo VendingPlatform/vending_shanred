@@ -62,7 +62,7 @@ public class MachineServiceImplTest extends AbstractJUnit4SpringContextTests {
 	public void testcreate() {
 		MachineOperater machineOperater = new MachineOperater();
 		machineOperater.setMachineId(3);
-		machineOperater.setMachineName("测试售货机");
+		//machineOperater.setMachineName("测试售货机");
 		machineOperater.setOperFirmId(1);
 		try {
 			machineDAO.insertMachineOperate(machineOperater);

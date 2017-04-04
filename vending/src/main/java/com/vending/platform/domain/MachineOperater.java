@@ -16,19 +16,19 @@ public class MachineOperater implements Serializable {
 	/** 售货机ID */
 	private Integer machineId;
 	/** 售货机名牌号 */
-	private String machineName;
+	//private String machineName;
 	/** 售货机主板号 */
-	private String machinePannel;
+	//private String machinePannel;
 	/** 是否分配：0：未分配；1：已分配 */
 	private Integer machineAssign;
 	/** 售货机类型 */
-	private String tModelName;
+	//private String tModelName;
 	/** 分配给某员工 */
 	private Integer userId;
 	/** 售货机详细地址 */
 	private String machineAddress;
 	/** 售货机是否可用：0：不可用；1：可用 */
-	private Integer machineStatus;
+	//private Integer machineStatus;
 	/** 所属售货机组 */
 	private Integer groupId;
 	/** 所属运营商ID */
@@ -45,8 +45,28 @@ public class MachineOperater implements Serializable {
 	public MachineOperater() {
 		super();
 	}
+	
 
-	public Integer getmOperaterId() {
+	public MachineOperater(Integer mOperaterId, Integer machineId,
+            Integer machineAssign, Integer userId, String machineAddress,
+            Integer groupId, Integer operFirmId, Integer operateId,
+            Date operateDate, MachineInfo machineInfo, GroupInfo groupInfo) {
+        super();
+        this.mOperaterId = mOperaterId;
+        this.machineId = machineId;
+        this.machineAssign = machineAssign;
+        this.userId = userId;
+        this.machineAddress = machineAddress;
+        this.groupId = groupId;
+        this.operFirmId = operFirmId;
+        this.operateId = operateId;
+        this.operateDate = operateDate;
+        this.machineInfo = machineInfo;
+        this.groupInfo = groupInfo;
+    }
+
+
+    public Integer getmOperaterId() {
 		return mOperaterId;
 	}
 
@@ -70,14 +90,7 @@ public class MachineOperater implements Serializable {
 		this.machineAssign = machineAssign;
 	}
 
-	public String gettModelName() {
-		return tModelName;
-	}
-
-	public void settModelName(String tModelName) {
-		this.tModelName = tModelName;
-	}
-
+	
 	public Integer getUserId() {
 		return userId;
 	}
@@ -94,14 +107,7 @@ public class MachineOperater implements Serializable {
 		this.machineAddress = machineAddress;
 	}
 
-	public Integer getMachineStatus() {
-		return machineStatus;
-	}
-
-	public void setMachineStatus(Integer machineStatus) {
-		this.machineStatus = machineStatus;
-	}
-
+	
 	public Integer getGroupId() {
 		return groupId;
 	}
@@ -133,32 +139,16 @@ public class MachineOperater implements Serializable {
 	public void setOperateDate(Date operateDate) {
 		this.operateDate = operateDate;
 	}
-
-	public void setMachineInfo(MachineInfo machineInfo) {
-		this.machineInfo = machineInfo;
-	}
-
+	
 	public MachineInfo getMachineInfo() {
-		return machineInfo;
-	}
+        return machineInfo;
+    }
 
-	public String getMachineName() {
-		return machineName;
-	}
+    public void setMachineInfo(MachineInfo machineInfo) {
+        this.machineInfo = machineInfo;
+    }
 
-	public void setMachineName(String machineName) {
-		this.machineName = machineName;
-	}
-
-	public String getMachinePannel() {
-		return machinePannel;
-	}
-
-	public void setMachinePannel(String machinePannel) {
-		this.machinePannel = machinePannel;
-	}
-
-	public GroupInfo getGroupInfo() {
+    public GroupInfo getGroupInfo() {
 		return groupInfo;
 	}
 
@@ -167,13 +157,13 @@ public class MachineOperater implements Serializable {
 	}
 
 	@Override
-	public String toString() {
-		return "MachineOperater [mOperaterId=" + mOperaterId + ", machineId=" + machineId + ", machineName="
-				+ machineName + ", machinePannel=" + machinePannel + ", machineAssign=" + machineAssign
-				+ ", tModelName=" + tModelName + ", userId=" + userId + ", machineAddress=" + machineAddress
-				+ ", machineStatus=" + machineStatus + ", groupId=" + groupId + ", operFirmId=" + operFirmId
-				+ ", operateId=" + operateId + ", operateDate=" + operateDate + ", machineInfo=" + machineInfo
-				+ ", groupInfo=" + groupInfo + "]";
-	}
+    public String toString() {
+        return "MachineOperater [mOperaterId=" + mOperaterId + ", machineId="
+                + machineId + ", machineAssign=" + machineAssign + ", userId="
+                + userId + ", machineAddress=" + machineAddress + ", groupId="
+                + groupId + ", operFirmId=" + operFirmId + ", operateId="
+                + operateId + ", operateDate=" + operateDate + ", groupInfo="
+                + groupInfo + "]";
+    }
 
 }

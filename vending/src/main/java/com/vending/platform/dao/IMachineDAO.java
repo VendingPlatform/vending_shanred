@@ -58,15 +58,7 @@ public interface IMachineDAO {
 			@Result(property = "groupInfo", column = "groupId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getGroupInfoById")) })
 	public MachineOperater getMachineOperaterById(Integer mOperaterId);
 
-	/**
-	 * 按条件查询所有运营商售货机，管理员查看所有售货机，（one-to-one关联查询）
-	 * 
-	 * @param userInfo
-	 *            用户信息，其中包含所属公司ID等信息
-	 * @param machineOperater
-	 *            运营商售货机信息，包含运营商要查询的条件
-	 * @return List<MachineOperater> 运营商售货机列表
-	 */
+	/**按条件查询所有运营商售货机，管理员查看所有售货机，（one-to-one关联查询）*/
 
 	@SelectProvider(type = IMachineSqlProvider.class, method = "getAllMachineOperaters")
 	@Results({

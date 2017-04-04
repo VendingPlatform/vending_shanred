@@ -71,7 +71,7 @@ public class MachineManagerController extends UtilsAction {
 
 	@Description("按Id查看某售货机详细信息")
 	@RequestMapping(value = "/machineInfoDetail", method = RequestMethod.GET)
-	public ModelAndView getMachineOperateById(@RequestParam("mOperaterId") Integer mOperaterId, ModelMap modelMap) {
+	public ModelAndView getMachineOperateById(Integer mOperaterId, ModelMap modelMap) {
 		MachineOperater machineOperater = machineManagerService.getMachineOperaterById(mOperaterId);
 		modelMap.addAttribute("machineOperater", machineOperater);
 		return new ModelAndView("genview/OMachineInfoDetail", modelMap);

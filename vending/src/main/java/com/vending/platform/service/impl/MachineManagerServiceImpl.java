@@ -6,9 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.vending.platform.dao.IFrimAndGroupDAO;
 import com.vending.platform.dao.IMachineDAO;
-import com.vending.platform.dao.IUserManagerDao;
 import com.vending.platform.domain.MachineInfo;
 import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.MachineType;
