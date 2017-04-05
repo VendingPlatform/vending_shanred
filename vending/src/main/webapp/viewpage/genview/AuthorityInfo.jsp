@@ -25,14 +25,15 @@
 				</ul>
 			</div>
 		</div>
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAuthModal">
+		<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAuthModal">
   			创建权限
-		</button>
+		</button> -->
 		<table class="table">
 			<tr>
 				<th>Id</th>
 				<th>权限名称</th>
 				<th>权限编码</th>
+				<th>权限描述</th>
 				<th>操作者</th>
 				<th>操作时间</th>
 			</tr>
@@ -41,6 +42,7 @@
 					<td>${auth.authId}</td>
 					<td>${auth.authName}</td>
 					<td>${auth.authCode}</td>
+					<td>${auth.authDesc }</td>
 					<td>${auth.operateId}</td>
 					<td>${auth.operateDate}</td>
 				</tr>
@@ -48,7 +50,7 @@
 		</table>
 	</div>
 	<!-- Modal -->
-	<div class="modal fade" id="createAuthModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<%-- <div class="modal fade" id="createAuthModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -74,6 +76,6 @@
 	      </div>
 	    </div>
 	  </div>
-	</div>
+	</div> --%>
 </body>
 </html>
