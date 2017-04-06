@@ -1,7 +1,5 @@
 package com.vending.platform.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
