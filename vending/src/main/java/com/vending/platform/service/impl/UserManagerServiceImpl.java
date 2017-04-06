@@ -3,16 +3,16 @@ package com.vending.platform.service.impl;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.management.relation.Role;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.vending.platform.dao.IUserManagerDao;
 import com.vending.platform.domain.AuthorityInfo;
+import com.vending.platform.domain.RoleAuthInfo;
 import com.vending.platform.domain.RoleInfo;
 import com.vending.platform.domain.UserInfo;
+import com.vending.platform.domain.UserRoleInfo;
 import com.vending.platform.exception.SQLFormatException;
 import com.vending.platform.service.IUserManagerService;
 
@@ -126,4 +126,44 @@ public class UserManagerServiceImpl implements IUserManagerService, Serializable
 	public void deleteAuthority(Integer id) {
 		userManagerDao.deleteAuthorityInfo(id);
 	}
+
+    @Override
+    public void insertRoleAuthInfo(RoleAuthInfo roleAuthInfo) {
+        userManagerDao.insertRoleAuthInfo(roleAuthInfo);
+    }
+
+    @Override
+    public List<RoleAuthInfo> getAllRoleAuthInfos(RoleAuthInfo roleAuthInfo) {
+        return userManagerDao.getAllRoleAuthInfos(roleAuthInfo);
+    }
+
+    @Override
+    public RoleAuthInfo getRoleAuthInfoById(Integer roleAuthId) {
+        return userManagerDao.getRoleAuthInfoById(roleAuthId);
+    }
+
+    @Override
+    public void deleteRoleAuthInfo(Integer roleAuthId) {
+        userManagerDao.deleteRoleAuthInfo(roleAuthId);
+    }
+
+    @Override
+    public void insertUserRoleInfo(UserRoleInfo userRoleInfo) {
+        userManagerDao.insertUserRoleInfo(userRoleInfo);
+    }
+
+    @Override
+    public UserRoleInfo getUserRoleInfoById(Integer userRoleId) {
+        return userManagerDao.getUserRoleInfoById(userRoleId);
+    }
+
+    @Override
+    public void deleteUserRoleInfo(Integer userRoleId) {
+        userManagerDao.deleteUserRoleInfo(userRoleId);
+    }
+
+    @Override
+    public List<UserRoleInfo> getAllUserRoleInfos(UserRoleInfo userRoleInfo) {
+        return userManagerDao.getAllUserRoleInfos(userRoleInfo);
+    }
 }

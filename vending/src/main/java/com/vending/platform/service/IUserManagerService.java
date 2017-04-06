@@ -3,41 +3,63 @@ package com.vending.platform.service;
 import java.util.List;
 
 import com.vending.platform.domain.AuthorityInfo;
+import com.vending.platform.domain.RoleAuthInfo;
 import com.vending.platform.domain.RoleInfo;
 import com.vending.platform.domain.UserInfo;
+import com.vending.platform.domain.UserRoleInfo;
 
 public interface IUserManagerService {
-	/** 用户登录 */
-	public UserInfo login(UserInfo userInfo);
 
-	void insertUserInfo(UserInfo userInfo);
+    /** 用户角色 */
+    void insertUserRoleInfo(UserRoleInfo userRoleInfo);
 
-	UserInfo getUserInfoById(Integer id);
+    List<UserRoleInfo> getAllUserRoleInfos(UserRoleInfo userRoleInfo);
+    
+    UserRoleInfo getUserRoleInfoById(Integer userRoleId);
 
-	List<UserInfo> getAllUserInfos(UserInfo userInfo);
+    void deleteUserRoleInfo(Integer userRoleId);
 
-	/** 修改密码 */
-	void updateUserInfo(UserInfo userInfo);
+    /** 角色权限 */
 
-	void deleteUserInfo(Integer id);
+    void insertRoleAuthInfo(RoleAuthInfo roleAuthInfo);
 
-	void insertRole(RoleInfo roleInfo);
+    List<RoleAuthInfo> getAllRoleAuthInfos(RoleAuthInfo roleAuthInfo);
 
-	void updateRole(RoleInfo roleInfo);
+    RoleAuthInfo getRoleAuthInfoById(Integer roleAuthId);
 
-	RoleInfo getRoleById(Integer id);
+    void deleteRoleAuthInfo(Integer roleAuthId);
 
-	List<RoleInfo> getAllRoles(RoleInfo roleInfo);
+    /** 用户登录 */
+    public UserInfo login(UserInfo userInfo);
 
-	void deleteRole(Integer Id);
+    void insertUserInfo(UserInfo userInfo);
 
-	void insertAuthority(AuthorityInfo authorityInfo);
+    UserInfo getUserInfoById(Integer id);
 
-	AuthorityInfo getAuthorityById(Integer id);
+    List<UserInfo> getAllUserInfos(UserInfo userInfo);
 
-	List<AuthorityInfo> getAllAuthoritys(AuthorityInfo authorityInfo);
+    /** 修改密码 */
+    void updateUserInfo(UserInfo userInfo);
 
-	void updateAuthority(AuthorityInfo authorityInfo);
+    void deleteUserInfo(Integer id);
 
-	void deleteAuthority(Integer id);
+    void insertRole(RoleInfo roleInfo);
+
+    void updateRole(RoleInfo roleInfo);
+
+    RoleInfo getRoleById(Integer id);
+
+    List<RoleInfo> getAllRoles(RoleInfo roleInfo);
+
+    void deleteRole(Integer Id);
+
+    void insertAuthority(AuthorityInfo authorityInfo);
+
+    AuthorityInfo getAuthorityById(Integer id);
+
+    List<AuthorityInfo> getAllAuthoritys(AuthorityInfo authorityInfo);
+
+    void updateAuthority(AuthorityInfo authorityInfo);
+
+    void deleteAuthority(Integer id);
 }

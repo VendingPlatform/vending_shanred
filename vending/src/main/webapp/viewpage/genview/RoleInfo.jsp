@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -27,20 +26,27 @@
 				<th>Id</th>
 				<th>角色名称</th>
 				<th>角色状态</th>
-				<th>权限Id</th>
 				<th>公司Id</th>
 				<th>操作者</th>
 				<th>操作时间</th>
+				<th>操作</th>
 			</tr>
 			<c:forEach items="${allRoleInfos}" var="role">
 				<tr>
 					<td>${role.roleId }</td>
 					<td>${role.roleName }</td>
 					<td>${role.status }</td>
-					<td>${role.authorityInfo.authId }</td>
 					<td>${role.firmId }</td>
 					<td>${role.operateId }</td>
 					<td>${role.operateDate }</td>
+					<td>
+						<a href="<c:url value="/user/getRoleAuthInfo"/>?roleId=${role.roleId }" class="btn default"> 
+						<span class="glyphicon glyphicon-edit" title="编辑"></span>
+						</a>
+						<a href="<c:url value="/user/insertRoleAuthInfo"/>?roleId=${role.roleId }" class="btn default"> 
+						<span class="glyphicon glyphicon-add" title="添加权限"></span>
+						</a>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>

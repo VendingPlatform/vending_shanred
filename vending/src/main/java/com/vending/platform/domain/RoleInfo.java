@@ -17,7 +17,7 @@ public class RoleInfo implements Serializable {
 	/** 角色ID */
 	private Integer roleId;
 	private String roleName;
-	private Integer authId;
+	//private Integer authId;
 	/** 权限编号集合，用逗号隔开 */
 	//private String authorityCode;
 	/** 权限名称集合，与编号一一对应 */
@@ -32,8 +32,9 @@ public class RoleInfo implements Serializable {
 	private Date operateDate;
 
 	private List<UserInfo> userInfos;
-	
-	private AuthorityInfo authorityInfo;
+	private List<RoleAuthInfo> roleAuthInfo;
+	private List<UserRoleInfo> userRoleInfos; 
+	//private List<RoleInfo> roleInfos;
 
 	public RoleInfo() {
 		super();
@@ -45,14 +46,6 @@ public class RoleInfo implements Serializable {
 
 	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
-	}
-
-	public Integer getAuthId() {
-		return authId;
-	}
-
-	public void setAuthId(Integer authId) {
-		this.authId = authId;
 	}
 
 	public Integer getStatus() {
@@ -103,17 +96,26 @@ public class RoleInfo implements Serializable {
 		this.roleName = roleName;
 	}
 
-	public AuthorityInfo getAuthorityInfo() {
-		return authorityInfo;
-	}
+	public List<RoleAuthInfo> getRoleAuthInfo() {
+        return roleAuthInfo;
+    }
 
-	public void setAuthorityInfo(AuthorityInfo authorityInfo) {
-		this.authorityInfo = authorityInfo;
-	}
+    public void setRoleAuthInfo(List<RoleAuthInfo> roleAuthInfo) {
+        this.roleAuthInfo = roleAuthInfo;
+    }
 
-	@Override
+
+    public List<UserRoleInfo> getUserRoleInfos() {
+        return userRoleInfos;
+    }
+
+    public void setUserRoleInfos(List<UserRoleInfo> userRoleInfos) {
+        this.userRoleInfos = userRoleInfos;
+    }
+
+    @Override
 	public String toString() {
-		return "RoleInfo [roleId=" + roleId + ", roleName=" + roleName + ", authId=" + authId + ", status=" + status
+		return "RoleInfo [roleId=" + roleId + ", roleName=" + roleName + ",  status=" + status
 				+ ", firmId=" + firmId + ", operateId=" + operateId + ", operateDate=" + operateDate + ", userInfos="
 				+ userInfos + "]";
 	}

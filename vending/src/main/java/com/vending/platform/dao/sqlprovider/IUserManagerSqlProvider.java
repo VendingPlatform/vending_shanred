@@ -4,11 +4,55 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.jdbc.SQL;
 
 import com.vending.platform.domain.AuthorityInfo;
+import com.vending.platform.domain.RoleAuthInfo;
 import com.vending.platform.domain.RoleInfo;
 import com.vending.platform.domain.UserInfo;
+import com.vending.platform.domain.UserRoleInfo;
 
 /** @author Miley_Ren */
 public class IUserManagerSqlProvider {
+    
+    public String insertUserRoleInfo(UserRoleInfo userRoleInfo){
+        return "INSERT INTO userrole VALUES (#{userId}, #{roleId})";
+    }
+    
+    public String getAllUserRoleInfos(UserRoleInfo userRoleInfo){
+        return new SQL(){{
+            SELECT("*").FROM("userrole");
+            if(userRoleInfo.getUserId()!=null)
+                WHERE("userId=#{userId}");
+            if(userRoleInfo.getRoleId()!=null)
+                WHERE("roleId=#{roleId}");
+        }}.toString();
+    }
+    
+    public String getUserRoleInfoById(Integer userRoleId){
+        return "SELECT * FROM userrole WHERE userRoleId="+userRoleId;
+    }
+    
+    public String deleteUserRoleInfo(Integer userRoleId){
+        return "DELETE FROM userrole WHERE userRoleId="+userRoleId;
+    }
+    
+    public String insertRoleAuthInfo(RoleAuthInfo roleAuthInfo){
+        return "insert into roleauth values (#{roleId}, #{authId})";
+    }
+    
+    public String getAllRoleAuthInfos(RoleAuthInfo roleAuthInfo){
+        return new SQL(){{
+            SELECT("*").FROM("roleauth");
+            if(roleAuthInfo.getRoleId()!=null)
+                WHERE("roleId=#{roleId}");
+            if(roleAuthInfo.getAuthId()!=null)
+                WHERE("authId=#{authId}");
+        }}.toString();
+    }
+    public String getRoleAuthInfoById(Integer roleAuthId){
+        return "SELECT * FROM roleAuthId WHERE roleAuthId="+roleAuthId;
+    }
+    public String deleteRoleAuthInfo(Integer roleAuthId){
+        return "DELETE FROM roleAuthId WHERE roleAuthId="+roleAuthId;
+    }
 
 	public String insertAuthorityInfo(AuthorityInfo authorityInfo) {
 		return new SQL() {
@@ -99,9 +143,9 @@ public class IUserManagerSqlProvider {
 				if (StringUtils.isNotBlank(roleInfo.getRoleName())) {
 					VALUES("authorityCode", "#{roleName}");
 				}
-				if(roleInfo.getAuthId()!=null){
+			/*	if(roleInfo.getAuthId()!=null){
 					VALUES("authId", "#{authId}");
-				}
+				}*/
 				/*if (StringUtils.isNotBlank(roleInfo.getAuthorityCode())) {
 					VALUES("authorityCode", "#{authorityCode}");
 				}
@@ -130,9 +174,9 @@ public class IUserManagerSqlProvider {
 					if (StringUtils.isNotBlank(roleInfo.getRoleName())) {
 						SET("authorityCode=#{roleName}");
 					}
-					if(roleInfo.getAuthId()!=null){
+				/*	if(roleInfo.getAuthId()!=null){
 						SET("authId=#{authId}");
-					}
+					}*/
 					/*if (StringUtils.isNotBlank(roleInfo.getAuthorityCode())) {
 						SET("authorityCode=#{authorityCode}");
 					}
@@ -162,9 +206,9 @@ public class IUserManagerSqlProvider {
 				if (StringUtils.isNotBlank(roleInfo.getRoleName())) {
 					WHERE("authorityCode=#{roleName}");
 				}
-				if(roleInfo.getAuthId()!=null){
+			/*	if(roleInfo.getAuthId()!=null){
 					WHERE("authId=#{authId}");
-				}
+				}*/
 				/*if (StringUtils.isNotBlank(roleInfo.getAuthorityCode())) {
 					WHERE("authorityCode=#{authorityCode}");
 				}
