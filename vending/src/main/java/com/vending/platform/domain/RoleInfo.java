@@ -17,10 +17,11 @@ public class RoleInfo implements Serializable {
 	/** 角色ID */
 	private Integer roleId;
 	private String roleName;
+	private Integer authId;
 	/** 权限编号集合，用逗号隔开 */
-	private String authorityCode;
+	//private String authorityCode;
 	/** 权限名称集合，与编号一一对应 */
-	private String authorityName;
+	//private String authorityName;
 	/** 权限状态:0:不可用；1：可用 */
 	private Integer status;
 	/** 所属公司 */
@@ -31,6 +32,8 @@ public class RoleInfo implements Serializable {
 	private Date operateDate;
 
 	private List<UserInfo> userInfos;
+	
+	private AuthorityInfo authorityInfo;
 
 	public RoleInfo() {
 		super();
@@ -44,20 +47,12 @@ public class RoleInfo implements Serializable {
 		this.roleId = roleId;
 	}
 
-	public String getAuthorityCode() {
-		return authorityCode;
+	public Integer getAuthId() {
+		return authId;
 	}
 
-	public void setAuthorityCode(String authorityCode) {
-		this.authorityCode = authorityCode;
-	}
-
-	public String getAuthorityName() {
-		return authorityName;
-	}
-
-	public void setAuthorityName(String authorityName) {
-		this.authorityName = authorityName;
+	public void setAuthId(Integer authId) {
+		this.authId = authId;
 	}
 
 	public Integer getStatus() {
@@ -108,11 +103,19 @@ public class RoleInfo implements Serializable {
 		this.roleName = roleName;
 	}
 
+	public AuthorityInfo getAuthorityInfo() {
+		return authorityInfo;
+	}
+
+	public void setAuthorityInfo(AuthorityInfo authorityInfo) {
+		this.authorityInfo = authorityInfo;
+	}
+
 	@Override
 	public String toString() {
-		return "RoleInfo [roleId=" + roleId + ", roleName=" + roleName + ", authorityCode=" + authorityCode
-				+ ", authorityName=" + authorityName + ", status=" + status + ", firmId=" + firmId + ", operateId="
-				+ operateId + ", operateDate=" + operateDate + ", userInfos=" + userInfos + "]";
+		return "RoleInfo [roleId=" + roleId + ", roleName=" + roleName + ", authId=" + authId + ", status=" + status
+				+ ", firmId=" + firmId + ", operateId=" + operateId + ", operateDate=" + operateDate + ", userInfos="
+				+ userInfos + "]";
 	}
 
 }

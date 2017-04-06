@@ -56,6 +56,10 @@ public interface IUserManagerDao {
 	 * @return AuthorityInfo 返回一个实体类
 	 */
 	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getAuthorityInfoById")
+	@Results({
+		@Result(property = "roleInfos", column = "roleId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllRoles")),
+		@Result(property = "roleInfo", column = "roleId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getRoleById")) 
+	})
 	public AuthorityInfo getAuthorityInfoById(Integer authId);
 
 	/**
@@ -89,6 +93,9 @@ public interface IUserManagerDao {
 	 *            角色信息
 	 */
 	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getAllRoles")
+	@Results({
+		@Result(property = "authorityInfo", column = "authId", one = @One(select = "com.vending.platform.dao.IUserManagerDao.getAuthorityInfoById"))
+	})
 	public List<RoleInfo> getAllRoles(RoleInfo roleInfo);
 
 	/**

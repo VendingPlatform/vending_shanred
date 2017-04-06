@@ -2,6 +2,7 @@ package com.vending.platform.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * T_Authority_Info映射表：用户权限映射表
@@ -17,12 +18,16 @@ public class AuthorityInfo implements Serializable {
 	private String authName;
 	/** 权限编码 */
 	private String authCode;
-	/**所属公司*/
+	private String authDesc;
+	private Integer authType;
+	/** 所属公司 */
 	private Integer firmId;
 	/** 操作者ID */
 	private Integer operateId;
 	/** 操作时间 */
 	private Date operateDate;
+
+	private List<RoleInfo> roleInfos;
 
 	public AuthorityInfo() {
 		super();
@@ -52,6 +57,22 @@ public class AuthorityInfo implements Serializable {
 		this.authCode = authCode;
 	}
 
+	public String getAuthDesc() {
+		return authDesc;
+	}
+
+	public void setAuthDesc(String authDesc) {
+		this.authDesc = authDesc;
+	}
+
+	public Integer getAuthType() {
+		return authType;
+	}
+
+	public void setAuthType(Integer authType) {
+		this.authType = authType;
+	}
+
 	public Integer getFirmId() {
 		return firmId;
 	}
@@ -76,10 +97,19 @@ public class AuthorityInfo implements Serializable {
 		this.operateDate = operateDate;
 	}
 
+	public List<RoleInfo> getRoleInfos() {
+		return roleInfos;
+	}
+
+	public void setRoleInfos(List<RoleInfo> roleInfos) {
+		this.roleInfos = roleInfos;
+	}
+
 	@Override
 	public String toString() {
-		return "AuthorityInfo [authId=" + authId + ", authName=" + authName + ", authCode=" + authCode + ", firmId="
-				+ firmId + ", operateId=" + operateId + ", operateDate=" + operateDate + "]";
+		return "AuthorityInfo [authId=" + authId + ", authName=" + authName + ", authCode=" + authCode + ", authDesc="
+				+ authDesc + ", authType=" + authType + ", firmId=" + firmId + ", operateId=" + operateId
+				+ ", operateDate=" + operateDate + ", roleInfos=" + roleInfos + "]";
 	}
 
 }

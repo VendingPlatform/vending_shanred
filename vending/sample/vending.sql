@@ -24,7 +24,7 @@ CREATE TABLE `authorityinfo` (
   `authId` int(11) NOT NULL AUTO_INCREMENT COMMENT '权限id',
   `authName` varchar(50) NOT NULL COMMENT '权限名称（唯一性）',
   `authCode` varchar(10) NOT NULL COMMENT '权限编码（唯一性）',
-  `firmId` int(11) NOT NULL COMMENT '所属公司',
+  `authDesc` varchar(100) DEFAULT NULL COMMENT '权限描述',
   `operateId` int(11) DEFAULT NULL COMMENT '操作者',
   `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`authId`)

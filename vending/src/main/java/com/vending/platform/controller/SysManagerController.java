@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.vending.platform.domain.AuthorityInfo;
 import com.vending.platform.domain.FirmInfo;
 import com.vending.platform.service.IFirmAndGroupService;
 import com.vending.platform.service.IUserManagerService;
@@ -69,11 +68,11 @@ public class SysManagerController extends UtilsAction {
         return "redirect:/manager/getAllFirms";
     }
 
-    @Description("获取所有权限")
+   /* @Description("获取所有权限")
     @RequestMapping(value = "/getAllAuthoritys", method = RequestMethod.GET)
     public String getAllAuthority(ModelMap modelMap) {
         List<AuthorityInfo> authorityInfos = userManagerService.getAllAuthoritys(new AuthorityInfo());
         modelMap.addAttribute("authorityInfos", authorityInfos);
         return "genview/AuthorityInfo";
-    }
+    }*/
 }

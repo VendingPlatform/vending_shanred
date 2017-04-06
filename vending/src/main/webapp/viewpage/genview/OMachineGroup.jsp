@@ -47,6 +47,8 @@
 						<td>
 							<a href="<c:url value="/machine/machineGroupDetialInfos"/>?groupId=${groupInfo.groupId}" class="btn default"> <span class="glyphicon glyphicon-paperclip" title="详情"></span>
 							</a>
+							<a href="#" class="btn default"> <span class="glyphicon glyphicon-link" title="分配"></span>
+							</a>
 							<a href="<c:url value="/machine/machinegroupInfo"/>?groupId=${groupInfo.groupId}" class="btn default"> <span class="glyphicon glyphicon-edit" title="编辑"></span>
 							</a>
 							<a href="<c:url value="/machine/machinegroupDelete"/>?groupId=${groupInfo.groupId}" class="btn default"> <span class="glyphicon glyphicon-trash" title="删除"></span>
