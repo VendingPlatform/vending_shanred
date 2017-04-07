@@ -43,8 +43,8 @@
 				<td>${user.groupInfo.groupName}</td>
 			</tr>
 			<tr>
-				<td>公司</td>
-				<td>${user.firmInfo.firmName}</td>
+				<td>公司类型</td>
+				<td>${user.firmType}</td>
 			</tr>
 			<tr>
 				<td>状态</td>

@@ -13,7 +13,7 @@ import com.vending.platform.domain.UserRoleInfo;
 public class IUserManagerSqlProvider {
     
     public String insertUserRoleInfo(UserRoleInfo userRoleInfo){
-        return "INSERT INTO userrole VALUES (#{userId}, #{roleId})";
+        return "INSERT INTO userrole (userId,roleId) VALUES (#{userId}, #{roleId})";
     }
     
     public String getAllUserRoleInfos(UserRoleInfo userRoleInfo){
@@ -35,7 +35,7 @@ public class IUserManagerSqlProvider {
     }
     
     public String insertRoleAuthInfo(RoleAuthInfo roleAuthInfo){
-        return "insert into roleauth values (#{roleId}, #{authId})";
+        return "insert into roleauth (roleId, authId) values (#{roleId}, #{authId})";
     }
     
     public String getAllRoleAuthInfos(RoleAuthInfo roleAuthInfo){
@@ -141,26 +141,11 @@ public class IUserManagerSqlProvider {
 			{
 				INSERT_INTO("roleinfo");
 				if (StringUtils.isNotBlank(roleInfo.getRoleName())) {
-					VALUES("authorityCode", "#{roleName}");
+					VALUES("roleName", "#{roleName}");
 				}
-			/*	if(roleInfo.getAuthId()!=null){
-					VALUES("authId", "#{authId}");
-				}*/
-				/*if (StringUtils.isNotBlank(roleInfo.getAuthorityCode())) {
-					VALUES("authorityCode", "#{authorityCode}");
-				}
-				if (StringUtils.isNotBlank(roleInfo.getAuthorityName())) {
-					VALUES("authorityName", "#{authorityName}");
-				}*/
-				if (roleInfo.getStatus() != null) {
-					VALUES("status", "#{status}");
-				}
-				if (roleInfo.getFirmId() != null) {
-					VALUES("firmId", "#{firmId}");
-				}
-				if (roleInfo.getOperateId() != null) {
-					VALUES("operateId", "#{operateId}");
-				}
+				if (roleInfo.getFirmType() != null) {
+                    VALUES("firmType", "#{firmType}");
+                }
 				VALUES("operateDate", "(SELECT NOW())");
 			}
 		}.toString();
@@ -172,25 +157,10 @@ public class IUserManagerSqlProvider {
 				if (roleInfo.getRoleId() != null) {
 					UPDATE("roleinfo");
 					if (StringUtils.isNotBlank(roleInfo.getRoleName())) {
-						SET("authorityCode=#{roleName}");
+						SET("roleName=#{roleName}");
 					}
-				/*	if(roleInfo.getAuthId()!=null){
-						SET("authId=#{authId}");
-					}*/
-					/*if (StringUtils.isNotBlank(roleInfo.getAuthorityCode())) {
-						SET("authorityCode=#{authorityCode}");
-					}
-					if (StringUtils.isNotBlank(roleInfo.getAuthorityName())) {
-						SET("authorityName=#{authorityName}");
-					}*/
-					if (roleInfo.getStatus() != null) {
-						SET("status=#{status}");
-					}
-					if (roleInfo.getFirmId() != null) {
-						SET("firmId =#{firmId}");
-					}
-					if (roleInfo.getOperateId() != null) {
-						SET("operateId=#{operateId}");
+					if (roleInfo.getFirmType() != null) {
+						SET("firmType =#{firmType}");
 					}
 					SET("operateDate=(SELECT NOW())");
 					WHERE("roleId=#{roleId}");
@@ -204,25 +174,10 @@ public class IUserManagerSqlProvider {
 			{
 				SELECT("*").FROM("roleinfo");
 				if (StringUtils.isNotBlank(roleInfo.getRoleName())) {
-					WHERE("authorityCode=#{roleName}");
+					WHERE("roleName=#{roleName}");
 				}
-			/*	if(roleInfo.getAuthId()!=null){
-					WHERE("authId=#{authId}");
-				}*/
-				/*if (StringUtils.isNotBlank(roleInfo.getAuthorityCode())) {
-					WHERE("authorityCode=#{authorityCode}");
-				}
-				if (StringUtils.isNotBlank(roleInfo.getAuthorityName())) {
-					WHERE("authorityName=#{authorityName}");
-				}*/
-				if (roleInfo.getStatus() != null) {
-					WHERE("status=#{status}");
-				}
-				if (roleInfo.getFirmId() != null) {
-					WHERE("firmId =#{firmId}");
-				}
-				if (roleInfo.getOperateId() != null) {
-					WHERE("operateId=#{operateId}");
+				if (roleInfo.getFirmType() != null) {
+					WHERE("firmType =#{firmType}");
 				}
 			}
 		}.toString();

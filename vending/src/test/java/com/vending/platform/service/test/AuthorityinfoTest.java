@@ -74,10 +74,9 @@ public class AuthorityinfoTest {
 	@Test
 	public void insertRole() throws SQLFormatException {
 		RoleInfo roleInfo = new RoleInfo();
-		// roleInfo.setRoleName("test");
+		 roleInfo.setRoleName("test");
 		//roleInfo.setAuthorityCode("ttt;");
 		//roleInfo.setAuthorityName("ttt;");
-		roleInfo.setStatus(1);
 		// roleInfo.setFirmId(1);
 		// roleInfo.setOperateId(null);
 		try {
@@ -93,7 +92,6 @@ public class AuthorityinfoTest {
 		roleInfo.setRoleId(6);
 		//roleInfo.setAuthorityCode("ttt_UPDATE;");
 		//roleInfo.setAuthorityName("ttt;");
-		roleInfo.setStatus(1);
 		aDao.updateRoleInfo(roleInfo);
 	}
 
@@ -102,7 +100,6 @@ public class AuthorityinfoTest {
 		RoleInfo roleInfo = new RoleInfo();
 		//roleInfo.setAuthorityCode("ttt_UPDATE;");
 		//roleInfo.setAuthorityName("ttt;");
-		roleInfo.setStatus(1);
 		List<RoleInfo> roleInfos = aDao.getAllRoles(roleInfo);
 		for (RoleInfo roleInfo2 : roleInfos) {
 			System.out.println(roleInfo2.toString());

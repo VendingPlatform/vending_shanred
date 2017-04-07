@@ -102,9 +102,6 @@ public interface IUserManagerDao {
 	@Results({
 	    @Result(property = "roleAuthInfo", column = "roleAuthId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getRoleAuthInfoById")),
 	    @Result(property = "roleAuthInfos", column = "roleAuthId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllRoleAuthInfos")),
-        
-		//@Result(property = "roleInfos", column = "roleId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllRoles")),
-		//@Result(property = "roleInfo", column = "roleId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getRoleById")) 
 	})
 	public AuthorityInfo getAuthorityInfoById(Integer authId);
 
@@ -139,9 +136,6 @@ public interface IUserManagerDao {
 	 *            角色信息
 	 */
 	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getAllRoles")
-	@Results({
-		//@Result(property = "authorityInfo", column = "authId", one = @One(select = "com.vending.platform.dao.IUserManagerDao.getAuthorityInfoById"))
-	})
 	public List<RoleInfo> getAllRoles(RoleInfo roleInfo);
 
 	/**
@@ -156,8 +150,6 @@ public interface IUserManagerDao {
 	        @Result(property = "roleAuthInfos", column = "roleAuthId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllRoleAuthInfos")),
 	        @Result(property = "userRoleInfo", column = "userRoleId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getUserRoleInfoById")),
             @Result(property = "userRoleInfos", column = "userRoleId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllUserRoleInfos")),
-	        //@Result(property = "userInfos", column = "userId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllUsers")),
-			//@Result(property = "userInfo", column = "userId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getUserById"))
 	        })
 	public RoleInfo getRoleById(Integer roleId);
 
@@ -187,7 +179,6 @@ public interface IUserManagerDao {
 	 */
 	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getAllUsers")
 	@Results({
-			//@Result(property = "roleInfo", column = "roleId", one = @One(select = "com.vending.platform.dao.IUserManagerDao.getRoleById")),
 			@Result(property = "firmInfo", column = "firmId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById")),
 			@Result(property = "groupInfo", column = "groupId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getGroupInfoById")) })
 	public List<UserInfo> getAllUsers(UserInfo userInfo);
@@ -195,7 +186,6 @@ public interface IUserManagerDao {
 	/** 按Id查找用户 */
 	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getUserById")
 	@Results({
-			//@Result(property = "roleInfo", column = "roleId", one = @One(select = "com.vending.platform.dao.IUserManagerDao.getRoleById")),
 			@Result(property = "firmInfo", column = "firmId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById")),
 			@Result(property = "groupInfo", column = "groupId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getGroupInfoById")),
 			@Result(property = "userRoleInfos", column = "userRoleId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllUserRoleInfos")),

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.vending.platform.domain.FirmInfo;
 import com.vending.platform.service.IFirmAndGroupService;
-import com.vending.platform.service.IUserManagerService;
 
 @Controller
 @SessionAttributes("user")
@@ -22,8 +21,6 @@ public class SysManagerController extends UtilsAction {
     private static final long serialVersionUID = -5466394451153962610L;
     @Autowired
     private IFirmAndGroupService firmAndGroupService;
-    @Autowired
-    private IUserManagerService userManagerService;
 
     @Description("获取所有商家信息")
     @RequestMapping(value = "/getAllFirms")
@@ -67,12 +64,4 @@ public class SysManagerController extends UtilsAction {
         firmAndGroupService.deleteFirmInfo(firmId);
         return "redirect:/manager/getAllFirms";
     }
-
-   /* @Description("获取所有权限")
-    @RequestMapping(value = "/getAllAuthoritys", method = RequestMethod.GET)
-    public String getAllAuthority(ModelMap modelMap) {
-        List<AuthorityInfo> authorityInfos = userManagerService.getAllAuthoritys(new AuthorityInfo());
-        modelMap.addAttribute("authorityInfos", authorityInfos);
-        return "genview/AuthorityInfo";
-    }*/
 }

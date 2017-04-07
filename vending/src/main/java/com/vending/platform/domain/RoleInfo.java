@@ -17,24 +17,14 @@ public class RoleInfo implements Serializable {
 	/** 角色ID */
 	private Integer roleId;
 	private String roleName;
-	//private Integer authId;
-	/** 权限编号集合，用逗号隔开 */
-	//private String authorityCode;
-	/** 权限名称集合，与编号一一对应 */
-	//private String authorityName;
-	/** 权限状态:0:不可用；1：可用 */
-	private Integer status;
-	/** 所属公司 */
-	private Integer firmId;
-	/** 操作者 */
-	private Integer operateId;
+	/** 角色类型：0：系统管理员，1：运营商；2：厂商 */
+	private Integer firmType;
 	/** 操作时间 */
 	private Date operateDate;
 
 	private List<UserInfo> userInfos;
 	private List<RoleAuthInfo> roleAuthInfo;
 	private List<UserRoleInfo> userRoleInfos; 
-	//private List<RoleInfo> roleInfos;
 
 	public RoleInfo() {
 		super();
@@ -48,29 +38,13 @@ public class RoleInfo implements Serializable {
 		this.roleId = roleId;
 	}
 
-	public Integer getStatus() {
-		return status;
-	}
+	public Integer getFirmType() {
+        return firmType;
+    }
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-
-	public Integer getFirmId() {
-		return firmId;
-	}
-
-	public void setFirmId(Integer firmId) {
-		this.firmId = firmId;
-	}
-
-	public Integer getOperateId() {
-		return operateId;
-	}
-
-	public void setOperateId(Integer operateId) {
-		this.operateId = operateId;
-	}
+    public void setFirmType(Integer firmType) {
+        this.firmType = firmType;
+    }
 
 	public Date getOperateDate() {
 		return operateDate;
@@ -114,10 +88,12 @@ public class RoleInfo implements Serializable {
     }
 
     @Override
-	public String toString() {
-		return "RoleInfo [roleId=" + roleId + ", roleName=" + roleName + ",  status=" + status
-				+ ", firmId=" + firmId + ", operateId=" + operateId + ", operateDate=" + operateDate + ", userInfos="
-				+ userInfos + "]";
-	}
+    public String toString() {
+        return "RoleInfo [roleId=" + roleId + ", roleName=" + roleName
+                + ", firmType=" + firmType
+                + ", operateDate=" + operateDate
+                + ", userInfos=" + userInfos + ", roleAuthInfo=" + roleAuthInfo
+                + ", userRoleInfos=" + userRoleInfos + "]";
+    }
 
 }

@@ -107,16 +107,19 @@ CREATE TABLE `firminfo` (
   `operateId` int(11) DEFAULT NULL COMMENT '操作人',
   `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`firmId`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 /*Data for the table `firminfo` */
 
 insert  into `firminfo`(`firmId`,`firmNo`,`firmName`,`firmDesc`,`firmType`,`firmStatus`,`operateId`,`operateDate`) values 
 (1,'000','system','system',0,1,1,'2017-02-27 12:13:38'),
-(2,'001','运营商1','运营商1的描述信息_update',1,1,1,'2017-03-30 21:38:42'),
+(2,'001','运营商1','运营商1的描述信息',1,1,1,'2017-04-07 14:08:17'),
 (3,'002','厂商','厂商1的描述信息',2,1,1,'2017-02-27 17:00:49'),
 (4,'003','运营商2','运营商2描述',1,1,1,'2017-03-30 22:09:48'),
-(21,'004','004','004',2,1,1,'2017-03-30 23:18:09');
+(21,'004','004','004',2,1,1,'2017-03-30 23:18:09'),
+(22,'005','运营商3','运营商描述',1,1,1,'2017-04-07 14:09:10'),
+(23,'006','test','test describe',1,1,1,'2017-04-07 14:18:48'),
+(24,'007','test1','test1',1,1,1,'2017-04-07 14:25:39');
 
 /*Table structure for table `groupinfo` */
 
@@ -271,7 +274,7 @@ CREATE TABLE `roleauth` (
   KEY `authId` (`authId`),
   CONSTRAINT `roleauth_ibfk_1` FOREIGN KEY (`roleId`) REFERENCES `roleinfo` (`roleId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `roleauth_ibfk_2` FOREIGN KEY (`authId`) REFERENCES `authorityinfo` (`authId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 /*Data for the table `roleauth` */
 
@@ -289,20 +292,19 @@ DROP TABLE IF EXISTS `roleinfo`;
 CREATE TABLE `roleinfo` (
   `roleId` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户角色id',
   `roleName` varchar(50) NOT NULL COMMENT '角色名称（唯一）',
-  `status` int(1) NOT NULL DEFAULT '0' COMMENT '0：不可用；1：可用',
-  `firmId` int(11) DEFAULT NULL COMMENT '所属公司',
-  `operateId` int(11) DEFAULT NULL COMMENT '操作者(用户id)',
+  `firmType` int(11) NOT NULL COMMENT '角色类型：0：系统管理员，1：运营商；2：厂商',
   `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`roleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 /*Data for the table `roleinfo` */
 
-insert  into `roleinfo`(`roleId`,`roleName`,`status`,`firmId`,`operateId`,`operateDate`) values 
-(1,'system',1,1,1,'2017-02-27 12:54:59'),
-(2,'oper_admin',1,2,1,'2017-02-27 16:10:10'),
-(3,'manu_admin',1,3,1,'2017-02-27 17:03:15'),
-(9,'group_admin',1,2,1,'2017-04-06 16:03:17');
+insert  into `roleinfo`(`roleId`,`roleName`,`firmType`,`operateDate`) values 
+(1,'系统管理员',0,'2017-04-07 17:27:47'),
+(2,'运营商管理员',1,'2017-04-07 17:27:13'),
+(3,'厂商管理员',2,'2017-04-07 17:26:28'),
+(9,'用户组管理员',1,'2017-04-07 17:27:27'),
+(10,'操作员',1,'2017-04-07 15:52:10');
 
 /*Table structure for table `userinfo` */
 
@@ -315,7 +317,6 @@ CREATE TABLE `userinfo` (
   `password` varchar(50) NOT NULL COMMENT '密码',
   `mobilePhone` char(11) DEFAULT NULL COMMENT '手机号码',
   `email` varchar(50) DEFAULT NULL COMMENT 'email',
-  `roleId` int(11) NOT NULL COMMENT '角色id(角色不为空)',
   `groupId` int(11) DEFAULT NULL COMMENT '用户组id',
   `status` int(11) NOT NULL DEFAULT '0' COMMENT '状态，0：不可用，1：可用',
   `firmId` int(11) NOT NULL COMMENT '所属公司（系统管理员属于单独的公司）',
@@ -323,22 +324,23 @@ CREATE TABLE `userinfo` (
   `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
   `operateId` int(11) DEFAULT NULL COMMENT '操作者',
   PRIMARY KEY (`userId`),
-  KEY `roleId` (`roleId`),
   KEY `groupId` (`groupId`),
   KEY `firmId` (`firmId`),
-  CONSTRAINT `userinfo_ibfk_1` FOREIGN KEY (`roleId`) REFERENCES `roleinfo` (`roleId`),
   CONSTRAINT `userinfo_ibfk_2` FOREIGN KEY (`groupId`) REFERENCES `groupinfo` (`groupId`),
   CONSTRAINT `userinfo_ibfk_3` FOREIGN KEY (`firmId`) REFERENCES `firminfo` (`firmId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 /*Data for the table `userinfo` */
 
-insert  into `userinfo`(`userId`,`userNo`,`userName`,`password`,`mobilePhone`,`email`,`roleId`,`groupId`,`status`,`firmId`,`parentUserId`,`operateDate`,`operateId`) values 
-(1,'000','system','123456',NULL,NULL,1,1,1,1,1,'2017-02-27 12:58:14',1),
-(2,'00101','user1','123',NULL,NULL,2,NULL,1,2,1,'2017-02-27 16:12:00',1),
-(3,'00201','system001','123456',NULL,NULL,3,NULL,1,3,1,'2017-02-27 17:04:19',1),
-(4,'00102','运营商user2','123455',NULL,NULL,2,1,1,2,1,NULL,1),
-(5,'00401','system004','system004',NULL,NULL,3,NULL,1,21,NULL,'2017-03-30 23:18:11',1);
+insert  into `userinfo`(`userId`,`userNo`,`userName`,`password`,`mobilePhone`,`email`,`groupId`,`status`,`firmId`,`parentUserId`,`operateDate`,`operateId`) values 
+(1,'000','system','111',NULL,NULL,1,1,1,1,'2017-02-27 12:58:14',1),
+(2,'00101','user1','123',NULL,NULL,NULL,1,2,1,'2017-02-27 16:12:00',1),
+(3,'00201','system001','123456',NULL,NULL,NULL,1,3,1,'2017-02-27 17:04:19',1),
+(4,'00102','运营商user2','123455',NULL,NULL,1,1,2,1,NULL,1),
+(5,'00401','system004','system004',NULL,NULL,NULL,1,21,NULL,'2017-03-30 23:18:11',1),
+(6,'00501','system00501','system00501',NULL,NULL,NULL,1,22,NULL,'2017-04-07 14:09:59',NULL),
+(7,'00601','system00601','system00601',NULL,NULL,NULL,1,23,NULL,'2017-04-07 14:19:12',NULL),
+(8,'00701','system00701','system00701',NULL,NULL,NULL,1,24,NULL,'2017-04-07 14:32:48',NULL);
 
 /*Table structure for table `userrole` */
 
@@ -353,7 +355,7 @@ CREATE TABLE `userrole` (
   KEY `roleId` (`roleId`),
   CONSTRAINT `userrole_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `userinfo` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `userrole_ibfk_2` FOREIGN KEY (`roleId`) REFERENCES `roleinfo` (`roleId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 /*Data for the table `userrole` */
 
@@ -363,7 +365,10 @@ insert  into `userrole`(`userRoleId`,`userId`,`roleId`) values
 (3,3,3),
 (4,4,2),
 (5,5,3),
-(6,2,9);
+(6,2,9),
+(7,6,2),
+(8,7,2),
+(9,8,2);
 
 /*Table structure for table `wareinfo` */
 

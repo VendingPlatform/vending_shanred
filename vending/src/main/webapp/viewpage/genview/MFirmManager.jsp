@@ -20,7 +20,7 @@
 				</ul>
 			</div>
 		</div>
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#insertFirm">添加商家</button>
+		<a type="button" class="btn btn-primary" data-toggle="modal" data-target="#insertFirm">添加商家</a>
 		<div>
 			<table class="table">
 				<tr>
