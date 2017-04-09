@@ -32,7 +32,6 @@
 					<th>是否分配</th>
 					<th>售货机类型</th>
 					<th>售货机地址</th>
-					<th>售货机可用</th>
 					<th>售货机组</th>
 					<th>所属公司</th>
 					<th></th>
@@ -65,12 +64,13 @@
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        <h4 class="modal-title" id="ModelAdd">添加售货机</h4>
 		      </div>
-		      <div class="modal-body" style="width:500px">
+		      <div class="modal-body" style="width: 80%; padding-left: 30px">
 		        	<form  method="post" id="addMachineToGroupForm" >
 		        	<input type="hidden" value="${groupId}" name="groupId">
 		        	<c:forEach items="${machineNotIntoGroup}" var="m">
-		        		<label class="checkbox-inline">
-		        		  <input type="checkbox" name="mOperaterId" value="${m.mOperaterId}">${m.machineInfo.machineName}
+		        		<label class="checkbox">
+		        		  <input type="checkbox" name="mOperaterId" value="${m.mOperaterId}">
+		        		  ${m.mOperaterId}&nbsp;${m.machineInfo.machineName}&nbsp;${m.machineAddress}
 		        		</label>
 		        	</c:forEach>
 		        	</form>

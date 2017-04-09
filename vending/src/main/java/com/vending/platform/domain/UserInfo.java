@@ -2,6 +2,7 @@ package com.vending.platform.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * T_User_Info用户映射表：用户信息表，用户分为系统管理员、厂商管理员、运营商管理员
@@ -27,6 +28,8 @@ public class UserInfo implements Serializable {
 	private Integer roleId;
 	/** 用户角色名称 */
 	private String roleName;
+	/**是否为对应小组的管理员*/
+	private Integer groupManager;
 	/** 所属用户组 */
 	private Integer groupId;
 	/** 用户状态：0：不可用，1：可用 */
@@ -43,6 +46,8 @@ public class UserInfo implements Serializable {
 	private RoleInfo roleInfo;
 	private FirmInfo firmInfo;
 	private GroupInfo groupInfo;
+	
+	private List<UserRoleInfo> userRoleInfos;
 
 	public UserInfo() {
 		super();
@@ -211,7 +216,24 @@ public class UserInfo implements Serializable {
 		this.groupInfo = groupInfo;
 	}
 
-	@Override
+	public List<UserRoleInfo> getUserRoleInfos() {
+        return userRoleInfos;
+    }
+
+    public void setUserRoleInfos(List<UserRoleInfo> userRoleInfos) {
+        this.userRoleInfos = userRoleInfos;
+    }
+
+
+    public Integer getGroupManager() {
+        return groupManager;
+    }
+
+    public void setGroupManager(Integer groupManager) {
+        this.groupManager = groupManager;
+    }
+
+    @Override
 	public String toString() {
 		return "UserInfo [userId=" + userId + ", userNo=" + userNo + ", userName=" + userName + ", password=" + password
 				+ ", mobilePhone=" + mobilePhone + ", email=" + email + ", roleId=" + roleId + ", roleName=" + roleName

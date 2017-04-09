@@ -24,13 +24,13 @@ public class FirmAndGroupTest {
 	@Test
 	public void testOpgemGR() {
 		OperMgr operMgr = new OperMgr();
-		operMgr.setFirmNo("公司编号");
+		//operMgr.setFirmNo("公司编号");
 		operMgr.setFirmId(1);
-		operMgr.setFirmName("公司名称");
+		//operMgr.setFirmName("公司名称");
 		operMgr.setManuId(1);
 		firm.insertOperMgr(operMgr);
 		operMgr.setOperMgrId(1);
-		operMgr.setManuName("厂商名称");
+		//operMgr.setManuName("厂商名称");
 		firm.updateOperMgr(operMgr);
 		List<OperMgr> operMgrs = firm.getAllOperMgrs(operMgr);
 		for (OperMgr operMgr2 : operMgrs) {

@@ -4,11 +4,55 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.jdbc.SQL;
 
 import com.vending.platform.domain.AuthorityInfo;
+import com.vending.platform.domain.RoleAuthInfo;
 import com.vending.platform.domain.RoleInfo;
 import com.vending.platform.domain.UserInfo;
+import com.vending.platform.domain.UserRoleInfo;
 
 /** @author Miley_Ren */
 public class IUserManagerSqlProvider {
+    
+    public String insertUserRoleInfo(UserRoleInfo userRoleInfo){
+        return "INSERT INTO userrole (userId,roleId) VALUES (#{userId}, #{roleId})";
+    }
+    
+    public String getAllUserRoleInfos(UserRoleInfo userRoleInfo){
+        return new SQL(){{
+            SELECT("*").FROM("userrole");
+            if(userRoleInfo.getUserId()!=null)
+                WHERE("userId=#{userId}");
+            if(userRoleInfo.getRoleId()!=null)
+                WHERE("roleId=#{roleId}");
+        }}.toString();
+    }
+    
+    public String getUserRoleInfoById(Integer userRoleId){
+        return "SELECT * FROM userrole WHERE userRoleId="+userRoleId;
+    }
+    
+    public String deleteUserRoleInfo(Integer userRoleId){
+        return "DELETE FROM userrole WHERE userRoleId="+userRoleId;
+    }
+    
+    public String insertRoleAuthInfo(RoleAuthInfo roleAuthInfo){
+        return "insert into roleauth (roleId, authId) values (#{roleId}, #{authId})";
+    }
+    
+    public String getAllRoleAuthInfos(RoleAuthInfo roleAuthInfo){
+        return new SQL(){{
+            SELECT("*").FROM("roleauth");
+            if(roleAuthInfo.getRoleId()!=null)
+                WHERE("roleId=#{roleId}");
+            if(roleAuthInfo.getAuthId()!=null)
+                WHERE("authId=#{authId}");
+        }}.toString();
+    }
+    public String getRoleAuthInfoById(Integer roleAuthId){
+        return "SELECT * FROM roleAuthId WHERE roleAuthId="+roleAuthId;
+    }
+    public String deleteRoleAuthInfo(Integer roleAuthId){
+        return "DELETE FROM roleAuthId WHERE roleAuthId="+roleAuthId;
+    }
 
 	public String insertAuthorityInfo(AuthorityInfo authorityInfo) {
 		return new SQL() {
@@ -19,6 +63,12 @@ public class IUserManagerSqlProvider {
 				}
 				if (StringUtils.isNotBlank(authorityInfo.getAuthCode())) {
 					VALUES("authCode", "#{authCode}");
+				}
+				if(StringUtils.isNotBlank(authorityInfo.getAuthDesc())){
+					VALUES("authDesc", "#{authDesc}");
+				}
+				if(authorityInfo.getAuthType()!=null){
+					VALUES("authType", "#{authType}");
 				}
 				if (authorityInfo.getOperateId() != null) {
 					VALUES("operateId", "#{operateId}");
@@ -39,6 +89,13 @@ public class IUserManagerSqlProvider {
 					if (StringUtils.isNotBlank(authorityInfo.getAuthCode())) {
 						SET("authCode=#{authCode}");
 					}
+					
+					if(StringUtils.isNotBlank(authorityInfo.getAuthDesc())){
+						SET("authDesc=#{authDesc}");
+					}
+					if(authorityInfo.getAuthType()!=null){
+						SET("authType=#{authType}");
+					}
 					if (authorityInfo.getOperateId() != null) {
 						SET("operateId=#{operateId}");
 					}
@@ -56,6 +113,12 @@ public class IUserManagerSqlProvider {
 					SELECT("*").FROM("authorityinfo");
 					if (StringUtils.isNotBlank(authorityInfo.getAuthName())) {
 						WHERE("authName=#{authName}");
+					}
+					if(StringUtils.isNotBlank(authorityInfo.getAuthDesc())){
+						WHERE("authDesc=#{authDesc}");
+					}
+					if(authorityInfo.getAuthType()!=null){
+						WHERE("authType=#{authType}");
 					}
 					if (StringUtils.isNotBlank(authorityInfo.getAuthCode())) {
 						WHERE("authCode=#{authCode}");
@@ -78,23 +141,11 @@ public class IUserManagerSqlProvider {
 			{
 				INSERT_INTO("roleinfo");
 				if (StringUtils.isNotBlank(roleInfo.getRoleName())) {
-					VALUES("authorityCode", "#{roleName}");
+					VALUES("roleName", "#{roleName}");
 				}
-				if (StringUtils.isNotBlank(roleInfo.getAuthorityCode())) {
-					VALUES("authorityCode", "#{authorityCode}");
-				}
-				if (StringUtils.isNotBlank(roleInfo.getAuthorityName())) {
-					VALUES("authorityName", "#{authorityName}");
-				}
-				if (roleInfo.getStatus() != null) {
-					VALUES("status", "#{status}");
-				}
-				if (roleInfo.getFirmId() != null) {
-					VALUES("firmId", "#{firmId}");
-				}
-				if (roleInfo.getOperateId() != null) {
-					VALUES("operateId", "#{operateId}");
-				}
+				if (roleInfo.getFirmType() != null) {
+                    VALUES("firmType", "#{firmType}");
+                }
 				VALUES("operateDate", "(SELECT NOW())");
 			}
 		}.toString();
@@ -106,22 +157,10 @@ public class IUserManagerSqlProvider {
 				if (roleInfo.getRoleId() != null) {
 					UPDATE("roleinfo");
 					if (StringUtils.isNotBlank(roleInfo.getRoleName())) {
-						SET("authorityCode=#{roleName}");
+						SET("roleName=#{roleName}");
 					}
-					if (StringUtils.isNotBlank(roleInfo.getAuthorityCode())) {
-						SET("authorityCode=#{authorityCode}");
-					}
-					if (StringUtils.isNotBlank(roleInfo.getAuthorityName())) {
-						SET("authorityName=#{authorityName}");
-					}
-					if (roleInfo.getStatus() != null) {
-						SET("status=#{status}");
-					}
-					if (roleInfo.getFirmId() != null) {
-						SET("firmId =#{firmId}");
-					}
-					if (roleInfo.getOperateId() != null) {
-						SET("operateId=#{operateId}");
+					if (roleInfo.getFirmType() != null) {
+						SET("firmType =#{firmType}");
 					}
 					SET("operateDate=(SELECT NOW())");
 					WHERE("roleId=#{roleId}");
@@ -135,22 +174,10 @@ public class IUserManagerSqlProvider {
 			{
 				SELECT("*").FROM("roleinfo");
 				if (StringUtils.isNotBlank(roleInfo.getRoleName())) {
-					WHERE("authorityCode=#{roleName}");
+					WHERE("roleName=#{roleName}");
 				}
-				if (StringUtils.isNotBlank(roleInfo.getAuthorityCode())) {
-					WHERE("authorityCode=#{authorityCode}");
-				}
-				if (StringUtils.isNotBlank(roleInfo.getAuthorityName())) {
-					WHERE("authorityName=#{authorityName}");
-				}
-				if (roleInfo.getStatus() != null) {
-					WHERE("status=#{status}");
-				}
-				if (roleInfo.getFirmId() != null) {
-					WHERE("firmId =#{firmId}");
-				}
-				if (roleInfo.getOperateId() != null) {
-					WHERE("operateId=#{operateId}");
+				if (roleInfo.getFirmType() != null) {
+					WHERE("firmType =#{firmType}");
 				}
 			}
 		}.toString();
@@ -235,6 +262,8 @@ public class IUserManagerSqlProvider {
 					if (StringUtils.isNotBlank(userInfo.getRoleName())) {
 						SET("roleName=#{roleName}");
 					}
+					if (userInfo.getGroupManager() != null)
+	                    SET("groupManager=#{groupManager}");
 					if (userInfo.getGroupId() != null) {
 						if (userInfo.getGroupId() == -1) {
 							SET("groupId=null");
@@ -285,6 +314,8 @@ public class IUserManagerSqlProvider {
 				if (StringUtils.isNotBlank(userInfo.getRoleName())) {
 					WHERE("roleName=#{roleName}");
 				}
+                if (userInfo.getGroupManager() != null)
+                    WHERE("groupManager=#{groupManager}");
 				if (userInfo.getGroupId() != null) {
 					if (userInfo.getGroupId() == -1) {
 						WHERE("groupId is null");

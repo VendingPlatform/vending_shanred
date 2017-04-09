@@ -9,8 +9,10 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import com.vending.platform.dao.sqlprovider.IUserManagerSqlProvider;
 import com.vending.platform.domain.AuthorityInfo;
+import com.vending.platform.domain.RoleAuthInfo;
 import com.vending.platform.domain.RoleInfo;
 import com.vending.platform.domain.UserInfo;
+import com.vending.platform.domain.UserRoleInfo;
 import com.vending.platform.exception.SQLFormatException;
 
 /**
@@ -19,6 +21,47 @@ import com.vending.platform.exception.SQLFormatException;
  * @author Miley_Ren
  */
 public interface IUserManagerDao {
+    
+    @SelectProvider(type=IUserManagerSqlProvider.class, method="insertUserRoleInfo")
+    public void insertUserRoleInfo(UserRoleInfo userRoleInfo);
+    
+    @SelectProvider(type=IUserManagerSqlProvider.class, method="getAllUserRoleInfos")
+    @Results({
+        @Result(property = "userInfo", column = "userId", one = @One(select = "com.vending.platform.dao.IUserManagerDao.getUserById")),
+        @Result(property = "roleInfo", column = "roleId", one = @One(select = "com.vending.platform.dao.IUserManagerDao.getRoleById"))
+        })
+    public List<UserRoleInfo> getAllUserRoleInfos(UserRoleInfo userRoleInfo);
+    
+    @SelectProvider(type=IUserManagerSqlProvider.class, method="getUserRoleInfoById")
+    @Results({
+        @Result(property = "userInfo", column = "userId", one = @One(select = "com.vending.platform.dao.IUserManagerDao.getUserById")),
+        @Result(property = "roleInfo", column = "roleId", one = @One(select = "com.vending.platform.dao.IUserManagerDao.getRoleById"))
+        })
+    public UserRoleInfo getUserRoleInfoById(Integer userRoleId);
+    
+    @SelectProvider(type=IUserManagerSqlProvider.class, method="deleteUserRoleInfo")
+    public void deleteUserRoleInfo(Integer userRoleId);
+    
+    
+    @SelectProvider(type = IUserManagerSqlProvider.class, method = "insertRoleAuthInfo")
+    public void insertRoleAuthInfo(RoleAuthInfo roleAuthInfo);
+    
+    @SelectProvider(type = IUserManagerSqlProvider.class, method = "getAllRoleAuthInfos")
+    @Results({
+        @Result(property = "authorityInfo", column = "authId", one = @One(select = "com.vending.platform.dao.IUserManagerDao.getAuthorityInfoById")),
+        @Result(property = "roleInfo", column = "roleId", one = @One(select = "com.vending.platform.dao.IUserManagerDao.getRoleById"))
+        })
+    public List<RoleAuthInfo> getAllRoleAuthInfos(RoleAuthInfo roleAuthInfo);
+    
+    @SelectProvider(type = IUserManagerSqlProvider.class, method = "getRoleAuthInfoById")
+    @Results({
+        @Result(property = "authorityInfo", column = "authId", one = @One(select = "com.vending.platform.dao.IUserManagerDao.getAuthorityInfoById")),
+        @Result(property = "roleInfo", column = "roleId", one = @One(select = "com.vending.platform.dao.IUserManagerDao.getRoleById"))
+        })
+    public RoleAuthInfo getRoleAuthInfoById(Integer roleAuthId);
+    
+    @SelectProvider(type = IUserManagerSqlProvider.class, method = "deleteRoleAuthInfo")
+    public void deleteRoleAuthInfo(Integer roleAuthId);
 
 	/**
 	 * 插入新的权限信息；注意：同一公司不能有编码一样的权限
@@ -56,6 +99,10 @@ public interface IUserManagerDao {
 	 * @return AuthorityInfo 返回一个实体类
 	 */
 	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getAuthorityInfoById")
+	@Results({
+	    @Result(property = "roleAuthInfo", column = "roleAuthId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getRoleAuthInfoById")),
+	    @Result(property = "roleAuthInfos", column = "roleAuthId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllRoleAuthInfos")),
+	})
 	public AuthorityInfo getAuthorityInfoById(Integer authId);
 
 	/**
@@ -99,8 +146,11 @@ public interface IUserManagerDao {
 	 */
 	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getRoleById")
 	@Results({
-			@Result(property = "userInfos", column = "userId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllUsers")),
-			@Result(property = "userInfo", column = "userId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getUserById")) })
+	        @Result(property = "roleAuthInfo", column = "roleAuthId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getRoleAuthInfoById")),
+	        @Result(property = "roleAuthInfos", column = "roleAuthId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllRoleAuthInfos")),
+	        @Result(property = "userRoleInfo", column = "userRoleId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getUserRoleInfoById")),
+            @Result(property = "userRoleInfos", column = "userRoleId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllUserRoleInfos")),
+	        })
 	public RoleInfo getRoleById(Integer roleId);
 
 	/** 删除角色 */
@@ -129,7 +179,6 @@ public interface IUserManagerDao {
 	 */
 	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getAllUsers")
 	@Results({
-			@Result(property = "roleInfo", column = "roleId", one = @One(select = "com.vending.platform.dao.IUserManagerDao.getRoleById")),
 			@Result(property = "firmInfo", column = "firmId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById")),
 			@Result(property = "groupInfo", column = "groupId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getGroupInfoById")) })
 	public List<UserInfo> getAllUsers(UserInfo userInfo);
@@ -137,9 +186,11 @@ public interface IUserManagerDao {
 	/** 按Id查找用户 */
 	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getUserById")
 	@Results({
-			@Result(property = "roleInfo", column = "roleId", one = @One(select = "com.vending.platform.dao.IUserManagerDao.getRoleById")),
 			@Result(property = "firmInfo", column = "firmId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById")),
-			@Result(property = "groupInfo", column = "groupId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getGroupInfoById")) })
+			@Result(property = "groupInfo", column = "groupId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getGroupInfoById")),
+			@Result(property = "userRoleInfos", column = "userRoleId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllUserRoleInfos")),
+	        @Result(property = "userRoleInfo", column = "userRoleId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getUserRoleInfoById"))
+			})
 	public UserInfo getUserById(Integer integer);
 
 	/** 删除用户 */

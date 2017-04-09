@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -27,35 +26,27 @@
 				<td>${user.userId}</td>
 			</tr>
 			<tr>
-				<td>userNo</td>
+				<td>用户编号</td>
 				<td>${user.userNo}</td>
 			</tr>
 			<tr>
-				<td>userName</td>
+				<td>用户名</td>
 				<td>${user.userName}</td>
 			</tr>
 			<tr>
-				<td>email</td>
+				<td>邮箱</td>
 				<td>${user.email}</td>
 			</tr>
 			<tr>
-				<td>roleId</td>
-				<td>${user.roleInfo.roleId}</td>
-			</tr>
-			<tr>
-				<td>roleName</td>
-				<td>${user.roleName}</td>
-			</tr>
-			<tr>
-				<td>GroupId</td>
+				<td>分组</td>
 				<td>${user.groupInfo.groupName}</td>
 			</tr>
 			<tr>
-				<td>FirmName</td>
-				<td>${user.firmInfo.firmName}</td>
+				<td>公司类型</td>
+				<td>${user.firmInfo.firmType}</td>
 			</tr>
 			<tr>
-				<td>status</td>
+				<td>状态</td>
 				<td>${user.status}</td>
 			</tr>
 		</table>

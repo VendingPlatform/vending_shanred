@@ -23,11 +23,11 @@
 		<form  action="<c:url value="/user/changepwdexecute"/>" method="post" style="width:180px">
 			<input type="hidden" name="userId" value="${user.userId }">
 			<div class="form-group">
-				<label for="name">UserName:</label>
+				<label for="name">用户名:</label>
 				<input type="text" class="form-control" id="name" name="userName" value="${user.userName }" readonly="readonly">
 			</div>
 			<div class="form-group">
-				<label for="pwd">Password:</label>
+				<label for="pwd">密码:</label>
 				<input type="password" class="form-control" id="pwd" name="password" value="${user.password}" required placeholder="输入密码">
 			</div>
 			<button type="submit" class="btn btn-primary">提交</button>

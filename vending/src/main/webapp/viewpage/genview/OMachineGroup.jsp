@@ -32,6 +32,7 @@
 					<th>分组类型</th>
 					<th>描述信息</th>
 					<th>公司</th>
+					<th>公司名称</th>
 					<th>操作者</th>
 					<th>操作日期</th>
 					<th></th>
@@ -41,11 +42,14 @@
 						<td>${groupInfo.groupName}</td>
 						<td>${groupInfo.groupType}</td>
 						<td>${groupInfo.groupDesc}</td>
-						<td>${groupInfo.firmId}</td>
+						<td>${groupInfo.firmInfo.firmId}</td>
+						<td>${groupInfo.firmInfo.firmName}</td>
 						<td>${groupInfo.operateId}</td>
 						<td>${groupInfo.operateDate}</td>
 						<td>
 							<a href="<c:url value="/machine/machineGroupDetialInfos"/>?groupId=${groupInfo.groupId}" class="btn default"> <span class="glyphicon glyphicon-paperclip" title="详情"></span>
+							</a>
+							<a href="#" class="btn default"> <span class="glyphicon glyphicon-link" title="分配"></span>
 							</a>
 							<a href="<c:url value="/machine/machinegroupInfo"/>?groupId=${groupInfo.groupId}" class="btn default"> <span class="glyphicon glyphicon-edit" title="编辑"></span>
 							</a>

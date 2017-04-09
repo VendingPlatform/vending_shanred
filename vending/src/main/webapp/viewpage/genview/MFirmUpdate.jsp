@@ -30,7 +30,7 @@
 						<td>商家编号</td>
 						<td>
 							<div class="form-group">
-								<input type="text" class="form-control" name="firmNo" value="${firmInfo.firmNo}" placeholder="商家编号">
+								<input type="text" class="form-control" name="firmNo" value="${firmInfo.firmNo}" placeholder="商家编号" readonly>
 							</div>
 						</td>
 					</tr>
@@ -38,7 +38,7 @@
 						<td>商家名称</td>
 						<td>
 							<div class="form-group">
-								<input type="text" class="form-control" name="firmName" value="${firmInfo.firmName}" placeholder="商家名称">
+								<input type="text" class="form-control" name="firmName" value="${firmInfo.firmName}" placeholder="商家名称" >
 							</div>
 						</td>
 					</tr>

@@ -171,16 +171,10 @@ public class IFirmAndGroupSqlProvider {
 		return new SQL() {
 			{
 				INSERT_INTO("opermgr");
-				if (StringUtils.isNotBlank(operMgr.getFirmNo()))
-					VALUES("firmNo", "#{firmNo}");
 				if (operMgr.getFirmId() != null)
 					VALUES("firmId", "#{firmId}");
-				if (StringUtils.isNotBlank(operMgr.getFirmName()))
-					VALUES("firmName", "#{firmName}");
 				if (operMgr.getManuId() != null)
 					VALUES("manuId", "#{manuId}");
-				if (StringUtils.isNotBlank(operMgr.getManuName()))
-					VALUES("manuName", "#{manuName}");
 				if (operMgr.getOperateId() != null)
 					VALUES("operateId", "#{operateId}");
 				VALUES("operateDate", "(SELECT NOW())");
@@ -192,16 +186,10 @@ public class IFirmAndGroupSqlProvider {
 		return new SQL() {
 			{
 				UPDATE("opermgr");
-				if (StringUtils.isNotBlank(operMgr.getFirmNo()))
-					SET("firmNo=#{firmNo}");
 				if (operMgr.getFirmId() != null)
 					SET("firmId=#{firmId}");
-				if (StringUtils.isNotBlank(operMgr.getFirmName()))
-					SET("firmName=#{firmName}");
 				if (operMgr.getManuId() != null)
 					SET("manuId=#{manuId}");
-				if (StringUtils.isNotBlank(operMgr.getManuName()))
-					SET("manuName=#{manuName}");
 				if (operMgr.getOperateId() != null)
 					SET("operateId=#{operateId}");
 				SET("operateDate=(SELECT NOW())");
@@ -214,16 +202,10 @@ public class IFirmAndGroupSqlProvider {
 		return new SQL() {
 			{
 				SELECT("*").FROM("opermgr");
-				if (StringUtils.isNotBlank(operMgr.getFirmNo()))
-					WHERE("firmNo=#{firmNo}");
 				if (operMgr.getFirmId() != null)
 					WHERE("firmId=#{firmId}");
-				if (StringUtils.isNotBlank(operMgr.getFirmName()))
-					WHERE("firmName=#{firmName}");
 				if (operMgr.getManuId() != null)
 					WHERE("manuId=#{manuId}");
-				if (StringUtils.isNotBlank(operMgr.getManuName()))
-					WHERE("manuName=#{manuName}");
 				if (operMgr.getOperateId() != null)
 					WHERE("operateId=#{operateId}");
 			}

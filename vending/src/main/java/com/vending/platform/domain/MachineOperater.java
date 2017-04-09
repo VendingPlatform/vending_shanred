@@ -15,20 +15,12 @@ public class MachineOperater implements Serializable {
 	private Integer mOperaterId;
 	/** 售货机ID */
 	private Integer machineId;
-	/** 售货机名牌号 */
-	//private String machineName;
-	/** 售货机主板号 */
-	//private String machinePannel;
 	/** 是否分配：0：未分配；1：已分配 */
 	private Integer machineAssign;
-	/** 售货机类型 */
-	//private String tModelName;
 	/** 分配给某员工 */
 	private Integer userId;
 	/** 售货机详细地址 */
 	private String machineAddress;
-	/** 售货机是否可用：0：不可用；1：可用 */
-	//private Integer machineStatus;
 	/** 所属售货机组 */
 	private Integer groupId;
 	/** 所属运营商ID */

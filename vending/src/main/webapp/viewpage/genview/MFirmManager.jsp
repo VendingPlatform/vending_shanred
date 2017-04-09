@@ -20,7 +20,7 @@
 				</ul>
 			</div>
 		</div>
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#insertFirm">添加商家</button>
+		<a type="button" class="btn btn-primary" data-toggle="modal" data-target="#insertFirm">添加商家</a>
 		<div>
 			<table class="table">
 				<tr>
@@ -37,11 +37,11 @@
 				<c:forEach items="${operMgrs}" var="operFirm">
 					<tr>
 						<td>${operFirm.operMgrId}</td>
-						<td>${operFirm.firmNo}</td>
-						<td>${operFirm.firmId}</td>
-						<td>${operFirm.firmName}</td>
-						<td>${operFirm.manuId}</td>
-						<td>${operFirm.manuName}</td>
+						<td>${operFirm.operFirm.firmNo}</td>
+						<td>${operFirm.operFirm.firmId}</td>
+						<td>${operFirm.operFirm.firmName}</td>
+						<td>${operFirm.manuFirm.firmId}</td>
+						<td>${operFirm.manuFirm.firmName}</td>
 						<td>${operFirm.operateId}</td>
 						<td>${operFirm.operateDate}</td>
 						<td>

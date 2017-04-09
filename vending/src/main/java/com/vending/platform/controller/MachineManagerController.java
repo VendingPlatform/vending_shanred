@@ -112,8 +112,6 @@ public class MachineManagerController extends UtilsAction {
 		groupInfo.setFirmId(userInfo.getFirmId());
 		groupInfo.setGroupType(2);// type=2,表示查询售货机分组
 
-		// List<GroupInfo> groupInfos =
-		// machineManagerService.getAllMachineGroups(groupInfo);
 		List<GroupInfo> groupInfos = firmAndGroupService.getAllGroupInfos(groupInfo);
 		modelMap.addAttribute("machineGroupInfos", groupInfos);
 		return new ModelAndView("genview/OMachineGroup", modelMap);
@@ -147,7 +145,6 @@ public class MachineManagerController extends UtilsAction {
 	@RequestMapping(value = "/machineGroupUpdate")
 	public String updateGroupInfo(GroupInfo groupInfo) {
 		firmAndGroupService.updateGroup(groupInfo);
-		// machineManagerService.updateGroupInfo(groupInfo);
 		return "redirect:/machine/machineGroup";
 	}
 
