@@ -10,6 +10,10 @@ import com.vending.platform.domain.UserInfo;
 import com.vending.platform.domain.UserRoleInfo;
 
 public interface IUserManagerService {
+
+    /** 判断用户是否已注册 */
+    Boolean alreadyUser(UserInfo userInfo);
+
     /** 根据权限查询所有用户 */
     List<UserInfo> getAllUsersByAuth(Set<AuthorityInfo> auths,
             UserInfo userInfo);

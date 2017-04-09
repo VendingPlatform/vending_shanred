@@ -262,6 +262,8 @@ public class IUserManagerSqlProvider {
 					if (StringUtils.isNotBlank(userInfo.getRoleName())) {
 						SET("roleName=#{roleName}");
 					}
+					if (userInfo.getGroupManager() != null)
+	                    SET("groupManager=#{groupManager}");
 					if (userInfo.getGroupId() != null) {
 						if (userInfo.getGroupId() == -1) {
 							SET("groupId=null");
@@ -312,6 +314,8 @@ public class IUserManagerSqlProvider {
 				if (StringUtils.isNotBlank(userInfo.getRoleName())) {
 					WHERE("roleName=#{roleName}");
 				}
+                if (userInfo.getGroupManager() != null)
+                    WHERE("groupManager=#{groupManager}");
 				if (userInfo.getGroupId() != null) {
 					if (userInfo.getGroupId() == -1) {
 						WHERE("groupId is null");

@@ -1,5 +1,6 @@
 package com.vending.platform.controller;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,7 +24,7 @@ import com.vending.platform.domain.UserRoleInfo;
 import com.vending.platform.service.IUserManagerService;
 
 @Controller
-@SessionAttributes({"user","userAuth"})
+@SessionAttributes({"user","userAuth","userAuthCodes"})
 @RequestMapping("/user")
 public class UserLoginController {
 	private static Logger logger = Logger.getLogger(UserLoginController.class);
@@ -34,11 +35,16 @@ public class UserLoginController {
 	public Set<AuthorityInfo> getUserAuth(){
 	    return new HashSet<AuthorityInfo>();
 	}
+	@ModelAttribute("userAuthCodes")
+	public List<String> getuserAuthList(){
+	    return new ArrayList<String>();
+	}
 	
 	@Description("用户登录")
 	@RequestMapping(method = RequestMethod.POST, value = "/login")
 	@ModelAttribute("user")
-	public ModelAndView login(UserInfo userInfo, @ModelAttribute("userAuth")Set<AuthorityInfo> userAuth, ModelMap modelMap) {
+	public ModelAndView login(UserInfo userInfo, @ModelAttribute("userAuth")Set<AuthorityInfo> userAuth, 
+	        @ModelAttribute("userAuthCodes")List<String> userAuthCodes,ModelMap modelMap) {
 		UserInfo user = userManagerService.login(userInfo);
 		ModelAndView modelAndView = new ModelAndView();
 		if (user != null) {
@@ -59,8 +65,10 @@ public class UserLoginController {
                        userAuth.add(roleAuth.getAuthorityInfo());
                     }
                 }
+				userAuthCodes = userManagerService.getAuthTop(userAuth);
 				modelMap.addAttribute("user", user);
 				modelMap.addAttribute("userAuth", userAuth);
+				modelMap.addAttribute("userAuthCodes",userAuthCodes);
 				logger.debug(user.toString() + "：登录信息");
 			}
 		} else {

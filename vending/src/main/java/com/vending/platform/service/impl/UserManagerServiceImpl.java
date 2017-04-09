@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.catalina.User;
 import org.apache.log4j.Logger;
+import org.hamcrest.core.IsEqual;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -205,5 +207,20 @@ public class UserManagerServiceImpl
         }
         userInfos = this.getAllUserInfos(userSelect);
         return userInfos;
+    }
+
+    @Override
+    public Boolean alreadyUser(UserInfo userInfo) {
+        UserInfo user = new UserInfo();
+        user.setUserNo(userInfo.getUserNo());
+        user.setFirmId(userInfo.getFirmId());
+        List<UserInfo> userInfos = this.getAllUserInfos(user);
+        user = new UserInfo();
+        user.setFirmId(userInfo.getFirmId());
+        user.setUserName(userInfo.getUserName());
+        List<UserInfo> userRepqteName = this.getAllUserInfos(user);
+        if (userInfos.size() > 0||userRepqteName.size()>0)
+            return false;
+        return true;
     }
 }

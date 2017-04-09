@@ -28,6 +28,8 @@ public class UserInfo implements Serializable {
 	private Integer roleId;
 	/** 用户角色名称 */
 	private String roleName;
+	/**是否为对应小组的管理员*/
+	private Integer groupManager;
 	/** 所属用户组 */
 	private Integer groupId;
 	/** 用户状态：0：不可用，1：可用 */
@@ -220,6 +222,15 @@ public class UserInfo implements Serializable {
 
     public void setUserRoleInfos(List<UserRoleInfo> userRoleInfos) {
         this.userRoleInfos = userRoleInfos;
+    }
+
+
+    public Integer getGroupManager() {
+        return groupManager;
+    }
+
+    public void setGroupManager(Integer groupManager) {
+        this.groupManager = groupManager;
     }
 
     @Override

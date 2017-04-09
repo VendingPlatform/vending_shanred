@@ -15,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.vending.platform.domain.AuthorityInfo;
+import com.vending.platform.domain.FirmInfo;
+import com.vending.platform.domain.GroupInfo;
 import com.vending.platform.domain.RoleAuthInfo;
 import com.vending.platform.domain.RoleInfo;
 import com.vending.platform.domain.UserInfo;
 import com.vending.platform.domain.UserRoleInfo;
+import com.vending.platform.service.IFirmAndGroupService;
 import com.vending.platform.service.IUserManagerService;
 
 @Controller
@@ -30,14 +33,75 @@ public class UserManagerController extends UtilsAction {
     private static final long serialVersionUID = 6934405543902610637L;
     @Autowired
     private IUserManagerService userManagerService;
+    @Autowired
+    private IFirmAndGroupService firmAndGroupService;
+
+    @RequestMapping(value = "/registerUser")
+    public String insertUser(UserInfo userInfo) {
+        boolean repeat = userManagerService.alreadyUser(userInfo);
+        if (repeat == false) {
+            try {
+                write("该用户名和用户编号已被占用！");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return "genview/AllUsers";
+        }
+        if (userInfo.getGroupId() == null) {
+            userInfo.setGroupManager(null);
+        }
+        userManagerService.insertUserInfo(userInfo);
+        try {
+            write("插入成功");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "genview/AllUsers";
+    }
+
+    @RequestMapping(value = "/userRoleInfo")
+    public String getAllUserRoleDetail(@RequestParam("userId") Integer userId,
+            ModelMap modelMap) {
+        UserRoleInfo userRoleInfo = new UserRoleInfo();
+        userRoleInfo.setUserId(userId);
+        List<UserRoleInfo> userRoleInfos = userManagerService
+                .getAllUserRoleInfos(userRoleInfo);
+        modelMap.addAttribute("userRoleInfo", userRoleInfos);
+        if (userRoleInfos.size() > 0) {
+            UserInfo info = new UserInfo();
+            info = userRoleInfos.get(0).getUserInfo();
+            modelMap.addAttribute("userInfoDetail", info);
+        }
+        return "genview/UserRoleDetail";
+    }
 
     @RequestMapping(value = "/getAllUsers")
     public String getAllUsers(@ModelAttribute("user") UserInfo userInfo,
             @ModelAttribute("userAuth") Set<AuthorityInfo> auths,
             ModelMap modelMap) {
+        // 获取用户
         List<UserInfo> userInfos = userManagerService.getAllUsersByAuth(auths,
                 userInfo);
+        List<GroupInfo> groupInfosToAsssign = null;
+        List<FirmInfo> firmInfosToAssign = null;
+
+        // 若为运营商获取用户组
+        if (userInfo.getFirmInfo().getFirmType() == 1) {
+            GroupInfo groupInfo = new GroupInfo();
+            groupInfo.setFirmId(userInfo.getFirmInfo().getFirmId());
+            groupInfo.setGroupType(1);
+            groupInfosToAsssign = firmAndGroupService
+                    .getAllGroupInfos(groupInfo);
+        }
+        // 若为厂商获取公司
+        if (userInfo.getFirmInfo().getFirmType() == 0) {
+            firmInfosToAssign = firmAndGroupService
+                    .getAllFirmInfos(new FirmInfo());
+        }
+
         modelMap.addAttribute("userInfos", userInfos);
+        modelMap.addAttribute("firmInfosToAssign", firmInfosToAssign);
+        modelMap.addAttribute("groupInfosToAsssign", groupInfosToAsssign);
         return "genview/AllUsers";
     }
 
