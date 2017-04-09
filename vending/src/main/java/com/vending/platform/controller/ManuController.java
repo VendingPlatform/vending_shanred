@@ -57,7 +57,7 @@ public class ManuController extends UtilsAction {
             } else {
                 boolean flag = true;
                 for (OperMgr oper : operMgrs) {
-                    if (id == oper.getFirmId()) {
+                    if (id == oper.getOperFirm().getFirmId()) {
                         flag = false;
                         continue;
                     }
@@ -80,16 +80,12 @@ public class ManuController extends UtilsAction {
             return "redirect:/manu/getAllOperateFirms";
         int result = 0;
         for (int i = 0; i < firmIds.length; i++) {
-            FirmInfo firmInfo = firmAndGroupService.getFirmInfoById(firmIds[i]);
             OperMgr operMgr = new OperMgr();
             operMgr.setFirmId(firmIds[i]);
             if (firmAndGroupService.getAllOperMgrs(operMgr).size() > 0) {
                 continue;
             } else {
-                operMgr.setFirmNo(firmInfo.getFirmNo());
-                operMgr.setFirmName(firmInfo.getFirmName());
                 operMgr.setManuId(userInfo.getFirmInfo().getFirmId());
-                operMgr.setManuName(userInfo.getFirmInfo().getFirmName());
                 operMgr.setOperateId(userInfo.getUserId());
                 firmAndGroupService.insertOperMgr(operMgr);
                 result++;

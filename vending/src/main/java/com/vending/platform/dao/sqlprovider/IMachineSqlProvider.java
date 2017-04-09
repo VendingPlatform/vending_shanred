@@ -30,32 +30,6 @@ public class IMachineSqlProvider {
             }
         }.toString();
     }
-	/*public String insertMachineOperate(MachineOperater machineOperater) {
-		return new SQL() {
-			{
-				INSERT_INTO("machineoperater");
-				if (machineOperater != null && machineOperater.getMachineId() != null) {
-					VALUES("machineId", "'" + machineOperater.getMachineId() + "'");
-					VALUES("machineName", "'" + machineOperater.getMachineName() + "'");
-					VALUES("machinePannel", "'" + machineOperater.getMachinePannel() + "'");
-					VALUES("tModelName", "'" + machineOperater.gettModelName() + "'");
-					if (machineOperater.getMachineAssign() != null) {
-						VALUES("machineAssign", "'" + machineOperater.getMachineAssign() + "'");
-					}
-					if (machineOperater.getMachineStatus() != null) {
-						VALUES("machineStatus", "'" + machineOperater.getMachineStatus() + "'");
-					}
-					if (machineOperater.getOperFirmId() != null) {
-						VALUES("operFirmId", "'" + machineOperater.getOperFirmId() + "'");
-					}
-					if (machineOperater.getOperateId() != null) {
-						VALUES("operateId", "'" + machineOperater.getOperateId() + "'");
-					}
-					VALUES("operateDate", "(select now())");
-				}
-			}
-		}.toString();
-	}*/
 
 	public String deleteMachineOperateById(Integer machinId) {
 		return new SQL() {
@@ -102,55 +76,6 @@ public class IMachineSqlProvider {
             }
         }.toString();
     }
-	/*public String updateMachineOperate(MachineOperater machineOperater) {
-		return new SQL() {
-			{
-				if (machineOperater != null && machineOperater.getmOperaterId() != null) {
-					UPDATE("machineoperater");
-					if (machineOperater.getMachineId() != null) {
-						SET("machineId=#{machinId}");
-					}
-					if (StringUtils.isNotBlank(machineOperater.getMachineName())) {
-						SET("machineName='" + machineOperater.getMachineName() + "'");
-					}
-					if (StringUtils.isNotBlank(machineOperater.getMachinePannel())) {
-						SET("machinePannel='" + machineOperater.getMachinePannel() + "'");
-					}
-					if (machineOperater.getMachineAssign() != null) {
-						SET("machineAssign=" + machineOperater.getMachineAssign());
-					}
-					if (StringUtils.isNotBlank(machineOperater.gettModelName())) {
-						SET("tModelName='" + machineOperater.gettModelName() + "'");
-					}
-					if (machineOperater.getUserId() != null) {
-						SET("userId=" + machineOperater.getUserId());
-					}
-					if (StringUtils.isNotBlank(machineOperater.getMachineAddress())) {
-						SET("machineAddress='" + machineOperater.getMachineAddress() + "'");
-					}
-					if (machineOperater.getMachineStatus() != null) {
-						SET("machineStatus=" + machineOperater.getMachineStatus());
-					}
-					if (machineOperater.getGroupId() != null) {
-						if (machineOperater.getGroupId() == -1) {
-							SET("groupId=null");
-						} else {
-							SET("groupId=" + machineOperater.getGroupId());
-						}
-					}
-					if (machineOperater.getOperFirmId() != null) {
-						SET("operFirmId=" + machineOperater.getOperFirmId());
-					}
-					if (machineOperater.getOperateId() != null) {
-						SET("operateId=" + machineOperater.getOperateId());
-					}
-					SET("operateDate=(select now())");
-
-					WHERE("mOperaterId=" + machineOperater.getmOperaterId());
-				}
-			}
-		}.toString();
-	}*/
 
 	public String getMachineOperaterById(Integer id) {
 		return "SELECT * FROM machineoperater WHERE mOperaterId=" + id;
@@ -206,53 +131,6 @@ public class IMachineSqlProvider {
             }
         }.toString();
     }
-	/*public String getAllMachineOperaters(MachineOperater machineOperater) {
-		return new SQL() {
-			{
-				SELECT("*");
-				FROM("machineoperater");
-				if (machineOperater != null) {
-					if (machineOperater.getMachineId() != null) {
-						WHERE("machineId=#{machineId}");
-					}
-					if (StringUtils.isNotBlank(machineOperater.getMachineName())) {
-						WHERE("machineName='#{machineName}");
-					}
-					if (StringUtils.isNotBlank(machineOperater.getMachinePannel())) {
-						WHERE("machinePannel=#{machinePannel}");
-					}
-					if (machineOperater.getMachineAssign() != null) {
-						WHERE("machineAssign=#{machineAssign}");
-					}
-					if (StringUtils.isNotBlank(machineOperater.gettModelName())) {
-						WHERE("tModelName=#{tModelName}");
-					}
-					if (machineOperater.getUserId() != null) {
-						WHERE("userId=#{userId}");
-					}
-					if (StringUtils.isNotBlank(machineOperater.getMachineAddress())) {
-						WHERE("machineAddress=#{machineAddress}");
-					}
-					if (machineOperater.getMachineStatus() != null) {
-						WHERE("machineStatus=#{machineStatus}");
-					}
-					if (machineOperater.getGroupId() != null) {
-						if (machineOperater.getGroupId() == -1) {
-							WHERE("groupId is null");
-						} else {
-							WHERE("groupId=#{groupId}");
-						}
-					}
-					if (machineOperater.getOperFirmId() != null) {
-						WHERE("operFirmId=#{operFirmId}");
-					}
-					if (machineOperater.getOperateId() != null) {
-						WHERE("operateId=#{operateId}");
-					}
-				}
-			}
-		}.toString();
-	}*/
 
 	public String getMachineInfoById(Integer id) {
 		return "SELECT * FROM machineinfo WHERE machineId=" + id;

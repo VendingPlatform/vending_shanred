@@ -1,7 +1,5 @@
 package com.vending.platform.domain;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +27,6 @@ public class AuthorityInfo implements Serializable {
     /** 操作时间 */
     private Date operateDate;
 
-    // private List<RoleInfo> roleInfos;
     private List<RoleAuthInfo> roleAuthInfos;
 
     public AuthorityInfo() {

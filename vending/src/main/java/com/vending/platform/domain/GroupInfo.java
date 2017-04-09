@@ -30,6 +30,8 @@ public class GroupInfo implements Serializable {
 
 	private List<MachineOperater> machineOperaters;
 	private List<UserInfo> userInfos;
+	
+	private FirmInfo firmInfo;
 
 	public GroupInfo() {
 		super();
@@ -107,7 +109,15 @@ public class GroupInfo implements Serializable {
 		this.userInfos = userInfos;
 	}
 
-	@Override
+	public FirmInfo getFirmInfo() {
+        return firmInfo;
+    }
+
+    public void setFirmInfo(FirmInfo firmInfo) {
+        this.firmInfo = firmInfo;
+    }
+
+    @Override
 	public String toString() {
 		return "GroupInfo [groupId=" + groupId + ", groupName=" + groupName + ", groupType=" + groupType
 				+ ", groupDesc=" + groupDesc + ", firmId=" + firmId + ", operateId=" + operateId + ", operateDate="

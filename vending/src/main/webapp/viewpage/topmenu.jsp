@@ -34,7 +34,7 @@
 						</ul></li>
 					<!-- firmType==0系统管理员才有的权限 -->
 					<c:if test="${user.firmInfo.firmType==0 }">
-						<li><a href="<%=basePath%>viewpage/genview/ManagerFirm.jsp">商家管理</a></li>
+						<li><a href="<c:url value="/manager/getAllFirms"/>">商家管理</a></li>
 					</c:if>
 					<!-- firmType==1运营商才有的权限 -->
 					<c:if test="${user.firmInfo.firmType==1 }">

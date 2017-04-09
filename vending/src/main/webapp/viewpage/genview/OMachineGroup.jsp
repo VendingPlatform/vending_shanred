@@ -32,6 +32,7 @@
 					<th>分组类型</th>
 					<th>描述信息</th>
 					<th>公司</th>
+					<th>公司名称</th>
 					<th>操作者</th>
 					<th>操作日期</th>
 					<th></th>
@@ -41,7 +42,8 @@
 						<td>${groupInfo.groupName}</td>
 						<td>${groupInfo.groupType}</td>
 						<td>${groupInfo.groupDesc}</td>
-						<td>${groupInfo.firmId}</td>
+						<td>${groupInfo.firmInfo.firmId}</td>
+						<td>${groupInfo.firmInfo.firmName}</td>
 						<td>${groupInfo.operateId}</td>
 						<td>${groupInfo.operateDate}</td>
 						<td>

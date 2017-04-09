@@ -56,7 +56,6 @@ public class UserLoginController {
                     roleAuthInfo.setRoleId(roleId);
                     List<RoleAuthInfo> roleAuthInfos = userManagerService.getAllRoleAuthInfos(roleAuthInfo);
                     for (RoleAuthInfo roleAuth : roleAuthInfos) {
-                      System.out.println("************"+ userAuth.contains(roleAuth.getAuthorityInfo()));
                        userAuth.add(roleAuth.getAuthorityInfo());
                     }
                 }

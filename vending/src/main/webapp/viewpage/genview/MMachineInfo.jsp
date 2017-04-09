@@ -93,7 +93,7 @@
       					<c:forEach items='${operMgrs}' var='f'>
       					<div class="radio">
   							<label>
-  							 	 <input type="radio" name="operFirmInfo.firmId" value="${f.firmId }">${f.firmId }&nbsp;${f.firmName }&nbsp;${f.firmNo }
+  							 	 <input type="radio" name="operFirmInfo.firmId" value="${f.operFirm.firmId }">${f.operFirm.firmId }&nbsp;${f.operFirm.firmName }&nbsp;${f.operFirm.firmNo }
  						    </label>
 						</div>
 						</c:forEach>

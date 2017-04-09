@@ -1,6 +1,7 @@
 package com.vending.platform.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.vending.platform.domain.AuthorityInfo;
 import com.vending.platform.domain.RoleAuthInfo;
@@ -9,12 +10,18 @@ import com.vending.platform.domain.UserInfo;
 import com.vending.platform.domain.UserRoleInfo;
 
 public interface IUserManagerService {
+    /** 根据权限查询所有用户 */
+    List<UserInfo> getAllUsersByAuth(Set<AuthorityInfo> auths,
+            UserInfo userInfo);
+
+    /** 查看当前用户权限编码列表 */
+    List<String> getAuthTop(Set<AuthorityInfo> authorityInfos);
 
     /** 用户角色 */
     void insertUserRoleInfo(UserRoleInfo userRoleInfo);
 
     List<UserRoleInfo> getAllUserRoleInfos(UserRoleInfo userRoleInfo);
-    
+
     UserRoleInfo getUserRoleInfoById(Integer userRoleId);
 
     void deleteUserRoleInfo(Integer userRoleId);
