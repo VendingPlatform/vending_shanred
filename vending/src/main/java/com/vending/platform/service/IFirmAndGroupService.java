@@ -9,7 +9,7 @@ import com.vending.platform.domain.UserInfo;
 
 public interface IFirmAndGroupService {
 	/** 添加商家，创建商家的同时要为商家创建管理员 */
-	boolean insertFirm(FirmInfo firmInfo);
+	boolean insertFirm(FirmInfo firmInfo,UserInfo user);
 
 	void updateFirm(FirmInfo firmInfo);
 

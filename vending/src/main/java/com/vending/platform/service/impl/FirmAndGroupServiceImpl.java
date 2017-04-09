@@ -26,7 +26,7 @@ public class FirmAndGroupServiceImpl implements IFirmAndGroupService {
     private IUserManagerDao userManagerDao;
 
     @Override
-    public boolean insertFirm(FirmInfo firmInfo) {
+    public boolean insertFirm(FirmInfo firmInfo,UserInfo user) {
         FirmInfo firmAlready = new FirmInfo();
         firmAlready.setFirmNo(firmInfo.getFirmNo());
         List<FirmInfo> firmInfos = firmAndGroupDao.getAllFirmInfos(firmAlready);
@@ -38,7 +38,7 @@ public class FirmAndGroupServiceImpl implements IFirmAndGroupService {
                     .getFirmId();
             firmInfo.setFirmId(firmId);
             // 添加管理员
-            boolean result = this.addFirmManager(firmInfo);
+            boolean result = this.addFirmManager(firmInfo,user);
             if (result == false)
                 firmAndGroupDao.deleteFirmInfo(firmId);
             return true;
@@ -46,7 +46,7 @@ public class FirmAndGroupServiceImpl implements IFirmAndGroupService {
     }
 
     /** 添加管理员 */
-    public boolean addFirmManager(FirmInfo firmInfo) {
+    public boolean addFirmManager(FirmInfo firmInfo,UserInfo user) {
         UserInfo userInfo = new UserInfo();
         UserRoleInfo userRoleInfo = new UserRoleInfo();
         userInfo.setFirmId(firmInfo.getFirmId());
@@ -58,12 +58,14 @@ public class FirmAndGroupServiceImpl implements IFirmAndGroupService {
         userInfo.setPassword("system" + firmInfo.getFirmNo() + "01");
         userInfo.setUserNo(firmInfo.getFirmNo() + "01");
         userInfo.setStatus(1);
-
+        
         Integer roleId = 0;
         if (firmInfo.getFirmType() == 1) {// 运营商
+        	userInfo.setParentUserId(user.getUserId());
             roleId = 2;
         }
         if (firmInfo.getFirmType() == 2) {// 厂商
+        	userInfo.setParentUserId(user.getUserId());
             roleId = 3;
         }
         if (firmInfo.getFirmType() == 0) {// 管理员

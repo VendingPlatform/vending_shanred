@@ -18,6 +18,7 @@ import com.vending.platform.domain.AuthorityInfo;
 import com.vending.platform.domain.RoleAuthInfo;
 import com.vending.platform.domain.RoleInfo;
 import com.vending.platform.domain.UserInfo;
+import com.vending.platform.domain.UserRoleInfo;
 import com.vending.platform.service.IUserManagerService;
 
 @Controller
@@ -30,13 +31,17 @@ public class UserManagerController extends UtilsAction {
 	private IUserManagerService userManagerService;
 
 	@RequestMapping(value = "/getAllUsers")
-	public String getAllUsers(@ModelAttribute("user") UserInfo userInfo) {
+	public String getAllUsers(@ModelAttribute("user") UserInfo userInfo,
+			@ModelAttribute("userAuth") Set<AuthorityInfo> auths) {
 		Integer firmId = userInfo.getFirmInfo().getFirmId();
+		List<UserInfo> userInfos = new ArrayList<UserInfo>();
+		UserInfo userSelect = new UserInfo();
 		if (firmId == 0) {
 			// 管理员，查看所有用户
-
+			userInfos = userManagerService.getAllUserInfos(userSelect);
 		} else if (firmId == 1) {
 			// 运营商，根据不同的角色查看用户
+
 		} else if (firmId == 2) {
 			// 查看厂商用户
 		}
@@ -80,7 +85,7 @@ public class UserManagerController extends UtilsAction {
 		List<AuthorityInfo> authorityInfos = userManagerService.getAllAuthoritys(authorityInfo);
 		List<AuthorityInfo> auths = new ArrayList<>();
 		for (AuthorityInfo a : authorityInfos) {
-			if(!authInfosAlready.contains(a)){
+			if (!authInfosAlready.contains(a)) {
 				auths.add(a);
 			}
 		}
@@ -98,11 +103,19 @@ public class UserManagerController extends UtilsAction {
 	@RequestMapping(value = "/getAllRoles")
 	public String getAllRoles(@ModelAttribute("user") UserInfo userInfo, ModelMap modelMap) {
 		Integer firmType = userInfo.getFirmInfo().getFirmType();
-		RoleInfo roleInfo = new RoleInfo();
+		List<RoleInfo> roleInfos = new ArrayList<RoleInfo>();
 		if (firmType != 0) {
-			roleInfo.setFirmType(firmType);
+			// 若不为系统管理员，则只可查看自己拥有的角色
+			UserRoleInfo userrole = new UserRoleInfo();
+			userrole.setUserId(userInfo.getUserId());
+			List<UserRoleInfo> userRoleInfos = userManagerService.getAllUserRoleInfos(userrole);
+			for (UserRoleInfo userRoleInfo : userRoleInfos) {
+				roleInfos.add(userRoleInfo.getRoleInfo());
+			}
+		} else {
+			// 若为系统管理员
+			roleInfos = userManagerService.getAllRoles(new RoleInfo());
 		}
-		List<RoleInfo> roleInfos = userManagerService.getAllRoles(roleInfo);
 		modelMap.addAttribute("allRoleInfos", roleInfos);
 		return "genview/RoleInfo";
 	}

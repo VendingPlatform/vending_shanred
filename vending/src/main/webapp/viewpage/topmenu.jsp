@@ -26,7 +26,9 @@
 						<ul class="dropdown-menu">
 							<li><a href="<c:url value="/user/getAllUsers"/>">用户管理</a></li>
 							<li role="separator" class="divider"></li>
+							<c:if test="${user.firmInfo.firmType==0 }">
 							<li><a href="<c:url value="/user/getAllAuthoritys"/>">权限管理</a></li>
+							</c:if>
 							<li><a href="<c:url value="/user/getAllRoles"/>">角色管理</a></li>
 							<li><a href="#">用户组管理</a></li>
 						</ul></li>
@@ -39,8 +41,8 @@
 						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 售货机管理 <span class="caret"></span>
 						</a>
 							<ul class="dropdown-menu">
-								<li><a href="<c:url value="/machine/machineHome"/>">售货机管理(c)</a></li>
-								<li><a href="<c:url value="/machine/machineGroup"/>">分组管理(c)</a></li>
+								<li><a href="<c:url value="/machine/machineInfo"/>">售货机管理</a></li>
+								<li><a href="<c:url value="/machine/machineGroup"/>">分组管理</a></li>
 								<li><a href="#">货道管理</a>
 								<li role="separator" class="divider"></li>
 								<li><a href="#">货道组管理</a></li>

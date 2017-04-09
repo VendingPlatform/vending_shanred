@@ -52,13 +52,18 @@
 					<td>
 						<a href="<c:url value="/user/getRoleAuthInfo"/>?roleId=${role.roleId }" class="btn default">
 							 <span class="glyphicon glyphicon-info-sign" title="详情"></span>
-						</a> <a class="btn default" onclick="getRoleById(${role.roleId })" data-toggle="modal" data-target="#getRole"> 
+						</a> 
+						<c:if test="${user.firmInfo.firmType==0 }">
+						<a class="btn default" onclick="getRoleById(${role.roleId })" data-toggle="modal" data-target="#getRole"> 
 							<span class="glyphicon glyphicon-edit" title="编辑"></span>
-						</a> <a class="btn default" onclick="getAllAuths(${role.roleId },${role.firmType})" data-toggle="modal" data-target="#getAuths"> 
+						</a> 
+						<a class="btn default" onclick="getAllAuths(${role.roleId },${role.firmType})" data-toggle="modal" data-target="#getAuths"> 
 							<span class="glyphicon glyphicon-plus" title="添加权限"></span>
-						</a> <a onclick="delRole(${role.roleId })" class="btn default"> 
+						</a> 
+						<a onclick="delRole(${role.roleId })" class="btn default"> 
 							<span class="glyphicon glyphicon-trash" title="删除角色"></span>
 						</a>
+						</c:if>
 					</td>
 				</tr>
 			</c:forEach>
@@ -171,7 +176,7 @@ function getAllAuths(roleId,firmType){
 			$("#roleIdAssign").val(roleId);
 			$("#checkbox").empty();
 			for(var i=0;i<response.length;i++){
-				var html ="<label class='checkbox'><input type='checkbox' name='authId' value='"+response[i].authId+"'>"+response[i].authName+"&nbsp;"+response[i].authCode+"&nbsp;"+response[i].authDesc+"</label>";
+				var html ="<label class='checkbox'><input type='checkbox' name='authIds' value='"+response[i].authId+"'>"+response[i].authName+"&nbsp;"+response[i].authCode+"&nbsp;"+response[i].authDesc+"</label>";
 				$("#checkbox").append(html);
 			}
         },  

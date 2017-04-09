@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.vending.platform.domain.FirmInfo;
+import com.vending.platform.domain.UserInfo;
 import com.vending.platform.service.IFirmAndGroupService;
 
 @Controller
@@ -31,7 +33,7 @@ public class SysManagerController extends UtilsAction {
         return "genview/ManagerFirm";
     }
 
-    @Description("获取商家信息")
+    @Description("按Id获取商家信息")
     @RequestMapping(value = "/getFirmInfo", method = RequestMethod.GET)
     public String getFirmById(Integer firmId, ModelMap modelMap) {
         FirmInfo firmInfo = firmAndGroupService.getFirmInfoById(firmId);
@@ -48,8 +50,8 @@ public class SysManagerController extends UtilsAction {
 
     @Description("添加商家")
     @RequestMapping(value = "/createFirmInfo", method = RequestMethod.POST)
-    public String createFirmInfo(FirmInfo firmInfo) {
-        boolean flag = firmAndGroupService.insertFirm(firmInfo);
+    public String createFirmInfo(FirmInfo firmInfo,@ModelAttribute("user") UserInfo user) {
+        boolean flag = firmAndGroupService.insertFirm(firmInfo,user);
         try {
             write(flag);
         } catch (IOException e) {
