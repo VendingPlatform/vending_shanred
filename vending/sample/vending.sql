@@ -1,4 +1,4 @@
-/*
+﻿/*
 SQLyog Community v12.4.1 (64 bit)
 MySQL - 5.5.54 : Database - vending
 *********************************************************************
@@ -163,9 +163,9 @@ CREATE TABLE `machineinfo` (
   PRIMARY KEY (`machineId`),
   KEY `manuFirmId` (`manuFirmId`),
   KEY `operFirmId` (`operFirmId`),
-  CONSTRAINT `t_machine_info_ibfk_2` FOREIGN KEY (`operFirmId`) REFERENCES `firminfo` (`firmId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `t_machine_info_ibfk_1` FOREIGN KEY (`manuFirmId`) REFERENCES `firminfo` (`firmId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+  CONSTRAINT `t_machine_info_ibfk_1` FOREIGN KEY (`manuFirmId`) REFERENCES `firminfo` (`firmId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `t_machine_info_ibfk_2` FOREIGN KEY (`operFirmId`) REFERENCES `firminfo` (`firmId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 /*Data for the table `machineinfo` */
 
@@ -194,9 +194,9 @@ CREATE TABLE `machineoperater` (
   KEY `machineId` (`machineId`),
   KEY `userId` (`userId`),
   KEY `groupId` (`groupId`),
-  CONSTRAINT `MachineOperater_ibfk_3` FOREIGN KEY (`groupId`) REFERENCES `groupinfo` (`groupId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `machineoperater_ibfk_1` FOREIGN KEY (`machineId`) REFERENCES `machineinfo` (`machineId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `MachineOperater_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `userinfo` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `MachineOperater_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `userinfo` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `MachineOperater_ibfk_3` FOREIGN KEY (`groupId`) REFERENCES `groupinfo` (`groupId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 /*Data for the table `machineoperater` */
@@ -228,6 +228,64 @@ CREATE TABLE `machinetype` (
 insert  into `machinetype`(`tModelId`,`tModelName`,`firmId`,`operateId`,`operateDate`) values 
 (1,'类型1',3,1,'2017-02-27 17:07:25'),
 (2,'类型2',3,1,'2017-03-16 23:08:23');
+
+/*Table structure for table `opermgr` */
+
+DROP TABLE IF EXISTS `opermgr`;
+
+CREATE TABLE `opermgr` (
+  `operMgrId` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `firmId` int(11) NOT NULL COMMENT '合作的运营商id',
+  `manuId` int(11) NOT NULL COMMENT '厂商ID',
+  `operateId` int(11) DEFAULT NULL COMMENT '操作者',
+  `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
+  PRIMARY KEY (`operMgrId`),
+  KEY `firmId` (`firmId`),
+  KEY `OperMgr_ibfk_2` (`manuId`),
+  CONSTRAINT `OperMgr_ibfk_1` FOREIGN KEY (`firmId`) REFERENCES `firminfo` (`firmId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `OperMgr_ibfk_2` FOREIGN KEY (`manuId`) REFERENCES `firminfo` (`firmId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+
+/*Data for the table `opermgr` */
+
+insert  into `opermgr`(`operMgrId`,`firmId`,`manuId`,`operateId`,`operateDate`) values 
+(10,22,3,3,'2017-04-09 18:34:49'),
+(11,23,3,3,'2017-04-09 18:34:49'),
+(13,4,3,3,'2017-04-09 19:11:38'),
+(14,25,3,3,'2017-04-09 19:11:38');
+
+/*Table structure for table `roleauth` */
+
+DROP TABLE IF EXISTS `roleauth`;
+
+CREATE TABLE `roleauth` (
+  `roleAuthId` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `roleId` int(11) NOT NULL COMMENT '角色Id',
+  `authId` int(11) NOT NULL COMMENT '权限Id',
+  PRIMARY KEY (`roleAuthId`),
+  KEY `roleId` (`roleId`),
+  KEY `authId` (`authId`),
+  CONSTRAINT `roleauth_ibfk_1` FOREIGN KEY (`roleId`) REFERENCES `roleinfo` (`roleId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `roleauth_ibfk_2` FOREIGN KEY (`authId`) REFERENCES `authorityinfo` (`authId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+
+/*Data for the table `roleauth` */
+
+insert  into `roleauth`(`roleAuthId`,`roleId`,`authId`) values 
+(1,1,1),
+(2,2,2),
+(3,3,3),
+(4,9,4),
+(5,2,4),
+(15,2,5),
+(16,2,6),
+(17,2,7),
+(18,2,8),
+(19,2,9),
+(20,11,6),
+(21,11,8),
+(22,12,7),
+(23,12,9);
 
 /*Table structure for table `roleinfo` */
 
@@ -287,6 +345,31 @@ insert  into `userinfo`(`userId`,`userNo`,`userName`,`password`,`mobilePhone`,`e
 (7,'00601','system00601','system00601',NULL,NULL,1,NULL,1,23,1,'2017-04-07 14:19:12',NULL),
 (9,'00701','system00701','system00701',NULL,NULL,1,NULL,1,25,1,'2017-04-09 19:08:06',NULL),
 (10,'00502','sys6','111',NULL,NULL,NULL,NULL,1,22,NULL,'2017-04-09 22:59:35',6);
+
+/*Table structure for table `userrole` */
+
+DROP TABLE IF EXISTS `userrole`;
+
+CREATE TABLE `userrole` (
+  `userRoleId` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户角色Id',
+  `userId` int(11) NOT NULL COMMENT '用户Id',
+  `roleId` int(11) NOT NULL COMMENT '角色Id',
+  PRIMARY KEY (`userRoleId`),
+  KEY `userId` (`userId`),
+  KEY `roleId` (`roleId`),
+  CONSTRAINT `userrole_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `userinfo` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `userrole_ibfk_2` FOREIGN KEY (`roleId`) REFERENCES `roleinfo` (`roleId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+
+/*Data for the table `userrole` */
+
+insert  into `userrole`(`userRoleId`,`userId`,`roleId`) values 
+(1,1,1),
+(3,3,3),
+(5,5,3),
+(7,6,2),
+(8,7,2),
+(20,9,2);
 
 /*Table structure for table `wareinfo` */
 
