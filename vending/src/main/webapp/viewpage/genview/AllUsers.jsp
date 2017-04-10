@@ -1,4 +1,3 @@
-<%@page import="java.util.List"%>
 <%@page import="com.vending.platform.domain.AuthorityInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -12,6 +11,7 @@
 <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="<c:url value='/resources/js/user.js'/>" type="text/javascript"></script>
 <title>用户信息</title>
 </head>
 <body>
@@ -26,15 +26,10 @@
 			</div>
 		</div>
 		<!-- 只有管理员可以添加用户 -->
-		<%
-		    List<String> auths = (List<String>)session.getAttribute("userAuthCodes");
-			if (auths.contains("000") || auths.contains("001") || auths.contains("002")) {
-		%> 
+		<c:if test="${flag==0||flag==1 }">
 		<a href="<c:url value='/user/insertUser'/>" class="btn btn-primary"
 			data-toggle="modal" data-target="#insertUser">添加管理员</a>
-		<%
-		    }
-		%>
+		</c:if>
 		<table class="table">
 			<tr>
 				<th>Id</th>
@@ -60,30 +55,114 @@
 					<td>${u.firmInfo.firmName}</td>
 					<td>${u.operateDate}</td>
 					<td>
-					
 					<a
 						href="<c:url value='/user/userRoleInfo'/>?userId=${u.userId}"
-						class="btn default"> <span
-							class="glyphicon glyphicon-info-sign" title="详情"></span>
+						class="btn default">
+						<span class="glyphicon glyphicon-info-sign" title="详情"></span>
 					</a>
 					<a
 						href="<c:url value='#'/>?userId=${u.userId}"
 						class="btn default"> 
 					<span
+						onclick="getAllUserRoleDetail(${u.userId})"  data-toggle="modal" data-target="#updateUserInfo"
 						class="glyphicon glyphicon-edit" title="编辑"></span>
 					</a>
-					<a
-						href="<c:url value='/user/assignRoleToUser'/>?userId=${u.userId}"
-						class="btn default"> 
-					<span
-						class="glyphicon glyphicon-plus" title="角色管理"></span>
+					<a onclick="getRoletoAssign(${u.userId},${u.firmInfo.firmType})" class="btn default" data-toggle="modal" data-target="#assignRoleToUser"> 
+						<span class="glyphicon glyphicon-plus" title="角色管理"></span>
 					</a>
 					</td>
 				</tr>
 			</c:forEach>
 		</table>
 	</div>
-
+	<div class="modal fade" id="updateUserInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">用户更新</h4>
+				</div>
+				<div class="modal-body" style="width: 80%; padding-left: 30px">
+					<form class="form" id="updateUserForm">
+					<input type="hidden" name="operateId" value="${user.userId }">
+					<input type="hidden" name="userId" id="userId">
+						<div class="form-group">
+							<label for="userNo">用户编号:</label> 
+							<input type="text" class="form-control" name="userNo" id="userNo" readonly>
+						</div>
+						<div class="form-group">
+							<label for="userName">用户名:</label> 
+							<input type="text" id="userName"
+								class="form-control" name="userName"
+								readonly>
+						</div>
+						<div class="form-group">
+							<label for="password">密码:</label> 
+							<input type="password" id="password"
+								class="form-control" name="password" placeholder="输入密码" required>
+						</div>
+						<c:if test="${groupInfosToAsssign!=null}">
+							<div class="form-group">
+								<label for="groupId">分组:</label> <select name="groupId"
+									class="form-control">
+									<option value="">---管理员分组---</option>
+									<c:forEach items="${groupInfosToAsssign}" var="g">
+										<option value="${g.groupId }">${g.groupName }</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="groupManager">是否为小组管理员:</label> <select
+									name="groupManager" class="form-control">
+									<option value="1">是</option>
+									<option value="0"selected>否</option>
+								</select>
+							</div>
+						</c:if>
+						<div class="form-group">
+							<label for="status">状态:</label> <select name="status"
+								class="form-control">
+								<option value="1">可用</option>
+								<option value="0">禁用</option>
+							</select>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary"
+						onclick="updateUserInfo()" data-dismiss="modal">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="assignRoleToUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">角色分配</h4>
+				</div>
+				<div class="modal-body" style="width: 80%; padding-left: 30px">
+					<form class="form" id="assignRoleToUserForm">
+					<input type="hidden" name="operateId" value="${user.userId }">
+					<input type="hidden" name="userId" id="userIdInput">
+						<div id="assignRoleDiv"></div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary"
+						onclick="assignRoleToUser()" data-dismiss="modal">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="modal fade" id="insertUser" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
@@ -108,7 +187,7 @@
 								required>
 						</div>
 						<div class="form-group">
-							<label for="password">密码:</label> <input type="text"
+							<label for="password">密码:</label> <input type="password"
 								class="form-control" name="password" placeholder="输入密码" required>
 						</div>
 						<div class="form-group">
@@ -133,7 +212,7 @@
 								<label for="groupManager">是否为小组管理员:</label> <select
 									name="groupManager" class="form-control">
 									<option value="1">是</option>
-									<option value="0">否</option>
+									<option value="0" selected>否</option>
 								</select>
 							</div>
 						</c:if>
@@ -168,21 +247,4 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript">
-	function insertUser(){
-		$.ajax({
-			url : "<c:url value='/user/registerUser'/>",
-			type : "post",
-			dataType : "text",
-			data : $('#insertUserForm').serialize(),
-			success : function(response) {
-				alert(response);
-				location.reload();
-			},
-			error : function() {
-				alert("添加失败");
-			}
-		});
-	}
-</script>
 </html>

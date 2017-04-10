@@ -10,6 +10,7 @@
 <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="<c:url value='/resources/js/manu.js'/>" type="text/javascript"></script>
 <title>AllTypes Page</title>
 </head>
 <body>
@@ -77,37 +78,4 @@
  		 </div>
 	</div> 
 </body>
-<script type="text/javascript">
-function updateMachineType(){
-	$.ajax({  
-        url:"<c:url value='/manu/updateType'/>",
-        type:"post",  
-        dataType:"text",  
-        data:$('#updateMachineType').serialize(),
-        success:function(responseText){  
-        	alert("更新成功");
-        	location.reload();
-        },  
-        error:function(){  
-            alert("更新失败");  
-        }  
-    });  
-}
-
-function getTypeById(tModelId){
-	$.ajax({
-		url:"<c:url value='/manu/getTypeById'/>?tModelId="+tModelId,
-		type:"get",  
-	    dataType:"json",  
-		success:function(data){  
-        	$("#tId").val(tModelId);
-        	$("#tModelName").val(data);
-        },  
-        error:function(){  
-            alert("数据错误");  
-        }  
-	});	
-	
-}
-</script>
 </html>

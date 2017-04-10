@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="<c:url value='/resources/js/firmGroup.js'/>" type="text/javascript"></script>
 <title>Firm Manager Page</title>
 </head>
 <body>
@@ -143,25 +144,4 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript">
-	function createFirmInfo() {
-		$.ajax({
-			url : "<c:url value='/manager/createFirmInfo'/>",
-			type : "post",
-			dataType : "text",
-			data : $('#createFirmInfo').serialize(),
-			success : function(response) {
-				if (response == "true") {
-					alert("添加成功");
-				} else if (response =="false") {
-					alert("编号重复，请重置");
-				}
-				location.reload();
-			},
-			error : function() {
-				alert("添加失败");
-			}
-		});
-	}
-</script>
 </html>

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import com.vending.platform.dao.sqlprovider.IUserManagerSqlProvider;
 import com.vending.platform.domain.AuthorityInfo;
@@ -42,6 +43,8 @@ public interface IUserManagerDao {
     @SelectProvider(type=IUserManagerSqlProvider.class, method="deleteUserRoleInfo")
     public void deleteUserRoleInfo(Integer userRoleId);
     
+    @Select("DELETE FROM userrole WHERE userId=#{userId}")
+    public void deletUserRoleByUserId(Integer userId);
     
     @SelectProvider(type = IUserManagerSqlProvider.class, method = "insertRoleAuthInfo")
     public void insertRoleAuthInfo(RoleAuthInfo roleAuthInfo);

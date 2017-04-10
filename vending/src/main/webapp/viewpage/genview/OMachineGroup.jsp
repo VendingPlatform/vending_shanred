@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="<c:url value='/resources/js/firmGroup.js'/>" type="text/javascript"></script>
+
 <title>Machine Group</title>
 </head>
 <body>
@@ -35,7 +37,7 @@
 					<th>公司名称</th>
 					<th>操作者</th>
 					<th>操作日期</th>
-					<th></th>
+					<th>操作</th>
 				</tr>
 				<c:forEach items="${machineGroupInfos}" var="groupInfo">
 					<tr>
@@ -48,8 +50,6 @@
 						<td>${groupInfo.operateDate}</td>
 						<td>
 							<a href="<c:url value="/machine/machineGroupDetialInfos"/>?groupId=${groupInfo.groupId}" class="btn default"> <span class="glyphicon glyphicon-paperclip" title="详情"></span>
-							</a>
-							<a href="#" class="btn default"> <span class="glyphicon glyphicon-link" title="分配"></span>
 							</a>
 							<a href="<c:url value="/machine/machinegroupInfo"/>?groupId=${groupInfo.groupId}" class="btn default"> <span class="glyphicon glyphicon-edit" title="编辑"></span>
 							</a>
@@ -82,34 +82,11 @@
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-		        <button type="button" id="add" class="btn btn-primary" data-dismiss="modal">提交</button>
+		        <button type="button" onclick="addGroup()" class="btn btn-primary" data-dismiss="modal">提交</button>
 		      </div>
 		    </div>
 		  </div>
 		</div>
 	</div>
-<script type="text/javascript">
-$(document).ready(function(){
-    $("#add").click(function(){  
-         $.ajax({  
-            url:"<c:url value='/machine/machineGroupCreate'/>",
-            type:"post",  
-            dataType:"text",  
-            data:$('#addGroupForm').serialize(),
-            success:function(responseText){  
-            	if(responseText==1)
-            	{alert("添加成功");}
-            	else{
-            		alert("添加失败");
-            	}  
-            	location.reload();
-            },  
-            error:function(){  
-                alert("创建失败");  
-            }  
-        });  
-     });  
- });  
-</script>
 </body>
 </html>

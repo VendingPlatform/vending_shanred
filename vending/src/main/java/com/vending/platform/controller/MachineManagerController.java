@@ -50,6 +50,8 @@ public class MachineManagerController extends UtilsAction {
 	@RequestMapping(value = "/machineInfo")
 	public ModelAndView getAllOprMachineInfos(MachineOperater machineOperater,
 			@ModelAttribute("user") UserInfo userInfo, ModelMap modelMap) {
+	    List<MachineType> machineTypes = machineManagerService.getAllMachineTypes(new MachineType());
+	    modelMap.addAttribute("allMachineTypes", machineTypes);
 		ModelAndView modelAndView = new ModelAndView();
 		if (machineOperater != null) {
 			logger.debug("信息：" + userInfo.toString());

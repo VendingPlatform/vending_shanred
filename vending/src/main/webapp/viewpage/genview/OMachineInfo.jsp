@@ -35,10 +35,10 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<select name="machineInfo.tModelName" class="form-control">
+				<select name="machineInfo.tModelId" class="form-control">
 					<option value="">---售货机类型---</option>
 					<c:forEach items="${allMachineTypes}" var="machineType">
-						<option value="${machineType.tModelName}">${machineType.tModelName}</option>
+						<option value="${machineType.tModelId}">${machineType.tModelName}</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -63,7 +63,7 @@
 						<td>${machine.machineInfo.machineName }</td>
 						<td>${machine.machineInfo.machinePannel }</td>
 						<td>${machine.machineAssign }</td>
-						<td>${machine.machineInfo.tModelName }</td>
+						<td>${machine.machineInfo.machineType.tModelName }</td>
 						<td>${machine.machineAddress }</td>
 						<td>
 							<a href="<c:url value="/machine/machineInfoDetail"/>?mOperaterId=${machine.mOperaterId}" class="btn default"> <span class="glyphicon glyphicon-info-sign" title="详情"></span>
