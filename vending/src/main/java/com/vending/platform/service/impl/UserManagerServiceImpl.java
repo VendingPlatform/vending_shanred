@@ -223,4 +223,9 @@ public class UserManagerServiceImpl
             return false;
         return true;
     }
+
+    @Override
+    public void deletUserRoleByUserId(Integer userId) {
+        userManagerDao.deletUserRoleByUserId(userId);
+    }
 }

@@ -1,9 +1,24 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	
+	int flag = 0;
+    List<String> auths = (List<String>)session.getAttribute("userAuthCodes");
+    if(auths.contains("000")){
+        flag=0;
+    }
+    else if (auths.contains("001") || auths.contains("002")) {
+	    //管理员
+	    flag=1;
+	}else{
+	    //普通
+	    flag=2;
+	}
+	session.setAttribute("flag", flag);
 %>
 <!-- 运营商菜单及标题栏 -->
 <body>
@@ -24,13 +39,15 @@
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 用户管理 <span class="caret"></span>
 					</a>
 						<ul class="dropdown-menu">
+						<!-- 用户管理只有系统管理员和运营商管理员，厂商管理员可以访问 -->
+						<c:if test="${flag==0||flag==1}">
 							<li><a href="<c:url value="/user/getAllUsers"/>">用户管理</a></li>
-							<li role="separator" class="divider"></li>
+						</c:if>
 							<c:if test="${user.firmInfo.firmType==0 }">
 							<li><a href="<c:url value="/user/getAllAuthoritys"/>">权限管理</a></li>
 							</c:if>
 							<li><a href="<c:url value="/user/getAllRoles"/>">角色管理</a></li>
-							<li><a href="#">用户组管理</a></li>
+							<li><a href="<c:url value="/user/getAllGroups"/>">用户组管理</a></li>
 						</ul></li>
 					<!-- firmType==0系统管理员才有的权限 -->
 					<c:if test="${user.firmInfo.firmType==0 }">

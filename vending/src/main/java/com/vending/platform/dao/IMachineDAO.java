@@ -2,6 +2,7 @@ package com.vending.platform.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -81,8 +82,9 @@ public interface IMachineDAO {
 	/** 按Id查询售货机 */
 	@SelectProvider(type = IMachineSqlProvider.class, method = "getMachineTypeById")
 	@Results({
-		@Result(property = "firmInfo" , column = "firmId",
-				one= @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById"))})
+	    @Result(property = "machineInfos" , column = "machineId", many= @Many(select = "com.vending.platform.dao.IMachineDAO.getAllMachineInfos")),
+	    @Result(property = "machineInfo" , column = "machineId", many= @Many(select = "com.vending.platform.dao.IMachineDAO.getMachineInfoById")),
+		@Result(property = "firmInfo" , column = "firmId", one= @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById"))})
 	public MachineType getMachineTypeById(Integer tModeId);
 
 	/** 删除售货机类型 */
@@ -100,6 +102,7 @@ public interface IMachineDAO {
 	/** 按条件查询所有售货机 */
 	@SelectProvider(type = IMachineSqlProvider.class, method = "getAllMachineInfos")
 	@Results({
+	    @Result(property = "machineType" , column = "tModelId", one= @One(select = "com.vending.platform.dao.IMachineDAO.getMachineTypeById")),
 	    @Result(property = "operFirmInfo" , column = "operFirmId", one= @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById")),
 	    @Result(property = "manuFirmInfo" , column = "manuFirmId", one= @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById"))
 	    })
@@ -108,6 +111,7 @@ public interface IMachineDAO {
 	/** 按照Id查询MachineInfo中信息 */
 	@SelectProvider(type = IMachineSqlProvider.class, method = "getMachineInfoById")
 	@Results({
+	    @Result(property = "machineType" , column = "tModelId", one=@One(select = "com.vending.platform.dao.IMachineDAO.getMachineTypeById")),
 	    @Result(property = "operFirmInfo" , column = "operFirmId",one= @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById")),
         @Result(property = "manuFirmInfo" , column = "manuFirmId",one= @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById"))
 	    })

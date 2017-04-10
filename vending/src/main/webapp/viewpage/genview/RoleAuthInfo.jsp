@@ -13,7 +13,6 @@
 <title>Role Auth Info Page</title>
 </head>
 <body>
-<body>
 	<%@include file="../topmenu.jsp"%>
 	<div class="container">
 		<div class="row clearfix">
@@ -43,6 +42,5 @@
 			</c:forEach>
 		</table>
 	</div>
-</body>
 </body>
 </html>
