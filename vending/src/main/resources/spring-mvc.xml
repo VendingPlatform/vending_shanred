@@ -12,7 +12,7 @@
 
 	<!-- 启动注解 -->
 	<context:annotation-config />
-  
+	
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
 	<context:component-scan base-package="com.vending.platform.*" />
     <mvc:annotation-driven/> 
@@ -23,8 +23,6 @@
 		<property name="prefix" value="/viewpage/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-  
- 
 	<!-- 默认访问跳转到登录页面 -->
 	<!-- <mvc:view-controller path="/" view-name="redirect:/user/login" /> -->
 

@@ -88,6 +88,7 @@ public class IMachineSqlProvider {
                 FROM("machineoperater o LEFT JOIN  machineInfo i ON o.machineId=i.machineId ");
                 if (machineOperater != null) {
                     if(machineOperater.getMachineInfo()!=null){
+                    	
                         if (StringUtils.isNotBlank(machineOperater.getMachineInfo().getMachineName())) {
                             WHERE("i.machineName='#{machineInfo.machineName}");
                         }
@@ -101,6 +102,8 @@ public class IMachineSqlProvider {
                             WHERE("i.manuMachineStatus=#{machineInfo.manuMachineStatus}");
                         }
                     }
+                    if(machineOperater.getmOperaterId()!=null)
+                		WHERE("o.mOperaterId=#{mOperaterId}");
                     if (machineOperater.getMachineId() != null) {
                         WHERE("o.machineId=#{machineId}");
                     }
