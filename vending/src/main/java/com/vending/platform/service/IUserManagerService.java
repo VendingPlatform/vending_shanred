@@ -29,6 +29,8 @@ public interface IUserManagerService {
     UserRoleInfo getUserRoleInfoById(Integer userRoleId);
 
     void deleteUserRoleInfo(Integer userRoleId);
+    
+    void deletUserRoleByUserId(Integer userId);
 
     /** 角色权限 */
 
@@ -49,7 +51,7 @@ public interface IUserManagerService {
 
     List<UserInfo> getAllUserInfos(UserInfo userInfo);
 
-    /** 修改密码 */
+    /** 修改用户信息*/
     void updateUserInfo(UserInfo userInfo);
 
     void deleteUserInfo(Integer id);

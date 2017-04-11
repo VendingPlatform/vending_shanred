@@ -50,7 +50,7 @@
 					</tr>
 					<tr>
 						<td>售货机类型</td>
-						<td>${machineOperater.machineInfo.tModelName }</td>
+						<td>${machineOperater.machineInfo.machineType.tModelName }</td>
 					</tr>
 					<tr>
 						<td>分配管理员</td>

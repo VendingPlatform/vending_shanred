@@ -20,8 +20,6 @@ public class MachineInfo implements Serializable {
 	private Integer manuFirmId;
 	/** 售货机价格 */
 	private BigDecimal machinePrice;
-	/** 售货机类型 */
-	private String tModelName;
 	/** 售货机出售状态 ：0：未售出；1：售出；2：回收 */
 	private Integer manuMachineStatus;
 	/** 卖给某运营商 */
@@ -30,7 +28,10 @@ public class MachineInfo implements Serializable {
 	private Integer operateId;
 	/** 操作时间 */
 	private Date operateDate;
+	/**售货机类型*/
+	private Integer tModelId;
 	
+	private MachineType machineType;
 	private FirmInfo operFirmInfo;
 	private FirmInfo manuFirmInfo;
 
@@ -76,14 +77,6 @@ public class MachineInfo implements Serializable {
 
 	public void setMachinePrice(BigDecimal machinePrice) {
 		this.machinePrice = machinePrice;
-	}
-
-	public String gettModelName() {
-		return tModelName;
-	}
-
-	public void settModelName(String tModelName) {
-		this.tModelName = tModelName;
 	}
 
 	public Integer getManuMachineStatus() {
@@ -134,12 +127,28 @@ public class MachineInfo implements Serializable {
         this.manuFirmInfo = manuFirmInfo;
     }
 
+    public Integer gettModelId() {
+        return tModelId;
+    }
+
+    public void settModelId(Integer tModelId) {
+        this.tModelId = tModelId;
+    }
+
+    public MachineType getMachineType() {
+        return machineType;
+    }
+
+    public void setMachineType(MachineType machineType) {
+        this.machineType = machineType;
+    }
+
     @Override
     public String toString() {
         return "MachineInfo [machineId=" + machineId + ", machineName="
                 + machineName + ", machinePannel=" + machinePannel
                 + ", manuFirmId=" + manuFirmId + ", machinePrice="
-                + machinePrice + ", tModelName=" + tModelName
+                + machinePrice 
                 + ", manuMachineStatus=" + manuMachineStatus + ", operFirmId="
                 + operFirmId + ", operateId=" + operateId + ", operateDate="
                 + operateDate + ", operFirmInfo=" + operFirmInfo

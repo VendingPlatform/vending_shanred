@@ -2,6 +2,7 @@ package com.vending.platform.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.vending.platform.domain.AuthorityInfo;
 import com.vending.platform.domain.GroupInfo;
 import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.MachineType;
@@ -24,7 +26,7 @@ import com.vending.platform.service.IMachineManagerService;
 import com.vending.platform.service.IUserManagerService;
 
 @Controller
-@SessionAttributes({ "user", "machineOperaterInfo", "allMachineTypes", "machineGroupInfos" })
+@SessionAttributes({ "user", "machineOperaterInfo", "allMachineTypes", "machineGroupInfos", "userAuth" })
 @RequestMapping("/machine")
 public class MachineManagerController extends UtilsAction {
 	private static final long serialVersionUID = -8056726050883641564L;
@@ -50,6 +52,8 @@ public class MachineManagerController extends UtilsAction {
 	@RequestMapping(value = "/machineInfo")
 	public ModelAndView getAllOprMachineInfos(MachineOperater machineOperater,
 			@ModelAttribute("user") UserInfo userInfo, ModelMap modelMap) {
+		List<MachineType> machineTypes = machineManagerService.getAllMachineTypes(new MachineType());
+		modelMap.addAttribute("allMachineTypes", machineTypes);
 		ModelAndView modelAndView = new ModelAndView();
 		if (machineOperater != null) {
 			logger.debug("信息：" + userInfo.toString());
@@ -216,4 +220,35 @@ public class MachineManagerController extends UtilsAction {
 		return "redirect:/machine/machineGroupDetialInfos?groupId=" + groupId;
 	}
 
+	@Description("获取所有待分配用户")
+	@RequestMapping(value = "/getAssignToUsers")
+	public String getAssignToUsers(@ModelAttribute("user") UserInfo userInfo,
+			@ModelAttribute("userAuth") Set<AuthorityInfo> auths, ModelMap modelMap) {
+		List<UserInfo> assignUsers = userManagerService.getAllUsersByAuth(auths, userInfo);
+		modelMap.addAttribute("assignUsers", assignUsers);
+		try {
+			writeJson(assignUsers);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "genview/OMachineInfo";
+	}
+
+	@RequestMapping(value = "/assignMachineToUser")
+	public String assignMachineToUser(@RequestParam("mOperaterId") Integer mOperaterId, Integer userId)
+			throws IOException {
+		MachineOperater machineOperater = new MachineOperater();
+		machineOperater.setmOperaterId(mOperaterId);
+		machineOperater.setMachineAssign(1);
+
+		if (machineManagerService.getAllMachineOperaters(machineOperater).size() > 0) {
+			write("该售货机已被分配。");
+			return "genview/OMachineInfo";
+		}
+		machineOperater.setUserId(userId);
+		machineManagerService.updateMachineOperater(machineOperater);
+		write("分配成功");
+
+		return "genview/OMachineInfo";
+	}
 }

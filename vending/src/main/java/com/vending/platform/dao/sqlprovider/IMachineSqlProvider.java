@@ -88,19 +88,22 @@ public class IMachineSqlProvider {
                 FROM("machineoperater o LEFT JOIN  machineInfo i ON o.machineId=i.machineId ");
                 if (machineOperater != null) {
                     if(machineOperater.getMachineInfo()!=null){
+                    	
                         if (StringUtils.isNotBlank(machineOperater.getMachineInfo().getMachineName())) {
                             WHERE("i.machineName='#{machineInfo.machineName}");
                         }
                         if (StringUtils.isNotBlank(machineOperater.getMachineInfo().getMachinePannel())) {
                             WHERE("i.machinePannel=#{machineInfo.machinePannel}");
                         }
-                        if (StringUtils.isNotBlank(machineOperater.getMachineInfo().gettModelName())) {
-                            WHERE("i.tModelName=#{machineInfo.tModelName}");
+                        if(machineOperater.getMachineInfo()!=null&&  machineOperater.getMachineInfo().gettModelId()!=null ){
+                            WHERE("i.tModelId=#{machineInfo.tModelId}");
                         }
                         if (machineOperater.getMachineInfo().getManuMachineStatus() != null) {
                             WHERE("i.manuMachineStatus=#{machineInfo.manuMachineStatus}");
                         }
                     }
+                    if(machineOperater.getmOperaterId()!=null)
+                		WHERE("o.mOperaterId=#{mOperaterId}");
                     if (machineOperater.getMachineId() != null) {
                         WHERE("o.machineId=#{machineId}");
                     }
@@ -215,8 +218,8 @@ public class IMachineSqlProvider {
 				if (StringUtils.isNotBlank(machineInfo.getMachinePrice() + "")) {
 					VALUES("machinePrice", "#{machinePrice}");
 				}
-				if (StringUtils.isNotBlank(machineInfo.gettModelName())) {
-					VALUES("tModelName", "#{tModelName}");
+				if (machineInfo.gettModelId()!=null) {
+					VALUES("tModelId", "#{tModelId}");
 				}
 				if (machineInfo.getManuMachineStatus() != null) {
 					VALUES("manuMachineStatus", "#{manuMachineStatus}");
@@ -249,8 +252,8 @@ public class IMachineSqlProvider {
 					if (StringUtils.isNotBlank(machineInfo.getMachinePrice() + "")) {
 						SET("machinePrice=#{machinePrice}");
 					}
-					if (StringUtils.isNotBlank(machineInfo.gettModelName())) {
-						SET("tModelName=#{tModelName}");
+					if (machineInfo.gettModelId()!=null) {
+						SET("tModelId=#{tModelId}");
 					}
 					if (machineInfo.getManuMachineStatus() != null) {
 						SET("manuMachineStatus=#{manuMachineStatus}");
@@ -283,9 +286,9 @@ public class IMachineSqlProvider {
 				if (machineInfo.getMachinePrice()!=null) {
 					WHERE("machinePrice=#{machinePrice}");
 				}
-				if (StringUtils.isNotBlank(machineInfo.gettModelName())) {
-					WHERE("tModelName=#{tModelName}");
-				}
+				if (machineInfo.gettModelId()!=null) {
+				    WHERE("tModelId=#{tModelId}");
+                }
 				if (machineInfo.getManuMachineStatus() != null) {
 					WHERE("manuMachineStatus=#{manuMachineStatus}");
 				}

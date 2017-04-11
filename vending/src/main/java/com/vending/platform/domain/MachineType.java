@@ -2,6 +2,7 @@ package com.vending.platform.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * T_Machine_Type：售货机类型
@@ -23,6 +24,8 @@ public class MachineType implements Serializable {
 	/** 操作时间 */
 	private Date operateDate;
 	private FirmInfo firmInfo;
+	
+	private List<MachineInfo> machineInfos;
 
 	public MachineType() {
 		super();
@@ -76,7 +79,15 @@ public class MachineType implements Serializable {
 		this.firmInfo = firmInfo;
 	}
 
-	@Override
+	public List<MachineInfo> getMachineInfos() {
+        return machineInfos;
+    }
+
+    public void setMachineInfos(List<MachineInfo> machineInfos) {
+        this.machineInfos = machineInfos;
+    }
+
+    @Override
     public String toString() {
         return "MachineType [tModelId=" + tModelId + ", tModelName="
                 + tModelName + ", firmId=" + firmId + ", operateId=" + operateId

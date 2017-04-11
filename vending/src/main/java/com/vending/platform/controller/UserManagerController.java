@@ -59,9 +59,29 @@ public class UserManagerController extends UtilsAction {
         return "genview/AllUsers";
     }
 
+    @RequestMapping(value="/updateUserInfo")
+    public String updateUserInfo(UserInfo userInfo){
+        userManagerService.updateUserInfo(userInfo);
+        return "genview/AllUsers";
+    }
+    
+    @RequestMapping(value = "/getUserInfoToUpdate")
+    private String getUserInfoToUpdate(@RequestParam("userId") Integer userId,
+            ModelMap modelMap) {
+        UserInfo userUpdate = userManagerService.getUserInfoById(userId);
+        modelMap.addAttribute("userUpdate", userUpdate);
+        try {
+            writeJson(userUpdate);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "genview/AllUsers";
+    }
+
     @RequestMapping(value = "/userRoleInfo")
     public String getAllUserRoleDetail(@RequestParam("userId") Integer userId,
             ModelMap modelMap) {
+
         UserRoleInfo userRoleInfo = new UserRoleInfo();
         userRoleInfo.setUserId(userId);
         List<UserRoleInfo> userRoleInfos = userManagerService
@@ -148,7 +168,7 @@ public class UserManagerController extends UtilsAction {
     //// 还需根据不同权限进行查询，并不是所有人都可以查询用户角色
     // 或者让用户可以查看，但是不要进行其他操作
     @RequestMapping(value = "/getAllRoles")
-    public String getAllRoles(@ModelAttribute("user") UserInfo userInfo,
+    public String getRoles(@ModelAttribute("user") UserInfo userInfo,
             ModelMap modelMap) {
         Integer firmType = userInfo.getFirmInfo().getFirmType();
         List<RoleInfo> roleInfos = new ArrayList<RoleInfo>();
@@ -167,6 +187,45 @@ public class UserManagerController extends UtilsAction {
         }
         modelMap.addAttribute("allRoleInfos", roleInfos);
         return "genview/RoleInfo";
+    }
+
+    @RequestMapping(value = "/getAllRoleAssignToUser")
+    public String getAllRolesAssignToUser(
+            @RequestParam("firmType") Integer firmType, ModelMap modelMap) {
+        RoleInfo roleInfo = new RoleInfo();
+        roleInfo.setFirmType(firmType);
+
+        List<RoleInfo> rolesAssignToUser = userManagerService
+                .getAllRoles(roleInfo);
+        modelMap.addAttribute("rolesAssignToUser", rolesAssignToUser);
+        try {
+            writeJson(rolesAssignToUser);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "genview/AllUsers";
+    }
+
+    @RequestMapping(value = "/assignRoleToUser")
+    public String assignRoleToUser(@RequestParam("userId") Integer userId,
+            Integer[] roleIds) {
+        // 先删除所有原先的权限，每次分配就是一次更新
+        UserRoleInfo userAlready = new UserRoleInfo();
+        userAlready.setUserId(userId);
+        userManagerService.deletUserRoleByUserId(userId);
+
+        UserRoleInfo userRoleInfo = new UserRoleInfo();
+        userRoleInfo.setUserId(userId);
+        for (Integer id : roleIds) {
+            userRoleInfo.setRoleId(id);
+            userManagerService.insertUserRoleInfo(userRoleInfo);
+        }
+        try {
+            write("操作成功！");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "genview/AllUsers";
     }
 
     @RequestMapping(value = "/getRoleAuthInfo")

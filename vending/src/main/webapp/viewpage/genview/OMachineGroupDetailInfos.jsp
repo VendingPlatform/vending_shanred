@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="<c:url value='/resources/js/firmGroup.js'/>" type="text/javascript"></script>
 <title>OMachineGroupDetailInfos</title>
 </head>
 <body>
@@ -41,7 +42,7 @@
 						<td>${machine.machineInfo.machineName }</td>
 						<td>${machine.machineInfo.machinePannel }</td>
 						<td>${machine.machineAssign }</td>
-						<td>${machine.machineInfo.tModelName }</td>
+						<td>${machine.machineInfo.machineType.tModelName }</td>
 						<td>${machine.machineAddress }</td>
 						<td>${machine.groupInfo.groupName}</td>
 						<td>${machine.operFirmId}</td>
@@ -83,22 +84,5 @@
 		  </div>
 		</div>
 	</div>
-<script type="text/javascript">
-	function addMachineToGroup(){
-		$.ajax({  
-            url:"<c:url value='/machine/addMachineToGroup'/>",
-            type:"post",  
-            dataType:"text",  
-            data:$('#addMachineToGroupForm').serialize(),
-            success:function(responseText){  
-            	alert("添加成功");
-            	location.reload();
-            },  
-            error:function(){  
-                alert("添加失败");  
-            }  
-        });  
-	}
-</script>
 </body>
 </html>

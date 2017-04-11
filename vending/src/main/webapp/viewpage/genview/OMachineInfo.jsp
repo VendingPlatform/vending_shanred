@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="<c:url value='/resources/js/machine.js'/>" type="text/javascript"></script>
 <title>Select Machine Page</title>
 </head>
 <body>
@@ -35,10 +36,10 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<select name="machineInfo.tModelName" class="form-control">
+				<select name="machineInfo.tModelId" class="form-control">
 					<option value="">---售货机类型---</option>
 					<c:forEach items="${allMachineTypes}" var="machineType">
-						<option value="${machineType.tModelName}">${machineType.tModelName}</option>
+						<option value="${machineType.tModelId}">${machineType.tModelName}</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -63,16 +64,47 @@
 						<td>${machine.machineInfo.machineName }</td>
 						<td>${machine.machineInfo.machinePannel }</td>
 						<td>${machine.machineAssign }</td>
-						<td>${machine.machineInfo.tModelName }</td>
+						<td>${machine.machineInfo.machineType.tModelName }</td>
 						<td>${machine.machineAddress }</td>
 						<td>
 							<a href="<c:url value="/machine/machineInfoDetail"/>?mOperaterId=${machine.mOperaterId}" class="btn default"> <span class="glyphicon glyphicon-info-sign" title="详情"></span>
-							</a> <a href="<c:url value="/machine/machineInfoUpdateInfo"/>?mOperaterId=${machine.mOperaterId}" class="btn default"> <span class="glyphicon glyphicon-edit" title="编辑"></span>
+							</a> 
+							<a href="<c:url value="/machine/machineInfoUpdateInfo"/>?mOperaterId=${machine.mOperaterId}" class="btn default"> 
+								<span class="glyphicon glyphicon-edit" title="编辑"></span>
+							</a>
+							<a  onclick="getAssignToUsers(${machine.mOperaterId})" data-toggle="modal" 
+								data-target="#assignMachine" class="btn default"> 
+								<span class="glyphicon glyphicon-link" title="分配给用户"></span>
 							</a>
 						</td>
 					</tr>
 				</c:forEach>
 			</table>
+		</div>
+	</div>
+	
+		<div class="modal fade" id="assignMachine" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">选择用户</h4>
+				</div>
+				<div class="modal-body" style="width: 80%; padding-left: 30px">
+					<form class="form" id="assignMachineToUserForm">
+					<input type="hidden" name="mOperaterId" id="mOperaterId">
+					<input type="hidden" name="operateId" value="${user.userId }">
+						<div id="selectUserToAssign"></div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary"
+						onclick="assignMachineToUser()" data-dismiss="modal">保存</button>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

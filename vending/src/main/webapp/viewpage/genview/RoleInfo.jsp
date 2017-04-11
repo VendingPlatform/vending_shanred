@@ -7,9 +7,9 @@
 <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="<c:url value='/resources/js/user.js'/>" type="text/javascript"></script>
 <title>Role Info Page</title>
 </head>
-<body>
 <body>
 	<%@include file="../topmenu.jsp"%>
 	<div class="container">
@@ -150,111 +150,4 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript">
-function authAssignedRole(){
-	$.ajax({
-		url : "<c:url value='/user/assignAuthToRole'/>",
-		type: "post",
-		dataType:"text",
-		data: $('#authAssignForm').serialize(),
-		success:function(response){
-			alert("分配成功");
-        	location.reload();
-        },  
-        error:function(){  
-            alert("获取数据失败");  
-        }  
-	});
-}
-function getAllAuths(roleId,firmType){
-	$.ajax({
-		url : "<c:url value='/user/getAllAuths'/>",
-		type: "get",
-		dataType:"json",
-		data: {roleId:roleId,firmType:firmType},
-		success:function(response){
-			$("#roleIdAssign").val(roleId);
-			$("#checkbox").empty();
-			for(var i=0;i<response.length;i++){
-				var html ="<label class='checkbox'><input type='checkbox' name='authIds' value='"+response[i].authId+"'>"+response[i].authName+"&nbsp;"+response[i].authCode+"&nbsp;"+response[i].authDesc+"</label>";
-				$("#checkbox").append(html);
-			}
-        },  
-        error:function(){  
-            alert("获取数据失败");  
-        }  
-	});
-}
-
-function delRole(roleId){
-	if(confirm("确认删除该角色，及该角色的权限对应关系？")){
-		$.ajax({
-			url : "<c:url value='/user/deleteRole'/>?roleId="+roleId,
-			type: "delete",
-			dataType:"text",
-			success:function(response){
-				alert(response);
-	        	location.reload();
-	        },  
-	        error:function(){  
-	            alert("获取数据失败");  
-	        }  
-		});
-	}
-}
-function updateRole(){
-	$.ajax({
-		url : "<c:url value='/user/updateRole'/>",
-		type: "post",
-		dataType:"text",
-		data: $('#updateRoleForm').serialize(),
-		success:function(response){
-			alert("更新成功");
-        	location.reload();
-        },  
-        error:function(){  
-            alert("更新失败");  
-        }  
-	});
-}
-function getRoleById(roleId){
-	$.ajax({
-		url : "<c:url value='/user/getRoleById'/>?roleId="+roleId,
-		type: "get",
-		dataType:"json",
-		success:function(data){
-			$("#roleIdUpdate").val(roleId);
-			$("#newRoleName").val(data.roleName);
-			var type=data.firmType;
-			var typeText="";
-			if(type==0){
-				typeText="系统管理员";
-			}else if(type==1){
-				typeText="运营商";
-			}else if(type==2){
-				typeText="厂商";
-			}
-			$("#type").text("角色类型:"+typeText);
-        },  
-        error:function(){  
-            alert("获取数据失败");  
-        }  
-	});
-}
-function insertRole(){
-	$.ajax({
-		url : "<c:url value='/user/insertRole'/>",
-		type: "post",
-		dataType:"text",
-		data: $('#insertRoleForm').serialize(),
-		success:function(response){
-			alert(response);
-        	location.reload();
-        },  
-        error:function(){  
-            alert("添加失败");  
-        }  
-	});
-}
-</script>
 </html>

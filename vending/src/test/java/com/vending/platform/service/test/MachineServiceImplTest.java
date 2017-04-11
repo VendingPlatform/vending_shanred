@@ -177,7 +177,6 @@ public class MachineServiceImplTest extends AbstractJUnit4SpringContextTests {
 		machineDAO.insertMachineInfo(machineInfo);
 		
 		machineInfo.setMachineId(5);
-		machineInfo.settModelName("修改之后的model");
 		machineDAO.updateMachineInfo(machineInfo);
 		
 		List<MachineInfo> machineInfos = machineDAO.getAllMachineInfos(machineInfo);
