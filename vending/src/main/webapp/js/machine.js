@@ -36,3 +36,20 @@ function assignMachineToUser(){
 		}
 	});
 }
+
+function removeMachine(mOperaterId) {
+	if (confirm("确认移除该售货机?")) {
+		$.ajax({
+			url : "../machine/removeMachineOperater?mOperaterId=" + mOperaterId,
+			type : "post",
+			dataType : "text",
+			success : function(response) {
+				alert(response);
+				location.reload();
+			},
+			error : function() {
+				alert("获取数据失败");
+			}
+		});
+	}
+}

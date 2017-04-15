@@ -251,4 +251,10 @@ public class MachineManagerController extends UtilsAction {
 
 		return "genview/OMachineInfo";
 	}
+	
+	@RequestMapping(value = "/removeMachineOperater")
+	public String removeMachineOperater(@RequestParam("mOperaterId") Integer mOperaterId){
+		return "genview/UserRoleDetail";
+		
+	}
 }
