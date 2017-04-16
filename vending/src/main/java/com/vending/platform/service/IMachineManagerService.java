@@ -38,5 +38,6 @@ public interface IMachineManagerService {
 
 	void updateMachineOperater(MachineOperater machineOperater);
 	void inserMachineOperater(MachineOperater machineOperater);
+	void removeMachineOperaterFromUser(Integer mOperaterId);
 
 }

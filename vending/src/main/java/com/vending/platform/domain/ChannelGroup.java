@@ -10,109 +10,79 @@ import java.util.Date;
  **/
 public class ChannelGroup implements Serializable {
 
-	/** 序列号 */
-	private static final long serialVersionUID = -759033563075067030L;
-	/** 货道组ID */
-	private Integer channelGroupId;
-	/** 货道组名称 */
-	private String channelGroupName;
-	/** 商品编号 */
-	private String wareCode;
-	/** 商品名称 */
-	private String wareName;
-	/** 商品价格 */
-	private double warePrice;
-	/** 是否特价：0：否；1：是 */
-	private Integer isDiscount;
-	/** 所属售货机组 */
-	private Integer groupId;
-	/** 操作者 */
-	private Integer operateId;
-	/** 操作时间 */
-	private Date operateDate;
+    /** 序列号 */
+    private static final long serialVersionUID = -759033563075067030L;
+    /** 货道组ID */
+    private Integer channelGroupId;
+    /** 货道组名称 */
+    private String channelGroupName;
+    /** 所属售货机组 */
+    private Integer groupId;
+    /** 操作者 */
+    private Integer operateId;
+    /** 操作时间 */
+    private Date operateDate;
 
-	public ChannelGroup() {
-		super();
-	}
+    private GroupInfo groupInfo;
 
-	public Integer getChannelGroupId() {
-		return channelGroupId;
-	}
+    public ChannelGroup() {
+        super();
+    }
 
-	public void setChannelGroupId(Integer channelGroupId) {
-		this.channelGroupId = channelGroupId;
-	}
+    public Integer getChannelGroupId() {
+        return channelGroupId;
+    }
 
-	public String getChannelGroupName() {
-		return channelGroupName;
-	}
+    public void setChannelGroupId(Integer channelGroupId) {
+        this.channelGroupId = channelGroupId;
+    }
 
-	public void setChannelGroupName(String channelGroupName) {
-		this.channelGroupName = channelGroupName;
-	}
+    public String getChannelGroupName() {
+        return channelGroupName;
+    }
 
-	public String getWareCode() {
-		return wareCode;
-	}
+    public void setChannelGroupName(String channelGroupName) {
+        this.channelGroupName = channelGroupName;
+    }
 
-	public void setWareCode(String wareCode) {
-		this.wareCode = wareCode;
-	}
+    public Integer getGroupId() {
+        return groupId;
+    }
 
-	public String getWareName() {
-		return wareName;
-	}
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
+    }
 
-	public void setWareName(String wareName) {
-		this.wareName = wareName;
-	}
+    public Integer getOperateId() {
+        return operateId;
+    }
 
-	public double getWarePrice() {
-		return warePrice;
-	}
+    public void setOperateId(Integer operateId) {
+        this.operateId = operateId;
+    }
 
-	public void setWarePrice(double warePrice) {
-		this.warePrice = warePrice;
-	}
+    public Date getOperateDate() {
+        return operateDate;
+    }
 
-	public Integer getIsDiscount() {
-		return isDiscount;
-	}
+    public void setOperateDate(Date operateDate) {
+        this.operateDate = operateDate;
+    }
 
-	public void setIsDiscount(Integer isDiscount) {
-		this.isDiscount = isDiscount;
-	}
+    public GroupInfo getGroupInfo() {
+        return groupInfo;
+    }
 
-	public Integer getGroupId() {
-		return groupId;
-	}
+    public void setGroupInfo(GroupInfo groupInfo) {
+        this.groupInfo = groupInfo;
+    }
 
-	public void setGroupId(Integer groupId) {
-		this.groupId = groupId;
-	}
-
-	public Integer getOperateId() {
-		return operateId;
-	}
-
-	public void setOperateId(Integer operateId) {
-		this.operateId = operateId;
-	}
-
-	public Date getOperateDate() {
-		return operateDate;
-	}
-
-	public void setOperateDate(Date operateDate) {
-		this.operateDate = operateDate;
-	}
-
-	@Override
-	public String toString() {
-		return "ChannelGroup [channelGroupId=" + channelGroupId + ", channelGroupName=" + channelGroupName
-				+ ", wareCode=" + wareCode + ", wareName=" + wareName + ", warePrice=" + warePrice + ", isDiscount="
-				+ isDiscount + ", groupId=" + groupId + ", operateId=" + operateId + ", operateDate=" + operateDate
-				+ "]";
-	}
+    @Override
+    public String toString() {
+        return "ChannelGroup [channelGroupId=" + channelGroupId
+                + ", channelGroupName=" + channelGroupName + ", groupId="
+                + groupId + ", operateId=" + operateId + ", operateDate="
+                + operateDate + "]";
+    }
 
 }

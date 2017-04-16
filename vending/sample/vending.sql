@@ -51,19 +51,36 @@ DROP TABLE IF EXISTS `channelgroup`;
 CREATE TABLE `channelgroup` (
   `channelGroupId` int(11) NOT NULL AUTO_INCREMENT COMMENT '货道组id',
   `channelGroupName` varchar(50) NOT NULL DEFAULT 'null' COMMENT '货道组名称',
-  `wareCode` varchar(50) DEFAULT NULL COMMENT '商品编号',
-  `wareName` varchar(50) DEFAULT NULL COMMENT '商品名称',
-  `warePrice` double DEFAULT NULL COMMENT '商品价格',
-  `isDiscount` int(1) DEFAULT NULL COMMENT '是否特价',
+  `stockNum` int(11) DEFAULT NULL COMMENT '存货量',
   `groupId` int(11) DEFAULT NULL COMMENT '所属售货机组',
   `operateId` int(11) DEFAULT NULL COMMENT '操作人',
   `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`channelGroupId`),
   KEY `groupId` (`groupId`),
   CONSTRAINT `t_channel_group_ibfk_1` FOREIGN KEY (`groupId`) REFERENCES `groupinfo` (`groupId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*Data for the table `channelgroup` */
+
+insert  into `channelgroup`(`channelGroupId`,`channelGroupName`,`stockNum`,`groupId`,`operateId`,`operateDate`) values 
+(1,'testChannelGroup',11,32,NULL,'2017-04-16 17:03:12');
+
+/*Table structure for table `channelgroupwareinfo` */
+
+DROP TABLE IF EXISTS `channelgroupwareinfo`;
+
+CREATE TABLE `channelgroupwareinfo` (
+  `channelGroupId` int(11) NOT NULL COMMENT '货道组Id',
+  `wareId` int(11) NOT NULL COMMENT '商品Id',
+  `price` double DEFAULT NULL COMMENT '价格',
+  `isDiscount` int(11) DEFAULT NULL COMMENT '是否折扣',
+  PRIMARY KEY (`channelGroupId`),
+  KEY `wareId` (`wareId`),
+  CONSTRAINT `channelgroupwareinfo_ibfk_1` FOREIGN KEY (`channelGroupId`) REFERENCES `channelgroup` (`channelGroupId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `channelgroupwareinfo_ibfk_2` FOREIGN KEY (`wareId`) REFERENCES `wareinfo` (`wareId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `channelgroupwareinfo` */
 
 /*Table structure for table `channelinfo` */
 
@@ -71,27 +88,71 @@ DROP TABLE IF EXISTS `channelinfo`;
 
 CREATE TABLE `channelinfo` (
   `channelId` int(11) NOT NULL AUTO_INCREMENT COMMENT '货道id',
-  `channelNo` varchar(50) NOT NULL DEFAULT 'null' COMMENT '货道编号',
-  `wareCode` varchar(50) NOT NULL DEFAULT 'null' COMMENT '商品编号',
-  `wareName` varchar(50) DEFAULT NULL COMMENT '商品名称',
-  `warePrice` double DEFAULT NULL COMMENT '商品价格',
-  `isDiscount` int(11) DEFAULT NULL COMMENT '是否特价',
-  `stockNum` int(11) NOT NULL DEFAULT '0' COMMENT '额定存货量',
+  `channelNo` varchar(50) NOT NULL COMMENT '货道编号',
+  `stockNum` int(11) DEFAULT NULL COMMENT '额定存货量',
   `stockNumnNow` int(11) DEFAULT NULL COMMENT '当前存货量',
   `stockNumnAdd` int(11) DEFAULT NULL COMMENT '新增存货量',
   `channelGroupId` int(11) DEFAULT NULL COMMENT '所属货道组id',
-  `machineId` int(11) DEFAULT NULL COMMENT '所属售货机id',
-  `isHistory` int(1) NOT NULL DEFAULT '0' COMMENT '是否为历史信息',
+  `mOperaterId` int(11) DEFAULT NULL COMMENT '所属售货机id',
   `operateId` int(11) DEFAULT NULL COMMENT '操作者',
   `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`channelId`),
   KEY `channelGroupId` (`channelGroupId`),
-  KEY `machineId` (`machineId`),
-  CONSTRAINT `t_channel_info_ibfk_1` FOREIGN KEY (`channelGroupId`) REFERENCES `channelgroup` (`channelGroupId`),
-  CONSTRAINT `t_channel_info_ibfk_2` FOREIGN KEY (`machineId`) REFERENCES `machineinfo` (`machineId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `machineId` (`mOperaterId`),
+  CONSTRAINT `channelinfo_ibfk_1` FOREIGN KEY (`mOperaterId`) REFERENCES `machineoperater` (`mOperaterId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `channelinfo_ibfk_2` FOREIGN KEY (`channelGroupId`) REFERENCES `channelgroup` (`channelGroupId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 /*Data for the table `channelinfo` */
+
+insert  into `channelinfo`(`channelId`,`channelNo`,`stockNum`,`stockNumnNow`,`stockNumnAdd`,`channelGroupId`,`mOperaterId`,`operateId`,`operateDate`) values 
+(1,'001',11,0,0,1,9,NULL,'2017-04-16 17:33:15'),
+(11,'002',11,NULL,NULL,NULL,9,NULL,'2017-04-16 21:48:59');
+
+/*Table structure for table `channelinfohistory` */
+
+DROP TABLE IF EXISTS `channelinfohistory`;
+
+CREATE TABLE `channelinfohistory` (
+  `channelHistory` int(11) NOT NULL AUTO_INCREMENT COMMENT '历史Id',
+  `machineName` varchar(11) DEFAULT NULL COMMENT '售货机名称',
+  `channelNo` varchar(50) NOT NULL COMMENT '货道编号',
+  `channelGroupName` varchar(50) DEFAULT NULL COMMENT '货道组名称',
+  `wareName` varchar(50) DEFAULT NULL COMMENT '商品名称',
+  `price` double DEFAULT NULL COMMENT '价格',
+  `stockNum` int(11) DEFAULT '0' COMMENT '额定存货量',
+  `stockNumnNow` int(11) DEFAULT NULL COMMENT '当前存货量',
+  `stockNumnAdd` int(11) DEFAULT NULL COMMENT '新增存货量',
+  `operateId` int(11) DEFAULT NULL COMMENT '操作者',
+  `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
+  PRIMARY KEY (`channelHistory`),
+  KEY `channelGroupId` (`channelGroupName`),
+  KEY `machineId` (`machineName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `channelinfohistory` */
+
+/*Table structure for table `channelwareinfo` */
+
+DROP TABLE IF EXISTS `channelwareinfo`;
+
+CREATE TABLE `channelwareinfo` (
+  `channelId` int(11) NOT NULL COMMENT '货道Id',
+  `wareId` int(11) NOT NULL COMMENT '商品Id',
+  `price` double DEFAULT NULL COMMENT '商品售卖价格',
+  `isDiscount` int(11) NOT NULL DEFAULT '0' COMMENT '是否特价',
+  `mOperaterId` int(11) NOT NULL COMMENT '售货机',
+  PRIMARY KEY (`channelId`),
+  KEY `wareId` (`wareId`),
+  CONSTRAINT `channelwareinfo_ibfk_1` FOREIGN KEY (`channelId`) REFERENCES `channelinfo` (`channelId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `channelwareinfo_ibfk_2` FOREIGN KEY (`wareId`) REFERENCES `wareinfo` (`wareId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `channelwareinfo` */
+
+insert  into `channelwareinfo`(`channelId`,`wareId`,`price`,`isDiscount`,`mOperaterId`) values 
+(1,1,NULL,0,9),
+(11,2,2.5,0,9);
 
 /*Table structure for table `firminfo` */
 
@@ -168,7 +229,7 @@ CREATE TABLE `machineinfo` (
   CONSTRAINT `machineinfo_ibfk_1` FOREIGN KEY (`tModelId`) REFERENCES `machinetype` (`tModelId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `t_machine_info_ibfk_1` FOREIGN KEY (`manuFirmId`) REFERENCES `firminfo` (`firmId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `t_machine_info_ibfk_2` FOREIGN KEY (`operFirmId`) REFERENCES `firminfo` (`firmId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 /*Data for the table `machineinfo` */
 
@@ -206,12 +267,12 @@ CREATE TABLE `machineoperater` (
 /*Data for the table `machineoperater` */
 
 insert  into `machineoperater`(`mOperaterId`,`machineId`,`machineAssign`,`userId`,`machineAddress`,`groupId`,`operFirmId`,`operateId`,`operateDate`) values 
-(9,9,0,NULL,NULL,32,22,6,'2017-04-09 19:26:26'),
-(10,10,0,NULL,NULL,32,22,6,'2017-04-09 19:26:26'),
-(11,11,0,NULL,NULL,NULL,22,6,'2017-04-09 19:27:04'),
-(12,12,0,NULL,NULL,33,22,6,'2017-04-09 19:26:58'),
-(13,13,0,NULL,NULL,NULL,22,NULL,'2017-04-09 19:15:10'),
-(14,16,0,NULL,NULL,32,22,6,'2017-04-10 22:06:51');
+(9,9,1,10,NULL,32,22,6,'2017-04-15 17:09:18'),
+(10,10,1,6,NULL,32,22,6,'2017-04-15 18:58:52'),
+(11,11,0,NULL,NULL,NULL,22,6,'2017-04-15 17:09:26'),
+(12,12,0,NULL,NULL,33,22,6,'2017-04-15 17:36:31'),
+(13,13,0,NULL,NULL,NULL,22,NULL,'2017-04-15 17:36:28'),
+(14,16,1,6,NULL,32,22,6,'2017-04-15 18:58:54');
 
 /*Table structure for table `machinetype` */
 
@@ -249,7 +310,7 @@ CREATE TABLE `opermgr` (
   KEY `OperMgr_ibfk_2` (`manuId`),
   CONSTRAINT `OperMgr_ibfk_1` FOREIGN KEY (`firmId`) REFERENCES `firminfo` (`firmId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `OperMgr_ibfk_2` FOREIGN KEY (`manuId`) REFERENCES `firminfo` (`firmId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 /*Data for the table `opermgr` */
 
@@ -302,7 +363,7 @@ CREATE TABLE `roleinfo` (
   `firmType` int(11) NOT NULL COMMENT '角色类型：0：系统管理员，1：运营商；2：厂商',
   `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`roleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 /*Data for the table `roleinfo` */
 
@@ -400,14 +461,19 @@ CREATE TABLE `wareinfo` (
   `wareMaxPrice` double DEFAULT NULL COMMENT '最高售价',
   `wareMinPrice` double DEFAULT NULL COMMENT '最低售价',
   `wareDesc` varchar(225) DEFAULT NULL COMMENT '商品描述',
-  `wareStatus` int(1) NOT NULL COMMENT '是否可用',
   `firmId` int(11) DEFAULT NULL COMMENT '运营商id',
   `operateId` int(11) DEFAULT NULL COMMENT '操作者',
   `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
-  PRIMARY KEY (`wareId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`wareId`),
+  KEY `firmId` (`firmId`),
+  CONSTRAINT `wareinfo_ibfk_1` FOREIGN KEY (`firmId`) REFERENCES `firminfo` (`firmId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `wareinfo` */
+
+insert  into `wareinfo`(`wareId`,`wareCode`,`wareName`,`wareNorm`,`wareUnit`,`wareBasePrice`,`wareMaxPrice`,`wareMinPrice`,`wareDesc`,`firmId`,`operateId`,`operateDate`) values 
+(1,'YL-BSKL-G330','百事可乐300ml','24罐/箱','罐',1.75,0,0,'百事可乐gengxin',22,6,'2017-04-16 13:58:00'),
+(2,'YL-BSKL-G331','可口可乐500ml','24罐/箱','罐',1.75,NULL,NULL,'可口可乐',22,6,'2017-04-16 13:55:29');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

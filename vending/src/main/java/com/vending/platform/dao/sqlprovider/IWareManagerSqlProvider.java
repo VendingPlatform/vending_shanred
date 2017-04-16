@@ -6,7 +6,7 @@ import org.apache.ibatis.jdbc.SQL;
 import com.vending.platform.domain.WareInfo;
 
 public class IWareManagerSqlProvider {
-	public String inserWareInfo(WareInfo wareInfo) {
+	public String insertWareInfo(WareInfo wareInfo) {
 		return new SQL() {
 			{
 				INSERT_INTO("wareinfo");
@@ -18,16 +18,14 @@ public class IWareManagerSqlProvider {
 					VALUES("wareNorm", "#{wareNorm}");
 				if (StringUtils.isNotBlank(wareInfo.getWareUnit()))
 					VALUES("wareUnit", "#{wareUnit}");
-				if (StringUtils.isNotBlank(wareInfo.getWareBasePrice() + ""))
+				if (wareInfo.getWareBasePrice()!=null)
 					VALUES("wareBasePrice", "#{wareBasePrice}");
-				if (StringUtils.isNotBlank(wareInfo.getWareMaxPrice() + ""))
+				if (wareInfo.getWareMaxPrice()!=null)
 					VALUES("wareMaxPrice", "#{wareMaxPrice}");
-				if (StringUtils.isNotBlank(wareInfo.getWareMinPrice() + ""))
+				if (wareInfo.getWareMinPrice()!=null)
 					VALUES("wareMinPrice", "#{wareMinPrice}");
 				if (StringUtils.isNotBlank(wareInfo.getWareDesc()))
 					VALUES("wareDesc", "#{wareDesc}");
-				if (wareInfo.getWareStatus() != null)
-					VALUES("wareStatus", "#{wareStatus}");
 				if (wareInfo.getFirmId() != null)
 					VALUES("firmId", "#{firmId}");
 				if (wareInfo.getOperateId() != null)
@@ -49,16 +47,14 @@ public class IWareManagerSqlProvider {
 					SET("wareNorm=#{wareNorm}");
 				if (StringUtils.isNotBlank(wareInfo.getWareUnit()))
 					SET("wareUnit=#{wareUnit}");
-				if (StringUtils.isNotBlank(wareInfo.getWareBasePrice() + ""))
+				if (wareInfo.getWareBasePrice()!=null)
 					SET("wareBasePrice=#{wareBasePrice}");
-				if (StringUtils.isNotBlank(wareInfo.getWareMaxPrice() + ""))
+				if (wareInfo.getWareMaxPrice()!=null)
 					SET("wareMaxPrice=#{wareMaxPrice}");
-				if (StringUtils.isNotBlank(wareInfo.getWareMinPrice() + ""))
+				if (wareInfo.getWareMinPrice()!=null)
 					SET("wareMinPrice=#{wareMinPrice}");
 				if (StringUtils.isNotBlank(wareInfo.getWareDesc()))
 					SET("wareDesc=#{wareDesc}");
-				if (wareInfo.getWareStatus() != null)
-					SET("wareStatus=#{wareStatus}");
 				if (wareInfo.getFirmId() != null)
 					SET("firmId=#{firmId}");
 				if (wareInfo.getOperateId() != null)
@@ -81,21 +77,18 @@ public class IWareManagerSqlProvider {
 					WHERE("wareNorm=#{wareNorm}");
 				if (StringUtils.isNotBlank(wareInfo.getWareUnit()))
 					WHERE("wareUnit=#{wareUnit}");
-				if (StringUtils.isNotBlank(wareInfo.getWareBasePrice() + ""))
+				if (wareInfo.getWareBasePrice()!=null)
 					WHERE("wareBasePrice=#{wareBasePrice}");
-				if (StringUtils.isNotBlank(wareInfo.getWareMaxPrice() + ""))
+				if (wareInfo.getWareMaxPrice()!=null)
 					WHERE("wareMaxPrice=#{wareMaxPrice}");
-				if (StringUtils.isNotBlank(wareInfo.getWareMinPrice() + ""))
+				if (wareInfo.getWareMinPrice() !=null)
 					WHERE("wareMinPrice=#{wareMinPrice}");
 				if (StringUtils.isNotBlank(wareInfo.getWareDesc()))
 					WHERE("wareDesc=#{wareDesc}");
-				if (wareInfo.getWareStatus() != null)
-					WHERE("wareStatus=#{wareStatus}");
 				if (wareInfo.getFirmId() != null)
 					WHERE("firmId=#{firmId}");
 				if (wareInfo.getOperateId() != null)
 					WHERE("operateId=#{operateId}");
-				WHERE("wareId=#{wareId}");
 			}
 		}.toString();
 	}

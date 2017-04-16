@@ -26,9 +26,8 @@ public class IWareManagerTest {
 		wareInfo.setWareName("可乐");
 		wareInfo.setWareNorm("24瓶/箱");
 		wareInfo.setWareUnit("单位");
-		wareInfo.setWareStatus(1);
 		wareInfo.setFirmId(2);
-		wareManagerDAO.inserWareInfo(wareInfo);
+		wareManagerDAO.insertWareInfo(wareInfo);
 
 		wareInfo.setWareId(1);
 		wareInfo.setWareDesc("dsafsdf");

@@ -45,7 +45,9 @@ public interface IFrimAndGroupDAO {
 			@Result(property = "operMgrs", column= "operMgrId", many= @Many(select = "com.vending.platform.dao.IMachineDAO.getAllOperMgrs")),
 			@Result(property = "operMgr", column= "operMgrId", many= @Many(select = "com.vending.platform.dao.IMachineDAO.getOperMgrById")),
 			@Result(property = "groupInfos", column= "groupId", many= @Many(select = "com.vending.platform.dao.IMachineDAO.getAllOperMgrs")),
-            @Result(property = "groupInfo", column= "groupId", many= @Many(select = "com.vending.platform.dao.IMachineDAO.getGroupInfoById"))
+            @Result(property = "groupInfo", column= "groupId", many= @Many(select = "com.vending.platform.dao.IMachineDAO.getGroupInfoById")),
+            @Result(property = "wareInfos", column= "wareId", many= @Many(select = "com.vending.platform.dao.IWareManagerDAO.getAllWareInfos")),
+            @Result(property = "wareInfo", column= "wareId", many= @Many(select = "com.vending.platform.dao.IWareManagerDAO.getWareInfoById"))
 	})
 	public FirmInfo getFirmInfoById(Integer firmId);
 

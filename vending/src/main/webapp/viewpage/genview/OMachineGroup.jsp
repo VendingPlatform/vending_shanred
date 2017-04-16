@@ -8,7 +8,7 @@
 <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="<c:url value='/resources/js/firmGroup.js'/>" type="text/javascript"></script>
-
+<script src="<c:url value='/resources/js/machine.js'/>" type="text/javascript"></script>
 <title>Machine Group</title>
 </head>
 <body>
@@ -49,9 +49,11 @@
 						<td>${groupInfo.operateId}</td>
 						<td>${groupInfo.operateDate}</td>
 						<td>
-							<a href="<c:url value="/machine/machineGroupDetialInfos"/>?groupId=${groupInfo.groupId}" class="btn default"> <span class="glyphicon glyphicon-paperclip" title="详情"></span>
+							<a href="<c:url value="/machine/machineGroupDetialInfos"/>?groupId=${groupInfo.groupId}" class="btn default"> <span class="glyphicon glyphicon-info-sign" title="详情"></span>
 							</a>
 							<a href="<c:url value="/machine/machinegroupInfo"/>?groupId=${groupInfo.groupId}" class="btn default"> <span class="glyphicon glyphicon-edit" title="编辑"></span>
+							</a>
+							<a onclick="getAssignToUsers(${groupInfo.groupId})" class="btn default" data-toggle="modal" data-target="#assignMachineGroup"> <span class="glyphicon glyphicon-link" title="分配"></span>
 							</a>
 							<a href="<c:url value="/machine/machinegroupDelete"/>?groupId=${groupInfo.groupId}" class="btn default"> <span class="glyphicon glyphicon-trash" title="删除"></span>
 							</a>
@@ -86,6 +88,31 @@
 		      </div>
 		    </div>
 		  </div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="assignMachineGroup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">选择用户</h4>
+				</div>
+				<div class="modal-body" style="width: 80%; padding-left: 30px">
+					<form class="form" id="assignMachineGroupToUserForm">
+					<input type="hidden" name="groupId" id="Id">
+					<input type="hidden" name="operateId" value="${user.userId }">
+						<div id="selectUserToAssign"></div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary"
+						onclick="assignMachineGroupToUser()" data-dismiss="modal">保存</button>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

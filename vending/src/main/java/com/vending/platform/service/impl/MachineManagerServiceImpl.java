@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.vending.platform.dao.IMachineDAO;
+import com.vending.platform.dao.IOperaterDAO;
 import com.vending.platform.domain.MachineInfo;
 import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.MachineType;
@@ -20,18 +21,15 @@ public class MachineManagerServiceImpl implements IMachineManagerService {
 
 	@Autowired
 	private IMachineDAO machineDao;
+	@Autowired
+	private IOperaterDAO operaterDao;
 
 	@Override
 	public List<MachineOperater> getMachineOperaters(UserInfo userInfo, MachineOperater machineOperater) {
 		if (machineOperater == null || userInfo == null) {
 			return null;
 		}
-		/*
-		 * int roleId = userInfo.getRoleInfo().getRoleId(); RoleInfo roleInfo =
-		 * userManagerDao.getRoleById(roleId); String authorityCode =
-		 * roleInfo.getAuthorityCode(); machineOperater =
-		 * UtilsService.getCode(authorityCode, machineOperater, userInfo);
-		 */List<MachineOperater> machineOperaters = machineDao.getAllMachineOperaters(machineOperater);
+		 List<MachineOperater> machineOperaters = machineDao.getAllMachineOperaters(machineOperater);
 		return machineOperaters;
 	}
 
@@ -127,8 +125,13 @@ public class MachineManagerServiceImpl implements IMachineManagerService {
         try {
             machineDao.insertMachineOperate(machineOperater);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void removeMachineOperaterFromUser(Integer mOperaterId) {
+        operaterDao.removeUserMachineOperater(mOperaterId);
+    }
+    
 }

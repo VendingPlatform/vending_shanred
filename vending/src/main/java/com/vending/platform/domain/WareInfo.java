@@ -2,6 +2,7 @@ package com.vending.platform.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * T_Ware_Info:商品信息表
@@ -9,150 +10,163 @@ import java.util.Date;
  * @author Miley_Ren
  */
 public class WareInfo implements Serializable {
-	/** 序列号 */
-	private static final long serialVersionUID = -3601449521375525963L;
+    /** 序列号 */
+    private static final long serialVersionUID = -3601449521375525963L;
 
-	/** 商品ID */
-	private Integer wareId;
-	/** 商品编号 */
-	private String wareCode;
-	/** 商品名称 */
-	private String wareName;
-	/** 商品规格，如：每箱多少瓶 */
-	private String wareNorm;
-	/** 商品单位 */
-	private String wareUnit;
-	/** 商品进价 */
-	private double wareBasePrice;
-	/** 最高售价 */
-	private double wareMaxPrice;
-	/** 最低售价 */
-	private double wareMinPrice;
-	/** 商品描述 */
-	private String wareDesc;
-	/** 是否可用 */
-	private Integer wareStatus;
-	/** 所属运营商ID */
-	private Integer firmId;
-	/** 商品状态：0：可用；1：不可用 */
-	/** 操作者 */
-	private Integer operateId;
-	/** 操作时间 */
-	private Date operateDate;
+    /** 商品ID */
+    private Integer wareId;
+    /** 商品编号 */
+    private String wareCode;
+    /** 商品名称 */
+    private String wareName;
+    /** 商品规格，如：每箱多少瓶 */
+    private String wareNorm;
+    /** 商品单位 */
+    private String wareUnit;
+    /** 商品进价 */
+    private Double wareBasePrice;
+    /** 最高售价 */
+    private Double wareMaxPrice;
+    /** 最低售价 */
+    private Double wareMinPrice;
+    /** 商品描述 */
+    private String wareDesc;
+    /** 所属运营商ID */
+    private Integer firmId;
+    /** 商品状态：0：可用；1：不可用 */
+    /** 操作者 */
+    private Integer operateId;
+    /** 操作时间 */
+    private Date operateDate;
 
-	public WareInfo() {
-		super();
-	}
+    private FirmInfo firmInfo;
+    private List<ChannelWareInfo> channelWareInfos;
 
-	public Integer getWareId() {
-		return wareId;
-	}
+    public WareInfo() {
+        super();
+    }
 
-	public void setWareId(Integer wareId) {
-		this.wareId = wareId;
-	}
+    public Integer getWareId() {
+        return wareId;
+    }
 
-	public String getWareCode() {
-		return wareCode;
-	}
+    public void setWareId(Integer wareId) {
+        this.wareId = wareId;
+    }
 
-	public void setWareCode(String wareCode) {
-		this.wareCode = wareCode;
-	}
+    public String getWareCode() {
+        return wareCode;
+    }
 
-	public String getWareName() {
-		return wareName;
-	}
+    public void setWareCode(String wareCode) {
+        this.wareCode = wareCode;
+    }
 
-	public void setWareName(String wareName) {
-		this.wareName = wareName;
-	}
+    public String getWareName() {
+        return wareName;
+    }
 
-	public String getWareNorm() {
-		return wareNorm;
-	}
+    public void setWareName(String wareName) {
+        this.wareName = wareName;
+    }
 
-	public void setWareNorm(String wareNorm) {
-		this.wareNorm = wareNorm;
-	}
+    public String getWareNorm() {
+        return wareNorm;
+    }
 
-	public String getWareUnit() {
-		return wareUnit;
-	}
+    public void setWareNorm(String wareNorm) {
+        this.wareNorm = wareNorm;
+    }
 
-	public void setWareUnit(String wareUnit) {
-		this.wareUnit = wareUnit;
-	}
+    public String getWareUnit() {
+        return wareUnit;
+    }
 
-	public double getWareBasePrice() {
-		return wareBasePrice;
-	}
+    public void setWareUnit(String wareUnit) {
+        this.wareUnit = wareUnit;
+    }
 
-	public void setWareBasePrice(double wareBasePrice) {
-		this.wareBasePrice = wareBasePrice;
-	}
+    public Double getWareBasePrice() {
+        return wareBasePrice;
+    }
 
-	public double getWareMaxPrice() {
-		return wareMaxPrice;
-	}
+    public void setWareBasePrice(Double wareBasePrice) {
+        this.wareBasePrice = wareBasePrice;
+    }
 
-	public void setWareMaxPrice(double wareMaxPrice) {
-		this.wareMaxPrice = wareMaxPrice;
-	}
+    public Double getWareMaxPrice() {
+        return wareMaxPrice;
+    }
 
-	public double getWareMinPrice() {
-		return wareMinPrice;
-	}
+    public void setWareMaxPrice(Double wareMaxPrice) {
+        this.wareMaxPrice = wareMaxPrice;
+    }
 
-	public void setWareMinPrice(double wareMinPrice) {
-		this.wareMinPrice = wareMinPrice;
-	}
+    public Double getWareMinPrice() {
+        return wareMinPrice;
+    }
 
-	public String getWareDesc() {
-		return wareDesc;
-	}
+    public void setWareMinPrice(Double wareMinPrice) {
+        this.wareMinPrice = wareMinPrice;
+    }
 
-	public void setWareDesc(String wareDesc) {
-		this.wareDesc = wareDesc;
-	}
+    public String getWareDesc() {
+        return wareDesc;
+    }
 
-	public Integer getWareStatus() {
-		return wareStatus;
-	}
+    public void setWareDesc(String wareDesc) {
+        this.wareDesc = wareDesc;
+    }
 
-	public void setWareStatus(Integer wareStatus) {
-		this.wareStatus = wareStatus;
-	}
+    public Integer getFirmId() {
+        return firmId;
+    }
 
-	public Integer getFirmId() {
-		return firmId;
-	}
+    public void setFirmId(Integer firmId) {
+        this.firmId = firmId;
+    }
 
-	public void setFirmId(Integer firmId) {
-		this.firmId = firmId;
-	}
+    public Integer getOperateId() {
+        return operateId;
+    }
 
-	public Integer getOperateId() {
-		return operateId;
-	}
+    public void setOperateId(Integer operateId) {
+        this.operateId = operateId;
+    }
 
-	public void setOperateId(Integer operateId) {
-		this.operateId = operateId;
-	}
+    public Date getOperateDate() {
+        return operateDate;
+    }
 
-	public Date getOperateDate() {
-		return operateDate;
-	}
+    public void setOperateDate(Date operateDate) {
+        this.operateDate = operateDate;
+    }
 
-	public void setOperateDate(Date operateDate) {
-		this.operateDate = operateDate;
-	}
+    public FirmInfo getFirmInfo() {
+        return firmInfo;
+    }
 
-	@Override
-	public String toString() {
-		return "WareInfo [wareId=" + wareId + ", wareCode=" + wareCode + ", wareName=" + wareName + ", wareNorm="
-				+ wareNorm + ", wareUnit=" + wareUnit + ", wareBasePrice=" + wareBasePrice + ", wareMaxPrice="
-				+ wareMaxPrice + ", wareMinPrice=" + wareMinPrice + ", wareDesc=" + wareDesc + ", firmId=" + firmId
-				+ ", operateId=" + operateId + ", operateDate=" + operateDate + "]";
-	}
+    public void setFirmInfo(FirmInfo firmInfo) {
+        this.firmInfo = firmInfo;
+    }
+
+    public List<ChannelWareInfo> getChannelWareInfos() {
+        return channelWareInfos;
+    }
+
+    public void setChannelWareInfos(List<ChannelWareInfo> channelWareInfos) {
+        this.channelWareInfos = channelWareInfos;
+    }
+
+    @Override
+    public String toString() {
+        return "WareInfo [wareId=" + wareId + ", wareCode=" + wareCode
+                + ", wareName=" + wareName + ", wareNorm=" + wareNorm
+                + ", wareUnit=" + wareUnit + ", wareBasePrice=" + wareBasePrice
+                + ", wareMaxPrice=" + wareMaxPrice + ", wareMinPrice="
+                + wareMinPrice + ", wareDesc=" + wareDesc + ", firmId=" + firmId
+                + ", operateId=" + operateId + ", operateDate=" + operateDate
+                + ", firmInfo=" + firmInfo + "]";
+    }
+
 }
