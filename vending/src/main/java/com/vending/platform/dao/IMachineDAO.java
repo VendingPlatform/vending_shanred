@@ -56,7 +56,10 @@ public interface IMachineDAO {
 	@SelectProvider(type = IMachineSqlProvider.class, method = "getMachineOperaterById")
 	@Results({
 			@Result(property = "machineInfo", column = "machineId", one = @One(select = "com.vending.platform.dao.IMachineDAO.getMachineInfoById")),
-			@Result(property = "groupInfo", column = "groupId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getGroupInfoById")) })
+			@Result(property = "groupInfo", column = "groupId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getGroupInfoById")),
+			@Result(property = "channelInfos" ,column="channelId", many = @Many(select="com.vending.platform.dao.IChannelManagerDAO.getAllChannelInfos")),
+			@Result(property = "channelInfo" ,column="channelId", many = @Many(select="com.vending.platform.dao.IChannelManagerDAO.getChannelInfoById"))
+            })
 	public MachineOperater getMachineOperaterById(Integer mOperaterId);
 
 	/**按条件查询所有运营商售货机，管理员查看所有售货机，（one-to-one关联查询）*/

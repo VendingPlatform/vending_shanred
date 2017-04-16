@@ -63,7 +63,9 @@
 					<tr>
 						<td>${machine.machineInfo.machineName }</td>
 						<td>${machine.machineInfo.machinePannel }</td>
-						<td>${machine.machineAssign }</td>
+						<td><c:if test="${machine.machineAssign==1}">已分配</c:if>
+						<c:if test="${machine.machineAssign==0}">未分配</c:if>
+						</td>
 						<td>${machine.machineInfo.machineType.tModelName }</td>
 						<td>${machine.machineAddress }</td>
 						<td>
@@ -94,7 +96,7 @@
 				</div>
 				<div class="modal-body" style="width: 80%; padding-left: 30px">
 					<form class="form" id="assignMachineToUserForm">
-					<input type="hidden" name="mOperaterId" id="mOperaterId">
+					<input type="hidden" name="mOperaterId" id="Id">
 					<input type="hidden" name="operateId" value="${user.userId }">
 						<div id="selectUserToAssign"></div>
 					</form>

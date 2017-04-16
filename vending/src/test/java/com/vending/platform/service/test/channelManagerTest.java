@@ -26,8 +26,6 @@ public class channelManagerTest {
 		channelManagerDAO.insertChannelGroup(channelGroup);
 
 		channelGroup.setChannelGroupId(1);
-		channelGroup.setWareName("可乐");
-		channelGroup.setWareCode("001");
 		channelManagerDAO.updateChannelGroup(channelGroup);
 
 		List<ChannelGroup> channelGroups = channelManagerDAO.getAllChannelGroups(channelGroup);
@@ -42,13 +40,10 @@ public class channelManagerTest {
 	public void testChannelInfo() {
 		ChannelInfo channelInfo = new ChannelInfo();
 		channelInfo.setChannelNo("货道编号");
-		channelInfo.setWareCode("商品code");
 		channelInfo.setStockNum(1);
-		channelInfo.setIsHistory(0);
 		channelManagerDAO.insertChannelInfo(channelInfo);
 
 		channelInfo.setChannelId(1);
-		channelInfo.setWareName("商品名称");
 		channelManagerDAO.updateChannelInfo(channelInfo);
 
 		List<ChannelInfo> channelInfos = channelManagerDAO.getAllChannelInfos(channelInfo);

@@ -10,160 +10,121 @@ import java.util.Date;
  */
 public class ChannelInfo implements Serializable {
 
-	/** 序列号 */
-	private static final long serialVersionUID = 8761114712738792976L;
-	/** 货道ID */
-	private Integer channelId;
-	/** 货道编号 */
-	private String channelNo;
-	/**商品编号*/
-	private String wareCode;
-	/** 商品名称 */
-	private String wareName;
-	/** 商品价格 */
-	private double warePrice;
-	/** 是否特价 */
-	private Integer isDiscount;
-	/** 额定存货量 */
-	private Integer stockNum;
-	/** 当前存货量 */
-	private Integer stockNumNow;
-	/** 新增存货量 */
-	private Integer stockNumAdd;
-	/**所属货道组ID*/
-	private Integer channelGroupId;
-	/** 所属售货机 */
-	private Integer machineId;
-	/** 是否为历史信息：0：否；1：是 */
-	private Integer isHistory;
-	/** 操作者 */
-	private Integer operateId;
-	/** 操作时间 */
-	private Date operateDate;
+    /** 序列号 */
+    private static final long serialVersionUID = 8761114712738792976L;
+    /** 货道ID */
+    private Integer channelId;
+    /** 货道编号 */
+    private String channelNo;
+    /** 额定存货量 */
+    private Integer stockNum;
+    /** 当前存货量 */
+    private Integer stockNumNow;
+    /** 新增存货量 */
+    private Integer stockNumAdd;
+    /** 所属货道组ID */
+    private Integer channelGroupId;
+    /** 所属售货机 */
+    private Integer mOperaterId;
+    /** 操作者 */
+    private Integer operateId;
+    /** 操作时间 */
+    private Date operateDate;
 
-	public ChannelInfo() {
-		super();
-	}
+    private MachineOperater machineOperater;
 
-	public Integer getChannelId() {
-		return channelId;
-	}
+    public ChannelInfo() {
+        super();
+    }
 
-	public void setChannelId(Integer channelId) {
-		this.channelId = channelId;
-	}
+    public Integer getChannelId() {
+        return channelId;
+    }
 
-	public String getChannelNo() {
-		return channelNo;
-	}
+    public void setChannelId(Integer channelId) {
+        this.channelId = channelId;
+    }
 
-	public void setChannelNo(String channelNo) {
-		this.channelNo = channelNo;
-	}
+    public String getChannelNo() {
+        return channelNo;
+    }
 
-	public String getWareCode() {
-		return wareCode;
-	}
+    public void setChannelNo(String channelNo) {
+        this.channelNo = channelNo;
+    }
 
-	public void setWareCode(String wareCode) {
-		this.wareCode = wareCode;
-	}
+    public Integer getStockNum() {
+        return stockNum;
+    }
 
-	public String getWareName() {
-		return wareName;
-	}
+    public void setStockNum(Integer stockNum) {
+        this.stockNum = stockNum;
+    }
 
-	public void setWareName(String wareName) {
-		this.wareName = wareName;
-	}
+    public Integer getStockNumNow() {
+        return stockNumNow;
+    }
 
-	public double getWarePrice() {
-		return warePrice;
-	}
+    public void setStockNumNow(Integer stockNumNow) {
+        this.stockNumNow = stockNumNow;
+    }
 
-	public void setWarePrice(double warePrice) {
-		this.warePrice = warePrice;
-	}
+    public Integer getStockNumAdd() {
+        return stockNumAdd;
+    }
 
-	public Integer getIsDiscount() {
-		return isDiscount;
-	}
+    public void setStockNumAdd(Integer stockNumAdd) {
+        this.stockNumAdd = stockNumAdd;
+    }
 
-	public void setIsDiscount(Integer isDiscount) {
-		this.isDiscount = isDiscount;
-	}
+    public Integer getChannelGroupId() {
+        return channelGroupId;
+    }
 
-	public Integer getStockNum() {
-		return stockNum;
-	}
+    public void setChannelGroupId(Integer channelGroupId) {
+        this.channelGroupId = channelGroupId;
+    }
 
-	public void setStockNum(Integer stockNum) {
-		this.stockNum = stockNum;
-	}
+    public Integer getmOperaterId() {
+        return mOperaterId;
+    }
 
-	public Integer getStockNumNow() {
-		return stockNumNow;
-	}
+    public void setmOperaterId(Integer mOperaterId) {
+        this.mOperaterId = mOperaterId;
+    }
 
-	public void setStockNumNow(Integer stockNumNow) {
-		this.stockNumNow = stockNumNow;
-	}
+    public Integer getOperateId() {
+        return operateId;
+    }
 
-	public Integer getStockNumAdd() {
-		return stockNumAdd;
-	}
+    public void setOperateId(Integer operateId) {
+        this.operateId = operateId;
+    }
 
-	public void setStockNumAdd(Integer stockNumAdd) {
-		this.stockNumAdd = stockNumAdd;
-	}
+    public Date getOperateDate() {
+        return operateDate;
+    }
 
-	public Integer getChannelGroupId() {
-		return channelGroupId;
-	}
+    public void setOperateDate(Date operateDate) {
+        this.operateDate = operateDate;
+    }
 
-	public void setChannelGroupId(Integer channelGroupId) {
-		this.channelGroupId = channelGroupId;
-	}
+    public MachineOperater getMachineOperater() {
+        return machineOperater;
+    }
 
-	public Integer getMachineId() {
-		return machineId;
-	}
+    public void setMachineOperater(MachineOperater machineOperater) {
+        this.machineOperater = machineOperater;
+    }
 
-	public void setMachineId(Integer machineId) {
-		this.machineId = machineId;
-	}
-
-	public Integer getIsHistory() {
-		return isHistory;
-	}
-
-	public void setIsHistory(Integer isHistory) {
-		this.isHistory = isHistory;
-	}
-
-	public Integer getOperateId() {
-		return operateId;
-	}
-
-	public void setOperateId(Integer operateId) {
-		this.operateId = operateId;
-	}
-
-	public Date getOperateDate() {
-		return operateDate;
-	}
-
-	public void setOperateDate(Date operateDate) {
-		this.operateDate = operateDate;
-	}
-
-	@Override
-	public String toString() {
-		return "ChannelInfo [channelId=" + channelId + ", channelNo=" + channelNo + ", wareCode=" + wareCode
-				+ ", wareName=" + wareName + ", warePrice=" + warePrice + ", isDiscount=" + isDiscount + ", stockNum="
-				+ stockNum + ", stockNumNow=" + stockNumNow + ", stockNumAdd=" + stockNumAdd + ", machineId="
-				+ machineId + ", isHistory=" + isHistory + ", operateId=" + operateId + ", operateDate=" + operateDate
-				+ "]";
-	}
+    @Override
+    public String toString() {
+        return "ChannelInfo [channelId=" + channelId + ", channelNo="
+                + channelNo + ", stockNum=" + stockNum + ", stockNumNow="
+                + stockNumNow + ", stockNumAdd=" + stockNumAdd
+                + ", channelGroupId=" + channelGroupId + ", mOperaterId="
+                + mOperaterId + ", operateId=" + operateId + ", operateDate="
+                + operateDate + "]";
+    }
 
 }

@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.vending.platform.domain.AuthorityInfo;
+import com.vending.platform.domain.ChannelWareInfo;
 import com.vending.platform.domain.GroupInfo;
 import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.MachineType;
 import com.vending.platform.domain.UserInfo;
+import com.vending.platform.service.IChannelManagerService;
 import com.vending.platform.service.IFirmAndGroupService;
 import com.vending.platform.service.IMachineManagerService;
 import com.vending.platform.service.IUserManagerService;
@@ -37,6 +39,8 @@ public class MachineManagerController extends UtilsAction {
 	private IFirmAndGroupService firmAndGroupService;
 	@Autowired
 	private IUserManagerService userManagerService;
+	@Autowired
+	private IChannelManagerService channelService;
 
 	@Description("进入售货机页面")
 	@RequestMapping(value = "/machineHome")
@@ -76,8 +80,16 @@ public class MachineManagerController extends UtilsAction {
 	@Description("按Id查看某售货机详细信息")
 	@RequestMapping(value = "/machineInfoDetail", method = RequestMethod.GET)
 	public ModelAndView getMachineOperateById(Integer mOperaterId, ModelMap modelMap) {
-		MachineOperater machineOperater = machineManagerService.getMachineOperaterById(mOperaterId);
-		modelMap.addAttribute("machineOperater", machineOperater);
+		//查询售货机信息
+	    MachineOperater machineOperater = machineManagerService.getMachineOperaterById(mOperaterId);
+
+	    //查询货道信息
+	    ChannelWareInfo channelWareInfo = new ChannelWareInfo();
+	    channelWareInfo.setmOperaterId(mOperaterId);
+	   
+	    List<ChannelWareInfo> channelWareInfos = channelService.getAllChannelWareInfos(channelWareInfo);
+	    modelMap.addAttribute("channelWareByMachine", channelWareInfos);
+	    modelMap.addAttribute("machineOperater", machineOperater);
 		return new ModelAndView("genview/OMachineInfoDetail", modelMap);
 	}
 
@@ -233,6 +245,33 @@ public class MachineManagerController extends UtilsAction {
 		}
 		return "genview/OMachineInfo";
 	}
+	
+	@Description("分配售货机组给用户")
+	@RequestMapping(value="/assignMachineGroupToUser")
+	public String assignMachineGroupToUser(@RequestParam("groupId") Integer groupId,@RequestParam("userId")Integer userId){
+	    //获取组内售货机
+	    MachineOperater mOperater = new MachineOperater();
+	    mOperater.setGroupId(groupId);
+	    List<MachineOperater> mOs = machineManagerService.getAllMachineOperaters(mOperater);
+	    int sum = 0;
+	    //分配售货机
+	    for (MachineOperater m : mOs) {
+            m.setMachineAssign(1);
+            if(machineManagerService.getAllMachineOperaters(m).size()>0){
+                logger.debug("已分配，不能继续分配");
+            }else{
+            m.setUserId(userId);
+            machineManagerService.updateMachineOperater(m);
+            sum++;
+            }
+         }
+	    try {
+            write("分配成功"+sum+"个");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	    return "genview/OMachineGroup";
+	}
 
 	@RequestMapping(value = "/assignMachineToUser")
 	public String assignMachineToUser(@RequestParam("mOperaterId") Integer mOperaterId, Integer userId)
@@ -254,7 +293,8 @@ public class MachineManagerController extends UtilsAction {
 	
 	@RequestMapping(value = "/removeMachineOperater")
 	public String removeMachineOperater(@RequestParam("mOperaterId") Integer mOperaterId){
+	    machineManagerService.removeMachineOperaterFromUser(mOperaterId);
+	    
 		return "genview/UserRoleDetail";
-		
 	}
 }

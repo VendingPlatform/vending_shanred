@@ -60,12 +60,12 @@
 							<ul class="dropdown-menu">
 								<li><a href="<c:url value="/machine/machineInfo"/>">售货机管理</a></li>
 								<li><a href="<c:url value="/machine/machineGroup"/>">分组管理</a></li>
-								<li><a href="#">货道管理</a>
-								<li role="separator" class="divider"></li>
 								<li><a href="#">货道组管理</a></li>
 								<li><a href="#">货道管理</a></li>
 							</ul></li>
-						<li><a href="#">商品管理</a></li>
+						<c:if test="${flag==0||flag==1}">
+						<li><a href="<c:url value="/ware/getAllWareInfos"/>">商品管理</a></li>
+						</c:if>
 						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 库存管理 <span class="caret"></span>
 						</a>
 							<ul class="dropdown-menu">
@@ -73,7 +73,6 @@
 								<li><a href="#">仓库出货</a></li>
 								<li><a href="#">出库信息查询</a></li>
 							</ul></li>
-
 						<li><a href="#">订单管理</a></li>
 						<li><a href="#">财务管理</a></li>
 					</c:if>

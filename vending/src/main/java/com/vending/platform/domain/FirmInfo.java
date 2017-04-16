@@ -33,6 +33,7 @@ public class FirmInfo implements Serializable {
     private List<MachineInfo> machineInfos;
     private List<OperMgr> operMgrs;
     private List<GroupInfo> groupInfos;
+    private List<WareInfo> wareInfos;
 
     public FirmInfo() {
         super();
@@ -140,6 +141,14 @@ public class FirmInfo implements Serializable {
 
     public void setGroupInfos(List<GroupInfo> groupInfos) {
         this.groupInfos = groupInfos;
+    }
+
+    public List<WareInfo> getWareInfos() {
+        return wareInfos;
+    }
+
+    public void setWareInfos(List<WareInfo> wareInfos) {
+        this.wareInfos = wareInfos;
     }
 
     @Override

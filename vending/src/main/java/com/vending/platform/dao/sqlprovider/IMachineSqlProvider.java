@@ -90,7 +90,7 @@ public class IMachineSqlProvider {
                     if(machineOperater.getMachineInfo()!=null){
                     	
                         if (StringUtils.isNotBlank(machineOperater.getMachineInfo().getMachineName())) {
-                            WHERE("i.machineName='#{machineInfo.machineName}");
+                            WHERE("i.machineName=#{machineInfo.machineName}");
                         }
                         if (StringUtils.isNotBlank(machineOperater.getMachineInfo().getMachinePannel())) {
                             WHERE("i.machinePannel=#{machineInfo.machinePannel}");
