@@ -101,7 +101,7 @@ public class IChannelManagerSqlProvider {
                     SET("stockNumAdd=#{stockNumAdd}");
                 if (channelInfo.getChannelGroupId() != null)
                     SET("channelGroupId=#{channelGroupId}");
-                if (channelInfo.getMachineOperater() != null)
+                if (channelInfo.getmOperaterId() != null)
                     SET("mOperaterId=#{mOperaterId}");
                 if(channelInfo.getMachineId()!=null)
                 	SET("machineId=#{machineId}");
@@ -127,7 +127,7 @@ public class IChannelManagerSqlProvider {
                     WHERE("stockNumAdd=#{stockNumAdd}");
                 if (channelInfo.getChannelGroupId() != null)
                     WHERE("channelGroupId=#{channelGroupId}");
-                if (channelInfo.getMachineOperater() != null)
+                if (channelInfo.getmOperaterId() != null)
                     WHERE("mOperaterId=#{mOperaterId}");
                 if(channelInfo.getMachineId()!=null)
                 	WHERE("machineId=#{machineId}");

@@ -82,4 +82,17 @@ public class ChannelManagerServiceImpl implements IChannelManagerService {
     public void insetChannelWareInfo(ChannelWareInfo channelWareInfo) {
         channelManagerDao.insertChannelWareInfo(channelWareInfo);
     }
+
+    @Override
+    public void assignChannel(Integer machineId,Integer mOperaterId) {
+        ChannelInfo channelInfo = new ChannelInfo();
+        channelInfo.setMachineId(machineId);
+        List<ChannelInfo> channelInfos = channelManagerDao.getAllChannelInfos(channelInfo);
+        for (ChannelInfo channel : channelInfos) {
+            channelInfo.setmOperaterId(mOperaterId);
+            channelInfo.setChannelId(channel.getChannelId());
+            channelManagerDao.updateChannelInfo(channelInfo);
+        }
+    }
 }
+ 

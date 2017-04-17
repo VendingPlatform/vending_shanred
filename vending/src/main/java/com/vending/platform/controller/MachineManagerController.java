@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.vending.platform.domain.AuthorityInfo;
+import com.vending.platform.domain.ChannelInfo;
 import com.vending.platform.domain.ChannelWareInfo;
 import com.vending.platform.domain.GroupInfo;
 import com.vending.platform.domain.MachineOperater;
@@ -84,11 +85,10 @@ public class MachineManagerController extends UtilsAction {
 	    MachineOperater machineOperater = machineManagerService.getMachineOperaterById(mOperaterId);
 
 	    //查询货道信息
-	    ChannelWareInfo channelWareInfo = new ChannelWareInfo();
-	    channelWareInfo.setmOperaterId(mOperaterId);
-	   
-	    List<ChannelWareInfo> channelWareInfos = channelService.getAllChannelWareInfos(channelWareInfo);
-	    modelMap.addAttribute("channelWareByMachine", channelWareInfos);
+	    ChannelInfo channel = new ChannelInfo();
+	    channel.setmOperaterId(mOperaterId);
+	    List<ChannelInfo> channels = channelService.getAllChannelInfos(channel);
+	    modelMap.addAttribute("channelInfo", channels);
 	    modelMap.addAttribute("machineOperater", machineOperater);
 		return new ModelAndView("genview/OMachineInfoDetail", modelMap);
 	}

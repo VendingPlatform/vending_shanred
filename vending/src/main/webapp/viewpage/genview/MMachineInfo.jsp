@@ -137,10 +137,10 @@
 		        		</div> 
       					<div class="form-group">
 		        		<label for='tModelName'>售货机类型:</label>
-						<select name="tModelName" class="form-control">
+						<select name="tModelId" class="form-control">
 						<option value="">---售货机类型---</option>
 						<c:forEach items='${machineTypes}' var='t'>
-							<option value='${t.tModelName}'>${t.tModelName}</option>
+							<option value='${t.tModelId}'>${t.tModelName}</option>
 						</c:forEach>
 						</select>
 		        		</div>

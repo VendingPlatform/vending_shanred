@@ -1,7 +1,5 @@
 package com.vending.platform.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -212,6 +210,7 @@ public class ManuController extends UtilsAction {
 				operater.setOperFirmId(machineInfo.getOperFirmInfo().getFirmId());
 				machineManagerService.inserMachineOperater(operater);
 				Integer mOperaterId  = machineManagerService.getMachineOperaterBymachine(mInfo.getMachineId());
+				channelService.assignChannel(mInfo.getMachineId(), mOperaterId);
 				write("分配成功");
 			}
 		}

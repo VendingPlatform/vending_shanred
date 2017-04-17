@@ -113,6 +113,7 @@
 						</div>
 						<input type="hidden" name="stockNumNow" value="0">
 						<input type="hidden" name="stockNumAdd" value="0">
+						<input type="hidden" name="operateId" value="${user.userId }">
 						<div class="form-group">
 							<label for="stockNumAdd">售货机名:</label>
 							<input type="text" class="form-control" value="${machineInfo.machineName }" readonly>

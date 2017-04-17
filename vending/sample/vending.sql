@@ -1,6 +1,6 @@
 /*
 SQLyog Community v12.4.1 (64 bit)
-MySQL - 5.1.62-community : Database - vending
+MySQL - 5.5.54 : Database - vending
 *********************************************************************
 */
 
@@ -33,8 +33,6 @@ CREATE TABLE `authorityinfo` (
 
 /*Data for the table `authorityinfo` */
 
-LOCK TABLES `authorityinfo` WRITE;
-
 insert  into `authorityinfo`(`authId`,`authName`,`authCode`,`authDesc`,`authType`,`operateId`,`operateDate`) values 
 (1,'系统权限','000','具有整个系统的管理权限',0,1,'2017-02-27 12:55:37'),
 (2,'运营商管理员权限','001','具有运营商内的所有管理权限（包括角色管理）',1,1,'2017-02-27 16:09:36'),
@@ -45,8 +43,6 @@ insert  into `authorityinfo`(`authId`,`authName`,`authCode`,`authDesc`,`authType
 (7,'运营商订单管理权限','00103','可管理订单',1,1,'2017-04-05 23:19:36'),
 (8,'运营商仓库管理权限','00104','可管理库存',1,1,'2017-04-05 23:25:00'),
 (9,'运营商财务管理权限','00105','可管理财务',1,1,'2017-04-05 23:25:44');
-
-UNLOCK TABLES;
 
 /*Table structure for table `channelgroup` */
 
@@ -65,12 +61,8 @@ CREATE TABLE `channelgroup` (
 
 /*Data for the table `channelgroup` */
 
-LOCK TABLES `channelgroup` WRITE;
-
 insert  into `channelgroup`(`channelGroupId`,`channelGroupName`,`stockNum`,`firmId`,`operateId`,`operateDate`) values 
 (1,'testChannelGroup',11,32,NULL,'2017-04-16 17:03:12');
-
-UNLOCK TABLES;
 
 /*Table structure for table `channelgroupwareinfo` */
 
@@ -88,10 +80,6 @@ CREATE TABLE `channelgroupwareinfo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `channelgroupwareinfo` */
-
-LOCK TABLES `channelgroupwareinfo` WRITE;
-
-UNLOCK TABLES;
 
 /*Table structure for table `channelinfo` */
 
@@ -115,22 +103,27 @@ CREATE TABLE `channelinfo` (
   CONSTRAINT `channelinfo_ibfk_1` FOREIGN KEY (`mOperaterId`) REFERENCES `machineoperater` (`mOperaterId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `channelinfo_ibfk_2` FOREIGN KEY (`channelGroupId`) REFERENCES `channelgroup` (`channelGroupId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `channelinfo_ibfk_3` FOREIGN KEY (`machineId`) REFERENCES `machineinfo` (`machineId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 /*Data for the table `channelinfo` */
 
-LOCK TABLES `channelinfo` WRITE;
-
 insert  into `channelinfo`(`channelId`,`channelNo`,`stockNum`,`stockNumNow`,`stockNumAdd`,`channelGroupId`,`mOperaterId`,`machineId`,`operateId`,`operateDate`) values 
 (1,'001',11,0,0,1,9,9,NULL,'2017-04-16 17:33:15'),
-(11,'002',11,NULL,NULL,NULL,9,9,NULL,'2017-04-16 21:48:59'),
-(15,'003',11,0,0,NULL,NULL,9,NULL,'2017-04-17 20:47:15'),
-(16,'004',11,0,0,NULL,NULL,9,NULL,'2017-04-17 20:47:21'),
-(17,'005',11,0,0,NULL,NULL,9,NULL,'2017-04-17 20:47:27'),
-(18,'006',11,0,0,NULL,NULL,9,NULL,'2017-04-17 20:47:34'),
-(19,'007',11,0,0,NULL,NULL,9,NULL,'2017-04-17 20:47:40');
-
-UNLOCK TABLES;
+(11,'002',11,0,0,NULL,9,9,NULL,'2017-04-16 21:48:59'),
+(15,'003',11,0,0,NULL,9,9,NULL,'2017-04-17 20:47:15'),
+(16,'004',11,0,0,NULL,9,9,NULL,'2017-04-17 20:47:21'),
+(17,'005',11,0,0,NULL,9,9,NULL,'2017-04-17 20:47:27'),
+(18,'006',11,0,0,NULL,9,9,NULL,'2017-04-17 20:47:34'),
+(19,'007',11,0,0,NULL,9,9,NULL,'2017-04-17 20:47:40'),
+(27,'001',11,0,0,NULL,21,25,NULL,'2017-04-17 21:48:59'),
+(28,'002',11,0,0,NULL,21,25,NULL,'2017-04-17 21:48:59'),
+(29,'003',11,0,0,NULL,21,25,NULL,'2017-04-17 21:48:59'),
+(30,'004',11,0,0,NULL,21,25,NULL,'2017-04-17 21:48:59'),
+(31,'005',11,0,0,NULL,21,25,NULL,'2017-04-17 21:48:59'),
+(32,'006',11,0,0,NULL,21,25,NULL,'2017-04-17 21:48:59'),
+(33,'007',11,0,0,NULL,21,25,NULL,'2017-04-17 21:48:59'),
+(34,'001',15,0,0,NULL,22,26,3,'2017-04-17 21:51:04'),
+(35,'002',15,0,0,NULL,22,26,3,'2017-04-17 21:51:04');
 
 /*Table structure for table `channelinfohistory` */
 
@@ -155,12 +148,8 @@ CREATE TABLE `channelinfohistory` (
 
 /*Data for the table `channelinfohistory` */
 
-LOCK TABLES `channelinfohistory` WRITE;
-
 insert  into `channelinfohistory`(`channelHistory`,`machineName`,`channelNo`,`channelGroupName`,`wareName`,`price`,`stockNum`,`stockNumnNow`,`stockNumnAdd`,`operateId`,`operateDate`) values 
 (1,NULL,'',NULL,NULL,NULL,0,NULL,NULL,NULL,'0000-00-00 00:00:00');
-
-UNLOCK TABLES;
 
 /*Table structure for table `channelwareinfo` */
 
@@ -180,14 +169,6 @@ CREATE TABLE `channelwareinfo` (
 
 /*Data for the table `channelwareinfo` */
 
-LOCK TABLES `channelwareinfo` WRITE;
-
-insert  into `channelwareinfo`(`channelId`,`wareId`,`price`,`isDiscount`,`mOperaterId`) values 
-(1,1,NULL,0,9),
-(11,2,2.5,0,9);
-
-UNLOCK TABLES;
-
 /*Table structure for table `firminfo` */
 
 DROP TABLE IF EXISTS `firminfo`;
@@ -206,8 +187,6 @@ CREATE TABLE `firminfo` (
 
 /*Data for the table `firminfo` */
 
-LOCK TABLES `firminfo` WRITE;
-
 insert  into `firminfo`(`firmId`,`firmNo`,`firmName`,`firmDesc`,`firmType`,`firmStatus`,`operateId`,`operateDate`) values 
 (1,'000','system','system',0,1,1,'2017-02-27 12:13:38'),
 (3,'002','厂商1','厂商1的描述信息',2,1,1,'2017-04-10 15:43:11'),
@@ -215,8 +194,6 @@ insert  into `firminfo`(`firmId`,`firmNo`,`firmName`,`firmDesc`,`firmType`,`firm
 (22,'005','运营商2','运营商描述',1,1,1,'2017-04-09 18:27:24'),
 (23,'006','运营商3','test describe',1,1,1,'2017-04-09 18:27:32'),
 (26,'007','test','test1',1,1,3,'2017-04-17 16:16:50');
-
-UNLOCK TABLES;
 
 /*Table structure for table `groupinfo` */
 
@@ -237,15 +214,11 @@ CREATE TABLE `groupinfo` (
 
 /*Data for the table `groupinfo` */
 
-LOCK TABLES `groupinfo` WRITE;
-
 insert  into `groupinfo`(`groupId`,`groupName`,`groupType`,`groupDesc`,`firmId`,`operateId`,`operateDate`) values 
 (1,'system',0,'系统管理员分组，此分组用作区分用户角色',1,1,'2017-03-20 16:59:54'),
 (32,'售货机组1',2,'售货机组1',22,6,'2017-04-09 19:26:00'),
 (33,'售货机组2',2,'售货机组2',22,6,'2017-04-09 19:26:51'),
 (35,'test',1,'TEST',22,6,'2017-04-10 22:03:06');
-
-UNLOCK TABLES;
 
 /*Table structure for table `machineinfo` */
 
@@ -258,7 +231,6 @@ CREATE TABLE `machineinfo` (
   `manuFirmId` int(11) NOT NULL COMMENT '厂商ID',
   `machinePrice` decimal(10,0) DEFAULT NULL COMMENT '售货机价格',
   `tModelId` int(11) DEFAULT NULL COMMENT '售货机类型',
-  `tModelName` varchar(20) DEFAULT NULL COMMENT '售货机类型/型号',
   `manuMachineStatus` int(11) NOT NULL DEFAULT '0' COMMENT '0:未售出，1：已售出，2：回收',
   `operFirmId` int(11) DEFAULT NULL COMMENT '卖给某运营商ID',
   `operateId` int(11) DEFAULT NULL COMMENT '操作者',
@@ -270,21 +242,14 @@ CREATE TABLE `machineinfo` (
   CONSTRAINT `machineinfo_ibfk_1` FOREIGN KEY (`tModelId`) REFERENCES `machinetype` (`tModelId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `t_machine_info_ibfk_1` FOREIGN KEY (`manuFirmId`) REFERENCES `firminfo` (`firmId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `t_machine_info_ibfk_2` FOREIGN KEY (`operFirmId`) REFERENCES `firminfo` (`firmId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 /*Data for the table `machineinfo` */
 
-LOCK TABLES `machineinfo` WRITE;
-
-insert  into `machineinfo`(`machineId`,`machineName`,`machinePannel`,`manuFirmId`,`machinePrice`,`tModelId`,`tModelName`,`manuMachineStatus`,`operFirmId`,`operateId`,`operateDate`) values 
-(9,'售货机1','售货机1',3,20,1,'类型1',1,22,3,'2017-04-09 18:29:07'),
-(10,'售货机2','售货机2',3,20,1,'类型1',1,22,3,'2017-04-09 18:29:21'),
-(11,'售货机3','售货机3',3,30,1,'类型1',1,22,3,'2017-04-09 18:31:13'),
-(12,'售货机4','售货机4',3,20,1,'类型1',1,22,3,'2017-04-09 18:31:56'),
-(13,'售货机5','售货机5',3,20,1,'类型2',1,22,3,'2017-04-09 18:33:03'),
-(16,'tes','sdf',3,23,2,'类型2',1,22,3,'2017-04-10 11:31:05');
-
-UNLOCK TABLES;
+insert  into `machineinfo`(`machineId`,`machineName`,`machinePannel`,`manuFirmId`,`machinePrice`,`tModelId`,`manuMachineStatus`,`operFirmId`,`operateId`,`operateDate`) values 
+(9,'售货机1','售货机1',3,20,1,1,22,3,'2017-04-09 18:29:07'),
+(25,'售货机2','售货机2',3,5999,1,1,22,3,'2017-04-17 21:47:11'),
+(26,'售货机3','售货机4',3,1000,2,1,22,3,'2017-04-17 21:50:32');
 
 /*Table structure for table `machineoperater` */
 
@@ -307,21 +272,14 @@ CREATE TABLE `machineoperater` (
   CONSTRAINT `machineoperater_ibfk_1` FOREIGN KEY (`machineId`) REFERENCES `machineinfo` (`machineId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `MachineOperater_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `userinfo` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `MachineOperater_ibfk_3` FOREIGN KEY (`groupId`) REFERENCES `groupinfo` (`groupId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 /*Data for the table `machineoperater` */
 
-LOCK TABLES `machineoperater` WRITE;
-
 insert  into `machineoperater`(`mOperaterId`,`machineId`,`machineAssign`,`userId`,`machineAddress`,`groupId`,`operFirmId`,`operateId`,`operateDate`) values 
 (9,9,1,10,NULL,32,22,6,'2017-04-15 17:09:18'),
-(10,10,1,6,NULL,32,22,6,'2017-04-15 18:58:52'),
-(11,11,0,NULL,NULL,NULL,22,6,'2017-04-15 17:09:26'),
-(12,12,0,NULL,NULL,33,22,6,'2017-04-15 17:36:31'),
-(13,13,0,NULL,NULL,NULL,22,NULL,'2017-04-15 17:36:28'),
-(14,16,1,6,NULL,32,22,6,'2017-04-15 18:58:54');
-
-UNLOCK TABLES;
+(21,25,0,NULL,NULL,NULL,22,NULL,'2017-04-17 21:48:52'),
+(22,26,0,NULL,NULL,NULL,22,NULL,'2017-04-17 21:51:04');
 
 /*Table structure for table `machinetype` */
 
@@ -340,13 +298,9 @@ CREATE TABLE `machinetype` (
 
 /*Data for the table `machinetype` */
 
-LOCK TABLES `machinetype` WRITE;
-
 insert  into `machinetype`(`tModelId`,`tModelName`,`firmId`,`operateId`,`operateDate`) values 
 (1,'类型1',3,1,'2017-02-27 17:07:25'),
 (2,'类型2',3,3,'2017-03-16 23:08:23');
-
-UNLOCK TABLES;
 
 /*Table structure for table `opermgr` */
 
@@ -367,14 +321,10 @@ CREATE TABLE `opermgr` (
 
 /*Data for the table `opermgr` */
 
-LOCK TABLES `opermgr` WRITE;
-
 insert  into `opermgr`(`operMgrId`,`firmId`,`manuId`,`operateId`,`operateDate`) values 
 (10,22,3,3,'2017-04-09 18:34:49'),
 (11,23,3,3,'2017-04-09 18:34:49'),
 (13,4,3,3,'2017-04-09 19:11:38');
-
-UNLOCK TABLES;
 
 /*Table structure for table `roleauth` */
 
@@ -393,8 +343,6 @@ CREATE TABLE `roleauth` (
 
 /*Data for the table `roleauth` */
 
-LOCK TABLES `roleauth` WRITE;
-
 insert  into `roleauth`(`roleAuthId`,`roleId`,`authId`) values 
 (1,1,1),
 (2,2,2),
@@ -412,8 +360,6 @@ insert  into `roleauth`(`roleAuthId`,`roleId`,`authId`) values
 (23,12,9),
 (24,10,5);
 
-UNLOCK TABLES;
-
 /*Table structure for table `roleinfo` */
 
 DROP TABLE IF EXISTS `roleinfo`;
@@ -428,8 +374,6 @@ CREATE TABLE `roleinfo` (
 
 /*Data for the table `roleinfo` */
 
-LOCK TABLES `roleinfo` WRITE;
-
 insert  into `roleinfo`(`roleId`,`roleName`,`firmType`,`operateDate`) values 
 (1,'系统管理员',0,'2017-04-07 17:27:47'),
 (2,'运营商管理员',1,'2017-04-07 17:27:13'),
@@ -438,8 +382,6 @@ insert  into `roleinfo`(`roleId`,`roleName`,`firmType`,`operateDate`) values
 (10,'操作员',1,'2017-04-07 15:52:10'),
 (11,'库存管理员',1,'2017-04-09 14:48:08'),
 (12,'财务管理员',1,'2017-04-09 14:49:19');
-
-UNLOCK TABLES;
 
 /*Table structure for table `userinfo` */
 
@@ -468,8 +410,6 @@ CREATE TABLE `userinfo` (
 
 /*Data for the table `userinfo` */
 
-LOCK TABLES `userinfo` WRITE;
-
 insert  into `userinfo`(`userId`,`userNo`,`userName`,`password`,`mobilePhone`,`email`,`groupManager`,`groupId`,`status`,`firmId`,`parentUserId`,`operateDate`,`operateId`) values 
 (1,'000','system','111',NULL,NULL,1,1,1,1,1,'2017-02-27 12:58:14',1),
 (3,'00201','system001','111',NULL,NULL,1,NULL,1,3,1,'2017-02-27 17:04:19',1),
@@ -478,8 +418,6 @@ insert  into `userinfo`(`userId`,`userNo`,`userName`,`password`,`mobilePhone`,`e
 (10,'00502','sys6','111',NULL,NULL,NULL,NULL,1,22,NULL,'2017-04-09 22:59:35',6),
 (12,'00701','system00701','system00701',NULL,NULL,NULL,NULL,1,26,1,'2017-04-10 15:43:28',NULL),
 (13,'00503','sys7','1111',NULL,NULL,0,NULL,1,22,NULL,'2017-04-10 20:06:06',6);
-
-UNLOCK TABLES;
 
 /*Table structure for table `userrole` */
 
@@ -498,8 +436,6 @@ CREATE TABLE `userrole` (
 
 /*Data for the table `userrole` */
 
-LOCK TABLES `userrole` WRITE;
-
 insert  into `userrole`(`userRoleId`,`userId`,`roleId`) values 
 (1,1,1),
 (3,3,3),
@@ -515,8 +451,6 @@ insert  into `userrole`(`userRoleId`,`userId`,`roleId`) values
 (48,6,10),
 (49,6,11),
 (50,6,12);
-
-UNLOCK TABLES;
 
 /*Table structure for table `wareinfo` */
 
@@ -542,13 +476,9 @@ CREATE TABLE `wareinfo` (
 
 /*Data for the table `wareinfo` */
 
-LOCK TABLES `wareinfo` WRITE;
-
 insert  into `wareinfo`(`wareId`,`wareCode`,`wareName`,`wareNorm`,`wareUnit`,`wareBasePrice`,`wareMaxPrice`,`wareMinPrice`,`wareDesc`,`firmId`,`operateId`,`operateDate`) values 
 (1,'YL-BSKL-G330','百事可乐300ml','24罐/箱','罐',1.75,0,0,'百事可乐gengxin',22,6,'2017-04-16 13:58:00'),
 (2,'YL-BSKL-G331','可口可乐500ml','24罐/箱','罐',1.75,NULL,NULL,'可口可乐',22,6,'2017-04-16 13:55:29');
-
-UNLOCK TABLES;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

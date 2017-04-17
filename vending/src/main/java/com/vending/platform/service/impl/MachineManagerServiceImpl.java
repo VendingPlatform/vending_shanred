@@ -138,8 +138,8 @@ public class MachineManagerServiceImpl implements IMachineManagerService {
 		MachineOperater machineOperater = new MachineOperater();
 		machineOperater.setMachineId(machineId);
 		List<MachineOperater> machineOperaters = machineDao.getAllMachineOperaters(machineOperater);
-		if (machineOperaters.size() == 1) {
-			return machineOperaters.get(0).getMachineId();
+		if (machineOperaters.size() >0) {
+			return machineOperaters.get(0).getmOperaterId();
 		} else
 			return null;
 	}

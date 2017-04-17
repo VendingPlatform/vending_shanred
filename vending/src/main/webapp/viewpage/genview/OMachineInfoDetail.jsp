@@ -60,40 +60,30 @@
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<a href="#" data-toggle="modal" data-target="#insertChannel"> <span
-					class="btn btn-default">添加货道信息</span>
-				</a>
+				货道信息
 			</div>
 			<div class="panel-body">
 				<table class="table">
 					<tr>
 						<th>货道编号</th>
-						<th>商品编号</th>
-						<th>商品名</th>
-						<th>商品进价</th>
-						<th>商品价格</th>
-						<th>是否折扣</th>
 						<th>存货量</th>
 						<th>现存量</th>
 						<th>新增量</th>
-						<th>货到组</th>
 						<th>售货机名</th>
 						<th>售货机主板号</th>
+						<th>操作</th>
 					</tr>
-					<c:forEach items="${channelWareByMachine}" var="ch">
+					<c:forEach items="${channelInfo}" var="ch">
 						<tr>
-							<td>${ch.channelInfo.channelNo}</td>
-							<td>${ch.wareInfo.wareCode}</td>
-							<td>${ch.wareInfo.wareName}</td>
-							<td>${ch.wareInfo.wareBasePrice}</td>
-							<td>${ch.price}</td>
-							<td>${ch.isDiscount}</td>
-							<td>${ch.channelInfo.stockNum}</td>
-							<td>${ch.channelInfo.stockNumNow}</td>
-							<td>${ch.channelInfo.stockNumAdd}</td>
-							<td>${ch.channelInfo.channelGroupId}</td>
-							<td>${ch.channelInfo.machineOperater.machineInfo.machineName}</td>
-							<td>${ch.channelInfo.machineOperater.machineInfo.machinePannel}</td>
+							<td>${ch.channelNo}</td>
+							<td>${ch.stockNum}</td>
+							<td>${ch.stockNumNow}</td>
+							<td>${ch.stockNumAdd}</td>
+							<td>${ch.machineInfo.machineName}</td>
+							<td>${ch.machineInfo.machinePannel}</td>
+							<td>
+							可用放置文本框，用于更新货道商品
+							</td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -101,64 +91,5 @@
 		</div>
 	</div>
 
-
-	<div class="modal fade" id="insertChannel" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">添加货道信息</h4>
-				</div>
-				<div class="modal-body" style="width: 500px">
-					<form class="form" id="insertChannelForm">
-						<div class="form-group">
-							<label for="channelNo">货道编号:</label> <input type="text"
-								class="form-control" name="channelNo" placeholder="输入货道编号">
-						</div>
-						<div class="form-group">
-							<label for="wareId">商品:</label> <input type="text"
-								class="form-control" name="wareId">
-						</div>
-						<div class="form-group">
-							<label for="price">商品售价:</label> <input type="text"
-								class="form-control" name="price" placeholder="输入价格">
-						</div>
-						<div class="form-group">
-							<label for="isDiscount">是否折扣:</label> <input type="text"
-								class="form-control" name="isDiscount">
-						</div>
-						<div class="form-group">
-							<label for="stockNum">货道容量:</label> <input type="text"
-								class="form-control" name="stockNum">
-						</div>
-						<div class="form-group">
-							<label for="stockNumNow">货道库存:</label> <input type="text"
-								class="form-control" name="stockNumNow">
-						</div>
-						<div class="form-group">
-							<label for="stockNumAdd">货道增量:</label> <input type="text"
-								class="form-control" name="stockNumAdd">
-						</div>
-						<div class="form-group">
-							<label for="stockNumAdd">售货机名:</label> <input type="text"
-								class="form-control"
-								value="${machineOperater.machineInfo.machineName }" readonly>
-						</div>
-						<input type="hidden" name="mOperaterId"
-							value="${machineOperater.mOperaterId }">
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" onclick="insertChannelInfo()"
-						class="btn btn-primary" data-dismiss="modal">提交</button>
-				</div>
-			</div>
-		</div>
-	</div>
 </body>
 </html>

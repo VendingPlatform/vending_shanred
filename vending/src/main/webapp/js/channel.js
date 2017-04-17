@@ -1,15 +1,14 @@
-function insertChannelInfo(){
+function getChannelInfoToUpdate(channenId){
 	$.ajax({
-		url:"../channel/insertChannel",
-		type:"post",
-		dataType:"text",
-		data:$("#insertChannelForm").serialize(),
-		success: function(response){
-			alert(response);
-			location.reload();
+		url:"../channel/getChannelInfoAndChannelWareInfo",
+		type:"get",
+		dataType:"json",
+		success :function(data){
+
 		},
 		error: function(){
 			alert("获取数据失败");
 		}
+
 	});
 }

@@ -34,4 +34,6 @@ public interface IChannelManagerService {
             ChannelWareInfo channelWareInfo);
 
     void insetChannelWareInfo(ChannelWareInfo channelWareInfo);
+    
+    void assignChannel(Integer machineId,Integer mOperaterId);
 }

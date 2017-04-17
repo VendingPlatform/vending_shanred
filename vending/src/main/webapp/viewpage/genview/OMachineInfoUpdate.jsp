@@ -64,23 +64,8 @@
 						<td>售货机地址</td>
 						<td>
 						<div class="form-group">
-							<input type="text" name="machineAddress" class="form-control"  placeholder="售货机地址" value="${machineOperater.machineAddress }">
+							<textarea rows="5" cols="30" name="machineAddress" class="form-control"  placeholder="售货机地址" value="${machineOperater.machineAddress }"></textarea> 
 						</div>
-						</td>
-					</tr>
-					<tr>
-						<td>售货机组</td>
-						<td>
-							<select name="groupId" required="required">
-							 	<c:forEach items="${groupInfos}" var="groupInfo">
-									  <c:if test="${(groupInfo.groupId)==(machineOperater.groupId)}"> 
-										<option value="${machineOperater.groupId }" selected>${groupInfo.groupName }</option>
-									</c:if>
-									 <c:if test="${(groupInfo.groupId)!=(machineOperater.groupId)}">
-										<option value="${groupInfo.groupId }">${groupInfo.groupName }</option>
-									</c:if>
-								</c:forEach> 
-							</select>
 						</td>
 					</tr>
 					<tr>
