@@ -27,6 +27,7 @@ public class SysManagerController extends UtilsAction {
     @Description("获取所有商家信息")
     @RequestMapping(value = "/getAllFirms")
     public String getAllFirms(FirmInfo firmInfo, ModelMap map) {
+    	firmInfo.setFirmType(1);
         List<FirmInfo> allFirmInfos = firmAndGroupService
                 .getAllFirmInfos(firmInfo);
         map.addAttribute("allFirmInfos", allFirmInfos);

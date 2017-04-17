@@ -62,6 +62,9 @@
 					<td>${m.operateId}</td>
 					<td>${m.operateDate}</td>
 					<td>
+						<a href="<c:url value="/manu/getMachineInfoChannel"/>?machineId=${m.machineId}" class="btn default"> 
+						<span class="glyphicon glyphicon-info-sign" title="货道信息"></span>
+						</a>
 						<a onclick="getMachineInfoById(${m.machineId})" class="btn default"
 						data-toggle="modal" data-target="#updateMachineModal"> 
 						<span class="glyphicon glyphicon-edit" title="编辑"></span>

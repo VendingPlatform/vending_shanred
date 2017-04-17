@@ -128,7 +128,7 @@ function getMachineInfoById(machineId) {
 
 function updateMachineType() {
 	$.ajax({
-		url : "/manu/updateType",
+		url : "../manu/updateType",
 		type : "post",
 		dataType : "text",
 		data : $('#updateMachineType').serialize(),
@@ -144,7 +144,7 @@ function updateMachineType() {
 
 function getTypeById(tModelId) {
 	$.ajax({
-		url : "/manu/getTypeById?tModelId=" + tModelId,
+		url : "../manu/getTypeById?tModelId=" + tModelId,
 		type : "get",
 		dataType : "json",
 		success : function(data) {
@@ -155,5 +155,36 @@ function getTypeById(tModelId) {
 			alert("数据错误");
 		}
 	});
+}
 
+function addChannelInfo() {
+	$.ajax({
+		url : "../manu/addChannelInfo",
+		type : "post",
+		dataType : "text",
+		data : $("#addChannelForm").serialize(),
+		success : function(res) {
+			alert(res);
+			location.reload();
+		},
+		error : function() {
+			alert("获取数据失败");
+		}
+	});
+}
+function deleteChan(channelId) {
+	if (confirm("确定删除该货道，及货道信息？")) {
+		$.ajax({
+			url : "../manu/deleteChannel?channelId=" + channelId,
+			type : "get",
+			dataType : "text",
+			success : function(res) {
+				alert("删除成功");
+				location.reload();
+			},
+			error : function() {
+				alert("获取数据失败");
+			}
+		});
+	}
 }

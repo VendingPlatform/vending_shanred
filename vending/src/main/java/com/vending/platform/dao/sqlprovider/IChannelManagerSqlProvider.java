@@ -1,9 +1,8 @@
 package com.vending.platform.dao.sqlprovider;
 
-import static org.hamcrest.CoreMatchers.nullValue;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.jdbc.SQL;
+
 import com.vending.platform.domain.ChannelGroup;
 import com.vending.platform.domain.ChannelInfo;
 import com.vending.platform.domain.ChannelWareInfo;
@@ -71,13 +70,15 @@ public class IChannelManagerSqlProvider {
                 if (channelInfo.getStockNum() != null)
                     VALUES("stockNum", "#{stockNum}");
                 if (channelInfo.getStockNumNow() != null)
-                    VALUES("stockNumnNow", "#{stockNumnNow}");
+                    VALUES("stockNumNow", "#{stockNumNow}");
                 if (channelInfo.getStockNumAdd() != null)
-                    VALUES("stockNumnAdd", "#{stockNumnAdd}");
+                    VALUES("stockNumAdd", "#{stockNumAdd}");
                 if (channelInfo.getChannelGroupId() != null)
                     VALUES("channelGroupId", "#{channelGroupId}");
                 if (channelInfo.getmOperaterId() != null)
                     VALUES("mOperaterId", "#{mOperaterId}");
+                if(channelInfo.getMachineId()!=null)
+                	VALUES("machineId", "#{machineId}");
                 if (channelInfo.getOperateId() != null)
                     VALUES("operateId", "#{operateId}");
                 VALUES("operateDate", "(SELECT NOW())");
@@ -95,13 +96,15 @@ public class IChannelManagerSqlProvider {
                 if (channelInfo.getStockNum() != null)
                     SET("stockNum=#{stockNum}");
                 if (channelInfo.getStockNumNow() != null)
-                    SET("stockNumnNow=#{stockNumnNow}");
+                    SET("stockNumNow=#{stockNumNow}");
                 if (channelInfo.getStockNumAdd() != null)
-                    SET("stockNumnAdd=#{stockNumnAdd}");
+                    SET("stockNumAdd=#{stockNumAdd}");
                 if (channelInfo.getChannelGroupId() != null)
                     SET("channelGroupId=#{channelGroupId}");
                 if (channelInfo.getMachineOperater() != null)
                     SET("mOperaterId=#{mOperaterId}");
+                if(channelInfo.getMachineId()!=null)
+                	SET("machineId=#{machineId}");
                 if (channelInfo.getOperateId() != null)
                     SET("operateId=#{operateId}");
                 SET("operateDate=(SELECT NOW())");
@@ -119,13 +122,15 @@ public class IChannelManagerSqlProvider {
                 if (channelInfo.getStockNum() != null)
                     WHERE("stockNum=#{stockNum}");
                 if (channelInfo.getStockNumNow() != null)
-                    WHERE("stockNumnNow=#{stockNumnNow}");
+                    WHERE("stockNumNow=#{stockNumNow}");
                 if (channelInfo.getStockNumAdd() != null)
-                    WHERE("stockNumnAdd=#{stockNumnAdd}");
+                    WHERE("stockNumAdd=#{stockNumAdd}");
                 if (channelInfo.getChannelGroupId() != null)
                     WHERE("channelGroupId=#{channelGroupId}");
                 if (channelInfo.getMachineOperater() != null)
                     WHERE("mOperaterId=#{mOperaterId}");
+                if(channelInfo.getMachineId()!=null)
+                	WHERE("machineId=#{machineId}");
                 if (channelInfo.getOperateId() != null)
                     WHERE("operateId=#{operateId}");
             }

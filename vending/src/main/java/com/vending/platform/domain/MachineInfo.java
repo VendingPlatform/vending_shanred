@@ -3,6 +3,7 @@ package com.vending.platform.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 /**
  * T_Machine_Info映射表：售货机信息表
  * @author Miley_Ren
@@ -34,6 +35,7 @@ public class MachineInfo implements Serializable {
 	private MachineType machineType;
 	private FirmInfo operFirmInfo;
 	private FirmInfo manuFirmInfo;
+	private List<ChannelInfo> channelInfos;
 
 	public MachineInfo() {
 		super();
@@ -143,7 +145,15 @@ public class MachineInfo implements Serializable {
         this.machineType = machineType;
     }
 
-    @Override
+    public List<ChannelInfo> getChannelInfos() {
+		return channelInfos;
+	}
+
+	public void setChannelInfos(List<ChannelInfo> channelInfos) {
+		this.channelInfos = channelInfos;
+	}
+
+	@Override
     public String toString() {
         return "MachineInfo [machineId=" + machineId + ", machineName="
                 + machineName + ", machinePannel=" + machinePannel
