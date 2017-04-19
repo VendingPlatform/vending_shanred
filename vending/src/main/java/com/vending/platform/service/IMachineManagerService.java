@@ -37,12 +37,13 @@ public interface IMachineManagerService {
 	/** 查询groupId售货机组内所有售货机信息 */
 	MachineOperater getMachineOperaterById(Integer mOperaterId);
 
-	Integer getMachineOperaterBymachine(Integer machineId);
+	MachineOperater getMachineOperaterBymachine(Integer machineId);
 	
 	void updateMachineOperater(MachineOperater machineOperater);
 	
 	void inserMachineOperater(MachineOperater machineOperater);
 	
 	void removeMachineOperaterFromUser(Integer mOperaterId);
+	
 
 }

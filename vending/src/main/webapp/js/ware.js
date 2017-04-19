@@ -65,3 +65,18 @@ function updateWareInfo(wareId) {
 		}
 	});
 }
+
+function getWareToAssign(firmId) {
+	$.ajax({
+		url : "../ware/getAllWareInfos",
+		type : "post",
+		data: {firmId:firmId},
+		dataType : "json",
+		success : function(res) {
+			alert("success");
+		},
+		error : function() {
+			alert("获取数据失败");
+		}
+	});
+}

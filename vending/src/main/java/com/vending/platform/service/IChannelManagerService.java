@@ -5,6 +5,7 @@ import java.util.List;
 import com.vending.platform.domain.ChannelGroup;
 import com.vending.platform.domain.ChannelInfo;
 import com.vending.platform.domain.ChannelWareInfo;
+import com.vending.platform.domain.MachineOperater;
 
 public interface IChannelManagerService {
 
@@ -14,7 +15,13 @@ public interface IChannelManagerService {
 
     ChannelInfo getChannelInfoById(Integer channelId);
 
+    /** 根据编号和售货机查询货道 */
+    ChannelInfo getChannelInfoByNo(String channelNo, Integer machineId);
+
     List<ChannelInfo> getAllChannelInfos(ChannelInfo channelInfo);
+
+    List<ChannelWareInfo> getAllChannelInfos(Integer firmId, String machineName,
+            String channelNo, String wareName);
 
     void deleteChannelInfo(Integer channelId);
 
@@ -34,6 +41,8 @@ public interface IChannelManagerService {
             ChannelWareInfo channelWareInfo);
 
     void insetChannelWareInfo(ChannelWareInfo channelWareInfo);
+
+    void updateChannelWareInfo(ChannelWareInfo channelWareInfo);
     
-    void assignChannel(Integer machineId,Integer mOperaterId);
+    void assignChannel(Integer machineId, MachineOperater mOperater);
 }

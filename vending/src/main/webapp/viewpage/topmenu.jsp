@@ -72,8 +72,8 @@
 							<ul class="dropdown-menu">
 								<li><a href="<c:url value="/machine/machineInfo"/>">售货机管理</a></li>
 								<li><a href="<c:url value="/machine/machineGroup"/>">分组管理</a></li>
-								<li><a href="#">货道组管理</a></li>
-								<li><a href="#">货道管理</a></li>
+								<li><a href="<c:url value="/channel/getAllChannelGroups/${user.firmInfo.firmId}"/>">货道组管理</a></li>
+								<li><a href="<c:url value="/channel/getAllChannels/${user.firmInfo.firmId}"/>">货道管理</a></li>
 							</ul></li>
 						<c:if test="${flag==0||flag==1}">
 						<li><a href="<c:url value="/ware/getAllWareInfos"/>">商品管理</a></li>

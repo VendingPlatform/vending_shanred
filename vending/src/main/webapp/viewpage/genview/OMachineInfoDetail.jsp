@@ -10,8 +10,7 @@
 <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="<c:url value='/resources/js/channel.js'/>"
-	type="text/javascript"></script>
+<script src="<c:url value='/resources/js/channel.js'/>" type="text/javascript"></script>
 <title>MachineOperater Info Page</title>
 </head>
 <body>
@@ -71,7 +70,10 @@
 						<th>新增量</th>
 						<th>售货机名</th>
 						<th>售货机主板号</th>
-						<th>操作</th>
+						<th>商品</th>
+						<th>价格</th>
+						<th>是否折扣</th>
+						<th></th>
 					</tr>
 					<c:forEach items="${channelInfo}" var="ch">
 						<tr>
@@ -81,8 +83,37 @@
 							<td>${ch.stockNumAdd}</td>
 							<td>${ch.machineInfo.machineName}</td>
 							<td>${ch.machineInfo.machinePannel}</td>
+							<form class="form" id="channelWareForm">
 							<td>
-							可用放置文本框，用于更新货道商品
+								<div class="form-group">
+								<select name="wareId" class="form-control" style="width:150px;position:absolution">
+									<option value="">---请选择商品---</option>
+									<c:forEach items="${wares}" var="w">
+										<option value="${w.wareId }">${w.wareName }</option>
+									</c:forEach>
+								</select>
+							</div>
+							</td>
+							<td>
+								<div class="form-group">
+									<input type="text" name="price" class="form-control" placeholder="价格" style="width:80px;position:absolution">
+								</div>
+							</td>
+							<td>
+								<div class="form-group">
+									<select name="isDiscount" class="form-control" style="width:60px;position:absolution">
+										<option value="0">否</option>
+										<option value="1">是</option>
+									</select>
+								</div>
+							</td>
+							<input type="hidden" name="channelId" value="${ch.channelId }">
+							<input type="hidden" name="mOperaterId" value="${ch.machineOperater.mOperaterId }">
+							<input type="hidden" name="userId" value="${user.userId}">
+							</form>
+							<td>
+								<button type="button" class="btn btn-primary"
+								onclick="addChannelWare()" >保存</button>
 							</td>
 						</tr>
 					</c:forEach>
@@ -91,5 +122,22 @@
 		</div>
 	</div>
 
+<script type="text/javascript">
+function addChannelWare(){
+	$.ajax({
+		url:'../channel/addChannelWare',
+		type:"post",
+		dataType:"text",
+		data:$("#channelWareForm").serialize(),
+		success: function(res){
+			alert("");
+		},
+		error: function(){
+			alert("获取数据失败");
+		}
+	});
+}
+
+</script>
 </body>
 </html>

@@ -41,7 +41,8 @@ public class WareInfo implements Serializable {
 
     private FirmInfo firmInfo;
     private List<ChannelWareInfo> channelWareInfos;
-
+    private List<ChannelGroup> channelGroups;
+    
     public WareInfo() {
         super();
     }
@@ -156,6 +157,14 @@ public class WareInfo implements Serializable {
 
     public void setChannelWareInfos(List<ChannelWareInfo> channelWareInfos) {
         this.channelWareInfos = channelWareInfos;
+    }
+
+    public List<ChannelGroup> getChannelGroups() {
+        return channelGroups;
+    }
+
+    public void setChannelGroups(List<ChannelGroup> channelGroups) {
+        this.channelGroups = channelGroups;
     }
 
     @Override

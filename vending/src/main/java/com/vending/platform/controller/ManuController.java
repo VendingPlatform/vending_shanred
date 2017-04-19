@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.vending.platform.domain.ChannelInfo;
+import com.vending.platform.domain.ChannelWareInfo;
 import com.vending.platform.domain.FirmInfo;
 import com.vending.platform.domain.MachineInfo;
 import com.vending.platform.domain.MachineOperater;
@@ -209,8 +210,9 @@ public class ManuController extends UtilsAction {
 				operater.setMachineAssign(0);
 				operater.setOperFirmId(machineInfo.getOperFirmInfo().getFirmId());
 				machineManagerService.inserMachineOperater(operater);
-				Integer mOperaterId  = machineManagerService.getMachineOperaterBymachine(mInfo.getMachineId());
-				channelService.assignChannel(mInfo.getMachineId(), mOperaterId);
+				
+				MachineOperater mOperater  = machineManagerService.getMachineOperaterBymachine(mInfo.getMachineId());
+				channelService.assignChannel(mInfo.getMachineId(), mOperater);
 				write("分配成功");
 			}
 		}
@@ -270,7 +272,9 @@ public class ManuController extends UtilsAction {
 			write("该编号已存在");
 			return "genview/MMachineInfoDetail";
 		}
+		//插入货道
 		channelService.insertChannelInfo(channelInfo);
+		
 		write("插入成功");
 		return "genview/MMachineInfoDetail";
 	}

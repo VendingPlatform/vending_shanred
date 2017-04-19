@@ -105,7 +105,8 @@
 						</div>
 						<c:if test="${groupInfosToAsssign!=null}">
 							<div class="form-group">
-								<label for="groupId">分组:</label> <select name="groupId"
+								<label for="groupId">分组:</label>
+								<select name="groupId"
 									class="form-control">
 									<option value="">---管理员分组---</option>
 									<c:forEach items="${groupInfosToAsssign}" var="g">
@@ -200,8 +201,8 @@
 						</div>
 						<c:if test="${groupInfosToAsssign!=null }">
 							<div class="form-group">
-								<label for="groupId">分组:</label> <select name="groupId"
-									class="form-control">
+								<label for="groupId">分组:</label> 
+								<select name="groupId"class="form-control">
 									<option value="">---管理员分组---</option>
 									<c:forEach items="${groupInfosToAsssign}" var="g">
 										<option value="${g.groupId }">${g.groupName }</option>

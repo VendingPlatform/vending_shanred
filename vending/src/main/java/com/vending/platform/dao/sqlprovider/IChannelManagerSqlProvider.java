@@ -9,16 +9,42 @@ import com.vending.platform.domain.ChannelWareInfo;
 
 public class IChannelManagerSqlProvider {
 
+    public String getAllChannelInfosBySearch(Integer firmId, String machineName,
+            String channelNo, String wareName) {
+        String SQL = new SQL() {
+            {
+                SELECT(" b.* FROM (channelinfo a LEFT JOIN  machineinfo c  ON a.machineId=c.machineId)LEFT JOIN (channelwareinfo b LEFT JOIN wareinfo d ON b.wareId=d.wareId) ON a.channelId=b.channelId");
+                if (firmId != null)
+                    WHERE("a.firmId="+firmId);
+                if (StringUtils.isNotBlank(machineName))
+                    WHERE("c.machineName='"+machineName+"'");
+                if (StringUtils.isNotBlank(channelNo))
+                    WHERE("a.channelNo='"+channelNo+"'");
+                if (StringUtils.isNotBlank(wareName))
+                    WHERE("d.wareName='"+wareName+"'");
+            }
+        }.toString();
+        return SQL;
+    }
+
     public String insertChannelGroup(ChannelGroup channelGroup) {
         return new SQL() {
             {
                 INSERT_INTO("channelgroup");
                 if (StringUtils.isNotBlank(channelGroup.getChannelGroupName()))
                     VALUES("channelGroupName", "#{channelGroupName}");
-                if (channelGroup.getGroupId() != null)
-                    VALUES("groupId", "#{groupId}");
                 if (channelGroup.getOperateId() != null)
                     VALUES("operateId", "#{operateId}");
+                if(channelGroup.getFirmId()!=null)
+                    VALUES("firmId","{firmId}");
+                
+                if(channelGroup.getWareId()!=null)
+                    VALUES("wareId", "#{wareId}");
+                if(channelGroup.getPrice()!=null)
+                    VALUES("price", "#{price}");
+                if(channelGroup.getIsDiscount()!=null)
+                    VALUES("isDiscount", "#{isDiscount}");
+                
                 VALUES("operateDate", "(SELECT NOW())");
             }
         }.toString();
@@ -30,10 +56,19 @@ public class IChannelManagerSqlProvider {
                 UPDATE("channelgroup");
                 if (StringUtils.isNotBlank(channelGroup.getChannelGroupName()))
                     SET("channelGroupName=#{channelGroupName}");
-                if (channelGroup.getGroupId() != null)
-                    SET("groupId=#{groupId}");
                 if (channelGroup.getOperateId() != null)
                     SET("operateId=#{operateId}");
+                if(channelGroup.getFirmId()!=null)
+                    SET("firmId=#{firmId}");
+                
+                if(channelGroup.getWareId()!=null)
+                    SET("wareId=#{wareId}");
+                if(channelGroup.getPrice()!=null)
+                    SET("price=#{price}");
+                if(channelGroup.getIsDiscount()!=null)
+                    SET("isDiscount=#{isDiscount}");
+                
+                
                 WHERE("channelGroupId=#{channelGroupId}");
             }
         }.toString();
@@ -45,10 +80,18 @@ public class IChannelManagerSqlProvider {
                 SELECT("*").FROM("channelgroup");
                 if (StringUtils.isNotBlank(channelGroup.getChannelGroupName()))
                     WHERE("channelGroupName=#{channelGroupName}");
-                if (channelGroup.getGroupId() != null)
-                    WHERE("groupId=#{groupId}");
+                if(channelGroup.getFirmId()!=null)
+                    WHERE("firmId=#{firmId}");
                 if (channelGroup.getOperateId() != null)
                     WHERE("operateId=#{operateId}");
+             
+                if(channelGroup.getWareId()!=null)
+                    WHERE("wareId=#{wareId}");
+                if(channelGroup.getPrice()!=null)
+                    WHERE("price=#{price}");
+                if(channelGroup.getIsDiscount()!=null)
+                    WHERE("isDiscount=#{isDiscount}");
+                
             }
         }.toString();
     }
@@ -77,12 +120,14 @@ public class IChannelManagerSqlProvider {
                     VALUES("channelGroupId", "#{channelGroupId}");
                 if (channelInfo.getmOperaterId() != null)
                     VALUES("mOperaterId", "#{mOperaterId}");
-                if(channelInfo.getMachineId()!=null)
-                	VALUES("machineId", "#{machineId}");
+                if (channelInfo.getMachineId() != null)
+                    VALUES("machineId", "#{machineId}");
+                if (channelInfo.getFirmId() != null)
+                    VALUES("firmId", "#{firmId}");
                 if (channelInfo.getOperateId() != null)
                     VALUES("operateId", "#{operateId}");
                 VALUES("operateDate", "(SELECT NOW())");
-               
+
             }
         }.toString();
     }
@@ -103,10 +148,12 @@ public class IChannelManagerSqlProvider {
                     SET("channelGroupId=#{channelGroupId}");
                 if (channelInfo.getmOperaterId() != null)
                     SET("mOperaterId=#{mOperaterId}");
-                if(channelInfo.getMachineId()!=null)
-                	SET("machineId=#{machineId}");
+                if (channelInfo.getMachineId() != null)
+                    SET("machineId=#{machineId}");
                 if (channelInfo.getOperateId() != null)
                     SET("operateId=#{operateId}");
+                if (channelInfo.getFirmId() != null)
+                    SET("firmId=#{firmId}");
                 SET("operateDate=(SELECT NOW())");
                 WHERE("channelId=#{channelId}");
             }
@@ -129,8 +176,10 @@ public class IChannelManagerSqlProvider {
                     WHERE("channelGroupId=#{channelGroupId}");
                 if (channelInfo.getmOperaterId() != null)
                     WHERE("mOperaterId=#{mOperaterId}");
-                if(channelInfo.getMachineId()!=null)
-                	WHERE("machineId=#{machineId}");
+                if (channelInfo.getMachineId() != null)
+                    WHERE("machineId=#{machineId}");
+                if (channelInfo.getFirmId() != null)
+                    WHERE("firmId=#{firmId}");
                 if (channelInfo.getOperateId() != null)
                     WHERE("operateId=#{operateId}");
             }
@@ -148,17 +197,20 @@ public class IChannelManagerSqlProvider {
     public String getAllChannelWareInfos(ChannelWareInfo channelWareInfo) {
         return new SQL() {
             {
-                SELECT("*").FROM("channelwareinfo");
+                //SELECT a.* FROM channelwareinfo a LEFT JOIN channelinfo b ON a.channelId=b.channelId WHERE b.firmId=22
+                SELECT("a.*").FROM("channelwareinfo a LEFT JOIN channelinfo b ON a.channelId=b.channelId");
                 if (channelWareInfo.getChannelId() != null)
-                    WHERE("channelId=#{channelId}");
+                    WHERE("a.channelId=#{channelId}");
                 if (channelWareInfo.getWareId() != null)
-                    WHERE("wareId=#{wareId}");
+                    WHERE("a.wareId=#{wareId}");
                 if (channelWareInfo.getPrice() != null)
-                    WHERE("price=#{price}");
+                    WHERE("a.price=#{price}");
                 if (channelWareInfo.getIsDiscount() != null)
-                    WHERE("isDiscount=#{isDiscount}");
+                    WHERE("a.isDiscount=#{isDiscount}");
                 if (channelWareInfo.getmOperaterId() != null)
-                    WHERE("mOperaterId=#{mOperaterId}");
+                    WHERE("a.mOperaterId=#{mOperaterId}");
+                if(channelWareInfo.getChannelInfo().getFirmId()!=null)
+                    WHERE("b.firmId=#{channelInfo.firmId}");
             }
         }.toString();
     }
@@ -168,20 +220,38 @@ public class IChannelManagerSqlProvider {
             {
                 INSERT_INTO("channelwareinfo");
                 if (channelWareInfo.getChannelId() != null)
-                    VALUES("channelId","#{channelId}");
+                    VALUES("channelId", "#{channelId}");
                 if (channelWareInfo.getWareId() != null)
-                    VALUES("wareId","#{wareId}");
+                    VALUES("wareId", "#{wareId}");
                 if (channelWareInfo.getPrice() != null)
-                    VALUES("price","#{price}");
+                    VALUES("price", "#{price}");
                 if (channelWareInfo.getIsDiscount() != null)
-                    VALUES("isDiscount","#{isDiscount}");
+                    VALUES("isDiscount", "#{isDiscount}");
                 if (channelWareInfo.getmOperaterId() != null)
-                    VALUES("mOperaterId","#{mOperaterId}");
+                    VALUES("mOperaterId", "#{mOperaterId}");
             }
         }.toString();
     }
     
-    public String getAllChannelWareInfoById(Integer channelId){
+    public String updateChannelWareInfo(ChannelWareInfo channelWareInfo){
+        return new SQL(){{
+            UPDATE("channelwareinfo");
+            if (channelWareInfo.getChannelId() != null)
+                SET("channelId=#{channelId}");
+            if (channelWareInfo.getWareId() != null)
+                SET("wareId=#{wareId}");
+            if (channelWareInfo.getPrice() != null)
+                SET("price=#{price}");
+            if (channelWareInfo.getIsDiscount() != null)
+                SET("isDiscount=#{isDiscount}");
+            if (channelWareInfo.getmOperaterId() != null)
+                SET("mOperaterId=#{mOperaterId}");
+            WHERE("channelId=#{channelId}");
+        }}.toString();
+    }
+    
+
+    public String getAllChannelWareInfoById(Integer channelId) {
         return "SELECT * FROM channelwareinfo WHERE channelId=#{channelId}";
     }
 }

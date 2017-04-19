@@ -16,14 +16,16 @@ public class ChannelGroup implements Serializable {
     private Integer channelGroupId;
     /** 货道组名称 */
     private String channelGroupName;
-    /** 所属售货机组 */
-    private Integer groupId;
+    private Integer firmId;
+    private Integer wareId;
+    private Double price;
+    private Integer isDiscount;
     /** 操作者 */
     private Integer operateId;
     /** 操作时间 */
     private Date operateDate;
 
-    private GroupInfo groupInfo;
+    private WareInfo wareInfo;
 
     public ChannelGroup() {
         super();
@@ -45,14 +47,6 @@ public class ChannelGroup implements Serializable {
         this.channelGroupName = channelGroupName;
     }
 
-    public Integer getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(Integer groupId) {
-        this.groupId = groupId;
-    }
-
     public Integer getOperateId() {
         return operateId;
     }
@@ -69,20 +63,54 @@ public class ChannelGroup implements Serializable {
         this.operateDate = operateDate;
     }
 
-    public GroupInfo getGroupInfo() {
-        return groupInfo;
+
+    public Integer getFirmId() {
+        return firmId;
     }
 
-    public void setGroupInfo(GroupInfo groupInfo) {
-        this.groupInfo = groupInfo;
+    public void setFirmId(Integer firmId) {
+        this.firmId = firmId;
+    }
+
+    public Integer getWareId() {
+        return wareId;
+    }
+
+    public void setWareId(Integer wareId) {
+        this.wareId = wareId;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Integer getIsDiscount() {
+        return isDiscount;
+    }
+
+    public void setIsDiscount(Integer isDiscount) {
+        this.isDiscount = isDiscount;
+    }
+
+    public WareInfo getWareInfo() {
+        return wareInfo;
+    }
+
+    public void setWareInfo(WareInfo wareInfo) {
+        this.wareInfo = wareInfo;
     }
 
     @Override
     public String toString() {
         return "ChannelGroup [channelGroupId=" + channelGroupId
-                + ", channelGroupName=" + channelGroupName + ", groupId="
-                + groupId + ", operateId=" + operateId + ", operateDate="
-                + operateDate + "]";
+                + ", channelGroupName=" + channelGroupName + ", firmId="
+                + firmId + ", wareId=" + wareId + ", price=" + price
+                + ", isDiscount=" + isDiscount + ", operateId=" + operateId
+                + ", operateDate=" + operateDate + "]";
     }
 
 }

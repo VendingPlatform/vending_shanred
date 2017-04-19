@@ -134,12 +134,12 @@ public class MachineManagerServiceImpl implements IMachineManagerService {
 	}
 
 	@Override
-	public Integer getMachineOperaterBymachine(Integer machineId) {
+	public MachineOperater getMachineOperaterBymachine(Integer machineId) {
 		MachineOperater machineOperater = new MachineOperater();
 		machineOperater.setMachineId(machineId);
 		List<MachineOperater> machineOperaters = machineDao.getAllMachineOperaters(machineOperater);
 		if (machineOperaters.size() >0) {
-			return machineOperaters.get(0).getmOperaterId();
+			return machineOperaters.get(0);
 		} else
 			return null;
 	}

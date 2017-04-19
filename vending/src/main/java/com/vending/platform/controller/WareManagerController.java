@@ -24,12 +24,15 @@ public class WareManagerController extends UtilsAction {
     private IWareManagerService wareService;
 
     @RequestMapping(value = "/getAllWareInfos")
-    public String getAllWareInfos(@ModelAttribute("user") UserInfo userInfo,
-            ModelMap map) {
-        WareInfo ware = new WareInfo();
+    public String getAllWareInfos(@ModelAttribute("user") UserInfo userInfo, WareInfo ware, ModelMap map) {
         ware.setFirmId(userInfo.getFirmInfo().getFirmId());
         List<WareInfo> wareInfos = wareService.getAllWareInfos(ware);
         map.addAttribute("allWareInfos", wareInfos);
+        try {
+            writeJson(wareInfos);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return "genview/WareInfo";
     }
 
@@ -68,4 +71,6 @@ public class WareManagerController extends UtilsAction {
         wareService.updateWareInfo(wa);
          return "genview/WareInfo";
     }
+    
+    
 }

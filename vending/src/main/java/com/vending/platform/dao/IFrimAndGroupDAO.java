@@ -41,6 +41,7 @@ public interface IFrimAndGroupDAO {
 	/** 按Id查找公司 */
 	@SelectProvider(type = IFirmAndGroupSqlProvider.class, method = "getFirmInfoById")
 	@Results({
+	        @Result(property = "channelGroups", column = "channelGroupId", many = @Many(select = "com.vending.platform.dao.IChannelManagerDAO.getChannelGroupById")),
 			@Result(property = "machineType", column = "tModelId", many = @Many(select = "com.vending.platform.dao.IMachineDAO.getMachineTypeById")),
 			@Result(property = "operMgrs", column= "operMgrId", many= @Many(select = "com.vending.platform.dao.IMachineDAO.getAllOperMgrs")),
 			@Result(property = "operMgr", column= "operMgrId", many= @Many(select = "com.vending.platform.dao.IMachineDAO.getOperMgrById")),

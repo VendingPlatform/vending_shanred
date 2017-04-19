@@ -9,6 +9,7 @@ import com.vending.platform.dao.IChannelManagerDAO;
 import com.vending.platform.domain.ChannelGroup;
 import com.vending.platform.domain.ChannelInfo;
 import com.vending.platform.domain.ChannelWareInfo;
+import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.service.IChannelManagerService;
 
 @Service
@@ -84,15 +85,41 @@ public class ChannelManagerServiceImpl implements IChannelManagerService {
     }
 
     @Override
-    public void assignChannel(Integer machineId,Integer mOperaterId) {
+    public void assignChannel(Integer machineId,MachineOperater mOperater) {
         ChannelInfo channelInfo = new ChannelInfo();
         channelInfo.setMachineId(machineId);
         List<ChannelInfo> channelInfos = channelManagerDao.getAllChannelInfos(channelInfo);
+        ChannelWareInfo channelWareInfo = new ChannelWareInfo();
         for (ChannelInfo channel : channelInfos) {
-            channelInfo.setmOperaterId(mOperaterId);
+            channelInfo.setmOperaterId(mOperater.getmOperaterId());
+            channelInfo.setFirmId(mOperater.getOperFirmId());
             channelInfo.setChannelId(channel.getChannelId());
             channelManagerDao.updateChannelInfo(channelInfo);
+            
+            channelWareInfo.setChannelId(channel.getChannelId());
+            channelWareInfo.setmOperaterId(mOperater.getmOperaterId());
+            channelManagerDao.insertChannelWareInfo(channelWareInfo);
         }
+    }
+
+    @Override
+    public List<ChannelWareInfo> getAllChannelInfos(Integer firmId,
+            String machineName, String channelNo, String wareName) {
+        return  channelManagerDao.getAllChannelInfosBySearch(firmId, machineName, channelNo, wareName);
+    }
+
+    @Override
+    public ChannelInfo getChannelInfoByNo(String channelNo, Integer machineId) {
+        ChannelInfo channelInfo = new ChannelInfo();
+        channelInfo.setChannelNo(channelNo);
+        channelInfo.setMachineId(machineId);
+        ChannelInfo cInfo= channelManagerDao.getAllChannelInfos(channelInfo).get(0);
+        return cInfo;
+    }
+
+    @Override
+    public void updateChannelWareInfo(ChannelWareInfo channelWareInfo) {
+        channelManagerDao.updateChannelWareInfo(channelWareInfo);
     }
 }
  

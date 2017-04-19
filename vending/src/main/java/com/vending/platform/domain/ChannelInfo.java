@@ -27,6 +27,7 @@ public class ChannelInfo implements Serializable {
     /** 所属售货机 */
     private Integer mOperaterId;
     private Integer machineId;
+    private Integer firmId;
     /** 操作者 */
     private Integer operateId;
     /** 操作时间 */
@@ -135,7 +136,15 @@ public class ChannelInfo implements Serializable {
 		this.machineInfo = machineInfo;
 	}
 
-	@Override
+	public Integer getFirmId() {
+        return firmId;
+    }
+
+    public void setFirmId(Integer firmId) {
+        this.firmId = firmId;
+    }
+
+    @Override
     public String toString() {
         return "ChannelInfo [channelId=" + channelId + ", channelNo="
                 + channelNo + ", stockNum=" + stockNum + ", stockNumNow="
