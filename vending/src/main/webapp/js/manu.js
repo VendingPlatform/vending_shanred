@@ -157,7 +157,7 @@ function getTypeById(tModelId) {
 	});
 }
 
-function addChannelInfo() {
+function addChannelInfo(){
 	$.ajax({
 		url : "../manu/addChannelInfo",
 		type : "post",
@@ -172,6 +172,7 @@ function addChannelInfo() {
 		}
 	});
 }
+
 function deleteChan(channelId) {
 	if (confirm("确定删除该货道，及货道信息？")) {
 		$.ajax({

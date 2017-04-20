@@ -10,6 +10,7 @@
 <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="<c:url value='/resources/js/ware.js'/>" type="text/javascript"></script>
+<script src="<c:url value='/resources/js/channel.js'/>" type="text/javascript"></script>
 <title>machineInfoUpdateInfo Info Page</title>
 </head>
 <body>
@@ -61,12 +62,17 @@
 					<h4 class="modal-title" id="myModalLabel">添加货道组</h4>
 				</div>
 				<div class="modal-body" style="width: 80%; padding-left: 30px">
-					<form class="form">
+					<form class="form" id="addChannelGroupForm">
 					<input type="hidden" name="firmId" value="${user.firmInfo.firmId}">
 					<input type="hidden" name="operateId" value="${user.userId}">
 						<div class="form-group">
 							<label for="channelGroupName">货道组名:</label> 
 							<input type="text" class="form-control" name="channelGroupName" placeholder="输入货道组名" required>
+						</div>
+						<div class="form-group">
+							<label for="wareId">商品</label>
+							<select name="wareId" class="form-control" id="wareIdInput">
+							</select>
 						</div>
 						<div class="form-group">
 							<label for="price">价格:</label> 
@@ -83,7 +89,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary"
+					<button type="button" class="btn btn-primary" onclick="addChannelGroup()"
 						 data-dismiss="modal">保存</button>
 				</div>
 			</div>

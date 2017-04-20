@@ -52,4 +52,11 @@ public class ChannelController extends UtilsAction {
         modelMap.addAttribute("channelGroups", channelGroups);
         return "genview/ChannelInfoGroups";
     }
+    
+    @Description("添加货道组信息")
+    @RequestMapping(value = "/addChannelGroup")
+    public String addChannelGroup(ChannelGroup channelGroup){
+    	channelService.inserChannelGroup(channelGroup);
+    	return "genview/ChannelInfoGroups";
+    }
 }

@@ -5,7 +5,7 @@ function addChannelWare(){
 		dataType:"text",
 		data:$("#channelWareForm").serialize(),
 		success: function(res){
-			alert("");
+			alert("添加成功");
 		},
 		error: function(){
 			alert("获取数据失败");
@@ -28,3 +28,19 @@ function getChannelInfoToUpdate(channenId){
 	});
 }
 
+
+function addChannelGroup(){
+	$.ajax({
+		url : "../../channel/addChannelGroup",
+		type : "post",
+		dataType : "text",
+		data : $("#addChannelGroupForm").serialize(),
+		success : function(res){
+			alert("添加货道组成功");
+			location.reload();
+		},
+		error: function(){
+			alert("获取数据失败");
+		}
+	});
+}

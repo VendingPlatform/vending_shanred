@@ -68,12 +68,16 @@ function updateWareInfo(wareId) {
 
 function getWareToAssign(firmId) {
 	$.ajax({
-		url : "../ware/getAllWareInfos",
-		type : "post",
-		data: {firmId:firmId},
+		url : "../../ware/getAllWareInfosByFirm/"+firmId,
+		type : "get",
 		dataType : "json",
 		success : function(res) {
-			alert("success");
+			$("#wareIdInput").empty();
+			$("#wareIdInput").append("<option >---选择商品---</option>");
+			for(i in res){
+				var html = "<option value="+res[i].wareId+">"+res[i].wareName+"</option>";
+				$("#wareIdInput").append(html);
+			}
 		},
 		error : function() {
 			alert("获取数据失败");

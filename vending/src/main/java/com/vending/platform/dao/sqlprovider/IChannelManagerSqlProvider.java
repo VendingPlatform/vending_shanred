@@ -36,7 +36,7 @@ public class IChannelManagerSqlProvider {
                 if (channelGroup.getOperateId() != null)
                     VALUES("operateId", "#{operateId}");
                 if(channelGroup.getFirmId()!=null)
-                    VALUES("firmId","{firmId}");
+                    VALUES("firmId","#{firmId}");
                 
                 if(channelGroup.getWareId()!=null)
                     VALUES("wareId", "#{wareId}");
