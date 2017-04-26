@@ -51,36 +51,23 @@ DROP TABLE IF EXISTS `channelgroup`;
 CREATE TABLE `channelgroup` (
   `channelGroupId` int(11) NOT NULL AUTO_INCREMENT COMMENT '货道组id',
   `channelGroupName` varchar(50) NOT NULL DEFAULT 'null' COMMENT '货道组名称',
-  `stockNum` int(11) DEFAULT NULL COMMENT '存货量',
-  `groupId` int(11) DEFAULT NULL COMMENT '所属售货机组',
+  `firmId` int(11) DEFAULT NULL COMMENT '所属公司',
+  `wareId` int(11) DEFAULT NULL COMMENT '商品Id',
+  `price` double DEFAULT NULL COMMENT '价格',
+  `isDiscount` int(11) DEFAULT '0' COMMENT '折扣',
   `operateId` int(11) DEFAULT NULL COMMENT '操作人',
   `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`channelGroupId`),
-  KEY `groupId` (`groupId`),
-  CONSTRAINT `t_channel_group_ibfk_1` FOREIGN KEY (`groupId`) REFERENCES `groupinfo` (`groupId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  KEY `groupId` (`firmId`),
+  KEY `wareId` (`wareId`),
+  CONSTRAINT `channelgroup_ibfk_1` FOREIGN KEY (`wareId`) REFERENCES `wareinfo` (`wareId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `channelgroup` */
 
-insert  into `channelgroup`(`channelGroupId`,`channelGroupName`,`stockNum`,`groupId`,`operateId`,`operateDate`) values 
-(1,'testChannelGroup',11,32,NULL,'2017-04-16 17:03:12');
-
-/*Table structure for table `channelgroupwareinfo` */
-
-DROP TABLE IF EXISTS `channelgroupwareinfo`;
-
-CREATE TABLE `channelgroupwareinfo` (
-  `channelGroupId` int(11) NOT NULL COMMENT '货道组Id',
-  `wareId` int(11) NOT NULL COMMENT '商品Id',
-  `price` double DEFAULT NULL COMMENT '价格',
-  `isDiscount` int(11) DEFAULT NULL COMMENT '是否折扣',
-  PRIMARY KEY (`channelGroupId`),
-  KEY `wareId` (`wareId`),
-  CONSTRAINT `channelgroupwareinfo_ibfk_1` FOREIGN KEY (`channelGroupId`) REFERENCES `channelgroup` (`channelGroupId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `channelgroupwareinfo_ibfk_2` FOREIGN KEY (`wareId`) REFERENCES `wareinfo` (`wareId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `channelgroupwareinfo` */
+insert  into `channelgroup`(`channelGroupId`,`channelGroupName`,`firmId`,`wareId`,`price`,`isDiscount`,`operateId`,`operateDate`) values 
+(1,'testChannelGroup',22,1,NULL,0,NULL,'2017-04-16 17:03:12'),
+(2,'null',NULL,NULL,NULL,0,NULL,NULL);
 
 /*Table structure for table `channelinfo` */
 
@@ -90,24 +77,34 @@ CREATE TABLE `channelinfo` (
   `channelId` int(11) NOT NULL AUTO_INCREMENT COMMENT '货道id',
   `channelNo` varchar(50) NOT NULL COMMENT '货道编号',
   `stockNum` int(11) DEFAULT NULL COMMENT '额定存货量',
-  `stockNumnNow` int(11) DEFAULT NULL COMMENT '当前存货量',
-  `stockNumnAdd` int(11) DEFAULT NULL COMMENT '新增存货量',
+  `stockNumNow` int(11) DEFAULT NULL COMMENT '当前存货量',
+  `stockNumAdd` int(11) DEFAULT NULL COMMENT '新增存货量',
   `channelGroupId` int(11) DEFAULT NULL COMMENT '所属货道组id',
   `mOperaterId` int(11) DEFAULT NULL COMMENT '所属售货机id',
+  `machineId` int(11) DEFAULT NULL COMMENT '所属售货机',
+  `firmId` int(11) DEFAULT NULL COMMENT '公司Id',
   `operateId` int(11) DEFAULT NULL COMMENT '操作者',
   `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`channelId`),
   KEY `channelGroupId` (`channelGroupId`),
   KEY `machineId` (`mOperaterId`),
+  KEY `machineId_2` (`machineId`),
   CONSTRAINT `channelinfo_ibfk_1` FOREIGN KEY (`mOperaterId`) REFERENCES `machineoperater` (`mOperaterId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `channelinfo_ibfk_2` FOREIGN KEY (`channelGroupId`) REFERENCES `channelgroup` (`channelGroupId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+  CONSTRAINT `channelinfo_ibfk_2` FOREIGN KEY (`channelGroupId`) REFERENCES `channelgroup` (`channelGroupId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `channelinfo_ibfk_3` FOREIGN KEY (`machineId`) REFERENCES `machineinfo` (`machineId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
 
 /*Data for the table `channelinfo` */
 
-insert  into `channelinfo`(`channelId`,`channelNo`,`stockNum`,`stockNumnNow`,`stockNumnAdd`,`channelGroupId`,`mOperaterId`,`operateId`,`operateDate`) values 
-(1,'001',11,0,0,1,9,NULL,'2017-04-16 17:33:15'),
-(11,'002',11,NULL,NULL,NULL,9,NULL,'2017-04-16 21:48:59');
+insert  into `channelinfo`(`channelId`,`channelNo`,`stockNum`,`stockNumNow`,`stockNumAdd`,`channelGroupId`,`mOperaterId`,`machineId`,`firmId`,`operateId`,`operateDate`) values 
+(49,'001',11,0,0,NULL,26,30,22,3,'2017-04-19 19:14:14'),
+(50,'002',11,0,0,NULL,26,30,22,3,'2017-04-19 19:14:16'),
+(51,'003',11,0,0,NULL,26,30,22,3,'2017-04-19 19:14:19'),
+(52,'001',11,0,0,NULL,NULL,31,NULL,3,'2017-04-19 19:13:17'),
+(53,'002',11,0,0,NULL,NULL,31,NULL,3,'2017-04-19 19:13:25'),
+(54,'003',11,0,0,NULL,NULL,31,NULL,3,'2017-04-19 19:13:34'),
+(55,'001',11,0,0,NULL,NULL,32,NULL,3,'2017-04-19 19:13:43'),
+(56,'002',11,0,0,NULL,NULL,32,NULL,3,'2017-04-19 19:13:52');
 
 /*Table structure for table `channelinfohistory` */
 
@@ -128,9 +125,12 @@ CREATE TABLE `channelinfohistory` (
   PRIMARY KEY (`channelHistory`),
   KEY `channelGroupId` (`channelGroupName`),
   KEY `machineId` (`machineName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*Data for the table `channelinfohistory` */
+
+insert  into `channelinfohistory`(`channelHistory`,`machineName`,`channelNo`,`channelGroupName`,`wareName`,`price`,`stockNum`,`stockNumnNow`,`stockNumnAdd`,`operateId`,`operateDate`) values 
+(1,NULL,'',NULL,NULL,NULL,0,NULL,NULL,NULL,'0000-00-00 00:00:00');
 
 /*Table structure for table `channelwareinfo` */
 
@@ -138,7 +138,7 @@ DROP TABLE IF EXISTS `channelwareinfo`;
 
 CREATE TABLE `channelwareinfo` (
   `channelId` int(11) NOT NULL COMMENT '货道Id',
-  `wareId` int(11) NOT NULL COMMENT '商品Id',
+  `wareId` int(11) DEFAULT NULL COMMENT '商品Id',
   `price` double DEFAULT NULL COMMENT '商品售卖价格',
   `isDiscount` int(11) NOT NULL DEFAULT '0' COMMENT '是否特价',
   `mOperaterId` int(11) NOT NULL COMMENT '售货机',
@@ -151,8 +151,9 @@ CREATE TABLE `channelwareinfo` (
 /*Data for the table `channelwareinfo` */
 
 insert  into `channelwareinfo`(`channelId`,`wareId`,`price`,`isDiscount`,`mOperaterId`) values 
-(1,1,NULL,0,9),
-(11,2,2.5,0,9);
+(49,NULL,NULL,0,26),
+(50,NULL,NULL,0,26),
+(51,NULL,NULL,0,26);
 
 /*Table structure for table `firminfo` */
 
@@ -176,10 +177,9 @@ insert  into `firminfo`(`firmId`,`firmNo`,`firmName`,`firmDesc`,`firmType`,`firm
 (1,'000','system','system',0,1,1,'2017-02-27 12:13:38'),
 (3,'002','厂商1','厂商1的描述信息',2,1,1,'2017-04-10 15:43:11'),
 (4,'003','运营商1','运营商1描述',1,1,1,'2017-04-09 18:27:16'),
-(21,'004','厂商2','004',2,1,1,'2017-04-09 18:27:47'),
 (22,'005','运营商2','运营商描述',1,1,1,'2017-04-09 18:27:24'),
 (23,'006','运营商3','test describe',1,1,1,'2017-04-09 18:27:32'),
-(26,'007','test','test',1,1,1,'2017-04-10 15:43:28');
+(26,'007','test','test1',1,1,3,'2017-04-17 16:16:50');
 
 /*Table structure for table `groupinfo` */
 
@@ -217,7 +217,6 @@ CREATE TABLE `machineinfo` (
   `manuFirmId` int(11) NOT NULL COMMENT '厂商ID',
   `machinePrice` decimal(10,0) DEFAULT NULL COMMENT '售货机价格',
   `tModelId` int(11) DEFAULT NULL COMMENT '售货机类型',
-  `tModelName` varchar(20) DEFAULT NULL COMMENT '售货机类型/型号',
   `manuMachineStatus` int(11) NOT NULL DEFAULT '0' COMMENT '0:未售出，1：已售出，2：回收',
   `operFirmId` int(11) DEFAULT NULL COMMENT '卖给某运营商ID',
   `operateId` int(11) DEFAULT NULL COMMENT '操作者',
@@ -229,17 +228,14 @@ CREATE TABLE `machineinfo` (
   CONSTRAINT `machineinfo_ibfk_1` FOREIGN KEY (`tModelId`) REFERENCES `machinetype` (`tModelId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `t_machine_info_ibfk_1` FOREIGN KEY (`manuFirmId`) REFERENCES `firminfo` (`firmId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `t_machine_info_ibfk_2` FOREIGN KEY (`operFirmId`) REFERENCES `firminfo` (`firmId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 /*Data for the table `machineinfo` */
 
-insert  into `machineinfo`(`machineId`,`machineName`,`machinePannel`,`manuFirmId`,`machinePrice`,`tModelId`,`tModelName`,`manuMachineStatus`,`operFirmId`,`operateId`,`operateDate`) values 
-(9,'售货机1','售货机1',3,20,1,'类型1',1,22,3,'2017-04-09 18:29:07'),
-(10,'售货机2','售货机2',3,20,1,'类型1',1,22,3,'2017-04-09 18:29:21'),
-(11,'售货机3','售货机3',3,30,1,'类型1',1,22,3,'2017-04-09 18:31:13'),
-(12,'售货机4','售货机4',3,20,1,'类型1',1,22,3,'2017-04-09 18:31:56'),
-(13,'售货机5','售货机5',3,20,1,'类型2',1,22,3,'2017-04-09 18:33:03'),
-(16,'tes','sdf',3,23,2,'类型2',1,22,3,'2017-04-10 11:31:05');
+insert  into `machineinfo`(`machineId`,`machineName`,`machinePannel`,`manuFirmId`,`machinePrice`,`tModelId`,`manuMachineStatus`,`operFirmId`,`operateId`,`operateDate`) values 
+(30,'售货机1','售货机1',3,60,1,1,22,3,'2017-04-19 19:12:03'),
+(31,'售货机2','售货机2',3,20,1,0,NULL,3,'2017-04-19 19:12:28'),
+(32,'售货机3','售货机3',3,20,2,0,NULL,3,'2017-04-19 19:12:45');
 
 /*Table structure for table `machineoperater` */
 
@@ -262,17 +258,12 @@ CREATE TABLE `machineoperater` (
   CONSTRAINT `machineoperater_ibfk_1` FOREIGN KEY (`machineId`) REFERENCES `machineinfo` (`machineId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `MachineOperater_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `userinfo` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `MachineOperater_ibfk_3` FOREIGN KEY (`groupId`) REFERENCES `groupinfo` (`groupId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 /*Data for the table `machineoperater` */
 
 insert  into `machineoperater`(`mOperaterId`,`machineId`,`machineAssign`,`userId`,`machineAddress`,`groupId`,`operFirmId`,`operateId`,`operateDate`) values 
-(9,9,1,10,NULL,32,22,6,'2017-04-15 17:09:18'),
-(10,10,1,6,NULL,32,22,6,'2017-04-15 18:58:52'),
-(11,11,0,NULL,NULL,NULL,22,6,'2017-04-15 17:09:26'),
-(12,12,0,NULL,NULL,33,22,6,'2017-04-15 17:36:31'),
-(13,13,0,NULL,NULL,NULL,22,NULL,'2017-04-15 17:36:28'),
-(14,16,1,6,NULL,32,22,6,'2017-04-15 18:58:54');
+(26,30,0,NULL,NULL,NULL,22,NULL,'2017-04-19 19:14:12');
 
 /*Table structure for table `machinetype` */
 
@@ -406,7 +397,6 @@ CREATE TABLE `userinfo` (
 insert  into `userinfo`(`userId`,`userNo`,`userName`,`password`,`mobilePhone`,`email`,`groupManager`,`groupId`,`status`,`firmId`,`parentUserId`,`operateDate`,`operateId`) values 
 (1,'000','system','111',NULL,NULL,1,1,1,1,1,'2017-02-27 12:58:14',1),
 (3,'00201','system001','111',NULL,NULL,1,NULL,1,3,1,'2017-02-27 17:04:19',1),
-(5,'00401','system004','system004',NULL,NULL,1,NULL,1,21,1,'2017-03-30 23:18:11',1),
 (6,'00501','sys5','111',NULL,NULL,1,NULL,1,22,1,'2017-04-07 14:09:59',NULL),
 (7,'00601','system00601','system00601',NULL,NULL,1,NULL,1,23,1,'2017-04-07 14:19:12',NULL),
 (10,'00502','sys6','111',NULL,NULL,NULL,NULL,1,22,NULL,'2017-04-09 22:59:35',6),
@@ -433,7 +423,6 @@ CREATE TABLE `userrole` (
 insert  into `userrole`(`userRoleId`,`userId`,`roleId`) values 
 (1,1,1),
 (3,3,3),
-(5,5,3),
 (8,7,2),
 (21,12,2),
 (27,10,9),

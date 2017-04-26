@@ -17,15 +17,17 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.vending.platform.domain.AuthorityInfo;
-import com.vending.platform.domain.ChannelWareInfo;
+import com.vending.platform.domain.ChannelInfo;
 import com.vending.platform.domain.GroupInfo;
 import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.MachineType;
 import com.vending.platform.domain.UserInfo;
+import com.vending.platform.domain.WareInfo;
 import com.vending.platform.service.IChannelManagerService;
 import com.vending.platform.service.IFirmAndGroupService;
 import com.vending.platform.service.IMachineManagerService;
 import com.vending.platform.service.IUserManagerService;
+import com.vending.platform.service.IWareManagerService;
 
 @Controller
 @SessionAttributes({ "user", "machineOperaterInfo", "allMachineTypes", "machineGroupInfos", "userAuth" })
@@ -41,6 +43,8 @@ public class MachineManagerController extends UtilsAction {
 	private IUserManagerService userManagerService;
 	@Autowired
 	private IChannelManagerService channelService;
+	@Autowired
+	private IWareManagerService wareService;
 
 	@Description("进入售货机页面")
 	@RequestMapping(value = "/machineHome")
@@ -79,17 +83,23 @@ public class MachineManagerController extends UtilsAction {
 
 	@Description("按Id查看某售货机详细信息")
 	@RequestMapping(value = "/machineInfoDetail", method = RequestMethod.GET)
-	public ModelAndView getMachineOperateById(Integer mOperaterId, ModelMap modelMap) {
+	public ModelAndView getMachineOperateById(@ModelAttribute("user")UserInfo userInfo, Integer mOperaterId, ModelMap modelMap) {
 		//查询售货机信息
 	    MachineOperater machineOperater = machineManagerService.getMachineOperaterById(mOperaterId);
 
 	    //查询货道信息
-	    ChannelWareInfo channelWareInfo = new ChannelWareInfo();
-	    channelWareInfo.setmOperaterId(mOperaterId);
-	   
-	    List<ChannelWareInfo> channelWareInfos = channelService.getAllChannelWareInfos(channelWareInfo);
-	    modelMap.addAttribute("channelWareByMachine", channelWareInfos);
+	    ChannelInfo channel = new ChannelInfo();
+	    channel.setmOperaterId(mOperaterId);
+	    List<ChannelInfo> channels = channelService.getAllChannelInfos(channel);
+	    
+	    WareInfo wareInfo = new WareInfo();
+	    wareInfo.setFirmId(userInfo.getFirmInfo().getFirmId());
+	    List<WareInfo> wareInfos = wareService.getAllWareInfos(wareInfo);
+	    
+	    modelMap.addAttribute("wares", wareInfos);
+	    modelMap.addAttribute("channelInfo", channels);
 	    modelMap.addAttribute("machineOperater", machineOperater);
+	    
 		return new ModelAndView("genview/OMachineInfoDetail", modelMap);
 	}
 

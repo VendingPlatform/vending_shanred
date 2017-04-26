@@ -5,33 +5,46 @@ import java.util.List;
 import com.vending.platform.domain.ChannelGroup;
 import com.vending.platform.domain.ChannelInfo;
 import com.vending.platform.domain.ChannelWareInfo;
+import com.vending.platform.domain.MachineOperater;
 
 public interface IChannelManagerService {
 
-    void insertChannelInfo(ChannelInfo channelInfo);
+	void insertChannelInfo(ChannelInfo channelInfo);
 
-    void updateChannelInfo(ChannelInfo channelInfo);
+	void updateChannelInfo(ChannelInfo channelInfo);
 
-    ChannelInfo getChannelInfoById(Integer channelId);
+	ChannelInfo getChannelInfoById(Integer channelId);
 
-    List<ChannelInfo> getAllChannelInfos(ChannelInfo channelInfo);
+	/** 根据编号和售货机查询货道 */
+	ChannelInfo getChannelInfoByNo(String channelNo, Integer machineId);
 
-    void deleteChannelInfo(Integer channelId);
+	List<ChannelInfo> getAllChannelInfos(ChannelInfo channelInfo);
 
-    void inserChannelGroup(ChannelGroup channelGroup);
+	List<ChannelInfo> getAllChannelInfosNotAssign(Integer firmId);
 
-    void updateChannelGroup(ChannelGroup channelGroup);
+	List<ChannelWareInfo> getAllChannelInfos(Integer firmId, String machineName, String channelNo, String wareName);
 
-    ChannelGroup getChannelGroupById(Integer channelGroupId);
+	void deleteChannelInfo(Integer channelId);
 
-    List<ChannelGroup> getAllChannelGroups(ChannelGroup channelGroup);
+	void inserChannelGroup(ChannelGroup channelGroup);
 
-    void deleteChannelGroup(Integer channelGroupId);
+	void updateChannelGroup(ChannelGroup channelGroup);
 
-    ChannelWareInfo getChannelWareInfo(Integer channelId);
+	ChannelGroup getChannelGroupById(Integer channelGroupId);
 
-    List<ChannelWareInfo> getAllChannelWareInfos(
-            ChannelWareInfo channelWareInfo);
+	List<ChannelGroup> getAllChannelGroups(ChannelGroup channelGroup);
 
-    void insetChannelWareInfo(ChannelWareInfo channelWareInfo);
+	void deleteChannelGroup(Integer channelGroupId);
+
+	ChannelWareInfo getChannelWareInfo(Integer channelId);
+
+	List<ChannelWareInfo> getAllChannelWareInfos(ChannelWareInfo channelWareInfo);
+
+	void insetChannelWareInfo(ChannelWareInfo channelWareInfo);
+
+	void updateChannelWareInfo(ChannelWareInfo channelWareInfo);
+
+	void assignChannel(Integer machineId, MachineOperater mOperater);
+	
+	List<ChannelWareInfo> getChannelsByGroupId(Integer channelGroupId);
 }

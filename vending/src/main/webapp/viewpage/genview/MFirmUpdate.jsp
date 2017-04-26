@@ -51,21 +51,7 @@
 							</div>
 						</td>
 					</tr>
-					<tr>
-						<td>商家类型</td>
-						<td>
-							<select name="firmType" required>
-								<c:if test="${firmInfo.firmType==1}">
-									<option value="${firmInfo.firmType}" selected>运营商</option>
-									<option value="0">厂商</option>
-								</c:if>
-								<c:if test="${firmInfo.firmType==2}">
-									<option value="${firmInfo.firmType}" selected>厂商</option>
-									<option value="1">运营商</option>
-								</c:if>
-							</select>
-						</td>
-					</tr>
+					<input type="hidden" name="firmType" value="1">
 					<tr>
 						<td>商家状态</td>
 						<td>

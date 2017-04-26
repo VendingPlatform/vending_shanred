@@ -26,11 +26,14 @@ public class ChannelInfo implements Serializable {
     private Integer channelGroupId;
     /** 所属售货机 */
     private Integer mOperaterId;
+    private Integer machineId;
+    private Integer firmId;
     /** 操作者 */
     private Integer operateId;
     /** 操作时间 */
     private Date operateDate;
 
+    private MachineInfo machineInfo;
     private MachineOperater machineOperater;
 
     public ChannelInfo() {
@@ -115,6 +118,30 @@ public class ChannelInfo implements Serializable {
 
     public void setMachineOperater(MachineOperater machineOperater) {
         this.machineOperater = machineOperater;
+    }
+
+    public Integer getMachineId() {
+		return machineId;
+	}
+
+	public void setMachineId(Integer machineId) {
+		this.machineId = machineId;
+	}
+
+	public MachineInfo getMachineInfo() {
+		return machineInfo;
+	}
+
+	public void setMachineInfo(MachineInfo machineInfo) {
+		this.machineInfo = machineInfo;
+	}
+
+	public Integer getFirmId() {
+        return firmId;
+    }
+
+    public void setFirmId(Integer firmId) {
+        this.firmId = firmId;
     }
 
     @Override

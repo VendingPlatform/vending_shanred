@@ -34,6 +34,7 @@ public class FirmInfo implements Serializable {
     private List<OperMgr> operMgrs;
     private List<GroupInfo> groupInfos;
     private List<WareInfo> wareInfos;
+    
 
     public FirmInfo() {
         super();

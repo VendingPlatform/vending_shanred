@@ -32,13 +32,14 @@
 				<div class="form-group">
 					<input type="text" class="form-control" name="firmName" placeholder="商家名称">
 				</div>
-				<div class="form-group">
+				<input type="hidden" name="firmType" value="1">
+				<!-- <div class="form-group">
 					<select name="firmType" class="form-control">
 						<option value="">---商家类型---</option>
 						<option value="1">运营商</option>
 						<option value="2">厂商</option>
 					</select>
-				</div>
+				</div> -->
 				<div class="form-group">
 					<select name="firmStatus" class="form-control">
 						<option value="">---是否可用---</option>
@@ -120,13 +121,7 @@
 							<label for="firmDesc">商家描述:</label>
 							<input type="text" class="form-control" name="firmDesc" placeholder="商家描述">
 						</div>
-						<div class="form-group">
-							<label for="firmDesc">商家类型:</label>
-							<select name="firmType" required>
-								<option value="1" selected>运营商</option>
-								<option value="2">厂商</option>
-							</select>
-						</div>
+						<input type="hidden" name="firmType" value="1">
 						<div class="form-group">
 							<label for="firmDesc">商家状态:</label>
 							<select name="firmStatus" required>

@@ -114,6 +114,8 @@ public interface IMachineDAO {
 	/** 按照Id查询MachineInfo中信息 */
 	@SelectProvider(type = IMachineSqlProvider.class, method = "getMachineInfoById")
 	@Results({
+		@Result(property = "channelInfos" ,column="channelId", many = @Many(select="com.vending.platform.dao.IChannelManagerDAO.getAllChannelInfos")),
+		@Result(property = "channelInfo" ,column="channelId", many = @Many(select="com.vending.platform.dao.IChannelManagerDAO.getChannelInfoById")),
 	    @Result(property = "machineType" , column = "tModelId", one=@One(select = "com.vending.platform.dao.IMachineDAO.getMachineTypeById")),
 	    @Result(property = "operFirmInfo" , column = "operFirmId",one= @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById")),
         @Result(property = "manuFirmInfo" , column = "manuFirmId",one= @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById"))

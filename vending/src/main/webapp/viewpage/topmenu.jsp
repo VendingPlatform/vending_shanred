@@ -36,7 +36,16 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="<c:url value="/home"/>">主页</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 用户管理 <span class="caret"></span>
+					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
+					<c:if test="${user.firmInfo.firmType!=0 }">
+					用户管理 
+					</c:if>
+					<c:if test="${user.firmInfo.firmType==0 }">
+					权限管理
+					</c:if>
+						
+					
+					<span class="caret"></span>
 					</a>
 						<ul class="dropdown-menu">
 						<!-- 用户管理只有系统管理员和运营商管理员，厂商管理员可以访问 -->
@@ -44,13 +53,16 @@
 							<li><a href="<c:url value="/user/getAllUsers"/>">用户管理</a></li>
 						</c:if>
 							<c:if test="${user.firmInfo.firmType==0 }">
-							<li><a href="<c:url value="/user/getAllAuthoritys"/>">权限管理</a></li>
+								<li><a href="<c:url value="/user/getAllAuthoritys"/>">权限管理</a></li>
 							</c:if>
-							<li><a href="<c:url value="/user/getAllRoles"/>">角色管理</a></li>
-							<li><a href="<c:url value="/user/getAllGroups"/>">用户组管理</a></li>
-						</ul></li>
-					<!-- firmType==0系统管理员才有的权限 -->
-					<c:if test="${user.firmInfo.firmType==0 }">
+								<li><a href="<c:url value="/user/getAllRoles"/>">角色管理</a></li>
+							<c:if test="${user.firmInfo.firmType==1 }">
+								<li><a href="<c:url value="/user/getAllGroups"/>">用户组管理</a></li>
+							</c:if>
+						</ul>
+					</li>
+					<!-- firmType==2厂商管理员才有的权限 -->
+					<c:if test="${user.firmInfo.firmType==2 }">
 						<li><a href="<c:url value="/manager/getAllFirms"/>">商家管理</a></li>
 					</c:if>
 					<!-- firmType==1运营商才有的权限 -->
@@ -60,8 +72,8 @@
 							<ul class="dropdown-menu">
 								<li><a href="<c:url value="/machine/machineInfo"/>">售货机管理</a></li>
 								<li><a href="<c:url value="/machine/machineGroup"/>">分组管理</a></li>
-								<li><a href="#">货道组管理</a></li>
-								<li><a href="#">货道管理</a></li>
+								<li><a href="<c:url value="/channel/getAllChannelGroups/${user.firmInfo.firmId}"/>">货道组管理</a></li>
+								<li><a href="<c:url value="/channel/getAllChannels/${user.firmInfo.firmId}"/>">货道管理</a></li>
 							</ul></li>
 						<c:if test="${flag==0||flag==1}">
 						<li><a href="<c:url value="/ware/getAllWareInfos"/>">商品管理</a></li>

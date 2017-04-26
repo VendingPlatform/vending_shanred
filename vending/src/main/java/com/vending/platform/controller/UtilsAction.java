@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.annotation.Description;
@@ -12,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 
 @Controller
 @SessionAttributes("user")
 public class UtilsAction implements Serializable {
     private static final long serialVersionUID = -8348417258576966571L;
     private HttpServletResponse response;
+    private HttpServletRequest request;
 
 
     @Description("进入home页")
@@ -26,6 +29,12 @@ public class UtilsAction implements Serializable {
         return "genview/home";
     }
 
+    public String baseUrl(){
+    	String path = request.getContextPath();
+    	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+    			+ path + "/";
+    	return basePath;
+    }
     public void write(Object object) throws IOException {
         try {
             // 设置响应数据类型和字符编码
@@ -57,7 +66,7 @@ public class UtilsAction implements Serializable {
         try {
             /* 用户json插件将对象转换成json字符串，并将时间类型格式化成：yyyy-MM-dd HH:mm:ss */
             String json = JSON.toJSONStringWithDateFormat(object,
-                    "yyyy-MM-dd HH:mm:ss");
+                    "yyyy-MM-dd HH:mm:ss",SerializerFeature.DisableCircularReferenceDetect);
             /* 设置响应数据类型和字符编码 */
             response.setContentType("text/html;charset=utf-8");
             /* 向客户端发送数据 */
@@ -86,4 +95,13 @@ public class UtilsAction implements Serializable {
         this.response = response;
     }
 
+	public HttpServletRequest getRequest() {
+		return request;
+	}
+	 @Resource
+	public void setRequest(HttpServletRequest request) {
+		this.request = request;
+	}
+
+    
 }

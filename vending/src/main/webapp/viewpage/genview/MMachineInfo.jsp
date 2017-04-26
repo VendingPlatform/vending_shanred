@@ -62,6 +62,9 @@
 					<td>${m.operateId}</td>
 					<td>${m.operateDate}</td>
 					<td>
+						<a href="<c:url value="/manu/getMachineInfoChannel"/>?machineId=${m.machineId}" class="btn default"> 
+						<span class="glyphicon glyphicon-info-sign" title="货道信息"></span>
+						</a>
 						<a onclick="getMachineInfoById(${m.machineId})" class="btn default"
 						data-toggle="modal" data-target="#updateMachineModal"> 
 						<span class="glyphicon glyphicon-edit" title="编辑"></span>
@@ -134,10 +137,10 @@
 		        		</div> 
       					<div class="form-group">
 		        		<label for='tModelName'>售货机类型:</label>
-						<select name="tModelName" class="form-control">
+						<select name="tModelId" class="form-control">
 						<option value="">---售货机类型---</option>
 						<c:forEach items='${machineTypes}' var='t'>
-							<option value='${t.tModelName}'>${t.tModelName}</option>
+							<option value='${t.tModelId}'>${t.tModelName}</option>
 						</c:forEach>
 						</select>
 		        		</div>

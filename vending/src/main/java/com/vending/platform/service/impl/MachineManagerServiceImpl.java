@@ -29,7 +29,7 @@ public class MachineManagerServiceImpl implements IMachineManagerService {
 		if (machineOperater == null || userInfo == null) {
 			return null;
 		}
-		 List<MachineOperater> machineOperaters = machineDao.getAllMachineOperaters(machineOperater);
+		List<MachineOperater> machineOperaters = machineDao.getAllMachineOperaters(machineOperater);
 		return machineOperaters;
 	}
 
@@ -47,7 +47,6 @@ public class MachineManagerServiceImpl implements IMachineManagerService {
 	public void updateMachineOperater(MachineOperater machineOperater) {
 		machineDao.updateMachineOperate(machineOperater);
 	}
-
 
 	@Override
 	public List<MachineOperater> getAllMachineOperaters(MachineOperater machineOperater) {
@@ -86,52 +85,63 @@ public class MachineManagerServiceImpl implements IMachineManagerService {
 		machineDao.deleteMachineType(id);
 	}
 
-    @Override
-    public List<MachineInfo> getAllMachineInfos(MachineInfo machineInfo) {
-        return machineDao.getAllMachineInfos(machineInfo);
-    }
+	@Override
+	public List<MachineInfo> getAllMachineInfos(MachineInfo machineInfo) {
+		return machineDao.getAllMachineInfos(machineInfo);
+	}
 
-    @Override
-    public MachineInfo getMachineInfoById(Integer machineId) {
-        return machineDao.getMachineInfoById(machineId);
-    }
+	@Override
+	public MachineInfo getMachineInfoById(Integer machineId) {
+		return machineDao.getMachineInfoById(machineId);
+	}
 
-    @Override
-    public void updateMachineInfo(MachineInfo machineInfo) {
-        machineDao.updateMachineInfo(machineInfo);
-        
-    }
+	@Override
+	public void updateMachineInfo(MachineInfo machineInfo) {
+		machineDao.updateMachineInfo(machineInfo);
 
-    @Override
-    public boolean deleteMachineInfo(Integer machineId) {
-        MachineOperater machineOperater = new MachineOperater();
-        machineOperater.setMachineId(machineId);
-        List<MachineOperater> machineOperaters = machineDao.getAllMachineOperaters(machineOperater);
-        if(machineOperaters.size()>0){
-            return false;
-        }
-        else{
-        machineDao.deleteMachineInfo(machineId);
-        return true;
-    }}
+	}
 
-    @Override
-    public void insertMachine(MachineInfo machineInfo) {
-         machineDao.insertMachineInfo(machineInfo);
-    }
+	@Override
+	public boolean deleteMachineInfo(Integer machineId) {
+		MachineOperater machineOperater = new MachineOperater();
+		machineOperater.setMachineId(machineId);
+		List<MachineOperater> machineOperaters = machineDao.getAllMachineOperaters(machineOperater);
+		if (machineOperaters.size() > 0) {
+			return false;
+		} else {
+			machineDao.deleteMachineInfo(machineId);
+			return true;
+		}
+	}
 
-    @Override
-    public void inserMachineOperater(MachineOperater machineOperater) {
-        try {
-            machineDao.insertMachineOperate(machineOperater);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	@Override
+	public void insertMachine(MachineInfo machineInfo) {
+		machineDao.insertMachineInfo(machineInfo);
+	}
 
-    @Override
-    public void removeMachineOperaterFromUser(Integer mOperaterId) {
-        operaterDao.removeUserMachineOperater(mOperaterId);
-    }
-    
+	@Override
+	public void inserMachineOperater(MachineOperater machineOperater) {
+		try {
+			machineDao.insertMachineOperate(machineOperater);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void removeMachineOperaterFromUser(Integer mOperaterId) {
+		operaterDao.removeUserMachineOperater(mOperaterId);
+	}
+
+	@Override
+	public MachineOperater getMachineOperaterBymachine(Integer machineId) {
+		MachineOperater machineOperater = new MachineOperater();
+		machineOperater.setMachineId(machineId);
+		List<MachineOperater> machineOperaters = machineDao.getAllMachineOperaters(machineOperater);
+		if (machineOperaters.size() >0) {
+			return machineOperaters.get(0);
+		} else
+			return null;
+	}
+
 }

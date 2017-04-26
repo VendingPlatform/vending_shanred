@@ -46,6 +46,7 @@
 				</table>
 			</div>
 		</div>
+		<c:if test="${user.firmInfo.firmType==1}">
 		<div class="panel panel-default">
 			<div class="panel-heading">管理的售货机</div>
 			<div class="panel-body">
@@ -69,6 +70,7 @@
 				</table>
 			</div>
 		</div>
+		</c:if>
 	</div>
 </body>
 </html>

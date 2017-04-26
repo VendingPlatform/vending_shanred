@@ -20,64 +20,91 @@ import com.vending.platform.domain.ChannelWareInfo;
  */
 public interface IChannelManagerDAO {
 
-    /** 添加货道组 */
-    @SelectProvider(type = IChannelManagerSqlProvider.class, method = "insertChannelGroup")
-    public void insertChannelGroup(ChannelGroup channelGroup);
+	@Select("SELECT a.* FROM channelwareinfo a LEFT JOIN channelinfo b ON a.channelId=b.channelId WHERE channelGroupId=#{channelGroupId}")
+	@Results({
+			@Result(property = "wareInfo", column = "wareId", one = @One(select = "com.vending.platform.dao.IWareManagerDAO.getWareInfoById")),
+			@Result(property = "channelInfo", column = "channelId", one = @One(select = "com.vending.platform.dao.IChannelManagerDAO.getChannelInfoById")) })
+	public List<ChannelWareInfo> getChannelInofByGroupId(Integer channelGroupId);
+	
+	@Select("SELECT * FROM channelInfo where firmId=#{firmId} and channelGroupId is null")
+	@Results({
+		@Result(property = "machineInfo", column = "machineId", one = @One(select = "com.vending.platform.dao.IMachineDAO.getMachineInfoById")),
+		@Result(property = "machineOperater", column = "mOperaterId", one = @One(select = "com.vending.platform.dao.IMachineDAO.getMachineOperaterById")) })
+	public List<ChannelInfo> getAllChannelInfosNotAssign(Integer firmId );
 
-    /** 更新货道组 */
-    @SelectProvider(type = IChannelManagerSqlProvider.class, method = "updateChannelGroup")
-    public void updateChannelGroup(ChannelGroup channelGroup);
+	@SelectProvider(type = IChannelManagerSqlProvider.class, method = "getAllChannelInfosBySearch")
+	@Results({
+			@Result(property = "wareInfo", column = "wareId", one = @One(select = "com.vending.platform.dao.IWareManagerDAO.getWareInfoById")),
+			@Result(property = "channelInfo", column = "channelId", one = @One(select = "com.vending.platform.dao.IChannelManagerDAO.getChannelInfoById")) })
+	public List<ChannelWareInfo> getAllChannelInfosBySearch(Integer firmId, String machineName, String channelNo,
+			String wareName);
 
-    /** 按条件查找所有货道组 */
-    @SelectProvider(type = IChannelManagerSqlProvider.class, method = "getAllChannelGroups")
-    public List<ChannelGroup> getAllChannelGroups(ChannelGroup channelGroup);
+	/** 添加货道组 */
+	@SelectProvider(type = IChannelManagerSqlProvider.class, method = "insertChannelGroup")
+	public void insertChannelGroup(ChannelGroup channelGroup);
 
-    /** 按Id查找货道组 */
-    @SelectProvider(type = IChannelManagerSqlProvider.class, method = "getChannelGroupById")
-    public ChannelGroup getChannelGroupById(Integer channelGroupId);
+	/** 更新货道组 */
+	@SelectProvider(type = IChannelManagerSqlProvider.class, method = "updateChannelGroup")
+	public void updateChannelGroup(ChannelGroup channelGroup);
 
-    /** 删除货道组 */
-    @SelectProvider(type = IChannelManagerSqlProvider.class, method = "deleteChannelGroup")
-    public void deleteChannelGroup(Integer channelGroupId);
+	/** 按条件查找所有货道组 */
+	@SelectProvider(type = IChannelManagerSqlProvider.class, method = "getAllChannelGroups")
+	@Results({
+			@Result(property = "wareInfo", column = "wareId", one = @One(select = "com.vending.platform.dao.IWareManagerDAO.getWareInfoById")) })
+	public List<ChannelGroup> getAllChannelGroups(ChannelGroup channelGroup);
 
-    /** 添加货道 */
-    @SelectProvider(type = IChannelManagerSqlProvider.class, method = "insertChannelInfo")
-    public void insertChannelInfo(ChannelInfo channelInfo);
+	/** 按Id查找货道组 */
+	@SelectProvider(type = IChannelManagerSqlProvider.class, method = "getChannelGroupById")
+	@Results({
+			@Result(property = "wareInfo", column = "wareId", one = @One(select = "com.vending.platform.dao.IWareManagerDAO.getWareInfoById")) })
+	public ChannelGroup getChannelGroupById(Integer channelGroupId);
 
-    /** 修改货道 */
-    @SelectProvider(type = IChannelManagerSqlProvider.class, method = "updateChannelInfo")
-    public void updateChannelInfo(ChannelInfo channelInfo);
+	/** 删除货道组 */
+	@SelectProvider(type = IChannelManagerSqlProvider.class, method = "deleteChannelGroup")
+	public void deleteChannelGroup(Integer channelGroupId);
 
-    /** 按需求查询所有货道 */
-    @SelectProvider(type = IChannelManagerSqlProvider.class, method = "getAllChannelInfos")
-    @Results({
-            @Result(property = "machineOperater", column = "mOperaterId", one = @One(select = "com.vending.platform.dao.IMachineDAO.getMachineOperaterById")) })
-    public List<ChannelInfo> getAllChannelInfos(ChannelInfo channelInfo);
+	/** 添加货道 */
+	@SelectProvider(type = IChannelManagerSqlProvider.class, method = "insertChannelInfo")
+	public void insertChannelInfo(ChannelInfo channelInfo);
 
-    /** 按Id查询货道 */
-    @SelectProvider(type = IChannelManagerSqlProvider.class, method = "getChannelInfoById")
-    @Results({
-            @Result(property = "machineOperater", column = "mOperaterId", one = @One(select = "com.vending.platform.dao.IMachineDAO.getMachineOperaterById")) })
-    public ChannelInfo getChannelInfoById(Integer channelId);
+	/** 修改货道 */
+	@SelectProvider(type = IChannelManagerSqlProvider.class, method = "updateChannelInfo")
+	public void updateChannelInfo(ChannelInfo channelInfo);
 
-    /** 删除货道信息 */
-    @SelectProvider(type = IChannelManagerSqlProvider.class, method = "deleteChannelInfo")
-    public void deleteChannelInfo(Integer channelId);
+	/** 按需求查询所有货道 */
+	@SelectProvider(type = IChannelManagerSqlProvider.class, method = "getAllChannelInfos")
+	@Results({
+			@Result(property = "machineInfo", column = "machineId", one = @One(select = "com.vending.platform.dao.IMachineDAO.getMachineInfoById")),
+			@Result(property = "machineOperater", column = "mOperaterId", one = @One(select = "com.vending.platform.dao.IMachineDAO.getMachineOperaterById")) })
+	public List<ChannelInfo> getAllChannelInfos(ChannelInfo channelInfo);
 
-    @SelectProvider(type = IChannelManagerSqlProvider.class, method = "getAllChannelWareInfos")
-    @Results({
-            @Result(property = "wareInfo", column = "wareId", one = @One(select = "com.vending.platform.dao.IWareManagerDAO.getWareInfoById")),
-            @Result(property = "channelInfo", column = "channelId", one = @One(select = "com.vending.platform.dao.IChannelManagerDAO.getChannelInfoById")) })
-    public List<ChannelWareInfo> getAllChannelWareInfos(ChannelWareInfo channelWareInfo);
+	/** 按Id查询货道 */
+	@SelectProvider(type = IChannelManagerSqlProvider.class, method = "getChannelInfoById")
+	@Results({
+			@Result(property = "machineInfo", column = "machineId", one = @One(select = "com.vending.platform.dao.IMachineDAO.getMachineInfoById")),
+			@Result(property = "machineOperater", column = "mOperaterId", one = @One(select = "com.vending.platform.dao.IMachineDAO.getMachineOperaterById")) })
+	public ChannelInfo getChannelInfoById(Integer channelId);
 
-    @SelectProvider(type = IChannelManagerSqlProvider.class, method = "getAllChannelWareInfoById")
-    @Results({
-            @Result(property = "wareInfo", column = "wareId", one = @One(select = "com.vending.platform.dao.IWareManagerDAO.getWareInfoById")),
-            @Result(property = "channelInfo", column = "channelId", one = @One(select = "com.vending.platform.dao.IChannelManagerDAO.getChannelInfoById")) })
-    public ChannelWareInfo getAllChannelWareInfoById(Integer channelId);
+	/** 删除货道信息 */
+	@SelectProvider(type = IChannelManagerSqlProvider.class, method = "deleteChannelInfo")
+	public void deleteChannelInfo(Integer channelId);
 
-    
-    @SelectProvider(type = IChannelManagerSqlProvider.class, method = "insertChannelWareInfo")
-    public void insertChannelWareInfo(ChannelWareInfo channelWareInfo);
+	@SelectProvider(type = IChannelManagerSqlProvider.class, method = "getAllChannelWareInfos")
+	@Results({
+			@Result(property = "wareInfo", column = "wareId", one = @One(select = "com.vending.platform.dao.IWareManagerDAO.getWareInfoById")),
+			@Result(property = "channelInfo", column = "channelId", one = @One(select = "com.vending.platform.dao.IChannelManagerDAO.getChannelInfoById")) })
+	public List<ChannelWareInfo> getAllChannelWareInfos(ChannelWareInfo channelWareInfo);
+
+	@SelectProvider(type = IChannelManagerSqlProvider.class, method = "getAllChannelWareInfoById")
+	@Results({
+			@Result(property = "wareInfo", column = "wareId", one = @One(select = "com.vending.platform.dao.IWareManagerDAO.getWareInfoById")),
+			@Result(property = "channelInfo", column = "channelId", one = @One(select = "com.vending.platform.dao.IChannelManagerDAO.getChannelInfoById")) })
+	public ChannelWareInfo getAllChannelWareInfoById(Integer channelId);
+
+	@SelectProvider(type = IChannelManagerSqlProvider.class, method = "insertChannelWareInfo")
+	public void insertChannelWareInfo(ChannelWareInfo channelWareInfo);
+
+	@SelectProvider(type = IChannelManagerSqlProvider.class, method = "updateChannelWareInfo")
+	public void updateChannelWareInfo(ChannelWareInfo channelWareInfo);
 
 }
