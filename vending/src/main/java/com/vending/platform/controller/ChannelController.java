@@ -1,5 +1,6 @@
 package com.vending.platform.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.vending.platform.domain.ChannelGroup;
+import com.vending.platform.domain.ChannelInfo;
 import com.vending.platform.domain.ChannelWareInfo;
 import com.vending.platform.service.IChannelManagerService;
 
@@ -59,4 +61,50 @@ public class ChannelController extends UtilsAction {
     	channelService.inserChannelGroup(channelGroup);
     	return "genview/ChannelInfoGroups";
     }
+    
+    @Description("获取该公司未分配的货道")
+    @RequestMapping(value="/getAllMachinesNotAssign/{firmId}")
+    public String getAllMachinesNotAssign(@PathVariable Integer firmId,ModelMap modelMap){
+    	List<ChannelInfo> channelInfosNotAssign = channelService.getAllChannelInfosNotAssign(firmId);
+    	modelMap.addAttribute("channelInfosNotAssign", channelInfosNotAssign);
+    	try {
+			writeJson(channelInfosNotAssign);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return "genview/ChannelInfoGroups";
+    }
+    
+    @Description("将货道加入货道组")
+    @RequestMapping(value="/addChannelsToGroup")
+    public String addChannelsToGroup(Integer[] channelId,Integer channelGroupId,Integer userId){
+    	ChannelGroup channelGroup = channelService.getChannelGroupById(channelGroupId);
+    	
+    	ChannelInfo channelInfo = new ChannelInfo();
+    	channelInfo.setOperateId(userId);
+    	channelInfo.setChannelGroupId(channelGroupId);
+    	
+    	ChannelWareInfo channelWareInfo  = new ChannelWareInfo();
+    	channelWareInfo.setWareId(channelGroup.getWareInfo().getWareId());
+    	channelWareInfo.setPrice(channelGroup.getPrice());
+    	channelWareInfo.setIsDiscount(channelGroup.getIsDiscount());
+    	
+    	for (Integer id : channelId) {
+			channelInfo.setChannelId(id);
+			channelWareInfo.setChannelId(id);
+			
+			channelService.updateChannelInfo(channelInfo);
+			channelService.updateChannelWareInfo(channelWareInfo);
+		}
+    	
+    	return "genview/ChannelInfoGroups";
+    }
+    @Description("查看货道组货道")
+    @RequestMapping(value="/getChannelsByGroup/{channelGroupId}")
+    public String getChannelsByGroup(@PathVariable Integer channelGroupId,ModelMap modelMap){
+    	List<ChannelWareInfo> cWareInfos = channelService.getChannelsByGroupId(channelGroupId);
+    	modelMap.addAttribute("channelsByGroupId", cWareInfos);
+    	return "genview/ChannelByGroup";
+    }
+    
 }

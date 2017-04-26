@@ -121,5 +121,15 @@ public class ChannelManagerServiceImpl implements IChannelManagerService {
     public void updateChannelWareInfo(ChannelWareInfo channelWareInfo) {
         channelManagerDao.updateChannelWareInfo(channelWareInfo);
     }
+
+	@Override
+	public List<ChannelInfo> getAllChannelInfosNotAssign(Integer firmId) {
+		return channelManagerDao.getAllChannelInfosNotAssign(firmId);
+	}
+
+	@Override
+	public List<ChannelWareInfo> getChannelsByGroupId(Integer channelGroupId) {
+		return channelManagerDao.getChannelInofByGroupId(channelGroupId);
+	}
 }
  
