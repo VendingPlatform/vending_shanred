@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.vending.platform.dao.IWareManagerDAO;
+import com.vending.platform.domain.Shipments;
 import com.vending.platform.domain.WareInfo;
 import com.vending.platform.service.IWareManagerService;
 
@@ -34,5 +35,25 @@ public class WareManagerServiceInpl implements IWareManagerService {
     public void updateWareInfo(WareInfo wareInfo) {
         wareDao.updateWareInfo(wareInfo);
     }
+
+	@Override
+	public Shipments getShipmentById(Integer shipId) {
+		return wareDao.getShipmentsById(shipId);
+	}
+
+	@Override
+	public void insertShipments(Shipments shipments) {
+		wareDao.insertShipments(shipments);
+	}
+
+	@Override
+	public void updateShipments(Shipments shipments) {
+		wareDao.updateShipments(shipments);
+	}
+
+	@Override
+	public List<Shipments> getAllShipmentses(Shipments shipments) {
+		return wareDao.getAllShipments(shipments);
+	}
 
 }

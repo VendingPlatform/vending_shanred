@@ -48,6 +48,8 @@ public class UserInfo implements Serializable {
 	private GroupInfo groupInfo;
 	
 	private List<UserRoleInfo> userRoleInfos;
+	private List<UserInfo> userInfos;
+	private List<Shipments> shipmentses;
 
 	public UserInfo() {
 		super();
@@ -233,7 +235,23 @@ public class UserInfo implements Serializable {
         this.groupManager = groupManager;
     }
 
-    @Override
+    public List<UserInfo> getUserInfos() {
+		return userInfos;
+	}
+
+	public void setUserInfos(List<UserInfo> userInfos) {
+		this.userInfos = userInfos;
+	}
+
+	public List<Shipments> getShipmentses() {
+		return shipmentses;
+	}
+
+	public void setShipmentses(List<Shipments> shipmentses) {
+		this.shipmentses = shipmentses;
+	}
+
+	@Override
 	public String toString() {
 		return "UserInfo [userId=" + userId + ", userNo=" + userNo + ", userName=" + userName + ", password=" + password
 				+ ", mobilePhone=" + mobilePhone + ", email=" + email + ", roleId=" + roleId + ", roleName=" + roleName

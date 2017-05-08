@@ -35,7 +35,7 @@
 			<c:forEach items="${userGroupInfos }" var="g">
 				<tr>
 					<td>${g.groupId }</td>
-					<td>${g.groupName }</td>
+					<td><a href="<c:url value="/user/${g.groupId}"/>">${g.groupName}</a></td>
 					<td>${g.groupDesc }</td>
 					<td>${g.operateDate }</td>
 				</tr>
