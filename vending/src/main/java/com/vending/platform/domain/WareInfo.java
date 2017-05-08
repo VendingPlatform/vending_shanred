@@ -43,6 +43,9 @@ public class WareInfo implements Serializable {
     private List<ChannelWareInfo> channelWareInfos;
     private List<ChannelGroup> channelGroups;
     
+    private List<Shipments> shipmentses;
+    
+    
     public WareInfo() {
         super();
     }
@@ -167,7 +170,15 @@ public class WareInfo implements Serializable {
         this.channelGroups = channelGroups;
     }
 
-    @Override
+	public List<Shipments> getShipmentses() {
+		return shipmentses;
+	}
+
+	public void setShipmentses(List<Shipments> shipmentses) {
+		this.shipmentses = shipmentses;
+	}
+
+	@Override
     public String toString() {
         return "WareInfo [wareId=" + wareId + ", wareCode=" + wareCode
                 + ", wareName=" + wareName + ", wareNorm=" + wareNorm

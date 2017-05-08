@@ -31,11 +31,11 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">售货机管理平台</a>
+				<a class="navbar-brand" href="<c:url value="/home"/>">售货机管理平台</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="<c:url value="/home"/>">主页</a></li>
+					
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
 					<c:if test="${user.firmInfo.firmType!=0 }">
 					用户管理 
@@ -78,15 +78,45 @@
 						<c:if test="${flag==0||flag==1}">
 						<li><a href="<c:url value="/ware/getAllWareInfos"/>">商品管理</a></li>
 						</c:if>
-						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 库存管理 <span class="caret"></span>
-						</a>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+							   role="button" aria-haspopup="true" aria-expanded="false"> 库存管理 
+							   <span class="caret"></span>
+							</a>
 							<ul class="dropdown-menu">
-								<li><a href="#">库存查询</a></li>
-								<li><a href="#">仓库出货</a></li>
-								<li><a href="#">出库信息查询</a></li>
-							</ul></li>
-						<li><a href="#">订单管理</a></li>
-						<li><a href="#">财务管理</a></li>
+								<li><a href="<c:url value="/ware/getAllShipments"/>">出库信息查询</a></li>
+								<li><a href="<%=basePath%>viewpage/genview/Shipments.jsp">仓库出货</a></li>
+								<li><a href="#">调拨</a></li>
+								<li><a href="#">清单打印</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+							   role="button" aria-haspopup="true" aria-expanded="false"> 订单管理 
+							   <span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="#">订单查询</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+							   role="button" aria-haspopup="true" aria-expanded="false"> 财务管理 
+							   <span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="#">#</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+							   role="button" aria-haspopup="true" aria-expanded="false"> 营业员信息
+							   <span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="#">#</a></li>
+							</ul>
+						</li>
 					</c:if>
 					<c:if test="${user.firmInfo.firmType==2 }">
 						<!-- 厂商才有的权限 -->

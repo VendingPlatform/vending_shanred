@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.vending.platform.domain.GroupInfo;
 import com.vending.platform.domain.UserInfo;
 import com.vending.platform.service.IFirmAndGroupService;
+import com.vending.platform.service.IUserManagerService;
 
 @Controller
 @SessionAttributes({ "user", "userAuth", "userAuthCodes" })
@@ -19,6 +21,8 @@ import com.vending.platform.service.IFirmAndGroupService;
 public class UserGroupController {
     @Autowired
     private IFirmAndGroupService firmAndGroupService;
+    @Autowired 
+    private IUserManagerService userService;
 
     @RequestMapping(value = "/getAllGroups")
     public String getAllGroups(@ModelAttribute("user") UserInfo userInfo,
@@ -37,5 +41,13 @@ public class UserGroupController {
             @ModelAttribute("user") UserInfo userInfo) {
         firmAndGroupService.insertGroup(groupInfo, userInfo);
         return "genview/UserGroups";
+    }
+    @RequestMapping(value="/{groupId}")
+    public String getGroupUsers(@PathVariable Integer groupId, ModelMap map){
+    	UserInfo user = new UserInfo();
+    	user.setGroupId(groupId);
+    	List<UserInfo> userInfos = userService.getAllUserInfos(user);
+    	map.addAttribute("groupUsers", userInfos);
+    	return "genview/UserGroupDetails";
     }
 }

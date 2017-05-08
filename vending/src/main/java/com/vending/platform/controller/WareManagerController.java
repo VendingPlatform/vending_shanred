@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.vending.platform.domain.Shipments;
 import com.vending.platform.domain.UserInfo;
 import com.vending.platform.domain.WareInfo;
 import com.vending.platform.service.IWareManagerService;
@@ -32,18 +33,18 @@ public class WareManagerController extends UtilsAction {
 		return "genview/WareInfo";
 	}
 
-	@RequestMapping(value="/getAllWareInfosByFirm/{firmId}")
-    public String getAllWareInfosByFirm(@PathVariable Integer firmId){
-    	WareInfo wareInfo = new WareInfo();
-    	wareInfo.setFirmId(firmId);
-    	List<WareInfo> wareInfos = wareService.getAllWareInfos(wareInfo);
-    	try {
+	@RequestMapping(value = "/getAllWareInfosByFirm/{firmId}")
+	public String getAllWareInfosByFirm(@PathVariable Integer firmId) {
+		WareInfo wareInfo = new WareInfo();
+		wareInfo.setFirmId(firmId);
+		List<WareInfo> wareInfos = wareService.getAllWareInfos(wareInfo);
+		try {
 			writeJson(wareInfos);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    	return "genview/ChannelInfoGroups";
-    }
+		return "genview/ChannelInfoGroups";
+	}
 
 	@RequestMapping(value = "/getWareInoById")
 	public String getWareInoById(@RequestParam("wareId") Integer wareId, ModelMap map) {
@@ -76,5 +77,24 @@ public class WareManagerController extends UtilsAction {
 		wa.setOperateId(userInfo.getUserId());
 		wareService.updateWareInfo(wa);
 		return "genview/WareInfo";
+	}
+
+	@RequestMapping(value = "/getAllShipments")
+	public String getAllShipments(@ModelAttribute("user") UserInfo userInfo, ModelMap map) {
+		String result = "";
+		if (userInfo == null) {
+			result =  "../genview/home";
+		} else {
+			Shipments sments = new Shipments();
+			
+			UserInfo user = new UserInfo();
+			user.setFirmId(userInfo.getFirmInfo().getFirmId());
+			sments.setUserInfo(user);
+			
+			List<Shipments> shipments = wareService.getAllShipmentses(sments);
+			map.addAttribute("allShipments", shipments);
+			result =  "/genview/AllShipments";
+		}
+		return result;
 	}
 }

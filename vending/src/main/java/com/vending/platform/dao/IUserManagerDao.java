@@ -149,7 +149,7 @@ public interface IUserManagerDao {
 	 */
 	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getRoleById")
 	@Results({
-	        @Result(property = "roleAuthInfo", column = "roleAuthId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getRoleAuthInfoById")),
+			@Result(property = "roleAuthInfo", column = "roleAuthId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getRoleAuthInfoById")),
 	        @Result(property = "roleAuthInfos", column = "roleAuthId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllRoleAuthInfos")),
 	        @Result(property = "userRoleInfo", column = "userRoleId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getUserRoleInfoById")),
             @Result(property = "userRoleInfos", column = "userRoleId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllUserRoleInfos")),
@@ -182,6 +182,8 @@ public interface IUserManagerDao {
 	 */
 	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getAllUsers")
 	@Results({
+			@Result(property = "shipments", column = "shipId", many = @Many(select = "com.vending.platform.dao.IWareManagerDAO.getShipmentsById")),
+			@Result(property = "shipmentses", column = "shipId", many = @Many(select = "com.vending.platform.dao.IWareManagerDAO.getAllShipments")),
 			@Result(property = "firmInfo", column = "firmId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById")),
 			@Result(property = "groupInfo", column = "groupId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getGroupInfoById")) })
 	public List<UserInfo> getAllUsers(UserInfo userInfo);
@@ -189,6 +191,8 @@ public interface IUserManagerDao {
 	/** 按Id查找用户 */
 	@SelectProvider(type = IUserManagerSqlProvider.class, method = "getUserById")
 	@Results({
+			@Result(property = "shipments", column = "shipId", many = @Many(select = "com.vending.platform.dao.IWareManagerDAO.getShipmentsById")),
+			@Result(property = "shipmentses", column = "shipId", many = @Many(select = "com.vending.platform.dao.IWareManagerDAO.getAllShipments")),
 			@Result(property = "firmInfo", column = "firmId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getFirmInfoById")),
 			@Result(property = "groupInfo", column = "groupId", one = @One(select = "com.vending.platform.dao.IFrimAndGroupDAO.getGroupInfoById")),
 			@Result(property = "userRoleInfos", column = "userRoleId", many = @Many(select = "com.vending.platform.dao.IUserManagerDao.getAllUserRoleInfos")),
