@@ -21,7 +21,7 @@
 			</div>
 		</div>
 		<div class="panel panel-default">
-			<div class="panel-heading">管理员信息</div>
+			<div class="panel-heading">库存信息</div>
 			<div class="panel-body">
 				<table class="table">
 					<tr>

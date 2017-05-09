@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.catalina.User;
 import org.apache.log4j.Logger;
-import org.hamcrest.core.IsEqual;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -228,4 +226,9 @@ public class UserManagerServiceImpl
     public void deletUserRoleByUserId(Integer userId) {
         userManagerDao.deletUserRoleByUserId(userId);
     }
+
+	@Override
+	public List<UserInfo> getAllUserByFirmId(Integer firmId) {
+		return null;
+	}
 }
