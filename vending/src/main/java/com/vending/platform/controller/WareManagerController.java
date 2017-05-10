@@ -2,6 +2,7 @@ package com.vending.platform.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,7 @@ public class WareManagerController extends UtilsAction {
 	private IFirmAndGroupService groupService;
 	@Autowired
 	private IUserManagerService userService;
-	
+
 	@RequestMapping(value = "/getAllWareInfos")
 	public String getAllWareInfos(@ModelAttribute("user") UserInfo userInfo, WareInfo ware, ModelMap map) {
 		ware.setFirmId(userInfo.getFirmInfo().getFirmId());
@@ -100,32 +101,61 @@ public class WareManagerController extends UtilsAction {
 
 			List<Shipments> shipments = wareService.getAllShipmentses(sments);
 			map.addAttribute("allShipments", shipments);
-			result = "/genview/AllShipments";
+			result = "genview/AllShipments";
 		}
 		return result;
 	}
 
 	@RequestMapping(value = "/intoShipmentsPage")
 	public String intoShipmentsPage(@ModelAttribute("user") UserInfo userInfo, ModelMap modelMap) {
-		Integer firmId  = userInfo.getFirmInfo().getFirmId();
-		
-		//获取营业员
-		UserInfo user = new UserInfo();
-		user.setFirmId(firmId);
-		userService.getAllUserInfos(user);
-		
+		Integer firmId = userInfo.getFirmInfo().getFirmId();
+
+		// 获取该公司的所有操作员，操作员可以管理售货机
+		List<UserInfo> userInfos = userService.getAllUserAuthByFirmId(firmId);
+
 		// 获取该公司售货机组
 		GroupInfo group = new GroupInfo();
 		group.setFirmId(firmId);
 		group.setGroupType(2);
 		List<GroupInfo> groups = groupService.getAllGroupInfos(group);
-		
+
 		// 获取该公司的所有商品
 		WareInfo ware = new WareInfo();
 		ware.setFirmId(firmId);
 		List<WareInfo> wareInfos = wareService.getAllWareInfos(ware);
 		modelMap.addAttribute("shipGroups", groups);
 		modelMap.addAttribute("shipWares", wareInfos);
-		return "/genview/addShipments";
+		modelMap.addAttribute("userIds", userInfos);
+		return "genview/AddShipments";
 	}
+
+	@RequestMapping(value = "/selectWare/{wareId}")
+	public String selectWare(@PathVariable Integer wareId) throws IOException {
+		if (wareId == null)
+			writeJson(null);
+		else {
+			WareInfo wareInfo = wareService.getWareInoById(wareId);
+			writeJson(wareInfo);
+		}
+		return "genview/AddShipments";
+	}
+
+	@RequestMapping(value = "/addShipToUser")
+	public String addShipToUser(Integer userId, String shipNo, Integer[] wareId, Integer[] num, String[] descr) {
+		Shipments shipments = new Shipments();
+		shipments.setUserId(userId);
+		shipments.setShipNo(shipNo);
+		shipments.setType(0);
+		
+		int size = wareId.length;
+		for(int i=0;i<size;i++){
+			shipments.setWareId(wareId[i]);
+			shipments.setNum(num[i]);
+			shipments.setDescr(descr[i]);
+			wareService.insertShipments(shipments);
+		}
+		
+		return "genview/AddShipments";
+	}
+
 }

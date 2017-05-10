@@ -12,6 +12,7 @@ public class Shipments implements Serializable {
 	private Integer num;
 	private Integer userId;
 	private Integer type;
+	private Integer isSend;
 	private String descr;
 	private Date operateDate;
 	
@@ -100,6 +101,16 @@ public class Shipments implements Serializable {
 
 	public void setUserInfo(UserInfo userInfo) {
 		this.userInfo = userInfo;
+	}
+
+
+	public Integer getIsSend() {
+		return isSend;
+	}
+
+
+	public void setIsSend(Integer isSend) {
+		this.isSend = isSend;
 	}
 
 

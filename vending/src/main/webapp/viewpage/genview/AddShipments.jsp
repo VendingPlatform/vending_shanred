@@ -24,28 +24,27 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">添加出库信息</div>
 			<div class="panel-body">
-				<form class="form-inline " >
+				<form class="form-inline " id="selectWareForm">
 					<div class="form-group">
-						<label>售货机组:</label>
-						<select class="form-control" id="groupId" name="groupId">
-							<option value="">----请选择分组----</option>
-							<c:forEach items="${shipGroups}" var="g">
-								<option value="${g.groupId}">${g.groupName}</option>
+						<label>营业员编号:</label>
+						<!-- <input class="form-control" id="userNo" placeholder="营业员编号" />
+						userIds -->
+						<select class="form-control" id="userId">
+							<option value="">----请选择用户----</option>
+							<c:forEach items="${userIds}" var="u">
+								<option value="${u.userId }">${u.userName}</option>
 							</c:forEach>
 						</select>
 					</div>
 					<div class="form-group">
-						<label>营业员编号:</label>
-						<input class="form-control" id="userId" name="userId" placeholder="营业员编号" />
-					</div>
-					<div class="form-group">
 						<label>出货编号:</label>
-						<input class="form-control" id="shipNo" name="shipNo" placeholder="输入出货编号">
+						<input class="form-control" id="shipNo" placeholder="输入出货编号">
 					</div>
-					<br/><br/>
+					<br />
+					<br />
 					<div class="form-group">
 						<label>商品:</label>
-						<select class="form-control" name="wareId">
+						<select class="form-control" name="wareId" id="wareId">
 							<option value="">----请选择商品----</option>
 							<c:forEach items="${shipWares }" var="w">
 								<option value="${w.wareId }">${w.wareName}</option>
@@ -54,23 +53,30 @@
 					</div>
 					<div class="form-group">
 						<label>商品数量:</label>
-						<input class="form-control" name="num" placeholder="输入出货编号">
+						<input class="form-control" name="num" id="num" placeholder="输入数量">
 					</div>
 					<div class="form-group">
 						<label>备注：</label>
-						<input class="form-control" name="descr" placeholder="添加备注">
+						<input class="form-control" name="descr" id="descr" placeholder="添加备注">
 					</div>
-					<button type="submit" class="btn btn-primary ">添加</button>
+					<a class="btn btn-primary" onclick="selectWare('<%=basePath%>')">添加</a>
 				</form>
-				<table class="table">
-					<tr class="info">
-						<th>商品编号</th>
-						<th>商品数量</th>
-						<th>单价</th>
-						<th>备注</th>
-					</tr>
-					<tr></tr>
-				</table>
+				<form id="shipForm">
+					<input type="hidden" name="userId" id="userIdHidden">
+					<input type="hidden" name="shipNo" id="shipNoHidden">
+
+					<table class="table" id="formTable">
+						<tr class="table info">
+							<th>商品编号</th>
+							<th>商品名称</th>
+							<th>商品数量</th>
+							<th>单价</th>
+							<th>备注</th>
+							<th>操作</th>
+						</tr>
+					</table>
+				</form>
+				<a type="reset" class="btn btn-primary" onclick="location.reload();">取消</a> <a type="submit" class="btn btn-primary" onclick="addShipToUser('<%=basePath%>')">出货</a>
 			</div>
 		</div>
 	</div>

@@ -76,6 +76,6 @@ public interface IUserManagerService {
 
     void deleteAuthority(Integer id);
     
-    /**获取所有营业员*/
-    List<UserInfo> getAllUserByFirmId(Integer firmId);
+    /**获取该公司的所有操作员*/
+    List<UserInfo> getAllUserAuthByFirmId(Integer firmId);
 }

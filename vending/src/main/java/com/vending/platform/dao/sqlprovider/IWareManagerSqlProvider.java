@@ -114,6 +114,8 @@ public class IWareManagerSqlProvider {
 					VALUES("num", "#{num}");
 				if(shipments.getType()!=null)
 					VALUES("type", "#{type}");
+				if(shipments.getIsSend()!=null)
+					VALUES("isSend", "#{isSend}");
 				if (shipments.getUserId() != null)
 					VALUES("userId", "#{userId}");
 				if (StringUtils.isNotBlank(shipments.getDescr()))
@@ -135,6 +137,8 @@ public class IWareManagerSqlProvider {
 					SET("num=#{num}");
 				if(shipments.getType()!=null)
 					SET("type=#{num}");
+				if(shipments.getIsSend()!=null)
+					SET("isSend=#{isSend}");
 				if (shipments.getUserId() != null)
 					SET("userId=#{userId}");
 				if (StringUtils.isNotBlank(shipments.getDescr()))
@@ -164,6 +168,8 @@ public class IWareManagerSqlProvider {
 						SET("userId=#{userId}");
 					if(shipments.getType()!=null)
 						SET("type=#{type}");
+					if(shipments.getIsSend()!=null)
+						SET("isSend=#{isSend}");
 					if (shipments.getUserInfo() != null) {
 						SET("fimrId=#{userInfo.firmId}");
 					}
