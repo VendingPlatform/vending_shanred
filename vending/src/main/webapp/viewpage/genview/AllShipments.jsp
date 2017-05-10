@@ -21,21 +21,26 @@
 			</div>
 		</div>
 		<div class="panel panel-default">
-			<div class="panel-heading">管理员信息</div>
+			<div class="panel-heading">库存信息</div>
 			<div class="panel-body">
 				<table class="table">
 					<tr>
 						<th>营业员组</th>
+						<th>营业员编号</th>
+						<th>营业员</th>
 						<th>商品名称</th>
 						<th>数量</th>
 						<th>单价</th>
 						<th>订单号</th>
 						<th>类型</th>
+						<th>是否结清</th>
 						<th>更新时间</th>
 					</tr>
 					<c:forEach items="${allShipments}" var="s">
 						<tr>
 							<td>${s.userInfo.groupInfo.groupName}</td>
+							<td>${s.userInfo.userNo }</td>
+							<td>${s.userInfo.userName }</td>
 							<td>${s.wareInfo.wareName}</td>
 							<td>${s.num }</td>
 							<td>${s.wareInfo.wareBasePrice }</td>
@@ -43,6 +48,10 @@
 							<td>
 								<c:if test="${s.type==0 }">出库</c:if>
 								<c:if test="${s.type==1 }">调拨</c:if>
+							</td>
+							<td>
+								<c:if test="${s.isSend==0 }">未结清</c:if>
+								<c:if test="${s.isSend==1 }">已结清</c:if>
 							</td>
 							<td>${s.operateDate }</td>
 						</tr>

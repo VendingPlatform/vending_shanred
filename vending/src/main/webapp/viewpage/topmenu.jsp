@@ -85,7 +85,7 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li><a href="<c:url value="/ware/getAllShipments"/>">出库信息查询</a></li>
-								<li><a href="<%=basePath%>viewpage/genview/Shipments.jsp">仓库出货</a></li>
+								<li><a href="<c:url value="/ware/intoShipmentsPage"/>">仓库出货</a></li>
 								<li><a href="#">调拨</a></li>
 								<li><a href="#">清单打印</a></li>
 							</ul>
