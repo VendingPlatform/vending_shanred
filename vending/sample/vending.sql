@@ -40,7 +40,7 @@ insert  into `authorityinfo`(`authId`,`authName`,`authCode`,`authDesc`,`authType
 (2,'运营商管理员权限','001','具有运营商内的所有管理权限（包括角色管理）',1,1,'2017-02-27 16:09:36'),
 (3,'厂商管理员权限','002','具有厂商内的所有管理权限（包括角色管理）',2,1,'2017-02-27 17:02:29'),
 (4,'运营商分组管理权限','00101','可管理用户组内组员及售货机信息（不包括角色管理）',1,1,'2017-04-05 22:30:44'),
-(5,'运营商普通管理权限','0010101','仅可管理自己的售货机及自身信息',1,1,'2017-04-05 22:31:43'),
+(5,'运营商营业员权限','0010101','仅可管理自己的售货机及自身信息',1,1,'2017-04-05 22:31:43'),
 (6,'运营商商品管理权限','00102','可管理商品',1,1,'2017-04-05 22:31:56'),
 (7,'运营商订单管理权限','00103','可管理订单',1,1,'2017-04-05 23:19:36'),
 (8,'运营商仓库管理权限','00104','可管理库存',1,1,'2017-04-05 23:25:00'),
@@ -307,7 +307,7 @@ CREATE TABLE `machineoperater` (
 LOCK TABLES `machineoperater` WRITE;
 
 insert  into `machineoperater`(`mOperaterId`,`machineId`,`machineAssign`,`userId`,`machineAddress`,`groupId`,`operFirmId`,`operateId`,`operateDate`) values 
-(26,30,0,NULL,NULL,NULL,22,NULL,'2017-04-19 19:14:12'),
+(26,30,1,6,NULL,NULL,22,NULL,'2017-05-10 17:19:45'),
 (27,31,0,NULL,NULL,NULL,22,NULL,'2017-04-25 21:05:35'),
 (28,32,0,NULL,NULL,NULL,22,NULL,'2017-04-25 21:05:39');
 
@@ -442,6 +442,7 @@ CREATE TABLE `shipments` (
   `num` int(11) DEFAULT NULL COMMENT '出货数量',
   `userId` int(11) DEFAULT NULL COMMENT '营业员Id',
   `type` int(11) DEFAULT NULL COMMENT '出货类型，0，出货，1，调拨',
+  `isSend` int(11) NOT NULL COMMENT '是否已结清；0：否，1：是',
   `descr` text COMMENT '备注',
   `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`shipId`),
@@ -449,15 +450,23 @@ CREATE TABLE `shipments` (
   KEY `userId` (`userId`),
   CONSTRAINT `shipments_ibfk_1` FOREIGN KEY (`wareId`) REFERENCES `wareinfo` (`wareId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `shipments_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `userinfo` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 /*Data for the table `shipments` */
 
 LOCK TABLES `shipments` WRITE;
 
-insert  into `shipments`(`shipId`,`wareId`,`shipNo`,`num`,`userId`,`type`,`descr`,`operateDate`) values 
-(1,1,'CSV20170508',3,6,0,'TEST','2017-05-08 21:16:51'),
-(2,1,'CSV20170508',4,6,0,NULL,'2017-05-08 22:30:04');
+insert  into `shipments`(`shipId`,`wareId`,`shipNo`,`num`,`userId`,`type`,`isSend`,`descr`,`operateDate`) values 
+(1,1,'CSV20170508',3,6,0,0,'TEST','2017-05-08 21:16:51'),
+(2,1,'CSV20170508',4,6,0,0,NULL,'2017-05-08 22:30:04'),
+(3,2,'sdfasd',12,6,NULL,0,'test1','2017-05-10 23:28:17'),
+(4,1,'sdfasd',12,6,NULL,0,'test2','2017-05-10 23:28:17'),
+(5,1,'asdfasdf',12,6,NULL,0,'test3','2017-05-10 23:29:10'),
+(6,2,'asdfasdf',12,6,NULL,0,'test4','2017-05-10 23:29:10'),
+(7,1,'dsgf',12,6,NULL,0,'test5','2017-05-10 23:29:43'),
+(8,2,'dsgf',12,6,NULL,0,'test6','2017-05-10 23:29:43'),
+(9,1,'asdfasdf',12,10,0,0,'test1','2017-05-10 23:30:56'),
+(10,2,'asdfasdf',12,10,0,0,'test2','2017-05-10 23:30:56');
 
 UNLOCK TABLES;
 
