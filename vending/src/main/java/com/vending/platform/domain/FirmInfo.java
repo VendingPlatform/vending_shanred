@@ -154,9 +154,13 @@ public class FirmInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "FirmInfo [firmId=" + firmId + ", firmName=" + firmName
-                + ", firmDesc=" + firmDesc + ", firmType=" + firmType
-                + ", firmStatus=" + firmStatus + ", operateId=" + operateId
-                + ", operateDate=" + operateDate + "]";
+        return "{"
+                + "\"firmId\":\"" +  firmId + "\","
+                + "\"firmName\":\"" +  firmName+ "\","
+                + "\"firmDesc\":\"" +  firmDesc + "\","
+                + "\"firmType\":\"" +  firmType+ "\","
+                + "\"firmStatus\":\"" +  firmStatus + "\","
+                + "\"operateId\":\"" +  operateId+ "\","
+                + "\"operateDate\":\"" +  operateDate + "\"}";
     }
 }

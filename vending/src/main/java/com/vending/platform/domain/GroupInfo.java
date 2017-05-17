@@ -127,10 +127,15 @@ public class GroupInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "GroupInfo [groupId=" + groupId + ", groupName=" + groupName
-                + ", groupType=" + groupType + ", groupDesc=" + groupDesc
-                + ", firmId=" + firmId + ", operateId=" + operateId
-                + ", operateDate=" + operateDate + "]";
+        return "{"
+        	+ "\"groupId\":\"" + groupId + "\","
+        	+ "\"groupName\":\"" + groupName+ ", "
+        	+ "\"groupType\":\"" + groupType + "\","
+        	+ "\"groupDesc\":\"" + groupDesc+ ", "
+        	+ "\"firmId\":\"" + firmId + "\","
+        	+ "\"operateId\":\"" + operateId + "\","
+        	+ "\"operateDate\":\"" + operateDate  + "\""
+        		+ "}";
     }
 
 }

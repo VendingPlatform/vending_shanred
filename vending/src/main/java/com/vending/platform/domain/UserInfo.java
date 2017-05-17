@@ -253,10 +253,21 @@ public class UserInfo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "UserInfo [userId=" + userId + ", userNo=" + userNo + ", userName=" + userName + ", password=" + password
-				+ ", mobilePhone=" + mobilePhone + ", email=" + email + ", roleId=" + roleId + ", roleName=" + roleName
-				+ ", groupId=" + groupId + ", status=" + status + ", firmId=" + firmId + ", parentUserId="
-				+ parentUserId + ", operateId=" + operateId + ", operateDate=" + operateDate + "]";
+		return "{\"userId\":\"" + userId + "\","
+				+ "\"userNo\": \""+ userNo + "\","
+				+ "\"userName\": \""+ userName + "\","
+				+ "\"password\": \""+ password + "\","
+				+ "\"mobilePhone\": \""+ mobilePhone + "\","
+				+ "\"email\": \""+ email + "\","
+				+ "\"roleId\": \""+ roleId + "\","
+				+ "\"roleName\": \""+ roleName + "\","
+				+ "\"groupId\": \""+ groupId + "\","
+				+ "\"status\": \""+ status + "\","
+				+ "\"firmId\": \""+ firmId + "\","
+				+ "\"parentUserId\": \""+  parentUserId + "\","
+				+ "\"operateId\": \""+  operateId + "\","
+				+ "\"operateDate\": \""+  operateDate + "\""
+				+ "}";
 	}
 
 }
