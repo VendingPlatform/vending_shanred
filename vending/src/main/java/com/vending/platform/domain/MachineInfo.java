@@ -163,8 +163,7 @@ public class MachineInfo implements Serializable {
         		+ "\"machinePrice\":\"" + machinePrice + "\","
         		+ "\"manuMachineStatus\":\"" +  manuMachineStatus + "\","
         		+ "\"operFirmId\":\"" + operFirmId + "\","
-        		+ "\"operateId\":\"" +  operateId + "\","
-        		+ "\"operateDate\":\"" + operateDate +  "\"}";
+        		+ "\"operateId\":\"" +  operateId + "\"}";
     }
 
 }

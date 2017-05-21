@@ -1,5 +1,8 @@
 package com.vending.platform.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSONObject;
 import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.UserInfo;
 import com.vending.platform.service.IMachineManagerService;
@@ -40,22 +42,23 @@ public class AndroidAction extends UtilsAction {
 
 	@ResponseBody
 	@RequestMapping(value = "/clientMachine")
-	public String getAllMachine(HttpServletRequest request, HttpServletResponse response) {
+	public String getAllMachine(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Integer userId = (Integer.parseInt(request.getParameter("userId")));
 		MachineOperater machineOperater = new MachineOperater();
 		machineOperater.setUserId(userId);
 		List<MachineOperater> machineOperaters = machineService.getAllMachineOperaters(machineOperater);
 		StringBuilder sBuilder = new StringBuilder();
-		sBuilder.append("{\"machines\" :[ ");
+		sBuilder.append("[ ");
 		for (int i = 0; i < machineOperaters.size(); i++) {
 			if (i != machineOperaters.size() - 1) {
 				sBuilder.append(machineOperaters.get(i).toString() + ",");
 			} else {
-				sBuilder.append(machineOperaters.get(i).toString()+"] }");
+				sBuilder.append(machineOperaters.get(i).toString()+"] ");
 			}
 		}
-
-		return sBuilder.toString();
+		 
+		String rString = URLEncoder.encode(sBuilder.toString(),"UTF-8");
+		return rString;
 	}
 
 }

@@ -166,7 +166,6 @@ public class MachineOperater implements Serializable {
 				+ " \"groupId\" : \"" + groupId+ "\", "
 				+ " \"operFirmId\" : \"" + operFirmId + "\", "
 				+ " \"operateId\" : \"" + operateId + "\", "
-				+ " \"operateDate\" : \"" + operateDate+ "\", "
 				+ " \"machineInfo\" : " + machineInfo 
 				+ "}";
 	}
