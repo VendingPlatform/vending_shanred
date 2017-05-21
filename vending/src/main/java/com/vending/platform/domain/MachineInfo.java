@@ -155,14 +155,15 @@ public class MachineInfo implements Serializable {
 
 	@Override
     public String toString() {
-        return "MachineInfo [machineId=" + machineId + ", machineName="
-                + machineName + ", machinePannel=" + machinePannel
-                + ", manuFirmId=" + manuFirmId + ", machinePrice="
-                + machinePrice 
-                + ", manuMachineStatus=" + manuMachineStatus + ", operFirmId="
-                + operFirmId + ", operateId=" + operateId + ", operateDate="
-                + operateDate + ", operFirmInfo=" + operFirmInfo
-                + ", manuFirmInfo=" + manuFirmInfo + "]";
+        return "{"
+        		+ "\"machineId\":\"" + machineId + "\","
+        		+ "\"machineName\":\"" + machineName + "\","
+        		+ "\"machinePannel\":\"" +  machinePannel+ "\","
+        		+ "\"manuFirmId\":\"" +  manuFirmId + "\","
+        		+ "\"machinePrice\":\"" + machinePrice + "\","
+        		+ "\"manuMachineStatus\":\"" +  manuMachineStatus + "\","
+        		+ "\"operFirmId\":\"" + operFirmId + "\","
+        		+ "\"operateId\":\"" +  operateId + "\"}";
     }
 
 }

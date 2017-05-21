@@ -156,13 +156,18 @@ public class MachineOperater implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "MachineOperater [mOperaterId=" + mOperaterId + ", machineId="
-                + machineId + ", machineAssign=" + machineAssign + ", userId="
-                + userId + ", machineAddress=" + machineAddress + ", groupId="
-                + groupId + ", operFirmId=" + operFirmId + ", operateId="
-                + operateId + ", operateDate=" + operateDate + ", groupInfo="
-                + groupInfo + "]";
-    }
+	public String toString() {
+		return "{"
+				+ " \"mOperaterId\" : \" " + mOperaterId + "\","
+				+ " \"machineId\" : \"" + machineId + "\", "
+				+ " \"machineAssign\" : \"" +machineAssign + "\", "
+				+ " \"userId\" : \"" + userId + "\", "
+				+ " \"machineAddress\" : \"" + machineAddress + "\","
+				+ " \"groupId\" : \"" + groupId+ "\", "
+				+ " \"operFirmId\" : \"" + operFirmId + "\", "
+				+ " \"operateId\" : \"" + operateId + "\", "
+				+ " \"machineInfo\" : " + machineInfo 
+				+ "}";
+	}
 
 }
