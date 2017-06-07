@@ -3,12 +3,14 @@ package com.vending.platform.service;
 import java.util.List;
 
 import com.vending.platform.domain.ChannelGroup;
+import com.vending.platform.domain.ChannelHistory;
 import com.vending.platform.domain.ChannelInfo;
 import com.vending.platform.domain.ChannelWareInfo;
 import com.vending.platform.domain.MachineOperater;
 
 public interface IChannelManagerService {
 
+	void insertChannelHistory(ChannelHistory channelHistory);
 	void insertChannelInfo(ChannelInfo channelInfo);
 
 	void updateChannelInfo(ChannelInfo channelInfo);

@@ -1,7 +1,5 @@
 package com.vending.platform.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -13,8 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.vending.platform.domain.ChannelHistory;
+import com.vending.platform.domain.ChannelInfo;
+import com.vending.platform.domain.ChannelWareInfo;
+import com.vending.platform.domain.MachineInfo;
 import com.vending.platform.domain.MachineOperater;
 import com.vending.platform.domain.UserInfo;
+import com.vending.platform.service.IChannelManagerService;
 import com.vending.platform.service.IMachineManagerService;
 import com.vending.platform.service.IUserManagerService;
 
@@ -26,6 +29,8 @@ public class AndroidAction extends UtilsAction {
 	private IUserManagerService userManagerService;
 	@Autowired
 	private IMachineManagerService machineService;
+	@Autowired
+	private IChannelManagerService channelService;
 
 	@ResponseBody
 	@RequestMapping(value = "/clientLogin")
@@ -53,12 +58,42 @@ public class AndroidAction extends UtilsAction {
 			if (i != machineOperaters.size() - 1) {
 				sBuilder.append(machineOperaters.get(i).toString() + ",");
 			} else {
-				sBuilder.append(machineOperaters.get(i).toString()+"] ");
+				sBuilder.append(machineOperaters.get(i).toString() + "] ");
 			}
 		}
-		 
-		String rString = URLEncoder.encode(sBuilder.toString(),"UTF-8");
+
+		String rString = URLEncoder.encode(sBuilder.toString(), "UTF-8");
 		return rString;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/clientAddStock")
+	public String addStockNum(HttpServletRequest request, HttpServletResponse response) {
+		String machineName = request.getParameter("machineName");
+		String channelNo = request.getParameter("channelNo");
+		Integer stockNum = Integer.valueOf(request.getParameter("stockNum"));
+		Integer userId = Integer.valueOf(request.getParameter("userId"));
+		// 对当前货道进行更新
+		ChannelInfo channel = new ChannelInfo();
+		MachineInfo machineInfo = new MachineInfo();
+		machineInfo.setMachineName(machineName);
+		channel.setMachineInfo(machineInfo);
+		channel.setChannelNo(channelNo);
+		channel = channelService.getAllChannelInfos(channel).get(0);
+		//更新channel表,更新加货量，现货量，操作员
+		ChannelInfo newChannel = new ChannelInfo();
+		newChannel.setChannelId(channel.getChannelId());
+		newChannel.setStockNumAdd(stockNum);
+		newChannel.setOperateId(userId);
+		newChannel.setStockNumNow(channel.getStockNumNow()+stockNum);
+		channelService.updateChannelInfo(newChannel);
+		// 将家伙信息添加至历史信息
+		// 获取货道商品信息
+		ChannelWareInfo channelWareInfo = channelService.getChannelWareInfo(channel.getChannelId());
+		ChannelHistory channelHistory = new ChannelHistory(machineName, channelWareInfo.getWareInfo().getWareName(),
+				channelWareInfo.getWareInfo().getWareBasePrice(), channelNo, stockNum, channel.getFirmId(), userId);
+		channelService.insertChannelHistory(channelHistory);
+		return "success";
 	}
 
 }
