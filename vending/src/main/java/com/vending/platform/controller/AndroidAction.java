@@ -1,5 +1,6 @@
 package com.vending.platform.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -61,17 +62,17 @@ public class AndroidAction extends UtilsAction {
 				sBuilder.append(machineOperaters.get(i).toString() + "] ");
 			}
 		}
-
 		String rString = URLEncoder.encode(sBuilder.toString(), "UTF-8");
 		return rString;
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/clientAddStock")
-	public String addStockNum(HttpServletRequest request, HttpServletResponse response) {
+	public String addStockNum(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String result="";
 		String machineName = request.getParameter("machineName");
 		String channelNo = request.getParameter("channelNo");
-		Integer stockNum = Integer.valueOf(request.getParameter("stockNum"));
+		Integer stockNumAdd = Integer.valueOf(request.getParameter("stockNum"));
 		Integer userId = Integer.valueOf(request.getParameter("userId"));
 		// 对当前货道进行更新
 		ChannelInfo channel = new ChannelInfo();
@@ -80,20 +81,28 @@ public class AndroidAction extends UtilsAction {
 		channel.setMachineInfo(machineInfo);
 		channel.setChannelNo(channelNo);
 		channel = channelService.getAllChannelInfos(channel).get(0);
-		//更新channel表,更新加货量，现货量，操作员
-		ChannelInfo newChannel = new ChannelInfo();
-		newChannel.setChannelId(channel.getChannelId());
-		newChannel.setStockNumAdd(stockNum);
-		newChannel.setOperateId(userId);
-		newChannel.setStockNumNow(channel.getStockNumNow()+stockNum);
-		channelService.updateChannelInfo(newChannel);
-		// 将家伙信息添加至历史信息
-		// 获取货道商品信息
-		ChannelWareInfo channelWareInfo = channelService.getChannelWareInfo(channel.getChannelId());
-		ChannelHistory channelHistory = new ChannelHistory(machineName, channelWareInfo.getWareInfo().getWareName(),
-				channelWareInfo.getWareInfo().getWareBasePrice(), channelNo, stockNum, channel.getFirmId(), userId);
-		channelService.insertChannelHistory(channelHistory);
-		return "success";
+		// 更新channel表,更新加货量，现货量，操作员
+		// 查看是否超出货道限制
+		if (channel.getStockNum() < (stockNumAdd + channel.getStockNumNow())) {
+			result ="超出货道总量";
+		} else if (stockNumAdd <= 0) {
+			result = "加货量为零";
+		} else {
+			ChannelInfo newChannel = new ChannelInfo();
+			newChannel.setChannelId(channel.getChannelId());
+			newChannel.setStockNumAdd(stockNumAdd);
+			newChannel.setOperateId(userId);
+			newChannel.setStockNumNow(channel.getStockNumNow() + stockNumAdd);
+			channelService.updateChannelInfo(newChannel);
+			// 将家伙信息添加至历史信息
+			// 获取货道商品信息
+			ChannelWareInfo channelWareInfo = channelService.getChannelWareInfo(channel.getChannelId());
+			ChannelHistory channelHistory = new ChannelHistory(machineName, channelWareInfo.getWareInfo().getWareName(),
+					channelWareInfo.getWareInfo().getWareBasePrice(), channelNo, stockNumAdd, channel.getFirmId(),
+					userId);
+			channelService.insertChannelHistory(channelHistory);
+			result = "添加成功";
+		}
+		return URLEncoder.encode(result.toString(), "UTF-8");
 	}
-
 }
