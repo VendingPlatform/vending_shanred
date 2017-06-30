@@ -110,7 +110,7 @@ CREATE TABLE `channelinfo` (
 LOCK TABLES `channelinfo` WRITE;
 
 insert  into `channelinfo`(`channelId`,`channelNo`,`stockNum`,`stockNumNow`,`stockNumAdd`,`channelGroupId`,`mOperaterId`,`machineId`,`firmId`,`operateId`,`operateDate`) values 
-(49,'001',11,0,0,1,26,30,22,6,'2017-04-26 11:15:30'),
+(49,'001',11,2,2,1,26,30,22,6,'2017-06-15 17:06:26'),
 (50,'002',11,0,0,NULL,26,30,22,3,'2017-04-19 19:14:16'),
 (51,'003',11,0,0,NULL,26,30,22,3,'2017-04-19 19:14:19'),
 (52,'001',11,0,0,1,27,31,22,6,'2017-04-26 11:15:34'),
@@ -129,25 +129,23 @@ CREATE TABLE `channelinfohistory` (
   `channelHistory` int(11) NOT NULL AUTO_INCREMENT COMMENT '历史Id',
   `machineName` varchar(11) DEFAULT NULL COMMENT '售货机名称',
   `channelNo` varchar(50) NOT NULL COMMENT '货道编号',
-  `channelGroupName` varchar(50) DEFAULT NULL COMMENT '货道组名称',
   `wareName` varchar(50) DEFAULT NULL COMMENT '商品名称',
   `price` double DEFAULT NULL COMMENT '价格',
-  `stockNum` int(11) DEFAULT '0' COMMENT '额定存货量',
-  `stockNumnNow` int(11) DEFAULT NULL COMMENT '当前存货量',
-  `stockNumnAdd` int(11) DEFAULT NULL COMMENT '新增存货量',
+  `firmId` int(11) NOT NULL COMMENT '所属公司',
+  `stockNumAdd` int(11) DEFAULT NULL COMMENT '新增存货量',
   `operateId` int(11) DEFAULT NULL COMMENT '操作者',
   `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`channelHistory`),
-  KEY `channelGroupId` (`channelGroupName`),
   KEY `machineId` (`machineName`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 /*Data for the table `channelinfohistory` */
 
 LOCK TABLES `channelinfohistory` WRITE;
 
-insert  into `channelinfohistory`(`channelHistory`,`machineName`,`channelNo`,`channelGroupName`,`wareName`,`price`,`stockNum`,`stockNumnNow`,`stockNumnAdd`,`operateId`,`operateDate`) values 
-(1,NULL,'',NULL,NULL,NULL,0,NULL,NULL,NULL,'0000-00-00 00:00:00');
+insert  into `channelinfohistory`(`channelHistory`,`machineName`,`channelNo`,`wareName`,`price`,`firmId`,`stockNumAdd`,`operateId`,`operateDate`) values 
+(2,'售货机1','001','百事可乐300ml',1.75,22,1,6,'2017-06-07 20:15:42'),
+(3,'售货机1','001','百事可乐300ml',1.75,22,1,6,'2017-06-07 20:22:58');
 
 UNLOCK TABLES;
 
@@ -308,7 +306,7 @@ LOCK TABLES `machineoperater` WRITE;
 
 insert  into `machineoperater`(`mOperaterId`,`machineId`,`machineAssign`,`userId`,`machineAddress`,`groupId`,`operFirmId`,`operateId`,`operateDate`) values 
 (26,30,1,6,NULL,NULL,22,NULL,'2017-05-10 17:19:45'),
-(27,31,0,NULL,NULL,NULL,22,NULL,'2017-04-25 21:05:35'),
+(27,31,1,6,NULL,NULL,22,NULL,'2017-05-21 19:09:49'),
 (28,32,0,NULL,NULL,NULL,22,NULL,'2017-04-25 21:05:39');
 
 UNLOCK TABLES;
