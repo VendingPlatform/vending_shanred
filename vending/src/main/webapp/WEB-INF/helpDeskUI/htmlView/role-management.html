@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <!-- IE兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 国产360浏览器高速模式 -->
+    <meta name="renderer" content="webkit">
+    <!-- 响应式设计 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>运营平台-角色管理</title>
+    <!-- 基础组件样式 -->
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/role-managements.css">
+    <!-- jQuery ui 组件样式 -->
+    <link rel="stylesheet" href="assets/css/jquery-ui-flat.css">
+    <!-- jQuery nprogress 进度条插件样式 -->
+    <link rel="stylesheet" href="assets/css/nprogress.css">
+    <!-- 图标字体样式 -->
+    <link rel="stylesheet" href="assets/css/simple-line-icons.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="assets/css/flat.css">
+    <link rel="stylesheet" href="assets/css/blue.css">
+    <!-- 
+        1. html5shiv 用于 IE8 支持 HTML5 标签 
+        2. respond.min.js 用于 IE8 的响应式设计兼容脚本。该脚本不支持本地直接打开方式，请在服务器下使用。
+    -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="pages theme-heading-static-top theme-sidebar-default">
+        <div class="navbar page-heading navbar-static-top">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- /navbar-header -->
+
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="notification">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="icon-bell"></i>
+                            <span class="badge badge-sm bg-badger">2</span>
+                        </a>
+                    </li>
+                    <li class="notification">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="icon-envelope fa-fw"></i>
+                            <span class="badge badge-sm bg-success">9</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#">
+                            <i class="icon-user"></i>
+                            李龙龙
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="icon-lock-open"></i>
+                            修改密码
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="icon-logout"></i>
+                            退出平台
+                        </a>
+                    </li>
+                </ul>
+                <!-- /navbar-right --> </div>
+        </div>
+        <!-- /navbar-top -->
+        <div class="page-sidebar">
+
+            <div class="sidebar-inner">
+                <div class="sidebar-brand bg-info">
+                    <i class="fa fa-area-chart fa-2x"></i>
+                    <span class="brand-title">运营平台</span>
+                </div>
+                <h4 class="sidebar-title">任务中心</h4>
+                <ul class="nav sidebar-nav">
+                    <li>
+                        <a href="#" >
+                            <i class="icon-rocket"></i>
+                            上报任务
+                            <span class="badge badge-sm bg-badger pull-right">20</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="icon-note"></i>
+                            任务处理
+                            <span class="badge badge-sm bg-info pull-right">4</span>
+                        </a>
+                    </li>
+                </ul>
+                <h4 class="sidebar-title">权限管理</h4>
+                <ul class="nav sidebar-nav">
+                    <li>
+                        <a href="#">
+                            <i class="icon-users "></i>
+                            用户管理
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="icon-settings "></i>
+                            角色管理
+                        </a>
+                    </li>
+                </ul>
+                <h4 class="sidebar-title">值班管理</h4>
+                <ul class="nav sidebar-nav">
+                    <li>
+                        <a href="#">
+                            <i class="icon-user"></i>
+                            值班安排
+                            <span class="badge badge-sm bg-success pull-right">5</span>
+                        </a>
+                    </li>
+                </ul>
+                <h4 class="sidebar-title">数据分析</h4>
+                <ul class="nav sidebar-nav">
+                    <li>
+                        <a href="#">
+                            <i class="icon-magnifier"></i>
+                            报表查询
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="icon-pie-chart"></i>
+                            数据分析
+                        </a>
+                    </li>
+                </ul>
+                <h4 class="sidebar-title sidebar-bordered">值班信息</h4>
+                <ul class="sidebar-user-nav">
+                    <li>
+                        <i class="color-info icon-directions margin-right-sm"></i>
+                        李龙龙
+                    </li>
+                    <li>
+                        <i class="color-info icon-call-end margin-right-sm"></i>
+                        010-1234567
+                    </li>
+                    <li>
+                        <a href="mailto:lilonglong@gm-medicare.com">
+                            <i class="color-info icon-envelope-letter margin-right-sm"></i>
+                            邮件联系值班人员
+                        </a>
+                    </li>
+                    <li>
+                        <i class="color-info fa fa-calendar margin-right-sm"></i>
+                        2015-08-06 22:22:30
+                    </li>
+
+                </ul>
+                <!-- /sidebar-user-nav --> </div>
+            <!-- /page-sidebar-inner --> </div>
+        <!-- /page-sidebar -->
+        <div class="page-content">
+            <div class="page-breadcrumb">
+                <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-flag fa-stack-1x fa-inverse"></i>
+                </span>
+                <h1>角色管理</h1>
+                <ol class="breadcrumb pull-right">
+                    <li class="description color-lightslategray">您现在的位置：</li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-home"></i>
+                            首页
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">权限管理</a>
+                    </li>
+                    <li class="active">角色管理</li>
+                </ol>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-flat">
+                            <div class="panel-heading clearfix">
+                                <h5 class="panel-title">
+                                    <i class="icon-grid"></i>
+                                    角色管理
+                                </h5>
+                                <div class="btn-group pull-right" role="group" aria-label="...">
+                                    <button type="button" class="btn btn-default" id="js-add-role-btn">
+                                        <i class="icon-user-follow"></i>
+                                        新增角色
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- /panel-heading -->
+                            <div class="panel-body">
+                                <form class="margin-bottom-lg">
+                                    <div class="row no-margin-right">
+                                        <div class="col-md-11">
+                                            <input type="text" class="form-control" placeholder="Search for...">
+                                        </div>
+                                        
+                                        <button class="btn btn-info col-md-1">
+                                             <i class="icon-magnifier"></i>
+                                            搜索
+                                        </button>
+                                    </div>
+                                </form>
+                                <!-- /form -->
+                                <div class="table-responsive">
+                                    <table class="table js-icheck">
+                                        <thead >
+                                            <tr class="bg-info-lighter">
+                                                <th>角色</th>
+                                                <th>理赔系统</th>
+                                                <th>权限</th>
+                                                <th>状态</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>@mdo</td>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>
+                                                    <span class="label bg-info">已处理</span>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-default">
+                                                        <i class="icon-note"></i>
+                                                        修改
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-default">
+                                                        <i class="icon-ban"></i>
+                                                        禁用
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+
+                                                <td>Jacob</td>
+                                                <td>Thornton</td>
+                                                <td>@fat</td>
+                                                <td>
+                                                    <span class="label bg-info">已处理</span>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-default">
+                                                        <i class="icon-note"></i>
+                                                        修改
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-default">
+                                                        <i class="icon-ban"></i>
+                                                        禁用
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                                <td>
+                                                    <span class="label bg-badger">未处理</span>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-default">
+                                                        <i class="icon-note"></i>
+                                                        修改
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-default">
+                                                        <i class="icon-ban"></i>
+                                                        禁用
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                                <td>
+                                                    <span class="label bg-badger">未处理</span>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-default">
+                                                        <i class="icon-note"></i>
+                                                        修改
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-default">
+                                                        <i class="icon-ban"></i>
+                                                        禁用
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                                <td>
+                                                    <span class="label bg-badger">未处理</span>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-default">
+                                                        <i class="icon-note"></i>
+                                                        修改
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-default">
+                                                        <i class="icon-ban"></i>
+                                                        禁用
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                                <td>
+                                                    <span class="label bg-badger">未处理</span>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-default">
+                                                        <i class="icon-note"></i>
+                                                        修改
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-default">
+                                                        <i class="icon-ban"></i>
+                                                        禁用
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                                <td>
+                                                    <span class="label bg-badger">未处理</span>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-default">
+                                                        <i class="icon-note"></i>
+                                                        修改
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-default">
+                                                        <i class="icon-ban"></i>
+                                                        禁用
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                                <td>
+                                                    <span class="label bg-info">已处理</span>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-default">
+                                                        <i class="icon-note"></i>
+                                                        修改
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-default">
+                                                        <i class="icon-ban"></i>
+                                                        禁用
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                                <td>
+                                                    <span class="label bg-info">已处理</span>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-default">
+                                                        <i class="icon-note"></i>
+                                                        修改
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-default">
+                                                        <i class="icon-ban"></i>
+                                                        禁用
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                                <td>
+                                                    <span class="label bg-info">已处理</span>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-default">
+                                                        <i class="icon-note"></i>
+                                                        修改
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-default">
+                                                        <i class="icon-ban"></i>
+                                                        禁用
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /table-responsive -->
+                                <div class="table-footer">
+                                    <div class="table-result pull-left color-lightslategray">
+                                        当前第：
+                                        <span class="result-index color-inverse">1</span>
+                                        页
+                                    共查找到：
+                                        <span class="result-number color-badger">1000</span>
+                                        条数据
+                                    </div>
+                                    <!-- /table-result -->
+                                    <nav class="pagination-custom-wrap">
+                                        <ul class=" pagination-custom">
+                                            <li class="active">
+                                                <a href="#" aria-label="Previous">首页</a>
+                                            </li>
+                                            <li class="disabled">
+                                                <a href="#" aria-label="Previous">«上一页</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="#" aria-label="Next">
+                                                    <span aria-hidden="true">下一页»</span>
+                                                </a>
+                                            </li>
+                                            <li >
+                                                <a href="#" aria-label="Previous">尾页</a>
+                                            </li>
+                                        </ul>
+                                        <div class="pagination-custom-result color-lightslategray">
+                                            <div class="pagination-total">
+                                                共
+                                                <span class="total">10</span>
+                                                页，
+                                            </div>
+                                            <div class="pagination-to">
+                                                到
+                                                <input type="text" class="form-control">页</div>
+
+                                            <button class="btn btn-default pagination-custom-btn" type="button">确定</button>
+                                        </div>
+                                    </nav>
+                                    <!-- /nav --> </div>
+                                <!-- /table-footer --> </div>
+                            <!-- /panel-body --> </div>
+                        <!-- /panel --> </div>
+                    <!-- /col-md-12 --> </div>
+                <!-- /row --> </div>
+            <!-- /container-fluid --> </div>
+        <!-- /page-content -->
+        <div class="page-footer">
+            <p class="copyright pull-left color-lightslategray">
+                © 2015 Copyright
+                <a href="http://www.gm-medicare.com/" target="_blank">GM-Medicare.com</a>
+                All Rights Reserved 版权所有
+            </p>
+            <p class="theme-author pull-right">
+                <i class="icon-envelope-letter color-badger"></i>
+                by
+                <a href="mailto:lilonglong@gm-medicare.com">李龙龙</a>
+            </p>
+        </div>
+        <!-- /page-footer --> </div>
+    <!-- /pages -->
+
+    <div id="js-add-role-dialog">
+        <form>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="请输入新增角色名..."></div>
+        </form>
+        <ul class="custom-tree-lists js-icheck">
+            <li>
+                <a data-toggle="collapse" href="#js-tree-one" aria-expanded="false" aria-controls="js-tree-one">
+                    <input type="checkbox">
+                    <i class="fa fa-minus fa-fw tree-left-icon pull-right" ></i>
+                    理赔系统
+                </a>
+                <ul id="js-tree-one" class="collapse in">
+                    <li>
+
+                        <a href="#">
+                            <input type="checkbox">新华人寿</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <input type="checkbox">太平人寿</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <input type="checkbox">幸福人寿</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a data-toggle="collapse" href="#js-tree-two" aria-expanded="false" aria-controls="js-tree-two" class="collapsed">
+                    <input type="checkbox">
+                    <i class="fa fa-minus fa-fw tree-left-icon pull-right"></i>
+                    任务中心
+                </a>
+                <ul id="js-tree-two" class="collapse">
+                    <li>
+
+                        <a href="#">
+                            <input type="checkbox">新华人寿</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <input type="checkbox">太平人寿</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <input type="checkbox">幸福人寿</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+
+                <a data-toggle="collapse" href="#js-tree-three" aria-expanded="false" aria-controls="js-tree-three" class="collapsed">
+                    <i class="fa fa-minus fa-fw tree-left-icon pull-right"></i>
+                    <input type="checkbox">上报中心</a>
+                <ul id="js-tree-three" class="collapse">
+                    <li>
+
+                        <a href="#">
+                            <input type="checkbox">新华人寿</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <input type="checkbox">太平人寿</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <input type="checkbox">幸福人寿</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+
+                <a data-toggle="collapse" href="#js-tree-four" aria-expanded="false" aria-controls="js-tree-four" class="collapsed">
+                    <i class="fa fa-minus fa-fw tree-left-icon pull-right"></i>
+                    <input type="checkbox">处理任务</a>
+                <ul id="js-tree-four" class="collapse">
+                    <li>
+
+                        <a href="#">
+                            <input type="checkbox">新华人寿</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <input type="checkbox">太平人寿</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <input type="checkbox">幸福人寿</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- /js-add-role-dialog -->
+    <div id="js-edit-role-dialog">
+        <form>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="请输入新增角色名..."></div>
+        </form>
+        <ul class="custom-tree-lists js-icheck">
+            <li>
+                <a data-toggle="collapse" href="#js-tree-first" aria-expanded="false" aria-controls="js-tree-first">
+                    <input type="checkbox">
+                    <i class="fa fa-minus fa-fw tree-left-icon pull-right" ></i>
+                    理赔系统
+                </a>
+                <ul id="js-tree-first" class="collapse in">
+                    <li>
+
+                        <a href="#">
+                            <input type="checkbox">新华人寿</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <input type="checkbox">太平人寿</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <input type="checkbox">幸福人寿</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a data-toggle="collapse" href="#js-tree-second" aria-expanded="false" aria-controls="js-tree-second" class="collapsed">
+                    <input type="checkbox">
+                    <i class="fa fa-minus fa-fw tree-left-icon pull-right"></i>
+                    任务中心
+                </a>
+                <ul id="js-tree-second" class="collapse">
+                    <li>
+
+                        <a href="#">
+                            <input type="checkbox">新华人寿</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <input type="checkbox">太平人寿</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <input type="checkbox">幸福人寿</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+
+                <a data-toggle="collapse" href="#js-tree-third" aria-expanded="false" aria-controls="js-tree-third" class="collapsed">
+                    <i class="fa fa-minus fa-fw tree-left-icon pull-right"></i>
+                    <input type="checkbox">上报中心</a>
+                <ul id="js-tree-third" class="collapse">
+                    <li>
+
+                        <a href="#">
+                            <input type="checkbox">新华人寿</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <input type="checkbox">太平人寿</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <input type="checkbox">幸福人寿</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+
+                <a data-toggle="collapse" href="#js-tree-fourth" aria-expanded="false" aria-controls="js-tree-fourth" class="collapsed">
+                    <i class="fa fa-minus fa-fw tree-left-icon pull-right"></i>
+                    <input type="checkbox">处理任务</a>
+                <ul id="js-tree-fourth" class="collapse">
+                    <li>
+
+                        <a href="#">
+                            <input type="checkbox">新华人寿</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <input type="checkbox">太平人寿</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <input type="checkbox">幸福人寿</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- /js-edit-role-dialog -->
+    <!-- jQuery -->
+    <script src="assets/js/lib/jquery.js"></script>
+    <!-- jQuery UI -->
+    <script src="assets/js/lib/jquery-ui.min.js"></script>
+    <!-- jQuery twitter bootstrap -->
+    <script src="assets/js/lib/bootstrap.min.js"></script>
+    <!-- jQuery 进度条 nprogress -->
+    <script src="assets/js/lib/nprogress.js"></script>
+    <!-- jQuery icheck -->
+    <script src="assets/js/lib/icheck.min.js"></script>
+    <!-- jQuery slimscroll -->
+    <script src="assets/js/lib/jquery.slimscroll.js"></script>
+    <!-- 基础脚本库 -->
+    <script src="assets/js/base/app.js"></script>
+    <script src="assets/js/pages/role-management.js"></script>
+    <script>
+    $(function (){
+        'use strict';
+        App.stopDefaultEvent();
+        App.sidebarScroll();
+        App.pageLoadBar();
+        App.icheckForm();
+        RoleManagement.addUserDialog();
+        RoleManagement.editRoleDialog();
+    });
+</script>
+</body>
+</html>
