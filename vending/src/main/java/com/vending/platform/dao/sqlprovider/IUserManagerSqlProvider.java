@@ -292,48 +292,51 @@ public class IUserManagerSqlProvider {
 	public String getAllUsers(UserInfo userInfo) {
 		return new SQL() {
 			{
-				SELECT("*").FROM("userinfo");
+				SELECT("a.*").FROM("userinfo a ,firminfo b");
 				if (userInfo.getUserNo() != null) {
-					WHERE("userNo=#{userNo}");
+					WHERE("a.userNo=#{userNo}");
 				}
 				if (StringUtils.isNotBlank(userInfo.getUserName())) {
-					WHERE("userName=#{userName}");
+					WHERE("a.userName=#{userName}");
 				}
 				if (StringUtils.isNotBlank(userInfo.getPassword())) {
-					WHERE("password=#{password}");
+					WHERE("a.password=#{password}");
 				}
 				if (StringUtils.isNotBlank(userInfo.getMobilePhone())) {
-					WHERE("mobilePhone=#{mobilePhone}");
+					WHERE("a.mobilePhone=#{mobilePhone}");
 				}
 				if (StringUtils.isNotBlank(userInfo.getEmail())) {
-					WHERE("email=#{email}");
+					WHERE("a.email=#{email}");
 				}
 				if (userInfo.getRoleId() != null) {
-					WHERE("roleId=#{roleId}");
+					WHERE("a.roleId=#{roleId}");
 				}
 				if (StringUtils.isNotBlank(userInfo.getRoleName())) {
-					WHERE("roleName=#{roleName}");
+					WHERE("a.roleName=#{roleName}");
 				}
                 if (userInfo.getGroupManager() != null)
-                    WHERE("groupManager=#{groupManager}");
+                    WHERE("a.groupManager=#{groupManager}");
 				if (userInfo.getGroupId() != null) {
 					if (userInfo.getGroupId() == -1) {
-						WHERE("groupId is null");
+						WHERE("a.groupId is null");
 					} else {
-						WHERE("groupId=#{groupId}");
+						WHERE("a.groupId=#{groupId}");
 					}
 				}
 				if (userInfo.getStatus() != null) {
-					WHERE("status=#{status}");
+					WHERE("a.status=#{status}");
 				}
 				if (userInfo.getFirmId() != null) {
-					WHERE("firmId=#{firmId}");
+					WHERE("a.firmId=#{firmId}");
+				}
+				if(userInfo.getFirmInfo()!=null&&userInfo.getFirmInfo().getFirmNo()!=null){
+					WHERE("b.firmNo=#{firmInfo.firmNo}");
 				}
 				if (userInfo.getParentUserId() != null) {
-					WHERE("parentUserId=#{parentUserId}");
+					WHERE("a.parentUserId=#{parentUserId}");
 				}
 				if (userInfo.getOperateId() != null) {
-					WHERE("operateId=#{operateId}");
+					WHERE("a.doperateId=#{operateId}");
 				}
 			}
 		}.toString();

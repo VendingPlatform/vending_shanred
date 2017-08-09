@@ -1,9 +1,8 @@
 /*
-SQLyog Ultimate v10.00 Beta1
+SQLyog Community v12.4.1 (64 bit)
 MySQL - 5.1.62-community : Database - vending
 *********************************************************************
 */
-
 
 /*!40101 SET NAMES utf8 */;
 
@@ -34,7 +33,20 @@ CREATE TABLE `authorityinfo` (
 
 /*Data for the table `authorityinfo` */
 
-insert  into `authorityinfo`(`authId`,`authName`,`authCode`,`authDesc`,`authType`,`operateId`,`operateDate`) values (1,'系统权限','000','具有整个系统的管理权限',0,1,'2017-02-27 12:55:37'),(2,'运营商管理员权限','001','具有运营商内的所有管理权限（包括角色管理）',1,1,'2017-02-27 16:09:36'),(3,'厂商管理员权限','002','具有厂商内的所有管理权限（包括角色管理）',2,1,'2017-02-27 17:02:29'),(4,'运营商分组管理权限','00101','可管理用户组内组员及售货机信息（不包括角色管理）',1,1,'2017-04-05 22:30:44'),(5,'运营商营业员权限','0010101','仅可管理自己的售货机及自身信息',1,1,'2017-04-05 22:31:43'),(6,'运营商商品管理权限','00102','可管理商品',1,1,'2017-04-05 22:31:56'),(7,'运营商订单管理权限','00103','可管理订单',1,1,'2017-04-05 23:19:36'),(8,'运营商仓库管理权限','00104','可管理库存',1,1,'2017-04-05 23:25:00'),(9,'运营商财务管理权限','00105','可管理财务',1,1,'2017-04-05 23:25:44');
+LOCK TABLES `authorityinfo` WRITE;
+
+insert  into `authorityinfo`(`authId`,`authName`,`authCode`,`authDesc`,`authType`,`operateId`,`operateDate`) values 
+(1,'系统权限','000','具有整个系统的管理权限',0,1,'2017-02-27 12:55:37'),
+(2,'运营商管理员权限','001','具有运营商内的所有管理权限（包括角色管理）',1,1,'2017-02-27 16:09:36'),
+(3,'厂商管理员权限','002','具有厂商内的所有管理权限（包括角色管理）',2,1,'2017-02-27 17:02:29'),
+(4,'运营商分组管理权限','00101','可管理用户组内组员及售货机信息（不包括角色管理）',1,1,'2017-04-05 22:30:44'),
+(5,'运营商营业员权限','0010101','仅可管理自己的售货机及自身信息',1,1,'2017-04-05 22:31:43'),
+(6,'运营商商品管理权限','00102','可管理商品',1,1,'2017-04-05 22:31:56'),
+(7,'运营商订单管理权限','00103','可管理订单',1,1,'2017-04-05 23:19:36'),
+(8,'运营商仓库管理权限','00104','可管理库存',1,1,'2017-04-05 23:25:00'),
+(9,'运营商财务管理权限','00105','可管理财务',1,1,'2017-04-05 23:25:44');
+
+UNLOCK TABLES;
 
 /*Table structure for table `channelgroup` */
 
@@ -57,7 +69,16 @@ CREATE TABLE `channelgroup` (
 
 /*Data for the table `channelgroup` */
 
-insert  into `channelgroup`(`channelGroupId`,`channelGroupName`,`firmId`,`wareId`,`price`,`isDiscount`,`operateId`,`operateDate`) values (1,'testChannelGroup',22,1,2.5,0,NULL,'2017-04-16 17:03:12'),(2,'test-1',22,1,2.5,0,NULL,NULL),(3,'test',22,2,3,0,6,'2017-04-20 22:12:05'),(4,'test-2',22,1,2.5,0,6,'2017-04-20 22:12:49'),(5,'testAdd',22,1,2.3,0,6,'2017-04-25 21:47:53');
+LOCK TABLES `channelgroup` WRITE;
+
+insert  into `channelgroup`(`channelGroupId`,`channelGroupName`,`firmId`,`wareId`,`price`,`isDiscount`,`operateId`,`operateDate`) values 
+(1,'testChannelGroup',22,1,2.5,0,NULL,'2017-04-16 17:03:12'),
+(2,'test-1',22,1,2.5,0,NULL,NULL),
+(3,'test',22,2,3,0,6,'2017-04-20 22:12:05'),
+(4,'test-2',22,1,2.5,0,6,'2017-04-20 22:12:49'),
+(5,'testAdd',22,1,2.3,0,6,'2017-04-25 21:47:53');
+
+UNLOCK TABLES;
 
 /*Table structure for table `channelinfo` */
 
@@ -86,7 +107,25 @@ CREATE TABLE `channelinfo` (
 
 /*Data for the table `channelinfo` */
 
-insert  into `channelinfo`(`channelId`,`channelNo`,`stockNum`,`stockNumNow`,`stockNumAdd`,`channelGroupId`,`mOperaterId`,`machineId`,`firmId`,`operateId`,`operateDate`) values (49,'001',11,2,2,1,26,30,22,6,'2017-06-15 17:06:26'),(50,'002',11,0,0,NULL,26,30,22,3,'2017-04-19 19:14:16'),(51,'003',11,0,0,NULL,26,30,22,3,'2017-04-19 19:14:19'),(52,'001',11,0,0,1,27,31,22,6,'2017-04-26 11:15:34'),(53,'002',11,0,0,NULL,27,31,22,3,'2017-04-25 21:05:35'),(54,'003',11,0,0,NULL,27,31,22,3,'2017-04-25 21:05:35'),(55,'001                                           ',11,0,0,1,28,32,22,6,'2017-04-26 11:15:36'),(56,'002',11,0,0,NULL,28,32,22,3,'2017-04-25 21:05:39'),(59,'001',11,0,0,NULL,29,33,22,3,'2017-06-30 16:28:23'),(60,'002',11,0,0,NULL,29,33,22,3,'2017-06-30 16:28:23'),(61,'003',11,0,0,NULL,29,33,22,3,'2017-06-30 16:28:23'),(62,'004',11,0,0,NULL,29,33,22,3,'2017-06-30 16:28:23'),(63,'005',11,0,0,NULL,29,33,22,3,'2017-06-30 16:28:23'),(64,'006',11,0,0,NULL,29,33,22,3,'2017-06-30 16:28:23');
+LOCK TABLES `channelinfo` WRITE;
+
+insert  into `channelinfo`(`channelId`,`channelNo`,`stockNum`,`stockNumNow`,`stockNumAdd`,`channelGroupId`,`mOperaterId`,`machineId`,`firmId`,`operateId`,`operateDate`) values 
+(49,'001',11,2,2,1,26,30,22,6,'2017-06-15 17:06:26'),
+(50,'002',11,0,0,NULL,26,30,22,3,'2017-04-19 19:14:16'),
+(51,'003',11,0,0,NULL,26,30,22,3,'2017-04-19 19:14:19'),
+(52,'001',11,0,0,1,27,31,22,6,'2017-04-26 11:15:34'),
+(53,'002',11,0,0,NULL,27,31,22,3,'2017-04-25 21:05:35'),
+(54,'003',11,0,0,NULL,27,31,22,3,'2017-04-25 21:05:35'),
+(55,'001                                           ',11,0,0,1,28,32,22,6,'2017-04-26 11:15:36'),
+(56,'002',11,0,0,NULL,28,32,22,3,'2017-04-25 21:05:39'),
+(59,'001',11,0,0,NULL,29,33,22,3,'2017-06-30 16:28:23'),
+(60,'002',11,0,0,NULL,29,33,22,3,'2017-06-30 16:28:23'),
+(61,'003',11,0,0,NULL,29,33,22,3,'2017-06-30 16:28:23'),
+(62,'004',11,0,0,NULL,29,33,22,3,'2017-06-30 16:28:23'),
+(63,'005',11,0,0,NULL,29,33,22,3,'2017-06-30 16:28:23'),
+(64,'006',11,0,0,NULL,29,33,22,3,'2017-06-30 16:28:23');
+
+UNLOCK TABLES;
 
 /*Table structure for table `channelinfohistory` */
 
@@ -108,7 +147,13 @@ CREATE TABLE `channelinfohistory` (
 
 /*Data for the table `channelinfohistory` */
 
-insert  into `channelinfohistory`(`channelHistory`,`machineName`,`channelNo`,`wareName`,`price`,`firmId`,`stockNumAdd`,`operateId`,`operateDate`) values (2,'售货机1','001','百事可乐300ml',1.75,22,1,6,'2017-06-07 20:15:42'),(3,'售货机1','001','百事可乐300ml',1.75,22,1,6,'2017-06-07 20:22:58');
+LOCK TABLES `channelinfohistory` WRITE;
+
+insert  into `channelinfohistory`(`channelHistory`,`machineName`,`channelNo`,`wareName`,`price`,`firmId`,`stockNumAdd`,`operateId`,`operateDate`) values 
+(2,'售货机1','001','百事可乐300ml',1.75,22,1,6,'2017-06-07 20:15:42'),
+(3,'售货机1','001','百事可乐300ml',1.75,22,1,6,'2017-06-07 20:22:58');
+
+UNLOCK TABLES;
 
 /*Table structure for table `channelwareinfo` */
 
@@ -128,7 +173,25 @@ CREATE TABLE `channelwareinfo` (
 
 /*Data for the table `channelwareinfo` */
 
-insert  into `channelwareinfo`(`channelId`,`wareId`,`price`,`isDiscount`,`mOperaterId`) values (49,1,2.5,0,26),(50,NULL,NULL,0,26),(51,NULL,NULL,0,26),(52,1,2.5,0,27),(53,NULL,NULL,0,27),(54,NULL,NULL,0,27),(55,1,2.5,0,28),(56,NULL,NULL,0,28),(59,NULL,NULL,0,29),(60,NULL,NULL,0,29),(61,NULL,NULL,0,29),(62,NULL,NULL,0,29),(63,NULL,NULL,0,29),(64,NULL,NULL,0,29);
+LOCK TABLES `channelwareinfo` WRITE;
+
+insert  into `channelwareinfo`(`channelId`,`wareId`,`price`,`isDiscount`,`mOperaterId`) values 
+(49,1,2.5,0,26),
+(50,NULL,NULL,0,26),
+(51,NULL,NULL,0,26),
+(52,1,2.5,0,27),
+(53,NULL,NULL,0,27),
+(54,NULL,NULL,0,27),
+(55,1,2.5,0,28),
+(56,NULL,NULL,0,28),
+(59,NULL,NULL,0,29),
+(60,NULL,NULL,0,29),
+(61,NULL,NULL,0,29),
+(62,NULL,NULL,0,29),
+(63,NULL,NULL,0,29),
+(64,NULL,NULL,0,29);
+
+UNLOCK TABLES;
 
 /*Table structure for table `firminfo` */
 
@@ -143,7 +206,7 @@ CREATE TABLE `firminfo` (
   `firmStatus` int(11) NOT NULL DEFAULT '0' COMMENT '公司状态，0：不可用；1：可用',
   `startTime` datetime DEFAULT NULL COMMENT 'SaaS租用开始时间',
   `endTime` datetime DEFAULT NULL COMMENT 'SaaS到期到期时间',
-  `isTry` int(11) DEFAULT '1' COMMENT '是否为试用期间，0，否，1，是',
+  `hasTry` int(11) DEFAULT '1' COMMENT '是否试用过，若试用过为1,以后将必须进行租用',
   `operateId` int(11) DEFAULT NULL COMMENT '操作人',
   `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`firmId`)
@@ -151,7 +214,17 @@ CREATE TABLE `firminfo` (
 
 /*Data for the table `firminfo` */
 
-insert  into `firminfo`(`firmId`,`firmNo`,`firmName`,`firmDesc`,`firmType`,`firmStatus`,`startTime`,`endTime`,`isTry`,`operateId`,`operateDate`) values (1,'000','system','system',0,1,NULL,NULL,1,1,'2017-02-27 12:13:38'),(3,'002','厂商1','厂商1的描述信息',2,1,NULL,NULL,1,1,'2017-04-10 15:43:11'),(4,'003','运营商1','运营商1描述',1,1,NULL,NULL,1,1,'2017-04-09 18:27:16'),(22,'005','运营商2','运营商描述',1,1,NULL,NULL,1,1,'2017-04-09 18:27:24'),(23,'006','运营商3','test describe',1,1,NULL,NULL,1,1,'2017-04-09 18:27:32'),(26,'007','test','test1',1,1,NULL,NULL,1,3,'2017-04-17 16:16:50');
+LOCK TABLES `firminfo` WRITE;
+
+insert  into `firminfo`(`firmId`,`firmNo`,`firmName`,`firmDesc`,`firmType`,`firmStatus`,`startTime`,`endTime`,`hasTry`,`operateId`,`operateDate`) values 
+(1,'000','system','system',0,1,NULL,NULL,1,1,'2017-02-27 12:13:38'),
+(3,'002','厂商1','厂商1的描述信息',2,1,NULL,NULL,1,1,'2017-04-10 15:43:11'),
+(4,'003','运营商1','运营商1描述',1,1,NULL,NULL,1,1,'2017-04-09 18:27:16'),
+(22,'005','运营商2','运营商描述',1,1,NULL,NULL,1,1,'2017-04-09 18:27:24'),
+(23,'006','运营商3','test describe',1,1,NULL,NULL,1,1,'2017-04-09 18:27:32'),
+(26,'007','test','test1',1,1,NULL,NULL,1,3,'2017-04-17 16:16:50');
+
+UNLOCK TABLES;
 
 /*Table structure for table `groupinfo` */
 
@@ -172,7 +245,17 @@ CREATE TABLE `groupinfo` (
 
 /*Data for the table `groupinfo` */
 
-insert  into `groupinfo`(`groupId`,`groupName`,`groupType`,`groupDesc`,`firmId`,`operateId`,`operateDate`) values (1,'system',0,'系统管理员分组，此分组用作区分用户角色',1,1,'2017-03-20 16:59:54'),(32,'售货机组1',2,'售货机组1',22,6,'2017-04-09 19:26:00'),(33,'售货机组2',2,'售货机组2',22,6,'2017-04-09 19:26:51'),(35,'test',1,'TEST',22,6,'2017-04-10 22:03:06'),(36,'华师大组',1,'test',22,6,'2017-05-08 15:51:52'),(37,'中山公园组',1,'test',22,6,'2017-05-08 15:52:05');
+LOCK TABLES `groupinfo` WRITE;
+
+insert  into `groupinfo`(`groupId`,`groupName`,`groupType`,`groupDesc`,`firmId`,`operateId`,`operateDate`) values 
+(1,'system',0,'系统管理员分组，此分组用作区分用户角色',1,1,'2017-03-20 16:59:54'),
+(32,'售货机组1',2,'售货机组1',22,6,'2017-04-09 19:26:00'),
+(33,'售货机组2',2,'售货机组2',22,6,'2017-04-09 19:26:51'),
+(35,'test',1,'TEST',22,6,'2017-04-10 22:03:06'),
+(36,'华师大组',1,'test',22,6,'2017-05-08 15:51:52'),
+(37,'中山公园组',1,'test',22,6,'2017-05-08 15:52:05');
+
+UNLOCK TABLES;
 
 /*Table structure for table `machineinfo` */
 
@@ -184,6 +267,7 @@ CREATE TABLE `machineinfo` (
   `machinePannel` varchar(50) NOT NULL COMMENT '售货机主板号',
   `manuFirmId` int(11) NOT NULL COMMENT '厂商ID',
   `machinePrice` decimal(10,0) DEFAULT NULL COMMENT '售货机价格',
+  `machineRentPrice` decimal(10,0) DEFAULT NULL COMMENT '售货机租用价格',
   `tModelId` int(11) DEFAULT NULL COMMENT '售货机类型',
   `manuMachineStatus` int(11) NOT NULL DEFAULT '0' COMMENT '0:未售出，1：已售出，2：回收',
   `operFirmId` int(11) DEFAULT NULL COMMENT '卖给某运营商ID',
@@ -200,7 +284,15 @@ CREATE TABLE `machineinfo` (
 
 /*Data for the table `machineinfo` */
 
-insert  into `machineinfo`(`machineId`,`machineName`,`machinePannel`,`manuFirmId`,`machinePrice`,`tModelId`,`manuMachineStatus`,`operFirmId`,`operateId`,`operateDate`) values (30,'售货机1','售货机1',3,'60',1,1,22,3,'2017-04-19 19:12:03'),(31,'售货机2','售货机2',3,'20',1,1,22,3,'2017-04-19 19:12:28'),(32,'售货机3','售货机3',3,'20',2,1,22,3,'2017-04-19 19:12:45'),(33,'售货机4','售货机4',3,'60',1,1,22,3,'2017-06-30 16:27:35');
+LOCK TABLES `machineinfo` WRITE;
+
+insert  into `machineinfo`(`machineId`,`machineName`,`machinePannel`,`manuFirmId`,`machinePrice`,`machineRentPrice`,`tModelId`,`manuMachineStatus`,`operFirmId`,`operateId`,`operateDate`) values 
+(30,'售货机1','售货机1',3,60,NULL,1,1,22,3,'2017-04-19 19:12:03'),
+(31,'售货机2','售货机2',3,20,NULL,1,1,22,3,'2017-04-19 19:12:28'),
+(32,'售货机3','售货机3',3,20,NULL,2,1,22,3,'2017-04-19 19:12:45'),
+(33,'售货机4','售货机4',3,60,NULL,1,1,22,3,'2017-06-30 16:27:35');
+
+UNLOCK TABLES;
 
 /*Table structure for table `machineoperater` */
 
@@ -227,7 +319,15 @@ CREATE TABLE `machineoperater` (
 
 /*Data for the table `machineoperater` */
 
-insert  into `machineoperater`(`mOperaterId`,`machineId`,`machineAssign`,`userId`,`machineAddress`,`groupId`,`operFirmId`,`operateId`,`operateDate`) values (26,30,1,6,NULL,NULL,22,NULL,'2017-05-10 17:19:45'),(27,31,1,6,NULL,NULL,22,NULL,'2017-05-21 19:09:49'),(28,32,0,NULL,NULL,NULL,22,NULL,'2017-04-25 21:05:39'),(29,33,0,NULL,NULL,NULL,22,NULL,'2017-06-30 16:28:23');
+LOCK TABLES `machineoperater` WRITE;
+
+insert  into `machineoperater`(`mOperaterId`,`machineId`,`machineAssign`,`userId`,`machineAddress`,`groupId`,`operFirmId`,`operateId`,`operateDate`) values 
+(26,30,1,6,NULL,NULL,22,NULL,'2017-05-10 17:19:45'),
+(27,31,1,6,NULL,NULL,22,NULL,'2017-05-21 19:09:49'),
+(28,32,0,NULL,NULL,NULL,22,NULL,'2017-04-25 21:05:39'),
+(29,33,0,NULL,NULL,NULL,22,NULL,'2017-06-30 16:28:23');
+
+UNLOCK TABLES;
 
 /*Table structure for table `machinetype` */
 
@@ -246,7 +346,13 @@ CREATE TABLE `machinetype` (
 
 /*Data for the table `machinetype` */
 
-insert  into `machinetype`(`tModelId`,`tModelName`,`firmId`,`operateId`,`operateDate`) values (1,'类型1',3,1,'2017-02-27 17:07:25'),(2,'类型2',3,3,'2017-03-16 23:08:23');
+LOCK TABLES `machinetype` WRITE;
+
+insert  into `machinetype`(`tModelId`,`tModelName`,`firmId`,`operateId`,`operateDate`) values 
+(1,'类型1',3,1,'2017-02-27 17:07:25'),
+(2,'类型2',3,3,'2017-03-16 23:08:23');
+
+UNLOCK TABLES;
 
 /*Table structure for table `opermgr` */
 
@@ -267,7 +373,14 @@ CREATE TABLE `opermgr` (
 
 /*Data for the table `opermgr` */
 
-insert  into `opermgr`(`operMgrId`,`firmId`,`manuId`,`operateId`,`operateDate`) values (10,22,3,3,'2017-04-09 18:34:49'),(11,23,3,3,'2017-04-09 18:34:49'),(13,4,3,3,'2017-04-09 19:11:38');
+LOCK TABLES `opermgr` WRITE;
+
+insert  into `opermgr`(`operMgrId`,`firmId`,`manuId`,`operateId`,`operateDate`) values 
+(10,22,3,3,'2017-04-09 18:34:49'),
+(11,23,3,3,'2017-04-09 18:34:49'),
+(13,4,3,3,'2017-04-09 19:11:38');
+
+UNLOCK TABLES;
 
 /*Table structure for table `roleauth` */
 
@@ -286,7 +399,26 @@ CREATE TABLE `roleauth` (
 
 /*Data for the table `roleauth` */
 
-insert  into `roleauth`(`roleAuthId`,`roleId`,`authId`) values (1,1,1),(2,2,2),(3,3,3),(4,9,4),(5,2,4),(15,2,5),(16,2,6),(17,2,7),(18,2,8),(19,2,9),(20,11,6),(21,11,8),(22,12,7),(23,12,9),(24,10,5);
+LOCK TABLES `roleauth` WRITE;
+
+insert  into `roleauth`(`roleAuthId`,`roleId`,`authId`) values 
+(1,1,1),
+(2,2,2),
+(3,3,3),
+(4,9,4),
+(5,2,4),
+(15,2,5),
+(16,2,6),
+(17,2,7),
+(18,2,8),
+(19,2,9),
+(20,11,6),
+(21,11,8),
+(22,12,7),
+(23,12,9),
+(24,10,5);
+
+UNLOCK TABLES;
 
 /*Table structure for table `roleinfo` */
 
@@ -302,17 +434,33 @@ CREATE TABLE `roleinfo` (
 
 /*Data for the table `roleinfo` */
 
-insert  into `roleinfo`(`roleId`,`roleName`,`firmType`,`operateDate`) values (1,'系统管理员',0,'2017-04-07 17:27:47'),(2,'运营商管理员',1,'2017-04-07 17:27:13'),(3,'厂商管理员',2,'2017-04-07 17:26:28'),(9,'用户组管理员',1,'2017-04-07 17:27:27'),(10,'操作员',1,'2017-04-07 15:52:10'),(11,'库存管理员',1,'2017-04-09 14:48:08'),(12,'财务管理员',1,'2017-04-09 14:49:19');
+LOCK TABLES `roleinfo` WRITE;
+
+insert  into `roleinfo`(`roleId`,`roleName`,`firmType`,`operateDate`) values 
+(1,'系统管理员',0,'2017-04-07 17:27:47'),
+(2,'运营商管理员',1,'2017-04-07 17:27:13'),
+(3,'厂商管理员',2,'2017-04-07 17:26:28'),
+(9,'用户组管理员',1,'2017-04-07 17:27:27'),
+(10,'操作员',1,'2017-04-07 15:52:10'),
+(11,'库存管理员',1,'2017-04-09 14:48:08'),
+(12,'财务管理员',1,'2017-04-09 14:49:19');
+
+UNLOCK TABLES;
 
 /*Table structure for table `saasnumprice` */
 
 DROP TABLE IF EXISTS `saasnumprice`;
 
 CREATE TABLE `saasnumprice` (
-  `numPrice` int(11) NOT NULL COMMENT '每台售货机租用价格'
+  `numPrice` int(11) NOT NULL COMMENT '每台售货机租用价格',
+  `firmType` int(11) DEFAULT NULL COMMENT '商家类型，厂商和运营商租用价格不一样'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `saasnumprice` */
+
+LOCK TABLES `saasnumprice` WRITE;
+
+UNLOCK TABLES;
 
 /*Table structure for table `saasprice` */
 
@@ -322,12 +470,22 @@ CREATE TABLE `saasprice` (
   `priceName` varchar(50) NOT NULL COMMENT '定价名称',
   `price` int(11) NOT NULL COMMENT 'SaaS收费价格',
   `rangeTime` int(11) NOT NULL COMMENT '价格对应的租用天数',
+  `discount` int(11) DEFAULT NULL COMMENT '折扣',
   PRIMARY KEY (`priceName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `saasprice` */
 
-insert  into `saasprice`(`priceName`,`price`,`rangeTime`) values ('15day',20,15),('1year',360,365),('30day',40,30),('3month',120,90),('tryonemonth',0,30);
+LOCK TABLES `saasprice` WRITE;
+
+insert  into `saasprice`(`priceName`,`price`,`rangeTime`,`discount`) values 
+('1month',40,30,100),
+('1year',408,365,85),
+('2year',720,730,75),
+('3year',936,1095,65),
+('tryonemonth',0,30,100);
+
+UNLOCK TABLES;
 
 /*Table structure for table `saasrentorder` */
 
@@ -346,6 +504,10 @@ CREATE TABLE `saasrentorder` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `saasrentorder` */
+
+LOCK TABLES `saasrentorder` WRITE;
+
+UNLOCK TABLES;
 
 /*Table structure for table `shipments` */
 
@@ -370,7 +532,21 @@ CREATE TABLE `shipments` (
 
 /*Data for the table `shipments` */
 
-insert  into `shipments`(`shipId`,`wareId`,`shipNo`,`num`,`userId`,`type`,`isSend`,`descr`,`operateDate`) values (1,1,'CSV20170508',3,6,0,0,'TEST','2017-05-08 21:16:51'),(2,1,'CSV20170508',4,6,0,0,NULL,'2017-05-08 22:30:04'),(3,2,'sdfasd',12,6,NULL,0,'test1','2017-05-10 23:28:17'),(4,1,'sdfasd',12,6,NULL,0,'test2','2017-05-10 23:28:17'),(5,1,'asdfasdf',12,6,NULL,0,'test3','2017-05-10 23:29:10'),(6,2,'asdfasdf',12,6,NULL,0,'test4','2017-05-10 23:29:10'),(7,1,'dsgf',12,6,NULL,0,'test5','2017-05-10 23:29:43'),(8,2,'dsgf',12,6,NULL,0,'test6','2017-05-10 23:29:43'),(9,1,'asdfasdf',12,10,0,0,'test1','2017-05-10 23:30:56'),(10,2,'asdfasdf',12,10,0,0,'test2','2017-05-10 23:30:56');
+LOCK TABLES `shipments` WRITE;
+
+insert  into `shipments`(`shipId`,`wareId`,`shipNo`,`num`,`userId`,`type`,`isSend`,`descr`,`operateDate`) values 
+(1,1,'CSV20170508',3,6,0,0,'TEST','2017-05-08 21:16:51'),
+(2,1,'CSV20170508',4,6,0,0,NULL,'2017-05-08 22:30:04'),
+(3,2,'sdfasd',12,6,NULL,0,'test1','2017-05-10 23:28:17'),
+(4,1,'sdfasd',12,6,NULL,0,'test2','2017-05-10 23:28:17'),
+(5,1,'asdfasdf',12,6,NULL,0,'test3','2017-05-10 23:29:10'),
+(6,2,'asdfasdf',12,6,NULL,0,'test4','2017-05-10 23:29:10'),
+(7,1,'dsgf',12,6,NULL,0,'test5','2017-05-10 23:29:43'),
+(8,2,'dsgf',12,6,NULL,0,'test6','2017-05-10 23:29:43'),
+(9,1,'asdfasdf',12,10,0,0,'test1','2017-05-10 23:30:56'),
+(10,2,'asdfasdf',12,10,0,0,'test2','2017-05-10 23:30:56');
+
+UNLOCK TABLES;
 
 /*Table structure for table `userinfo` */
 
@@ -399,7 +575,18 @@ CREATE TABLE `userinfo` (
 
 /*Data for the table `userinfo` */
 
-insert  into `userinfo`(`userId`,`userNo`,`userName`,`password`,`mobilePhone`,`email`,`groupManager`,`groupId`,`status`,`firmId`,`parentUserId`,`operateDate`,`operateId`) values (1,'000','system','111',NULL,NULL,1,1,1,1,1,'2017-02-27 12:58:14',1),(3,'00201','system001','111',NULL,NULL,1,NULL,1,3,1,'2017-02-27 17:04:19',1),(6,'00501','sys5','111',NULL,NULL,0,36,1,22,1,'2017-04-07 14:09:59',6),(7,'00601','system00601','system00601',NULL,NULL,1,NULL,1,23,1,'2017-04-07 14:19:12',NULL),(10,'00502','sys6','111',NULL,NULL,0,37,1,22,NULL,'2017-04-09 22:59:35',6),(12,'00701','system00701','system00701',NULL,NULL,NULL,NULL,1,26,1,'2017-04-10 15:43:28',NULL),(13,'00503','sys7','1111',NULL,NULL,0,36,1,22,NULL,'2017-04-10 20:06:06',6);
+LOCK TABLES `userinfo` WRITE;
+
+insert  into `userinfo`(`userId`,`userNo`,`userName`,`password`,`mobilePhone`,`email`,`groupManager`,`groupId`,`status`,`firmId`,`parentUserId`,`operateDate`,`operateId`) values 
+(1,'000','system','111',NULL,NULL,1,1,1,1,1,'2017-02-27 12:58:14',1),
+(3,'00201','system001','111',NULL,NULL,1,NULL,1,3,1,'2017-02-27 17:04:19',1),
+(6,'00501','sys5','111',NULL,NULL,0,36,1,22,1,'2017-04-07 14:09:59',6),
+(7,'00601','system00601','system00601',NULL,NULL,1,NULL,1,23,1,'2017-04-07 14:19:12',NULL),
+(10,'00502','sys6','111',NULL,NULL,0,37,1,22,NULL,'2017-04-09 22:59:35',6),
+(12,'00701','system00701','system00701',NULL,NULL,NULL,NULL,1,26,1,'2017-04-10 15:43:28',NULL),
+(13,'00503','sys7','1111',NULL,NULL,0,36,1,22,NULL,'2017-04-10 20:06:06',6);
+
+UNLOCK TABLES;
 
 /*Table structure for table `userrole` */
 
@@ -418,7 +605,25 @@ CREATE TABLE `userrole` (
 
 /*Data for the table `userrole` */
 
-insert  into `userrole`(`userRoleId`,`userId`,`roleId`) values (1,1,1),(3,3,3),(8,7,2),(21,12,2),(27,10,9),(28,10,10),(29,10,11),(30,10,12),(31,13,10),(46,6,2),(47,6,9),(48,6,10),(49,6,11),(50,6,12);
+LOCK TABLES `userrole` WRITE;
+
+insert  into `userrole`(`userRoleId`,`userId`,`roleId`) values 
+(1,1,1),
+(3,3,3),
+(8,7,2),
+(21,12,2),
+(27,10,9),
+(28,10,10),
+(29,10,11),
+(30,10,12),
+(31,13,10),
+(46,6,2),
+(47,6,9),
+(48,6,10),
+(49,6,11),
+(50,6,12);
+
+UNLOCK TABLES;
 
 /*Table structure for table `wareinfo` */
 
@@ -444,7 +649,13 @@ CREATE TABLE `wareinfo` (
 
 /*Data for the table `wareinfo` */
 
-insert  into `wareinfo`(`wareId`,`wareCode`,`wareName`,`wareNorm`,`wareUnit`,`wareBasePrice`,`wareMaxPrice`,`wareMinPrice`,`wareDesc`,`firmId`,`operateId`,`operateDate`) values (1,'YL-BSKL-G330','百事可乐300ml','24罐/箱','罐',1.75,0,0,'',22,6,'2017-04-16 13:58:00'),(2,'YL-BSKL-G331','可口可乐500ml','24罐/箱','罐',1.75,NULL,NULL,'可口可乐',22,6,'2017-04-16 13:55:29');
+LOCK TABLES `wareinfo` WRITE;
+
+insert  into `wareinfo`(`wareId`,`wareCode`,`wareName`,`wareNorm`,`wareUnit`,`wareBasePrice`,`wareMaxPrice`,`wareMinPrice`,`wareDesc`,`firmId`,`operateId`,`operateDate`) values 
+(1,'YL-BSKL-G330','百事可乐300ml','24罐/箱','罐',1.75,0,0,'',22,6,'2017-04-16 13:58:00'),
+(2,'YL-BSKL-G331','可口可乐500ml','24罐/箱','罐',1.75,NULL,NULL,'可口可乐',22,6,'2017-04-16 13:55:29');
+
+UNLOCK TABLES;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

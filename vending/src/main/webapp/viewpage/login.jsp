@@ -60,6 +60,8 @@ body {
 	<div class="container">
 		<form class="form-signin" method="post" action="<c:url value="/user/login"/>">
 			<h2 class="form-signin-heading">请登录：</h2>
+			<label for="inputFirm" class="sr-only">公司编号</label>
+			<input type="text" id="inputFirm"name="firmInfo.firmNo" class="form-control" placeholder="公司编号" required autofocus>
 			<label for="inputName" class="sr-only">用户名</label>
 			<input type="text" id="inputName" name="userName" class="form-control" placeholder="用户名" required autofocus>
 			<label for="inputPassword" class="sr-only">密码</label>

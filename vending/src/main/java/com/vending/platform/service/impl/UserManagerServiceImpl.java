@@ -30,10 +30,11 @@ public class UserManagerServiceImpl implements IUserManagerService, Serializable
 
 	@Override
 	public UserInfo login(UserInfo userInfo) {
-		if (userManagerDao.getAllUsers(userInfo).size() > 1) {
+		int i = userManagerDao.getAllUsers(userInfo).size();
+		if (i > 1) {
 			logger.debug("用户名密码多次匹配，用户错误");
 			return null;
-		} else if (userManagerDao.getAllUsers(userInfo).size() < 1) {
+		} else if (i < 1) {
 			logger.debug("登录失败");
 			return null;
 		} else {
