@@ -327,7 +327,7 @@ public class IUserManagerSqlProvider {
 					WHERE("a.status=#{status}");
 				}
 				if (userInfo.getFirmId() != null) {
-					WHERE("a.firmId=#{firmId}");
+					WHERE("a.firmId=#{firmId} and a.firmId=b.firmId");
 				}
 				if(userInfo.getFirmInfo()!=null&&userInfo.getFirmInfo().getFirmNo()!=null){
 					WHERE("b.firmNo=#{firmInfo.firmNo}");
