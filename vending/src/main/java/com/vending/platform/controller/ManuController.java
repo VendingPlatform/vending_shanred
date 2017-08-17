@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.vending.platform.domain.ChannelInfo;
-import com.vending.platform.domain.ChannelWareInfo;
 import com.vending.platform.domain.FirmInfo;
 import com.vending.platform.domain.MachineInfo;
 import com.vending.platform.domain.MachineOperater;
