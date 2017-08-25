@@ -18,13 +18,14 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.vending.platform.domain.AuthorityInfo;
+import com.vending.platform.domain.FirmInfo;
 import com.vending.platform.domain.RoleAuthInfo;
 import com.vending.platform.domain.UserInfo;
 import com.vending.platform.domain.UserRoleInfo;
 import com.vending.platform.service.IUserManagerService;
 
 @Controller
-@SessionAttributes({"user","userAuth","userAuthCodes"})
+@SessionAttributes({ "user", "userAuth", "userAuthCodes" })
 @RequestMapping("/user")
 public class UserLoginController {
 	private static Logger logger = Logger.getLogger(UserLoginController.class);
@@ -32,47 +33,57 @@ public class UserLoginController {
 	private IUserManagerService userManagerService;
 
 	@ModelAttribute("userAuth")
-	public Set<AuthorityInfo> getUserAuth(){
-	    return new HashSet<AuthorityInfo>();
+	public Set<AuthorityInfo> getUserAuth() {
+		return new HashSet<AuthorityInfo>();
 	}
+
 	@ModelAttribute("userAuthCodes")
-	public List<String> getuserAuthList(){
-	    return new ArrayList<String>();
+	public List<String> getuserAuthList() {
+		return new ArrayList<String>();
 	}
-	
+
 	@Description("用户登录")
 	@RequestMapping(method = RequestMethod.POST, value = "/login")
 	@ModelAttribute("user")
-	public ModelAndView login(UserInfo userInfo, @ModelAttribute("userAuth")Set<AuthorityInfo> userAuth, 
-	        @ModelAttribute("userAuthCodes")List<String> userAuthCodes,ModelMap modelMap) {
-		UserInfo user = userManagerService.login(userInfo);
+	public ModelAndView login(UserInfo userInfo, @ModelAttribute("userAuth") Set<AuthorityInfo> userAuth,
+			@ModelAttribute("userAuthCodes") List<String> userAuthCodes, ModelMap modelMap) {
+		FirmInfo firmInfo = new FirmInfo();
+		firmInfo.setFirmNo(userInfo.getFirmInfo().getFirmNo());
+		boolean check = userManagerService.checkFirmStatus(firmInfo);
+		
 		ModelAndView modelAndView = new ModelAndView();
-		if (user != null) {
-			if (user.getFirmInfo().getFirmStatus() == 1 && user.getStatus() == 1) {
-				modelAndView.setViewName("genview/home");
-				
-				//查找用户拥有的所有权限,先查用户角色表，再查角色权限表
-				UserRoleInfo userRoleInfo = new UserRoleInfo();
-				userRoleInfo.setUserId(user.getUserId());
-				List<UserRoleInfo> userRoleInfos = userManagerService.getAllUserRoleInfos(userRoleInfo);
-				
-				for (UserRoleInfo userRole : userRoleInfos) {
-                    Integer roleId = userRole.getRoleInfo().getRoleId();
-                    RoleAuthInfo roleAuthInfo = new RoleAuthInfo();
-                    roleAuthInfo.setRoleId(roleId);
-                    List<RoleAuthInfo> roleAuthInfos = userManagerService.getAllRoleAuthInfos(roleAuthInfo);
-                    for (RoleAuthInfo roleAuth : roleAuthInfos) {
-                       userAuth.add(roleAuth.getAuthorityInfo());
-                    }
-                }
-				userAuthCodes = userManagerService.getAuthTop(userAuth);
-				modelMap.addAttribute("user", user);
-				modelMap.addAttribute("userAuth", userAuth);
-				modelMap.addAttribute("userAuthCodes",userAuthCodes);
-				logger.debug(user.toString() + "：登录信息");
+		if (check) {//若可用，则进行登录
+			UserInfo user = userManagerService.login(userInfo);
+			if (user != null) {
+				if (user.getFirmInfo().getFirmStatus() == 1 && user.getStatus() == 1) {
+					modelAndView.setViewName("genview/home");
+
+					// 查找用户拥有的所有权限,先查用户角色表，再查角色权限表
+					UserRoleInfo userRoleInfo = new UserRoleInfo();
+					userRoleInfo.setUserId(user.getUserId());
+					List<UserRoleInfo> userRoleInfos = userManagerService.getAllUserRoleInfos(userRoleInfo);
+
+					for (UserRoleInfo userRole : userRoleInfos) {
+						Integer roleId = userRole.getRoleInfo().getRoleId();
+						RoleAuthInfo roleAuthInfo = new RoleAuthInfo();
+						roleAuthInfo.setRoleId(roleId);
+						List<RoleAuthInfo> roleAuthInfos = userManagerService.getAllRoleAuthInfos(roleAuthInfo);
+						for (RoleAuthInfo roleAuth : roleAuthInfos) {
+							userAuth.add(roleAuth.getAuthorityInfo());
+						}
+					}
+					userAuthCodes = userManagerService.getAuthTop(userAuth);
+					modelMap.addAttribute("user", user);
+					modelMap.addAttribute("userAuth", userAuth);
+					modelMap.addAttribute("userAuthCodes", userAuthCodes);
+					logger.debug(user.toString() + "：登录信息");
+				}
+			} else {
+				modelAndView.setViewName("/login");
 			}
-		} else {
-			modelAndView.setViewName("/login");
+		}
+		else{
+			modelAndView.setViewName("/Outtime");
 		}
 		modelAndView.addAllObjects(modelMap);
 		return modelAndView;

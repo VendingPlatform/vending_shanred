@@ -4,12 +4,15 @@ import java.util.List;
 import java.util.Set;
 
 import com.vending.platform.domain.AuthorityInfo;
+import com.vending.platform.domain.FirmInfo;
 import com.vending.platform.domain.RoleAuthInfo;
 import com.vending.platform.domain.RoleInfo;
 import com.vending.platform.domain.UserInfo;
 import com.vending.platform.domain.UserRoleInfo;
 
 public interface IUserManagerService {
+	/**检测商家是否可用*/
+	boolean checkFirmStatus(FirmInfo firmInfo);
 
     /** 判断用户是否已注册 */
     Boolean alreadyUser(UserInfo userInfo);
