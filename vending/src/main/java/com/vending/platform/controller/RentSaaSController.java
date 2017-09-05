@@ -1,12 +1,12 @@
 package com.vending.platform.controller;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Controller;
@@ -24,6 +24,7 @@ import com.vending.platform.service.ISaaSRentService;
 @Controller
 @RequestMapping("/saas")
 public class RentSaaSController extends UtilsAction {
+	Logger logger = Logger.getLogger(RentSaaSController.class);
 	private static final long serialVersionUID = -152211967929477481L;
 	@Autowired
 	private IFirmAndGroupService firmAndGroupService;
@@ -68,29 +69,36 @@ public class RentSaaSController extends UtilsAction {
 		for (SaasPrice saasPrice : saasPrices) {
 			if (saasPrice.getPriceName().equals("1month")) {
 				monthMoney = saasPrice.getPrice();
+				break;
 			}
 		}
-		double money = 0;
+		double money = 0.0;
 		if (rentTime == 0) {
 			// 免费试用
 			money = 0;
+			logger.info("--------------------trymonry=" + money);
 		} else if (rentTime < 12) {
 			// 租用期限为一年内
 			money = monthMoney * rentTime * machineNum * sNumPrice.getNumPrice();
+			logger.info("------------------monthmonry=" + money);
 		} else {
 			// 租用期限为年的倍数
 			// 找到租金折扣
 			int discount = 1;
 			for (SaasPrice saasPrice : saasPrices) {
-				if (rentTime == 12 && saasPrice.getPriceName().equals("1year")) {
+				if (rentTime == 12 && "1year".equals(saasPrice.getPriceName())) {
 					discount = saasPrice.getDiscount();
-				} else if (rentTime == 24 && saasPrice.getPriceName().equals("2year")) {
+					break;
+				} else if (rentTime == 24 && ("2year").equals(saasPrice.getPriceName())) {
 					discount = saasPrice.getDiscount();
-				} else if (rentTime == 36 && saasPrice.getPriceName().equals("3year")) {
+					break;
+				} else if (rentTime == 36 && ("3year").equals(saasPrice.getPriceName())) {
 					discount = saasPrice.getDiscount();
+					break;
 				}
 			}
-			money = monthMoney * rentTime * (discount / 100) * machineNum * sNumPrice.getNumPrice();
+			money = monthMoney * rentTime * machineNum * sNumPrice.getNumPrice() * discount/100.0;
+			logger.info("-------------------yearmonry=" + money);
 		}
 		try {
 			write(money);
@@ -105,7 +113,7 @@ public class RentSaaSController extends UtilsAction {
 	public String calculateMoney(Integer firmType, String firmName, String firmNo, String password, Double sumPrice,
 			Integer rentTime, Integer machineNum) {
 
-		//获取起止时间
+		// 获取起止时间
 		GregorianCalendar now = new GregorianCalendar();
 		SimpleDateFormat sf = new SimpleDateFormat(("yyyy-MM-dd HH:mm:ss"), Locale.SIMPLIFIED_CHINESE);
 		String startTime = sf.format(now.getTime());
@@ -127,7 +135,7 @@ public class RentSaaSController extends UtilsAction {
 		firmAndGroupService.insertFirm(firmInfo, userInfo);
 
 		Integer firmId = firmAndGroupService.getAllFirmInfos(firmInfo).get(0).getFirmId();
-		String  rentOrderId = String.valueOf(System.currentTimeMillis()+firmId);
+		String rentOrderId = String.valueOf(System.currentTimeMillis() + firmId);
 		SaaSRentOrder saaSRentOrder = new SaaSRentOrder();
 		saaSRentOrder.setFirmId(firmId);
 		saaSRentOrder.setMachineNum(machineNum);

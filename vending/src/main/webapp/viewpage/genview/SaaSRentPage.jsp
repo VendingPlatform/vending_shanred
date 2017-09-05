@@ -44,7 +44,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="firmNo" class="col-sm-2 control-label">租户编号：</label>
+				<label for="firmCode" class="col-sm-2 control-label">租户编号：</label>
 				<div class="col-sm-10" style="width: 240px">
 					<input type="text" class="form-control" name="firmNo" id="firmCode" value="" onchange="validateSaas(null, this.value,'<%=basePath%>')" required autofocus>
 				</div>
@@ -52,17 +52,17 @@
 			<div class="form-group">
 				<label for="password" class="col-sm-2 control-label">管理员密码:</label>
 				<div class="col-sm-10" style="width: 240px">
-					<input type="password" class="form-control" id="password" name="password" required placeholder="输入密码" autofocus>
+					<input type="password" class="form-control" id="password" name="password" required  autofocus>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">租用台数：</label>
+				<label for="machineNum" class="col-sm-2 control-label">租用台数：</label>
 				<div class="col-sm-10" style="width: 240px">
 					<input class="form-control" name="machineNum" id="machineNum" type="number" step="1" min="1" max="1000" onchange="calculateMoney('<%=basePath%>')" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">租用时间</label>
+				<label for="rentTime" class="col-sm-2 control-label">租用时间</label>
 				<div class="col-sm-10">
 					<input type="text" name="rentTime" id="rentTime" onchange="calculateMoney()" hidden>
 					<div class="btn-group">
@@ -85,7 +85,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">当前费用：</label>
+				<label for="sumPrice" class="col-sm-2 control-label">当前费用：</label>
 				<div class="col-sm-10" style="width: 240px">
 					<input type="text" name="sumPrice" class="form-control" id="sumPrice" readonly>
 				</div>
@@ -95,7 +95,6 @@
 				<button type="reset" class="btn btn-default">取消</button>
 			</div>
 		</div>
-		</form>
 	</div>
 </body>
 </html>
