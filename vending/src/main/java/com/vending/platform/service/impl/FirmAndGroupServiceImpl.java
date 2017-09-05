@@ -55,7 +55,11 @@ public class FirmAndGroupServiceImpl implements IFirmAndGroupService {
             logger.debug("用户已存在。。。");
             return false;
         }
-        userInfo.setPassword("system" + firmInfo.getFirmNo() + "01");
+        if(user.getPassword()!=null){
+        	userInfo.setPassword(user.getPassword());
+        }else{
+        	userInfo.setPassword("system" + firmInfo.getFirmNo() + "01");
+        }
         userInfo.setUserNo(firmInfo.getFirmNo() + "01");
         userInfo.setStatus(1);
         

@@ -43,7 +43,6 @@
 					<c:if test="${user.firmInfo.firmType==0 }">
 					权限管理
 					</c:if>
-						
 					
 					<span class="caret"></span>
 					</a>
@@ -61,8 +60,29 @@
 							</c:if>
 						</ul>
 					</li>
-					<!-- firmType==2厂商管理员才有的权限 -->
-					<c:if test="${user.firmInfo.firmType==2 }">
+					
+					
+					<!-- 系统管理员独有 -->
+					<!-- firmType==0系统管理员才有的权限 -->
+					<c:if test="${user.firmInfo.firmType==0 }">
+					<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+							   role="button" aria-haspopup="true" aria-expanded="false"> 租金管理 
+							   <span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="#">按时限租用</a></li>
+								<li><a href="#">按数量租用</a></li>
+							</ul>
+						</li>
+				    </c:if>
+				    
+					<!-- firmType==0系统管理员才有的权限 -->
+					<c:if test="${user.firmInfo.firmType==0 }">
+						<li><a href="<c:url value="#"/>">租户订单管理</a></li>
+					</c:if>
+					<!-- firmType==0系统管理员才有的权限 -->
+					<c:if test="${user.firmInfo.firmType==0 }">
 						<li><a href="<c:url value="/manager/getAllFirms"/>">商家管理</a></li>
 					</c:if>
 					<!-- firmType==1运营商才有的权限 -->

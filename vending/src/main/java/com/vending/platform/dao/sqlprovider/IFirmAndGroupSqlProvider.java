@@ -24,6 +24,18 @@ public class IFirmAndGroupSqlProvider {
 				if (firmInfo.getFirmType() != null) {
 					VALUES("firmType", "#{firmType}");
 				}
+				if (firmInfo.getHasTry() != null) {
+					VALUES("hasTry", "#{hasTry}");
+				}
+				if (firmInfo.getStartTime() != null) {
+					VALUES("startTime", "#{startTime}");
+				}
+				if (firmInfo.getEndTime() != null) {
+					VALUES("endTime", "#{endTime}");
+				}
+				if (firmInfo.getMachineNum() != null) {
+					VALUES("machineNum", "#{machineNum}");
+				}
 				if (firmInfo.getFirmStatus() != null) {
 					VALUES("firmStatus", "#{firmStatus}");
 				}
@@ -69,26 +81,28 @@ public class IFirmAndGroupSqlProvider {
 		return new SQL() {
 			{
 				SELECT("*").FROM("firminfo");
-				if (StringUtils.isNotBlank(firmInfo.getFirmNo())) {
-					WHERE("firmNo=#{firmNo}");
-				}
-				if (StringUtils.isNotBlank(firmInfo.getFirmName())) {
-					WHERE("firmName=#{firmName}");
-				}
-				if (StringUtils.isNotBlank(firmInfo.getFirmDesc())) {
-					WHERE("firmDesc=#{firmDesc}");
-				}
-				if (firmInfo.getFirmType() == null) {
-					WHERE("firmType != 0");
-				}
-				if (firmInfo.getFirmType() != null) {
-					WHERE("firmType=#{firmType}");
-				}
-				if (firmInfo.getFirmStatus() != null) {
-					WHERE("firmStatus=#{firmStatus}");
-				}
-				if (firmInfo.getOperateId() != null) {
-					WHERE("operateId=#{operateId}");
+				if (firmInfo != null) {
+					if (StringUtils.isNotBlank(firmInfo.getFirmNo())) {
+						WHERE("firmNo=#{firmNo}");
+					}
+					if (StringUtils.isNotBlank(firmInfo.getFirmName())) {
+						WHERE("firmName=#{firmName}");
+					}
+					if (StringUtils.isNotBlank(firmInfo.getFirmDesc())) {
+						WHERE("firmDesc=#{firmDesc}");
+					}
+					if (firmInfo.getFirmType() == null) {
+						WHERE("firmType != 0");
+					}
+					if (firmInfo.getFirmType() != null) {
+						WHERE("firmType=#{firmType}");
+					}
+					if (firmInfo.getFirmStatus() != null) {
+						WHERE("firmStatus=#{firmStatus}");
+					}
+					if (firmInfo.getOperateId() != null) {
+						WHERE("operateId=#{operateId}");
+					}
 				}
 			}
 		}.toString();

@@ -36,10 +36,11 @@ public class ChannelInfo implements Serializable {
     private MachineInfo machineInfo;
     private MachineOperater machineOperater;
 
-    public ChannelInfo() {
-        super();
-    }
 
+    public ChannelInfo() {
+    	super();
+	}
+    
     public Integer getChannelId() {
         return channelId;
     }

@@ -1,6 +1,8 @@
 package com.vending.platform.service.impl;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -10,8 +12,10 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vending.platform.dao.IFrimAndGroupDAO;
 import com.vending.platform.dao.IUserManagerDao;
 import com.vending.platform.domain.AuthorityInfo;
+import com.vending.platform.domain.FirmInfo;
 import com.vending.platform.domain.RoleAuthInfo;
 import com.vending.platform.domain.RoleInfo;
 import com.vending.platform.domain.UserInfo;
@@ -27,13 +31,16 @@ public class UserManagerServiceImpl implements IUserManagerService, Serializable
 
 	@Autowired
 	private IUserManagerDao userManagerDao;
+	@Autowired
+	private IFrimAndGroupDAO firmDao;
 
 	@Override
 	public UserInfo login(UserInfo userInfo) {
-		if (userManagerDao.getAllUsers(userInfo).size() > 1) {
+		int i = userManagerDao.getAllUsers(userInfo).size();
+		if (i > 1) {
 			logger.debug("用户名密码多次匹配，用户错误");
 			return null;
-		} else if (userManagerDao.getAllUsers(userInfo).size() < 1) {
+		} else if (i < 1) {
 			logger.debug("登录失败");
 			return null;
 		} else {
@@ -264,5 +271,27 @@ public class UserManagerServiceImpl implements IUserManagerService, Serializable
 		}
 
 		return userInfos;
+	}
+
+	@Override
+	public boolean checkFirmStatus(FirmInfo firmInfo) {
+		boolean result = true;
+		FirmInfo fInfo = firmDao.getAllFirmInfos(firmInfo).get(0);
+		String endTime = fInfo.getEndTime();
+		long now = System.currentTimeMillis();
+		if (endTime != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 小写的mm表示的是分钟
+			try {
+				long time = sdf.parse(endTime).getTime();
+				if (time <= now && fInfo.getFirmStatus() == 1) {// 判定是否超时
+					firmInfo.setFirmStatus(0);
+					firmDao.updateFirm(firmInfo);
+					result = false;
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
 	}
 }

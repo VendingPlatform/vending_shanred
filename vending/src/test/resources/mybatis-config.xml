@@ -8,5 +8,6 @@
 		<mapper class="com.vending.platform.dao.IFrimAndGroupDAO" />
 		<mapper class="com.vending.platform.dao.IChannelManagerDAO" />
 		<mapper class="com.vending.platform.dao.IWareManagerDAO" />
+		<mapper class="com.vending.platform.dao.SaaSRentDao"></mapper>
 	</mappers>
 </configuration>  

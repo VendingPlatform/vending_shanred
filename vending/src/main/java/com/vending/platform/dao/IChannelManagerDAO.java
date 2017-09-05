@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.SelectProvider;
 
 import com.vending.platform.dao.sqlprovider.IChannelManagerSqlProvider;
 import com.vending.platform.domain.ChannelGroup;
+import com.vending.platform.domain.ChannelHistory;
 import com.vending.platform.domain.ChannelInfo;
 import com.vending.platform.domain.ChannelWareInfo;
 
@@ -107,4 +108,6 @@ public interface IChannelManagerDAO {
 	@SelectProvider(type = IChannelManagerSqlProvider.class, method = "updateChannelWareInfo")
 	public void updateChannelWareInfo(ChannelWareInfo channelWareInfo);
 
+	@SelectProvider(type = IChannelManagerSqlProvider.class, method="insertChannelHistory")
+	public void insertChannelHistory(ChannelHistory channelHistory);
 }

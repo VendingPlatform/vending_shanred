@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.vending.platform.dao.IChannelManagerDAO;
 import com.vending.platform.domain.ChannelGroup;
+import com.vending.platform.domain.ChannelHistory;
 import com.vending.platform.domain.ChannelInfo;
 import com.vending.platform.domain.ChannelWareInfo;
 import com.vending.platform.domain.MachineOperater;
@@ -130,6 +131,11 @@ public class ChannelManagerServiceImpl implements IChannelManagerService {
 	@Override
 	public List<ChannelWareInfo> getChannelsByGroupId(Integer channelGroupId) {
 		return channelManagerDao.getChannelInofByGroupId(channelGroupId);
+	}
+
+	@Override
+	public void insertChannelHistory(ChannelHistory channelHistory) {
+		channelManagerDao.insertChannelHistory(channelHistory);
 	}
 }
  

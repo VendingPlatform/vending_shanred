@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -60,6 +65,8 @@ body {
 	<div class="container">
 		<form class="form-signin" method="post" action="<c:url value="/user/login"/>">
 			<h2 class="form-signin-heading">请登录：</h2>
+			<label for="inputFirm" class="sr-only">公司编号</label>
+			<input type="text" id="inputFirm" name="firmInfo.firmNo" class="form-control" placeholder="公司编号" required autofocus>
 			<label for="inputName" class="sr-only">用户名</label>
 			<input type="text" id="inputName" name="userName" class="form-control" placeholder="用户名" required autofocus>
 			<label for="inputPassword" class="sr-only">密码</label>
@@ -71,6 +78,7 @@ body {
 				</label>
 			</div>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+			<a class="btn btn-lg btn-default btn-block"   href="<%=basePath%>viewpage/genview/SaaSRentPage.jsp">立即购买</a>
 		</form>
 	</div>
 </body>

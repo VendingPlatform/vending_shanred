@@ -103,21 +103,27 @@ CREATE TABLE `channelinfo` (
   CONSTRAINT `channelinfo_ibfk_1` FOREIGN KEY (`mOperaterId`) REFERENCES `machineoperater` (`mOperaterId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `channelinfo_ibfk_2` FOREIGN KEY (`channelGroupId`) REFERENCES `channelgroup` (`channelGroupId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `channelinfo_ibfk_3` FOREIGN KEY (`machineId`) REFERENCES `machineinfo` (`machineId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
 
 /*Data for the table `channelinfo` */
 
 LOCK TABLES `channelinfo` WRITE;
 
 insert  into `channelinfo`(`channelId`,`channelNo`,`stockNum`,`stockNumNow`,`stockNumAdd`,`channelGroupId`,`mOperaterId`,`machineId`,`firmId`,`operateId`,`operateDate`) values 
-(49,'001',11,0,0,1,26,30,22,6,'2017-04-26 11:15:30'),
+(49,'001',11,2,2,1,26,30,22,6,'2017-06-15 17:06:26'),
 (50,'002',11,0,0,NULL,26,30,22,3,'2017-04-19 19:14:16'),
 (51,'003',11,0,0,NULL,26,30,22,3,'2017-04-19 19:14:19'),
 (52,'001',11,0,0,1,27,31,22,6,'2017-04-26 11:15:34'),
 (53,'002',11,0,0,NULL,27,31,22,3,'2017-04-25 21:05:35'),
 (54,'003',11,0,0,NULL,27,31,22,3,'2017-04-25 21:05:35'),
-(55,'001',11,0,0,1,28,32,22,6,'2017-04-26 11:15:36'),
-(56,'002',11,0,0,NULL,28,32,22,3,'2017-04-25 21:05:39');
+(55,'001                                           ',11,0,0,1,28,32,22,6,'2017-04-26 11:15:36'),
+(56,'002',11,0,0,NULL,28,32,22,3,'2017-04-25 21:05:39'),
+(59,'001',11,0,0,NULL,29,33,22,3,'2017-06-30 16:28:23'),
+(60,'002',11,0,0,NULL,29,33,22,3,'2017-06-30 16:28:23'),
+(61,'003',11,0,0,NULL,29,33,22,3,'2017-06-30 16:28:23'),
+(62,'004',11,0,0,NULL,29,33,22,3,'2017-06-30 16:28:23'),
+(63,'005',11,0,0,NULL,29,33,22,3,'2017-06-30 16:28:23'),
+(64,'006',11,0,0,NULL,29,33,22,3,'2017-06-30 16:28:23');
 
 UNLOCK TABLES;
 
@@ -129,25 +135,23 @@ CREATE TABLE `channelinfohistory` (
   `channelHistory` int(11) NOT NULL AUTO_INCREMENT COMMENT '历史Id',
   `machineName` varchar(11) DEFAULT NULL COMMENT '售货机名称',
   `channelNo` varchar(50) NOT NULL COMMENT '货道编号',
-  `channelGroupName` varchar(50) DEFAULT NULL COMMENT '货道组名称',
   `wareName` varchar(50) DEFAULT NULL COMMENT '商品名称',
   `price` double DEFAULT NULL COMMENT '价格',
-  `stockNum` int(11) DEFAULT '0' COMMENT '额定存货量',
-  `stockNumnNow` int(11) DEFAULT NULL COMMENT '当前存货量',
-  `stockNumnAdd` int(11) DEFAULT NULL COMMENT '新增存货量',
+  `firmId` int(11) NOT NULL COMMENT '所属公司',
+  `stockNumAdd` int(11) DEFAULT NULL COMMENT '新增存货量',
   `operateId` int(11) DEFAULT NULL COMMENT '操作者',
   `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`channelHistory`),
-  KEY `channelGroupId` (`channelGroupName`),
   KEY `machineId` (`machineName`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 /*Data for the table `channelinfohistory` */
 
 LOCK TABLES `channelinfohistory` WRITE;
 
-insert  into `channelinfohistory`(`channelHistory`,`machineName`,`channelNo`,`channelGroupName`,`wareName`,`price`,`stockNum`,`stockNumnNow`,`stockNumnAdd`,`operateId`,`operateDate`) values 
-(1,NULL,'',NULL,NULL,NULL,0,NULL,NULL,NULL,'0000-00-00 00:00:00');
+insert  into `channelinfohistory`(`channelHistory`,`machineName`,`channelNo`,`wareName`,`price`,`firmId`,`stockNumAdd`,`operateId`,`operateDate`) values 
+(2,'售货机1','001','百事可乐300ml',1.75,22,1,6,'2017-06-07 20:15:42'),
+(3,'售货机1','001','百事可乐300ml',1.75,22,1,6,'2017-06-07 20:22:58');
 
 UNLOCK TABLES;
 
@@ -179,7 +183,13 @@ insert  into `channelwareinfo`(`channelId`,`wareId`,`price`,`isDiscount`,`mOpera
 (53,NULL,NULL,0,27),
 (54,NULL,NULL,0,27),
 (55,1,2.5,0,28),
-(56,NULL,NULL,0,28);
+(56,NULL,NULL,0,28),
+(59,NULL,NULL,0,29),
+(60,NULL,NULL,0,29),
+(61,NULL,NULL,0,29),
+(62,NULL,NULL,0,29),
+(63,NULL,NULL,0,29),
+(64,NULL,NULL,0,29);
 
 UNLOCK TABLES;
 
@@ -194,6 +204,10 @@ CREATE TABLE `firminfo` (
   `firmDesc` text COMMENT '公司描述',
   `firmType` int(11) NOT NULL COMMENT '公司类型，0：系统管理员，不属于任何公司；1:运营商；2：厂商',
   `firmStatus` int(11) NOT NULL DEFAULT '0' COMMENT '公司状态，0：不可用；1：可用',
+  `startTime` datetime DEFAULT NULL COMMENT 'SaaS租用开始时间',
+  `endTime` datetime DEFAULT NULL COMMENT 'SaaS到期到期时间',
+  `hasTry` int(11) DEFAULT '1' COMMENT '是否试用过，若试用过为1,以后将必须进行租用',
+  `machineNum` int(11) DEFAULT NULL COMMENT '租用售货机台数',
   `operateId` int(11) DEFAULT NULL COMMENT '操作人',
   `operateDate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`firmId`)
@@ -203,13 +217,13 @@ CREATE TABLE `firminfo` (
 
 LOCK TABLES `firminfo` WRITE;
 
-insert  into `firminfo`(`firmId`,`firmNo`,`firmName`,`firmDesc`,`firmType`,`firmStatus`,`operateId`,`operateDate`) values 
-(1,'000','system','system',0,1,1,'2017-02-27 12:13:38'),
-(3,'002','厂商1','厂商1的描述信息',2,1,1,'2017-04-10 15:43:11'),
-(4,'003','运营商1','运营商1描述',1,1,1,'2017-04-09 18:27:16'),
-(22,'005','运营商2','运营商描述',1,1,1,'2017-04-09 18:27:24'),
-(23,'006','运营商3','test describe',1,1,1,'2017-04-09 18:27:32'),
-(26,'007','test','test1',1,1,3,'2017-04-17 16:16:50');
+insert  into `firminfo`(`firmId`,`firmNo`,`firmName`,`firmDesc`,`firmType`,`firmStatus`,`startTime`,`endTime`,`hasTry`,`machineNum`,`operateId`,`operateDate`) values 
+(1,'000','system','system',0,1,NULL,NULL,1,NULL,1,'2017-02-27 12:13:38'),
+(3,'002','厂商1','厂商1的描述信息',2,1,NULL,NULL,1,NULL,1,'2017-04-10 15:43:11'),
+(4,'003','运营商1','运营商1描述',1,1,NULL,NULL,1,NULL,1,'2017-04-09 18:27:16'),
+(22,'005','运营商2','运营商描述',1,1,NULL,NULL,1,NULL,1,'2017-04-09 18:27:24'),
+(23,'006','运营商3','test describe',1,1,NULL,NULL,1,NULL,1,'2017-04-09 18:27:32'),
+(26,'007','test','test1',1,1,NULL,NULL,1,NULL,3,'2017-04-17 16:16:50');
 
 UNLOCK TABLES;
 
@@ -254,6 +268,7 @@ CREATE TABLE `machineinfo` (
   `machinePannel` varchar(50) NOT NULL COMMENT '售货机主板号',
   `manuFirmId` int(11) NOT NULL COMMENT '厂商ID',
   `machinePrice` decimal(10,0) DEFAULT NULL COMMENT '售货机价格',
+  `machineRentPrice` decimal(10,0) DEFAULT NULL COMMENT '售货机租用价格',
   `tModelId` int(11) DEFAULT NULL COMMENT '售货机类型',
   `manuMachineStatus` int(11) NOT NULL DEFAULT '0' COMMENT '0:未售出，1：已售出，2：回收',
   `operFirmId` int(11) DEFAULT NULL COMMENT '卖给某运营商ID',
@@ -266,16 +281,17 @@ CREATE TABLE `machineinfo` (
   CONSTRAINT `machineinfo_ibfk_1` FOREIGN KEY (`tModelId`) REFERENCES `machinetype` (`tModelId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `t_machine_info_ibfk_1` FOREIGN KEY (`manuFirmId`) REFERENCES `firminfo` (`firmId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `t_machine_info_ibfk_2` FOREIGN KEY (`operFirmId`) REFERENCES `firminfo` (`firmId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 /*Data for the table `machineinfo` */
 
 LOCK TABLES `machineinfo` WRITE;
 
-insert  into `machineinfo`(`machineId`,`machineName`,`machinePannel`,`manuFirmId`,`machinePrice`,`tModelId`,`manuMachineStatus`,`operFirmId`,`operateId`,`operateDate`) values 
-(30,'售货机1','售货机1',3,60,1,1,22,3,'2017-04-19 19:12:03'),
-(31,'售货机2','售货机2',3,20,1,1,22,3,'2017-04-19 19:12:28'),
-(32,'售货机3','售货机3',3,20,2,1,22,3,'2017-04-19 19:12:45');
+insert  into `machineinfo`(`machineId`,`machineName`,`machinePannel`,`manuFirmId`,`machinePrice`,`machineRentPrice`,`tModelId`,`manuMachineStatus`,`operFirmId`,`operateId`,`operateDate`) values 
+(30,'售货机1','售货机1',3,60,NULL,1,1,22,3,'2017-04-19 19:12:03'),
+(31,'售货机2','售货机2',3,20,NULL,1,1,22,3,'2017-04-19 19:12:28'),
+(32,'售货机3','售货机3',3,20,NULL,2,1,22,3,'2017-04-19 19:12:45'),
+(33,'售货机4','售货机4',3,60,NULL,1,1,22,3,'2017-06-30 16:27:35');
 
 UNLOCK TABLES;
 
@@ -300,7 +316,7 @@ CREATE TABLE `machineoperater` (
   CONSTRAINT `machineoperater_ibfk_1` FOREIGN KEY (`machineId`) REFERENCES `machineinfo` (`machineId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `MachineOperater_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `userinfo` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `MachineOperater_ibfk_3` FOREIGN KEY (`groupId`) REFERENCES `groupinfo` (`groupId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 /*Data for the table `machineoperater` */
 
@@ -308,8 +324,9 @@ LOCK TABLES `machineoperater` WRITE;
 
 insert  into `machineoperater`(`mOperaterId`,`machineId`,`machineAssign`,`userId`,`machineAddress`,`groupId`,`operFirmId`,`operateId`,`operateDate`) values 
 (26,30,1,6,NULL,NULL,22,NULL,'2017-05-10 17:19:45'),
-(27,31,0,NULL,NULL,NULL,22,NULL,'2017-04-25 21:05:35'),
-(28,32,0,NULL,NULL,NULL,22,NULL,'2017-04-25 21:05:39');
+(27,31,1,6,NULL,NULL,22,NULL,'2017-05-21 19:09:49'),
+(28,32,0,NULL,NULL,NULL,22,NULL,'2017-04-25 21:05:39'),
+(29,33,0,NULL,NULL,NULL,22,NULL,'2017-06-30 16:28:23');
 
 UNLOCK TABLES;
 
@@ -326,7 +343,7 @@ CREATE TABLE `machinetype` (
   PRIMARY KEY (`tModelId`),
   KEY `firmId` (`firmId`),
   CONSTRAINT `MachineType_ibfk_1` FOREIGN KEY (`firmId`) REFERENCES `firminfo` (`firmId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 /*Data for the table `machinetype` */
 
@@ -334,7 +351,29 @@ LOCK TABLES `machinetype` WRITE;
 
 insert  into `machinetype`(`tModelId`,`tModelName`,`firmId`,`operateId`,`operateDate`) values 
 (1,'类型1',3,1,'2017-02-27 17:07:25'),
-(2,'类型2',3,3,'2017-03-16 23:08:23');
+(2,'类型2',3,3,'2017-03-16 23:08:23'),
+(9,']',3,5,NULL);
+
+UNLOCK TABLES;
+
+/*Table structure for table `money` */
+
+DROP TABLE IF EXISTS `money`;
+
+CREATE TABLE `money` (
+  `moneyId` int(11) NOT NULL AUTO_INCREMENT COMMENT '营业额Id',
+  `machineId` int(11) DEFAULT NULL COMMENT '售货机Id',
+  `moneyNum` double DEFAULT NULL COMMENT '金额',
+  `type` int(11) DEFAULT NULL COMMENT '类型：0为现金；1为移动支付',
+  `firmId` int(11) DEFAULT NULL COMMENT '运营商Id',
+  `operateId` int(11) DEFAULT NULL COMMENT '操作员Id',
+  `operaterDate` datetime DEFAULT NULL COMMENT '操作时间',
+  PRIMARY KEY (`moneyId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `money` */
+
+LOCK TABLES `money` WRITE;
 
 UNLOCK TABLES;
 
@@ -431,6 +470,68 @@ insert  into `roleinfo`(`roleId`,`roleName`,`firmType`,`operateDate`) values
 
 UNLOCK TABLES;
 
+/*Table structure for table `saasnumprice` */
+
+DROP TABLE IF EXISTS `saasnumprice`;
+
+CREATE TABLE `saasnumprice` (
+  `numPrice` int(11) NOT NULL COMMENT '每台售货机租用价格',
+  `firmType` int(11) DEFAULT NULL COMMENT '商家类型，厂商和运营商租用价格不一样'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `saasnumprice` */
+
+LOCK TABLES `saasnumprice` WRITE;
+
+UNLOCK TABLES;
+
+/*Table structure for table `saasprice` */
+
+DROP TABLE IF EXISTS `saasprice`;
+
+CREATE TABLE `saasprice` (
+  `priceName` varchar(50) NOT NULL COMMENT '定价名称',
+  `price` int(11) NOT NULL COMMENT 'SaaS收费价格',
+  `rangeTime` int(11) NOT NULL COMMENT '价格对应的租用天数',
+  `discount` int(11) DEFAULT NULL COMMENT '折扣',
+  PRIMARY KEY (`priceName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `saasprice` */
+
+LOCK TABLES `saasprice` WRITE;
+
+insert  into `saasprice`(`priceName`,`price`,`rangeTime`,`discount`) values 
+('1month',40,30,100),
+('1year',408,365,85),
+('2year',720,730,75),
+('3year',936,1095,65),
+('tryonemonth',0,30,100);
+
+UNLOCK TABLES;
+
+/*Table structure for table `saasrentorder` */
+
+DROP TABLE IF EXISTS `saasrentorder`;
+
+CREATE TABLE `saasrentorder` (
+  `rentOrderId` varchar(200) NOT NULL COMMENT '租用Id',
+  `firmId` int(11) NOT NULL COMMENT '租户Id',
+  `priceName` varchar(50) DEFAULT NULL COMMENT '租金类型',
+  `num` int(11) DEFAULT NULL COMMENT '售货机台数',
+  `sumPrice` int(11) DEFAULT NULL COMMENT '租金总价，需要租金单价*份数',
+  `numPrice` int(11) DEFAULT NULL COMMENT '每台租用价格',
+  `startTime` datetime DEFAULT NULL COMMENT '租用开始时间',
+  `endTime` datetime DEFAULT NULL COMMENT '租用结束时间',
+  PRIMARY KEY (`rentOrderId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `saasrentorder` */
+
+LOCK TABLES `saasrentorder` WRITE;
+
+UNLOCK TABLES;
+
 /*Table structure for table `shipments` */
 
 DROP TABLE IF EXISTS `shipments`;
@@ -493,20 +594,20 @@ CREATE TABLE `userinfo` (
   KEY `firmId` (`firmId`),
   CONSTRAINT `userinfo_ibfk_2` FOREIGN KEY (`groupId`) REFERENCES `groupinfo` (`groupId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `userinfo_ibfk_3` FOREIGN KEY (`firmId`) REFERENCES `firminfo` (`firmId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 /*Data for the table `userinfo` */
 
 LOCK TABLES `userinfo` WRITE;
 
 insert  into `userinfo`(`userId`,`userNo`,`userName`,`password`,`mobilePhone`,`email`,`groupManager`,`groupId`,`status`,`firmId`,`parentUserId`,`operateDate`,`operateId`) values 
-(1,'000','system','111',NULL,NULL,1,1,1,1,1,'2017-02-27 12:58:14',1),
 (3,'00201','system001','111',NULL,NULL,1,NULL,1,3,1,'2017-02-27 17:04:19',1),
 (6,'00501','sys5','111',NULL,NULL,0,36,1,22,1,'2017-04-07 14:09:59',6),
 (7,'00601','system00601','system00601',NULL,NULL,1,NULL,1,23,1,'2017-04-07 14:19:12',NULL),
 (10,'00502','sys6','111',NULL,NULL,0,37,1,22,NULL,'2017-04-09 22:59:35',6),
 (12,'00701','system00701','system00701',NULL,NULL,NULL,NULL,1,26,1,'2017-04-10 15:43:28',NULL),
-(13,'00503','sys7','1111',NULL,NULL,0,36,1,22,NULL,'2017-04-10 20:06:06',6);
+(13,'00503','sys7','1111',NULL,NULL,0,36,1,22,NULL,'2017-04-10 20:06:06',6),
+(22,'000','system','111',NULL,NULL,1,1,1,1,1,'2017-02-27 12:58:14',1);
 
 UNLOCK TABLES;
 
@@ -530,7 +631,7 @@ CREATE TABLE `userrole` (
 LOCK TABLES `userrole` WRITE;
 
 insert  into `userrole`(`userRoleId`,`userId`,`roleId`) values 
-(1,1,1),
+(1,22,1),
 (3,3,3),
 (8,7,2),
 (21,12,2),
@@ -547,6 +648,25 @@ insert  into `userrole`(`userRoleId`,`userId`,`roleId`) values
 
 UNLOCK TABLES;
 
+/*Table structure for table `usership` */
+
+DROP TABLE IF EXISTS `usership`;
+
+CREATE TABLE `usership` (
+  `shipId` int(11) NOT NULL AUTO_INCREMENT COMMENT '库存Id',
+  `userId` int(11) DEFAULT NULL COMMENT '用户Id',
+  `wareId` int(11) DEFAULT NULL COMMENT '商品Id',
+  `num` int(11) DEFAULT NULL COMMENT '商品库存',
+  `operaterDate` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`shipId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `usership` */
+
+LOCK TABLES `usership` WRITE;
+
+UNLOCK TABLES;
+
 /*Table structure for table `wareinfo` */
 
 DROP TABLE IF EXISTS `wareinfo`;
@@ -560,6 +680,7 @@ CREATE TABLE `wareinfo` (
   `wareBasePrice` double DEFAULT NULL COMMENT '商品进价',
   `wareMaxPrice` double DEFAULT NULL COMMENT '最高售价',
   `wareMinPrice` double DEFAULT NULL COMMENT '最低售价',
+  `warePic` varchar(225) DEFAULT NULL COMMENT '商品图片',
   `wareDesc` varchar(225) DEFAULT NULL COMMENT '商品描述',
   `firmId` int(11) DEFAULT NULL COMMENT '运营商id',
   `operateId` int(11) DEFAULT NULL COMMENT '操作者',
@@ -573,9 +694,9 @@ CREATE TABLE `wareinfo` (
 
 LOCK TABLES `wareinfo` WRITE;
 
-insert  into `wareinfo`(`wareId`,`wareCode`,`wareName`,`wareNorm`,`wareUnit`,`wareBasePrice`,`wareMaxPrice`,`wareMinPrice`,`wareDesc`,`firmId`,`operateId`,`operateDate`) values 
-(1,'YL-BSKL-G330','百事可乐300ml','24罐/箱','罐',1.75,0,0,'百事可乐gengxin',22,6,'2017-04-16 13:58:00'),
-(2,'YL-BSKL-G331','可口可乐500ml','24罐/箱','罐',1.75,NULL,NULL,'可口可乐',22,6,'2017-04-16 13:55:29');
+insert  into `wareinfo`(`wareId`,`wareCode`,`wareName`,`wareNorm`,`wareUnit`,`wareBasePrice`,`wareMaxPrice`,`wareMinPrice`,`warePic`,`wareDesc`,`firmId`,`operateId`,`operateDate`) values 
+(1,'YL-BSKL-G330','百事可乐300ml','24罐/箱','罐',1.75,0,0,NULL,'',22,6,'2017-04-16 13:58:00'),
+(2,'YL-BSKL-G331','可口可乐500ml','24罐/箱','罐',1.75,NULL,NULL,NULL,'可口可乐',22,6,'2017-04-16 13:55:29');
 
 UNLOCK TABLES;
 
